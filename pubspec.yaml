@@ -1,0 +1,29 @@
+name: notificare
+description: Official Notificare Flutter plugin. Implements the power of the Notificare platform in Flutter applications.
+version: 3.0.0
+author: Notificare
+homepage: https://notificare.com
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+  flutter: ">=1.20.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  json_annotation: ^3.1.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  build_runner: ^1.10.4
+  json_serializable: ^3.5.0
+
+flutter:
+  plugin:
+    platforms:
+      android:
+        package: re.notifica.flutter
+        pluginClass: NotificarePlugin
+      ios:
+        pluginClass: NotificarePlugin

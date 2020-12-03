@@ -1,0 +1,34 @@
+PODS:
+  - atlantis-proxyman (1.4.3)
+  - Flutter (1.0.0)
+  - notificare (3.0.0):
+    - Flutter
+    - Notificare/NotificareSDK (>= 3.0.0-alpha.1)
+  - Notificare/NotificareSDK (3.0.0-alpha.1)
+
+DEPENDENCIES:
+  - atlantis-proxyman
+  - Flutter (from `Flutter`)
+  - notificare (from `.symlinks/plugins/notificare/ios`)
+
+SPEC REPOS:
+  file:///Users/hpinhal/Developer/notificare/others/notificare-pods:
+    - Notificare
+  trunk:
+    - atlantis-proxyman
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: Flutter
+  notificare:
+    :path: ".symlinks/plugins/notificare/ios"
+
+SPEC CHECKSUMS:
+  atlantis-proxyman: e6d4cbe672fb4b886a75cca066cb1a6c44ad56b1
+  Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
+  Notificare: ad16678ebb861c02974c8c25f3438e5ce3517d51
+  notificare: d0b76285553fe403abab2f039fdfb4c14a81c3e0
+
+PODFILE CHECKSUM: fd5d6cd96043795e3254b3d4f19168e0390a6ee7
+
+COCOAPODS: 1.10.0

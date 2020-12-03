@@ -1,0 +1,10 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="re.notifica.flutter">
+
+    <application>
+
+        <receiver android:name=".NotificareReceiver" />
+
+    </application>
+
+</manifest>

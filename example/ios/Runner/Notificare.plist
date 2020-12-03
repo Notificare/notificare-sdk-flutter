@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>autoLaunch</key>
+	<false/>
+	<key>swizzlingEnabled</key>
+	<true/>
+	<key>crashReportsEnabled</key>
+	<true/>
+	<key>production</key>
+	<false/>
+	<key>developmentApplicationKey</key>
+	<string>aad066ca10a9ced782194be1774553c517f0953857f1a55d3c54e0adcac2e0ec</string>
+	<key>developmentApplicationSecret</key>
+	<string>b70dc1acd909baa35ff53a03ed6c7218e30f14f2e04b528c07fe15307ac473dc</string>
+	<key>productionApplicationKey</key>
+	<string></string>
+	<key>productionApplicationSecret</key>
+	<string></string>
+</dict>
+</plist>
