@@ -13,10 +13,10 @@ class _HomeState extends State<Home> {
   void initState() {
     super.initState();
 
-    Notificare.onReady.listen((event) {
+    Notificare.onReady.listen((application) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Notificare is ready.'),
+          content: Text('Notificare is ready: ${application.name}'),
         ),
       );
     });
@@ -27,15 +27,6 @@ class _HomeState extends State<Home> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('Device registered: ${device.id}'),
-        ),
-      );
-    });
-
-    Notificare.launch().catchError((err) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Failed to launch Notificare: $err'),
-          backgroundColor: Colors.red.shade900,
         ),
       );
     });
@@ -109,25 +100,43 @@ class _HomeState extends State<Home> {
 
   void _register() {
     Notificare.deviceManager.register('helder@notifica.re', 'Helder Pinhal').then((value) {
-      final snackBar = SnackBar(content: Text('Device registered.'));
-      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Done.'),
+        ),
+      );
     }).catchError((err) {
-      final snackBar = SnackBar(content: Text('$err'), backgroundColor: Colors.red.shade900);
-      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('$err'),
+          backgroundColor: Colors.red.shade900,
+        ),
+      );
     });
   }
 
   void _registerAnonymous() {
-    Notificare.deviceManager.register(null, null).then((value) => print('Done.')).catchError((err) => print('$err'));
+    Notificare.deviceManager.register(null, null).then((value) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Done.'),
+        ),
+      );
+    }).catchError((err) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('$err'),
+          backgroundColor: Colors.red.shade900,
+        ),
+      );
+    });
   }
 
   void _getCurrentDevice() {
     Notificare.deviceManager.currentDevice.then((value) {
-      print('Current device: ${value?.toJson()}');
-
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Current device: ${value?.id ?? 'none'}'),
+          content: Text('${value?.toJson()}'),
         ),
       );
     }).catchError((err) {
@@ -141,29 +150,88 @@ class _HomeState extends State<Home> {
   }
 
   void _fetchTags() {
-    Notificare.deviceManager.fetchTags().then((value) => print('$value')).catchError((err) => print('$err'));
+    Notificare.deviceManager.fetchTags().then((value) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('$value'),
+        ),
+      );
+    }).catchError((err) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('$err'),
+          backgroundColor: Colors.red.shade900,
+        ),
+      );
+    });
   }
 
   void _addTags() {
-    Notificare.deviceManager
-        .addTags(['hpinhal', 'flutter', 'remove-me'])
-        .then((value) => print('Done.'))
-        .catchError((err) => print('$err'));
+    Notificare.deviceManager.addTags(['hpinhal', 'flutter', 'remove-me']).then((value) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Done.'),
+        ),
+      );
+    }).catchError((err) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('$err'),
+          backgroundColor: Colors.red.shade900,
+        ),
+      );
+    });
   }
 
   void _removeTag() {
-    Notificare.deviceManager.removeTag('remove-me').then((value) => print('Done.')).catchError((err) => print('$err'));
+    Notificare.deviceManager.removeTag('remove-me').then((value) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Done.'),
+        ),
+      );
+    }).catchError((err) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('$err'),
+          backgroundColor: Colors.red.shade900,
+        ),
+      );
+    });
   }
 
   void _clearTags() {
-    Notificare.deviceManager.clearTags().then((value) => print('Done.')).catchError((err) => print('$err'));
+    Notificare.deviceManager.clearTags().then((value) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Done.'),
+        ),
+      );
+    }).catchError((err) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('$err'),
+          backgroundColor: Colors.red.shade900,
+        ),
+      );
+    });
   }
 
   void _fetchDoNotDisturb() {
-    Notificare.deviceManager
-        .fetchDoNotDisturb()
-        .then((value) => print('DnD: ${value == null ? 'null' : value.toJson()}'))
-        .catchError((err) => print('Failed to fetch DnD: $err'));
+    Notificare.deviceManager.fetchDoNotDisturb().then((value) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('${value?.toJson()}'),
+        ),
+      );
+    }).catchError((err) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('$err'),
+          backgroundColor: Colors.red.shade900,
+        ),
+      );
+    });
   }
 
   void _updateDoNotDisturb() {
@@ -172,57 +240,138 @@ class _HomeState extends State<Home> {
       end: NotificareTime.fromString('10:00'),
     );
 
-    Notificare.deviceManager
-        .updateDoNotDisturb(dnd)
-        .then((value) => print('Updated DnD.'))
-        .catchError((err) => print('Failed to update DnD: $err'));
+    Notificare.deviceManager.updateDoNotDisturb(dnd).then((value) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Done.'),
+        ),
+      );
+    }).catchError((err) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('$err'),
+          backgroundColor: Colors.red.shade900,
+        ),
+      );
+    });
   }
 
   void _clearDoNotDisturb() {
-    Notificare.deviceManager
-        .clearDoNotDisturb()
-        .then((value) => print('Cleared DnD.'))
-        .catchError((err) => print('Failed to clear DnD: $err'));
+    Notificare.deviceManager.clearDoNotDisturb().then((value) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Done.'),
+        ),
+      );
+    }).catchError((err) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('$err'),
+          backgroundColor: Colors.red.shade900,
+        ),
+      );
+    });
   }
 
   void _getPreferredLanguage() {
-    Notificare.deviceManager.preferredLanguage
-        .then((value) => print('Preferred language: $value'))
-        .catchError((err) => print('Failed to update preferred language: $err'));
+    Notificare.deviceManager.preferredLanguage.then((value) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('$value'),
+        ),
+      );
+    }).catchError((err) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('$err'),
+          backgroundColor: Colors.red.shade900,
+        ),
+      );
+    });
   }
 
   void _updatePreferredLanguage() {
-    Notificare.deviceManager
-        .updatePreferredLanguage('nl-NL')
-        .then((value) => print('Updated preferred language.'))
-        .catchError((err) => print('Failed to update preferred language: $err'));
+    Notificare.deviceManager.updatePreferredLanguage('nl-NL').then((value) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Done.'),
+        ),
+      );
+    }).catchError((err) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('$err'),
+          backgroundColor: Colors.red.shade900,
+        ),
+      );
+    });
   }
 
   void _clearPreferredLanguage() {
-    Notificare.deviceManager
-        .updatePreferredLanguage(null)
-        .then((value) => print('Cleared preferred language.'))
-        .catchError((err) => print('Failed to clear preferred language: $err'));
+    Notificare.deviceManager.updatePreferredLanguage(null).then((value) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Done.'),
+        ),
+      );
+    }).catchError((err) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('$err'),
+          backgroundColor: Colors.red.shade900,
+        ),
+      );
+    });
   }
 
   void _getUserData() {
-    Notificare.deviceManager
-        .fetchUserData()
-        .then((value) => print('User data: ${value == null ? 'null' : value}'))
-        .catchError((err) => print('Failed to get user data: $err'));
+    Notificare.deviceManager.fetchUserData().then((value) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('$value'),
+        ),
+      );
+    }).catchError((err) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('$err'),
+          backgroundColor: Colors.red.shade900,
+        ),
+      );
+    });
   }
 
   void _updateUserData() {
-    Notificare.deviceManager
-        .updateUserData({'firstName': 'Helder'})
-        .then((value) => print('Done.'))
-        .catchError((err) => print('Failed to update user data: $err'));
+    Notificare.deviceManager.updateUserData({'firstName': 'Helder'}).then((value) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Done.'),
+        ),
+      );
+    }).catchError((err) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('$err'),
+          backgroundColor: Colors.red.shade900,
+        ),
+      );
+    });
   }
 
   void _clearUserData() {
-    Notificare.deviceManager
-        .updateUserData({})
-        .then((value) => print('Done.'))
-        .catchError((err) => print('Failed to clear user data: $err'));
+    Notificare.deviceManager.updateUserData({}).then((value) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Done.'),
+        ),
+      );
+    }).catchError((err) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('$err'),
+          backgroundColor: Colors.red.shade900,
+        ),
+      );
+    });
   }
 }
