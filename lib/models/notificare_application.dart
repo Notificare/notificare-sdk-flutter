@@ -8,8 +8,8 @@ class NotificareApplication {
   final String name;
   final String category;
   final Map<String, bool> services;
-  final NotificareInboxConfig inboxConfig; // nullable
-  final NotificareRegionConfig regionConfig; // nullable
+  final NotificareInboxConfig? inboxConfig; // nullable
+  final NotificareRegionConfig? regionConfig; // nullable
   final List<NotificareUserDataField> userDataFields;
   final List<NotificareActionCategory> actionCategories;
 
@@ -46,7 +46,7 @@ class NotificareInboxConfig {
 
 @JsonSerializable()
 class NotificareRegionConfig {
-  final String proximityUUID;
+  final String? proximityUUID;
 
   NotificareRegionConfig(
     this.proximityUUID,
@@ -76,12 +76,12 @@ class NotificareUserDataField {
 
 @JsonSerializable()
 class NotificareActionCategory {
-  final String type;
-  final String label;
-  final String target;
-  final bool camera;
-  final bool keyboard;
-  final bool destructive;
+  final String? type;
+  final String? label;
+  final String? target;
+  final bool? camera;
+  final bool? keyboard;
+  final bool? destructive;
 
   NotificareActionCategory(
     this.type,

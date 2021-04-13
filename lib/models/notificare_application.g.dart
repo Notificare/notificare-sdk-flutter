@@ -12,9 +12,7 @@ NotificareApplication _$NotificareApplicationFromJson(
     json['id'] as String,
     json['name'] as String,
     json['category'] as String,
-    (json['services'] as Map<String, dynamic>)?.map(
-      (k, e) => MapEntry(k, e as bool),
-    ),
+    Map<String, bool>.from(json['services'] as Map),
     json['inboxConfig'] == null
         ? null
         : NotificareInboxConfig.fromJson(
@@ -23,16 +21,13 @@ NotificareApplication _$NotificareApplicationFromJson(
         ? null
         : NotificareRegionConfig.fromJson(
             json['regionConfig'] as Map<String, dynamic>),
-    (json['userDataFields'] as List)
-        ?.map((e) => e == null
-            ? null
-            : NotificareUserDataField.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
-    (json['actionCategories'] as List)
-        ?.map((e) => e == null
-            ? null
-            : NotificareActionCategory.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
+    (json['userDataFields'] as List<dynamic>)
+        .map((e) => NotificareUserDataField.fromJson(e as Map<String, dynamic>))
+        .toList(),
+    (json['actionCategories'] as List<dynamic>)
+        .map(
+            (e) => NotificareActionCategory.fromJson(e as Map<String, dynamic>))
+        .toList(),
   );
 }
 
@@ -67,7 +62,7 @@ Map<String, dynamic> _$NotificareInboxConfigToJson(
 NotificareRegionConfig _$NotificareRegionConfigFromJson(
     Map<String, dynamic> json) {
   return NotificareRegionConfig(
-    json['proximityUUID'] as String,
+    json['proximityUUID'] as String?,
   );
 }
 
@@ -97,12 +92,12 @@ Map<String, dynamic> _$NotificareUserDataFieldToJson(
 NotificareActionCategory _$NotificareActionCategoryFromJson(
     Map<String, dynamic> json) {
   return NotificareActionCategory(
-    json['type'] as String,
-    json['label'] as String,
-    json['target'] as String,
-    json['camera'] as bool,
-    json['keyboard'] as bool,
-    json['destructive'] as bool,
+    json['type'] as String?,
+    json['label'] as String?,
+    json['target'] as String?,
+    json['camera'] as bool?,
+    json['keyboard'] as bool?,
+    json['destructive'] as bool?,
   );
 }
 

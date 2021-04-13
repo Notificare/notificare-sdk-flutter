@@ -7,25 +7,26 @@ class NotificareDeviceManager {
 
   NotificareDeviceManager(this._channel);
 
-  Future<NotificareDevice> get currentDevice async {
+  Future<NotificareDevice?> get currentDevice async {
     final json = await _channel.invokeMethod<Map>('getCurrentDevice');
-    return json != null ? NotificareDevice.fromJson(json) : null;
+    return json != null ? NotificareDevice.fromJson(json as Map<String, dynamic>) : null;
   }
 
-  Future<String> get preferredLanguage async {
+  Future<String?> get preferredLanguage async {
     return _channel.invokeMethod('getPreferredLanguage');
   }
 
-  Future<void> updatePreferredLanguage(String language) async {
+  Future<void> updatePreferredLanguage(String? language) async {
     await _channel.invokeMethod('updatePreferredLanguage', language);
   }
 
-  Future<void> register(String userId, String userName) async {
+  Future<void> register(String? userId, String? userName) async {
     await _channel.invokeMethod('register', {'userId': userId, 'userName': userName});
   }
 
   Future<List<String>> fetchTags() async {
-    return _channel.invokeListMethod('fetchTags');
+    final result = await _channel.invokeListMethod<String>('fetchTags');
+    return result!;
   }
 
   Future<void> addTag(String tag) async {
@@ -48,7 +49,7 @@ class NotificareDeviceManager {
     await _channel.invokeMethod('clearTags');
   }
 
-  Future<NotificareDoNotDisturb> fetchDoNotDisturb() async {
+  Future<NotificareDoNotDisturb?> fetchDoNotDisturb() async {
     final json = await _channel.invokeMapMethod('fetchDoNotDisturb');
     return json != null ? NotificareDoNotDisturb.fromJson(json.cast<String, dynamic>()) : null;
   }
@@ -61,7 +62,7 @@ class NotificareDeviceManager {
     await _channel.invokeMethod('clearDoNotDisturb');
   }
 
-  Future<Map<String, String>> fetchUserData() async {
+  Future<Map<String, String>?> fetchUserData() async {
     final json = await _channel.invokeMapMethod('fetchUserData');
     return json?.cast<String, String>();
   }

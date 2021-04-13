@@ -11,8 +11,8 @@ part 'notificare_device.g.dart';
 @IsoDateTimeConverter()
 class NotificareDevice {
   final String id;
-  final String userId;
-  final String userName;
+  final String? userId;
+  final String? userName;
   final double timeZoneOffset;
   final String osVersion;
   final String sdkVersion;
@@ -21,8 +21,8 @@ class NotificareDevice {
   final String language;
   final String region;
   final String transport;
-  final NotificareDoNotDisturb dnd;
-  final Map<String, String> userData;
+  final NotificareDoNotDisturb? dnd;
+  final Map<String, String>? userData;
   final DateTime lastRegistered;
 
   // TODO add remaining properties

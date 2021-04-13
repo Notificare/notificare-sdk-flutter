@@ -13,7 +13,7 @@ class NotificareDoNotDisturb {
   final NotificareTime start;
   final NotificareTime end;
 
-  NotificareDoNotDisturb({@required this.start, @required this.end}) {
+  NotificareDoNotDisturb({required this.start, required this.end}) {
     if (start == null) throw ArgumentError.notNull('start');
     if (end == null) throw ArgumentError.notNull('end');
   }

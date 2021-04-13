@@ -4,7 +4,7 @@ version '3.0.0'
 
 buildscript {
     ext.kotlin_version = '1.4.10'
-    ext.notificare_version = '3.0.0'
+    ext.notificare_version = '3.0.0-beta.1'
 
     repositories {
         google()
@@ -49,7 +49,7 @@ android {
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
-    implementation "re.notifica:notificare-core:$notificare_version"
+    implementation "re.notifica:core:$notificare_version"
 
     // Moshi
     implementation "com.squareup.moshi:moshi-kotlin:1.11.0"

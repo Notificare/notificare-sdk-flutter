@@ -9,9 +9,9 @@ part of 'notificare_device.dart';
 NotificareDevice _$NotificareDeviceFromJson(Map json) {
   return NotificareDevice(
     json['id'] as String,
-    json['userId'] as String,
-    json['userName'] as String,
-    (json['timeZoneOffset'] as num)?.toDouble(),
+    json['userId'] as String?,
+    json['userName'] as String?,
+    (json['timeZoneOffset'] as num).toDouble(),
     json['osVersion'] as String,
     json['sdkVersion'] as String,
     json['appVersion'] as String,
@@ -21,10 +21,9 @@ NotificareDevice _$NotificareDeviceFromJson(Map json) {
     json['transport'] as String,
     json['dnd'] == null
         ? null
-        : NotificareDoNotDisturb.fromJson((json['dnd'] as Map)?.map(
-            (k, e) => MapEntry(k as String, e),
-          )),
-    (json['userData'] as Map)?.map(
+        : NotificareDoNotDisturb.fromJson(
+            Map<String, dynamic>.from(json['dnd'] as Map)),
+    (json['userData'] as Map?)?.map(
       (k, e) => MapEntry(k as String, e as String),
     ),
     const IsoDateTimeConverter().fromJson(json['lastRegistered'] as String),

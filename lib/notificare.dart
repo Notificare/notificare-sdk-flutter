@@ -19,11 +19,11 @@ class Notificare {
   static final deviceManager = NotificareDeviceManager(_deviceManagerChannel);
 
   static Future<bool> get isConfigured async {
-    return await _channel.invokeMethod('isConfigured');
+    return await (_channel.invokeMethod('isConfigured') as FutureOr<bool>);
   }
 
   static Future<bool> get isReady async {
-    return await _channel.invokeMethod('isReady');
+    return await (_channel.invokeMethod('isReady') as FutureOr<bool>);
   }
 
   static Future<void> configure(String applicationKey, String applicationSecret) async {
@@ -52,10 +52,10 @@ class Notificare {
     }
 
     if (_eventStreams[eventType] == null) {
-      _eventStreams[eventType] = _eventChannels[eventType].receiveBroadcastStream();
+      _eventStreams[eventType] = _eventChannels[eventType]!.receiveBroadcastStream();
     }
 
-    return _eventStreams[eventType];
+    return _eventStreams[eventType]!;
   }
 
   static Stream<void> get onReady {
