@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/services.dart';
+import 'package:notificare/models/notificare_application.dart';
 import 'package:notificare/models/notificare_device.dart';
 
 import 'modules/notificare_device_manager.dart';
@@ -9,7 +10,7 @@ class Notificare {
   // Channels
   static const MethodChannel _channel = const MethodChannel('re.notifica.flutter/notificare');
   static const MethodChannel _deviceManagerChannel =
-      const MethodChannel('re.notifica.flutter/notificare/device-manager', );
+      const MethodChannel('re.notifica.flutter/notificare/device-manager');
 
   // Events
   static Map<String, EventChannel> _eventChannels = new Map();
@@ -37,7 +38,7 @@ class Notificare {
   }
 
   static Future<void> launch() async {
-    await _channel.invokeMethod('launch', null);
+    await _channel.invokeMethod('launch');
   }
 
   static Future<void> unlaunch() async {
@@ -58,11 +59,17 @@ class Notificare {
     return _eventStreams[eventType]!;
   }
 
-  static Stream<void> get onReady {
-    return _getEventStream('ready');
+  static Stream<NotificareApplication> get onReady {
+    return _getEventStream('ready').map((result) {
+      final Map<dynamic, dynamic> json = result;
+      return NotificareApplication.fromJson(json.cast());
+    });
   }
 
   static Stream<NotificareDevice> get onDeviceRegistered {
-    return _getEventStream('device_registered').map((json) => NotificareDevice.fromJson(json));
+    return _getEventStream('device_registered').map((result) {
+      final Map<dynamic, dynamic> json = result;
+      return NotificareDevice.fromJson(json.cast());
+    });
   }
 }

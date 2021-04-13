@@ -6,8 +6,7 @@ part of 'notificare_application.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-NotificareApplication _$NotificareApplicationFromJson(
-    Map<String, dynamic> json) {
+NotificareApplication _$NotificareApplicationFromJson(Map json) {
   return NotificareApplication(
     json['id'] as String,
     json['name'] as String,
@@ -16,17 +15,18 @@ NotificareApplication _$NotificareApplicationFromJson(
     json['inboxConfig'] == null
         ? null
         : NotificareInboxConfig.fromJson(
-            json['inboxConfig'] as Map<String, dynamic>),
+            Map<String, dynamic>.from(json['inboxConfig'] as Map)),
     json['regionConfig'] == null
         ? null
         : NotificareRegionConfig.fromJson(
-            json['regionConfig'] as Map<String, dynamic>),
+            Map<String, dynamic>.from(json['regionConfig'] as Map)),
     (json['userDataFields'] as List<dynamic>)
-        .map((e) => NotificareUserDataField.fromJson(e as Map<String, dynamic>))
+        .map((e) => NotificareUserDataField.fromJson(
+            Map<String, dynamic>.from(e as Map)))
         .toList(),
     (json['actionCategories'] as List<dynamic>)
-        .map(
-            (e) => NotificareActionCategory.fromJson(e as Map<String, dynamic>))
+        .map((e) => NotificareActionCategory.fromJson(
+            Map<String, dynamic>.from(e as Map)))
         .toList(),
   );
 }
@@ -38,10 +38,11 @@ Map<String, dynamic> _$NotificareApplicationToJson(
       'name': instance.name,
       'category': instance.category,
       'services': instance.services,
-      'inboxConfig': instance.inboxConfig,
-      'regionConfig': instance.regionConfig,
-      'userDataFields': instance.userDataFields,
-      'actionCategories': instance.actionCategories,
+      'inboxConfig': instance.inboxConfig?.toJson(),
+      'regionConfig': instance.regionConfig?.toJson(),
+      'userDataFields': instance.userDataFields.map((e) => e.toJson()).toList(),
+      'actionCategories':
+          instance.actionCategories.map((e) => e.toJson()).toList(),
     };
 
 NotificareInboxConfig _$NotificareInboxConfigFromJson(
@@ -92,12 +93,8 @@ Map<String, dynamic> _$NotificareUserDataFieldToJson(
 NotificareActionCategory _$NotificareActionCategoryFromJson(
     Map<String, dynamic> json) {
   return NotificareActionCategory(
-    json['type'] as String?,
-    json['label'] as String?,
-    json['target'] as String?,
-    json['camera'] as bool?,
-    json['keyboard'] as bool?,
-    json['destructive'] as bool?,
+    json['type'] as String,
+    json['name'] as String,
   );
 }
 
@@ -105,9 +102,5 @@ Map<String, dynamic> _$NotificareActionCategoryToJson(
         NotificareActionCategory instance) =>
     <String, dynamic>{
       'type': instance.type,
-      'label': instance.label,
-      'target': instance.target,
-      'camera': instance.camera,
-      'keyboard': instance.keyboard,
-      'destructive': instance.destructive,
+      'name': instance.name,
     };

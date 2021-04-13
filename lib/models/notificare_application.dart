@@ -2,7 +2,10 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'notificare_application.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(
+  anyMap: true,
+  explicitToJson: true,
+)
 class NotificareApplication {
   final String id;
   final String name;
@@ -76,20 +79,12 @@ class NotificareUserDataField {
 
 @JsonSerializable()
 class NotificareActionCategory {
-  final String? type;
-  final String? label;
-  final String? target;
-  final bool? camera;
-  final bool? keyboard;
-  final bool? destructive;
+  final String type;
+  final String name;
 
   NotificareActionCategory(
     this.type,
-    this.label,
-    this.target,
-    this.camera,
-    this.keyboard,
-    this.destructive,
+    this.name,
   );
 
   factory NotificareActionCategory.fromJson(Map<String, dynamic> json) => _$NotificareActionCategoryFromJson(json);

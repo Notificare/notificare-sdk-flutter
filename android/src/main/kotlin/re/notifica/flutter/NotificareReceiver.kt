@@ -3,6 +3,7 @@ package re.notifica.flutter
 import re.notifica.app.NotificareIntentReceiver
 import re.notifica.flutter.events.NotificareEvent
 import re.notifica.flutter.events.NotificareEventManager
+import re.notifica.models.NotificareApplication
 import re.notifica.models.NotificareDevice
 
 class NotificareReceiver : NotificareIntentReceiver() {
@@ -13,9 +14,9 @@ class NotificareReceiver : NotificareIntentReceiver() {
         )
     }
 
-    override fun onReady() {
+    override fun onReady(application: NotificareApplication) {
         NotificareEventManager.send(
-            NotificareEvent.Ready
+            NotificareEvent.Ready(application)
         )
     }
 }

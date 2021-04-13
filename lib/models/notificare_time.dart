@@ -1,7 +1,3 @@
-
-//part 'notificare_time.g.dart';
-
-//@JsonSerializable()
 class NotificareTime {
   final int hours;
   final int minutes;

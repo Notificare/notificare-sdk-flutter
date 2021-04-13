@@ -1,6 +1,7 @@
 package re.notifica.flutter.events
 
 import re.notifica.flutter.models.toFlutterMap
+import re.notifica.models.NotificareApplication
 import re.notifica.models.NotificareDevice
 
 internal sealed class NotificareEvent {
@@ -13,9 +14,11 @@ internal sealed class NotificareEvent {
         DEVICE_REGISTERED(id = "device_registered"),
     }
 
-    object Ready : NotificareEvent() {
+    class Ready(
+        application: NotificareApplication
+    ) : NotificareEvent() {
         override val type = Type.READY
-        override val payload: Any? = null
+        override val payload = application.toFlutterMap()
     }
 
     class DeviceRegistered(

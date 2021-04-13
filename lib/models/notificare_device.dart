@@ -5,8 +5,8 @@ import 'package:notificare/models/notificare_do_not_disturb.dart';
 part 'notificare_device.g.dart';
 
 @JsonSerializable(
-  explicitToJson: true,
   anyMap: true,
+  explicitToJson: true,
 )
 @IsoDateTimeConverter()
 class NotificareDevice {
