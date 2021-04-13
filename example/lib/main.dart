@@ -41,66 +41,66 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: const Text('Plugin example app'),
         ),
-        body: Column(
+        body: ListView(
           children: [
-            RaisedButton(
+            TextButton(
               child: const Text('Register with user'),
               onPressed: _register,
             ),
-            RaisedButton(
+            TextButton(
               child: const Text('Register anonymous'),
               onPressed: _registerAnonymous,
             ),
-            RaisedButton(
+            TextButton(
               child: const Text('Get current device'),
               onPressed: _getCurrentDevice,
             ),
-            RaisedButton(
+            TextButton(
               child: const Text('Fetch tags'),
               onPressed: _fetchTags,
             ),
-            RaisedButton(
+            TextButton(
               child: const Text('Add tags'),
               onPressed: _addTags,
             ),
-            RaisedButton(
+            TextButton(
               child: const Text('Remove tag'),
               onPressed: _removeTag,
             ),
-            RaisedButton(
+            TextButton(
               child: const Text('Clear tags'),
               onPressed: _clearTags,
             ),
-            RaisedButton(
+            TextButton(
               child: const Text('Fetch DnD'),
               onPressed: _fetchDoNotDisturb,
             ),
-            RaisedButton(
+            TextButton(
               child: const Text('Update DnD'),
               onPressed: _updateDoNotDisturb,
             ),
-            RaisedButton(
+            TextButton(
               child: const Text('Clear DnD'),
               onPressed: _clearDoNotDisturb,
             ),
-            RaisedButton(
+            TextButton(
               child: const Text('Get preferred language'),
               onPressed: _getPreferredLanguage,
             ),
-            RaisedButton(
+            TextButton(
               child: const Text('Update preferred language'),
               onPressed: _updatePreferredLanguage,
             ),
-            RaisedButton(
+            TextButton(
               child: const Text('Clear preferred language'),
               onPressed: _clearPreferredLanguage,
             ),
-            RaisedButton(
+            TextButton(
               child: const Text('Get user data'),
               onPressed: _getUserData,
             ),
-            RaisedButton(child: const Text('Update user data'), onPressed: _updateUserData),
-            RaisedButton(child: const Text('Clear user data'), onPressed: _clearUserData),
+            TextButton(child: const Text('Update user data'), onPressed: _updateUserData),
+            TextButton(child: const Text('Clear user data'), onPressed: _clearUserData),
           ],
         ),
       ),
