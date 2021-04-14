@@ -6,7 +6,64 @@
 //
 
 import Foundation
-import NotificareSDK
+import NotificareKit
+
+extension NotificareApplication {
+    
+    func toDictionary() -> FlutterDictionary {
+        return [
+            "id": id,
+            "name": name,
+            "category": category,
+            "services": services,
+            "inboxConfig": inboxConfig?.toDictionary(),
+            "regionConfig": regionConfig?.toDictionary(),
+            "userDataFields": userDataFields.map { $0.toDictionary() },
+            "actionCategories": actionCategories.map { $0.toDictionary() },
+        ]
+    }
+}
+
+extension NotificareApplication.InboxConfig {
+    
+    func toDictionary() -> FlutterDictionary {
+        return [
+            "useInbox": useInbox,
+            "autoBadge": autoBadge,
+        ]
+    }
+}
+
+extension NotificareApplication.RegionConfig {
+    
+    func toDictionary() -> FlutterDictionary {
+        return [
+            "proximityUUID": proximityUUID,
+        ]
+    }
+}
+
+extension NotificareApplication.UserDataField {
+    
+    func toDictionary() -> FlutterDictionary {
+        return [
+            "type": type,
+            "key": key,
+            "label": label,
+        ]
+    }
+}
+
+extension NotificareApplication.ActionCategory {
+    
+    func toDictionary() -> FlutterDictionary {
+        return [
+            "type": type,
+            "name": name,
+            // TODO add remaining properties
+        ]
+    }
+}
 
 extension NotificareDevice {
 

@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import NotificareSDK
+import NotificareKit
 
 enum NotificareEventType: String, CaseIterable {
     case ready
@@ -22,9 +22,9 @@ class NotificareEventOnReady: NotificareEvent {
     let type: NotificareEventType
     let payload: Any?
 
-    init() {
+    init(application: NotificareApplication) {
         self.type = .ready
-        self.payload = nil
+        self.payload = application.toDictionary()
     }
 }
 
