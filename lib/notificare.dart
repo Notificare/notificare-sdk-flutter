@@ -9,15 +9,13 @@ import 'modules/notificare_device_manager.dart';
 class Notificare {
   // Channels
   static const MethodChannel _channel = const MethodChannel('re.notifica.flutter/notificare');
-  static const MethodChannel _deviceManagerChannel =
-      const MethodChannel('re.notifica.flutter/notificare/device-manager');
 
   // Events
   static Map<String, EventChannel> _eventChannels = new Map();
   static Map<String, Stream<dynamic>> _eventStreams = new Map();
 
   // Modules
-  static final deviceManager = NotificareDeviceManager(_deviceManagerChannel);
+  static final deviceManager = NotificareDeviceManager(_channel);
 
   static Future<bool> get isConfigured async {
     return await (_channel.invokeMethod('isConfigured') as FutureOr<bool>);

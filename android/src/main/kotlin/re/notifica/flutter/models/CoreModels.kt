@@ -49,7 +49,7 @@ internal fun NotificareDevice.toFlutterMap(): FlutterMap = mapOf(
     "deviceString" to deviceString,
     "language" to language,
     "region" to region,
-    "transport" to NotificarePlugin.moshi.adapter(NotificareTransport::class.java).toJsonValue(transport),
+    "transport" to transport.toJson(),
     "dnd" to dnd?.toFlutterMap(),
     "userData" to userData,
     "lastRegistered" to NotificarePlugin.moshi.adapter(Date::class.java).toJsonValue(lastRegistered),
