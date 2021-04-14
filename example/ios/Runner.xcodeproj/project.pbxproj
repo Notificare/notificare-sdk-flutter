@@ -15,6 +15,7 @@
 		97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FF1CF9000F007C117D /* LaunchScreen.storyboard */; };
 		DBEA190164F768F935A2B82B /* Pods_Runner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFAB2F9B98B2F3CBD7095E74 /* Pods_Runner.framework */; };
 		F252BF1B25628E6C00679387 /* Notificare.plist in Resources */ = {isa = PBXBuildFile; fileRef = F252BF1A25628E6C00679387 /* Notificare.plist */; };
+		F28199C3262757EE00E1F7CB /* NotificareServices.plist in Resources */ = {isa = PBXBuildFile; fileRef = F28199C2262757EE00E1F7CB /* NotificareServices.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -49,6 +50,7 @@
 		97C147021CF9000F007C117D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AFAB2F9B98B2F3CBD7095E74 /* Pods_Runner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Runner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F252BF1A25628E6C00679387 /* Notificare.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Notificare.plist; sourceTree = "<group>"; };
+		F28199C2262757EE00E1F7CB /* NotificareServices.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = NotificareServices.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +125,7 @@
 				1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */,
 				74858FAE1ED2DC5600515810 /* AppDelegate.swift */,
 				74858FAD1ED2DC5600515810 /* Runner-Bridging-Header.h */,
+				F28199C2262757EE00E1F7CB /* NotificareServices.plist */,
 			);
 			path = Runner;
 			sourceTree = "<group>";
@@ -192,6 +195,7 @@
 			files = (
 				F252BF1B25628E6C00679387 /* Notificare.plist in Resources */,
 				97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */,
+				F28199C3262757EE00E1F7CB /* NotificareServices.plist in Resources */,
 				3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */,
 				97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */,
 				97C146FC1CF9000F007C117D /* Main.storyboard in Resources */,
