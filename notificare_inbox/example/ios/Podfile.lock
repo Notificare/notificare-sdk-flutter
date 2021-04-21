@@ -1,0 +1,43 @@
+PODS:
+  - Flutter (1.0.0)
+  - notificare (3.0.0-alpha.1):
+    - Flutter
+    - Notificare/NotificareKit (= 3.0.0-alpha.1)
+  - Notificare/NotificareInboxKit (3.0.0-alpha.1)
+  - Notificare/NotificareKit (3.0.0-alpha.1)
+  - notificare_inbox (3.0.0-alpha.1):
+    - Flutter
+    - Notificare/NotificareInboxKit (= 3.0.0-alpha.1)
+
+DEPENDENCIES:
+  - Flutter (from `Flutter`)
+  - notificare (from `.symlinks/plugins/notificare/ios`)
+  - "Notificare/NotificareInboxKit (from `git@github.com:Notificare/notificare-sdk-ios.git`, branch `develop`)"
+  - "Notificare/NotificareKit (from `git@github.com:Notificare/notificare-sdk-ios.git`, branch `develop`)"
+  - notificare_inbox (from `.symlinks/plugins/notificare_inbox/ios`)
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: Flutter
+  Notificare:
+    :branch: develop
+    :git: "git@github.com:Notificare/notificare-sdk-ios.git"
+  notificare:
+    :path: ".symlinks/plugins/notificare/ios"
+  notificare_inbox:
+    :path: ".symlinks/plugins/notificare_inbox/ios"
+
+CHECKOUT OPTIONS:
+  Notificare:
+    :commit: 36320fd223afcfc6a463456cd04a5d0d329d7854
+    :git: "git@github.com:Notificare/notificare-sdk-ios.git"
+
+SPEC CHECKSUMS:
+  Flutter: 434fef37c0980e73bb6479ef766c45957d4b510c
+  Notificare: 76e14b15d82fa2674061242bb62e4106b5e4373c
+  notificare: 76e14b15d82fa2674061242bb62e4106b5e4373c
+  notificare_inbox: 1cca58670f0bd8f16b197ce056316b68a6b1a9ff
+
+PODFILE CHECKSUM: 82cd8c8e3c655cbd709fe4d47de9d58af2cd00ce
+
+COCOAPODS: 1.10.1
