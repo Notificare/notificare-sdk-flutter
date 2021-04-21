@@ -1,0 +1,54 @@
+//noinspection GrPackage
+group 're.notifica.flutter'
+version '3.0.0-alpha.1'
+
+buildscript {
+    ext.kotlin_version = '1.4.10'
+    ext.notificare_version = '3.0.0-alpha.1'
+
+    repositories {
+        google()
+        jcenter()
+//        maven { url 'https://maven.notifica.re/releases' }
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:4.1.0'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+rootProject.allprojects {
+    repositories {
+        google()
+        jcenter()
+
+        maven { url 'https://maven.notifica.re/releases' }
+        maven { url "https://maven.notifica.re/prereleases" }
+
+        mavenLocal()
+    }
+}
+
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+android {
+    compileSdkVersion 30
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+    defaultConfig {
+        minSdkVersion 23
+    }
+    lintOptions {
+        disable 'InvalidPackage'
+    }
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    implementation "re.notifica:core:$notificare_version"
+}

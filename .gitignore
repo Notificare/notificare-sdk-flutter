@@ -9,4 +9,5 @@ build/
 .idea/
 *.iml
 
+notificare-services.json
 NotificareServices.plist
