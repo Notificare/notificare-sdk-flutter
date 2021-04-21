@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/services.dart';
 import 'package:notificare/models/notificare_application.dart';
 import 'package:notificare/models/notificare_device.dart';
+import 'package:notificare/models/notificare_notification.dart';
 
 import 'modules/notificare_device_manager.dart';
 
@@ -49,6 +50,16 @@ class Notificare {
 
   static Future<void> unlaunch() async {
     await _channel.invokeMethod('unlaunch');
+  }
+
+  static Future<NotificareApplication> fetchApplication() async {
+    final json = await _channel.invokeMapMethod<String, dynamic>('fetchApplication');
+    return NotificareApplication.fromJson(json!);
+  }
+
+  static Future<NotificareNotification> fetchNotification(String id) async {
+    final json = await _channel.invokeMapMethod<String, dynamic>('fetchNotification', id);
+    return NotificareNotification.fromJson(json!);
   }
 
   // Events

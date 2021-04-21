@@ -12,7 +12,9 @@ import re.notifica.Notificare
 import re.notifica.NotificareCallback
 import re.notifica.callbacks.*
 import re.notifica.flutter.events.NotificareEventManager
+import re.notifica.models.NotificareApplication
 import re.notifica.models.NotificareDoNotDisturb
+import re.notifica.models.NotificareNotification
 import re.notifica.models.NotificareUserData
 
 class NotificarePlugin : FlutterPlugin {
@@ -37,6 +39,8 @@ class NotificarePlugin : FlutterPlugin {
                 "configure" -> configure(call, result)
                 "launch" -> launch(result)
                 "unlaunch" -> unlaunch(result)
+                "fetchApplication" -> fetchApplication(call, result)
+                "fetchNotification" -> fetchNotification(call, result)
 
                 // Device Manager
                 "getCurrentDevice" -> getCurrentDevice(result)
@@ -108,6 +112,40 @@ class NotificarePlugin : FlutterPlugin {
     private fun unlaunch(result: Result) {
         Notificare.unlaunch()
         result.success(null)
+    }
+
+    private fun fetchApplication(@Suppress("UNUSED_PARAMETER") call: MethodCall, response: Result) {
+        Notificare.fetchApplication(object : NotificareCallback<NotificareApplication> {
+            override fun onSuccess(result: NotificareApplication) {
+                onMainThread {
+                    response.success(result.toJson())
+                }
+            }
+
+            override fun onFailure(e: Exception) {
+                onMainThread {
+                    response.error(DEFAULT_ERROR_CODE, e.message, null)
+                }
+            }
+        })
+    }
+
+    private fun fetchNotification(@Suppress("UNUSED_PARAMETER") call: MethodCall, response: Result) {
+        val id = call.arguments<String>()
+
+        Notificare.fetchNotification(id, object : NotificareCallback<NotificareNotification> {
+            override fun onSuccess(result: NotificareNotification) {
+                onMainThread {
+                    response.success(result.toJson())
+                }
+            }
+
+            override fun onFailure(e: Exception) {
+                onMainThread {
+                    response.error(DEFAULT_ERROR_CODE, e.message, null)
+                }
+            }
+        })
     }
 
     // endregion

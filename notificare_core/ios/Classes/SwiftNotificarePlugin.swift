@@ -35,7 +35,9 @@ public class SwiftNotificarePlugin: NSObject, FlutterPlugin {
             case "configure": self.configure(call, result)
             case "launch": self.launch(call, result)
             case "unlaunch": self.unlaunch(call, result)
-                
+            case "fetchApplication": self.fetchApplication(call, result)
+            case "fetchNotification": self.fetchNotification(call, result)
+
             // Notificare Device Manager
             case "getCurrentDevice": self.getCurrentDevice(call, result)
             case "register": self.register(call, result)
@@ -104,6 +106,40 @@ public class SwiftNotificarePlugin: NSObject, FlutterPlugin {
     private func unlaunch(_ call: FlutterMethodCall, _ result: FlutterResult) {
         Notificare.shared.unlaunch()
         result(nil)
+    }
+    
+    private func fetchApplication(_ call: FlutterMethodCall, _ response: @escaping FlutterResult) {
+        Notificare.shared.fetchApplication { result in
+            switch result {
+            case let .success(application):
+                do {
+                    let json = try application.toJson()
+                    response(json)
+                } catch {
+                    response(FlutterError(code: DEFAULT_ERROR_CODE, message: error.localizedDescription, details: nil))
+                }
+            case let .failure(error):
+                response(FlutterError(code: DEFAULT_ERROR_CODE, message: error.localizedDescription, details: nil))
+            }
+        }
+    }
+    
+    private func fetchNotification(_ call: FlutterMethodCall, _ response: @escaping FlutterResult) {
+        let id = call.arguments as! String
+        
+        Notificare.shared.fetchNotification(id) { result in
+            switch result {
+            case let .success(notification):
+                do {
+                    let json = try notification.toJson()
+                    response(json)
+                } catch {
+                    response(FlutterError(code: DEFAULT_ERROR_CODE, message: error.localizedDescription, details: nil))
+                }
+            case let .failure(error):
+                response(FlutterError(code: DEFAULT_ERROR_CODE, message: error.localizedDescription, details: nil))
+            }
+        }
     }
 
     // MARK: - Notificare Device Manager

@@ -36,66 +36,43 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return ListView(
       children: [
-        TextButton(
-          child: const Text('Register with user'),
-          onPressed: _register,
-        ),
-        TextButton(
-          child: const Text('Register anonymous'),
-          onPressed: _registerAnonymous,
-        ),
-        TextButton(
-          child: const Text('Get current device'),
-          onPressed: _getCurrentDevice,
-        ),
-        TextButton(
-          child: const Text('Fetch tags'),
-          onPressed: _fetchTags,
-        ),
-        TextButton(
-          child: const Text('Add tags'),
-          onPressed: _addTags,
-        ),
-        TextButton(
-          child: const Text('Remove tag'),
-          onPressed: _removeTag,
-        ),
-        TextButton(
-          child: const Text('Clear tags'),
-          onPressed: _clearTags,
-        ),
-        TextButton(
-          child: const Text('Fetch DnD'),
-          onPressed: _fetchDoNotDisturb,
-        ),
-        TextButton(
-          child: const Text('Update DnD'),
-          onPressed: _updateDoNotDisturb,
-        ),
-        TextButton(
-          child: const Text('Clear DnD'),
-          onPressed: _clearDoNotDisturb,
-        ),
-        TextButton(
-          child: const Text('Get preferred language'),
-          onPressed: _getPreferredLanguage,
-        ),
-        TextButton(
-          child: const Text('Update preferred language'),
-          onPressed: _updatePreferredLanguage,
-        ),
-        TextButton(
-          child: const Text('Clear preferred language'),
-          onPressed: _clearPreferredLanguage,
-        ),
-        TextButton(
-          child: const Text('Get user data'),
-          onPressed: _getUserData,
-        ),
+        TextButton(child: const Text('Fetch application'), onPressed: _fetchApplication),
+        TextButton(child: const Text('Register with user'), onPressed: _register),
+        TextButton(child: const Text('Register anonymous'), onPressed: _registerAnonymous),
+        TextButton(child: const Text('Get current device'), onPressed: _getCurrentDevice),
+        TextButton(child: const Text('Fetch tags'), onPressed: _fetchTags),
+        TextButton(child: const Text('Add tags'), onPressed: _addTags),
+        TextButton(child: const Text('Remove tag'), onPressed: _removeTag),
+        TextButton(child: const Text('Clear tags'), onPressed: _clearTags),
+        TextButton(child: const Text('Fetch DnD'), onPressed: _fetchDoNotDisturb),
+        TextButton(child: const Text('Update DnD'), onPressed: _updateDoNotDisturb),
+        TextButton(child: const Text('Clear DnD'), onPressed: _clearDoNotDisturb),
+        TextButton(child: const Text('Get preferred language'), onPressed: _getPreferredLanguage),
+        TextButton(child: const Text('Update preferred language'), onPressed: _updatePreferredLanguage),
+        TextButton(child: const Text('Clear preferred language'), onPressed: _clearPreferredLanguage),
+        TextButton(child: const Text('Get user data'), onPressed: _getUserData),
         TextButton(child: const Text('Update user data'), onPressed: _updateUserData),
         TextButton(child: const Text('Clear user data'), onPressed: _clearUserData),
+        TextButton(child: const Text('Fetch notification'), onPressed: _fetchNotification),
       ],
     );
+  }
+
+  void _fetchApplication() {
+    Notificare.fetchApplication().then((value) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('${value.name} (${value.id})'),
+        ),
+      );
+    }).catchError((err) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('$err'),
+          backgroundColor: Colors.red.shade900,
+        ),
+      );
+    });
   }
 
   void _register() {
@@ -363,6 +340,23 @@ class _HomeState extends State<Home> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('Done.'),
+        ),
+      );
+    }).catchError((err) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('$err'),
+          backgroundColor: Colors.red.shade900,
+        ),
+      );
+    });
+  }
+
+  void _fetchNotification() {
+    Notificare.fetchNotification('60801c162bfa3c6cd0198cda').then((value) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('${value.toJson()}'),
         ),
       );
     }).catchError((err) {

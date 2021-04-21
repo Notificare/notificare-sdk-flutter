@@ -17,6 +17,7 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
 
+    Notificare.setUseAdvancedLogging(true);
     Notificare.launch();
   }
 
