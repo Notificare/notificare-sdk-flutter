@@ -28,6 +28,8 @@ class NotificarePlugin : FlutterPlugin {
         // Events
         NotificareEventManager.register(binding.binaryMessenger)
 
+        Notificare.intentReceiver = NotificareReceiver::class.java
+
         channel = MethodChannel(binding.binaryMessenger, "re.notifica.flutter/notificare", JSONMethodCodec.INSTANCE)
         channel.setMethodCallHandler { call, result ->
             when (call.method) {
@@ -103,8 +105,6 @@ class NotificarePlugin : FlutterPlugin {
     }
 
     private fun launch(result: Result) {
-        Notificare.intentReceiver = NotificareReceiver::class.java
-
         Notificare.launch()
         result.success(null)
     }
