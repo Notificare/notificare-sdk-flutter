@@ -51,7 +51,7 @@ NotificareNotificationContent _$NotificareNotificationContentFromJson(
     Map json) {
   return NotificareNotificationContent(
     type: json['type'] as String,
-    content: json['content'],
+    data: json['data'],
   );
 }
 
@@ -59,7 +59,7 @@ Map<String, dynamic> _$NotificareNotificationContentToJson(
         NotificareNotificationContent instance) =>
     <String, dynamic>{
       'type': instance.type,
-      'content': instance.content,
+      'data': instance.data,
     };
 
 NotificareNotificationAction _$NotificareNotificationActionFromJson(Map json) {

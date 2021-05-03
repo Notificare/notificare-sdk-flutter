@@ -40,11 +40,11 @@ class NotificareNotification {
 @JsonSerializable(anyMap: true, explicitToJson: true)
 class NotificareNotificationContent {
   final String type;
-  final dynamic content;
+  final dynamic data;
 
   NotificareNotificationContent({
     required this.type,
-    required this.content,
+    required this.data,
   });
 
   factory NotificareNotificationContent.fromJson(Map<String, dynamic> json) =>
