@@ -64,7 +64,8 @@ class NotificareInbox {
       final List<dynamic> items = result;
 
       return items.map((item) {
-        return NotificareInboxItem.fromJson(item.cast());
+        final Map json = item;
+        return NotificareInboxItem.fromJson(json.cast());
       }).toList();
     });
   }

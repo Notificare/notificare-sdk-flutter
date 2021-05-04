@@ -109,11 +109,11 @@ extension NotificareInboxPluginEvents {
 
 extension NotificareInboxPluginEvents {
     static func OnInboxUpdated(items: [NotificareInboxItem]) -> Event {
-        let asd = items.map({ try! $0.toJson() })
+        let payload = items.map({ try! $0.toJson() })
         
         return Event(
             type: .inboxUpdated,
-            payload: asd
+            payload: payload
         )
     }
     
