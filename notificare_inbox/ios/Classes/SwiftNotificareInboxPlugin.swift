@@ -46,7 +46,15 @@ public class SwiftNotificareInboxPlugin: NSObject, FlutterPlugin {
     }
 
     private func getItems(_ call: FlutterMethodCall, _ response: FlutterResult) {
-        response(NotificareInbox.shared.items)
+        do {
+            let items = try NotificareInbox.shared.items.map { item in
+                try item.toJson()
+            }
+            
+            response(items)
+        } catch {
+            response(FlutterError(code: DEFAULT_ERROR_CODE, message: error.localizedDescription, details: nil))
+        }
     }
     
     private func getBadge(_ call: FlutterMethodCall, _ response: FlutterResult) {
