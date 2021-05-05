@@ -10,7 +10,6 @@ import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.Result
 import re.notifica.Notificare
 import re.notifica.NotificareCallback
-import re.notifica.callbacks.*
 import re.notifica.flutter.events.NotificareEventManager
 import re.notifica.models.NotificareApplication
 import re.notifica.models.NotificareDoNotDisturb
@@ -28,7 +27,7 @@ class NotificarePlugin : FlutterPlugin {
         // Events
         NotificareEventManager.register(binding.binaryMessenger)
 
-        Notificare.intentReceiver = NotificareReceiver::class.java
+        Notificare.intentReceiver = NotificarePluginReceiver::class.java
 
         channel = MethodChannel(binding.binaryMessenger, "re.notifica.flutter/notificare", JSONMethodCodec.INSTANCE)
         channel.setMethodCallHandler { call, result ->

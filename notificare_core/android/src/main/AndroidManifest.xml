@@ -3,7 +3,9 @@
 
     <application>
 
-        <receiver android:name=".NotificareReceiver" />
+        <receiver
+            android:name=".NotificarePluginReceiver"
+            android:exported="false" />
 
     </application>
 
