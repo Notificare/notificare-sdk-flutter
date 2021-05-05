@@ -36,6 +36,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return ListView(
       children: [
+        TextButton(child: const Text('Get cached application'), onPressed: _getApplication),
         TextButton(child: const Text('Fetch application'), onPressed: _fetchApplication),
         TextButton(child: const Text('Register with user'), onPressed: _register),
         TextButton(child: const Text('Register anonymous'), onPressed: _registerAnonymous),
@@ -350,6 +351,24 @@ class _HomeState extends State<Home> {
         ),
       );
     });
+  }
+
+  void _getApplication() async {
+    try {
+      final application = await Notificare.application;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('${application?.toJson()}'),
+        ),
+      );
+    } catch (error) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('$error'),
+          backgroundColor: Colors.red.shade900,
+        ),
+      );
+    }
   }
 
   void _fetchNotification() {

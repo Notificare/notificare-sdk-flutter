@@ -35,6 +35,7 @@ public class SwiftNotificarePlugin: NSObject, FlutterPlugin {
             case "configure": self.configure(call, result)
             case "launch": self.launch(call, result)
             case "unlaunch": self.unlaunch(call, result)
+            case "getApplication": self.getApplication(call, result)
             case "fetchApplication": self.fetchApplication(call, result)
             case "fetchNotification": self.fetchNotification(call, result)
 
@@ -106,6 +107,15 @@ public class SwiftNotificarePlugin: NSObject, FlutterPlugin {
     private func unlaunch(_ call: FlutterMethodCall, _ result: FlutterResult) {
         Notificare.shared.unlaunch()
         result(nil)
+    }
+    
+    private func getApplication(_ call: FlutterMethodCall, _ response: @escaping FlutterResult) {
+        do {
+            let json = try Notificare.shared.application?.toJson()
+            response(json)
+        } catch {
+            response(FlutterError(code: DEFAULT_ERROR_CODE, message: error.localizedDescription, details: nil))
+        }
     }
     
     private func fetchApplication(_ call: FlutterMethodCall, _ response: @escaping FlutterResult) {

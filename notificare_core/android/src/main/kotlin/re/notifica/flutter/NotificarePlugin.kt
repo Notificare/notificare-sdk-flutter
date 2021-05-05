@@ -40,6 +40,7 @@ class NotificarePlugin : FlutterPlugin {
                 "configure" -> configure(call, result)
                 "launch" -> launch(result)
                 "unlaunch" -> unlaunch(result)
+                "getApplication" -> getApplication(call, result)
                 "fetchApplication" -> fetchApplication(call, result)
                 "fetchNotification" -> fetchNotification(call, result)
 
@@ -111,6 +112,10 @@ class NotificarePlugin : FlutterPlugin {
     private fun unlaunch(result: Result) {
         Notificare.unlaunch()
         result.success(null)
+    }
+
+    private fun getApplication(@Suppress("UNUSED_PARAMETER") call: MethodCall, response: Result) {
+        response.success(Notificare.application?.toJson())
     }
 
     private fun fetchApplication(@Suppress("UNUSED_PARAMETER") call: MethodCall, response: Result) {

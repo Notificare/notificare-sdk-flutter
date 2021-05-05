@@ -30,6 +30,11 @@ class Notificare {
     return await _channel.invokeMethod('getUseAdvancedLogging');
   }
 
+  static Future<NotificareApplication?> get application async {
+    final json = await _channel.invokeMapMethod<String, dynamic>('getApplication');
+    return json != null ? NotificareApplication.fromJson(json) : null;
+  }
+
   static Future<void> setUseAdvancedLogging(bool useAdvancedLogging) async {
     return await _channel.invokeMethod('setUseAdvancedLogging', useAdvancedLogging);
   }
