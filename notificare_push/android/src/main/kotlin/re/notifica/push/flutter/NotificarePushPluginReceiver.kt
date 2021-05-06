@@ -1,7 +1,7 @@
 package re.notifica.push.flutter
 
 import re.notifica.models.NotificareNotification
-import re.notifica.push.app.NotificarePushIntentReceiver
+import re.notifica.push.NotificarePushIntentReceiver
 import re.notifica.push.models.NotificareSystemNotification
 import re.notifica.push.models.NotificareUnknownNotification
 
