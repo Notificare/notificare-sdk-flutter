@@ -1,0 +1,56 @@
+//noinspection GrPackage
+group 're.notifica.push.ui.flutter'
+version '3.0.0-alpha.1'
+
+buildscript {
+    ext.kotlin_version = '1.4.32'
+
+    repositories {
+        google()
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:4.1.3'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+rootProject.allprojects {
+    repositories {
+        google()
+        jcenter()
+
+        maven { url 'https://maven.notifica.re/releases' }
+        maven { url "https://maven.notifica.re/prereleases" }
+
+        maven { url 'https://developer.huawei.com/repo' }
+
+        mavenLocal()
+    }
+}
+
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+android {
+    compileSdkVersion 30
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+    defaultConfig {
+        minSdkVersion 16
+    }
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    api 're.notifica:core:3.0.0-alpha.1'
+    api 're.notifica:push:3.0.0-alpha.1'
+    api 're.notifica:push-ui:3.0.0-alpha.1'
+
+    implementation 're.notifica:push-ui-fcm:3.0.0-alpha.1'
+    implementation 're.notifica:push-ui-hms:3.0.0-alpha.1'
+}

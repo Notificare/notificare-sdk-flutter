@@ -1,0 +1,33 @@
+name: notificare_push_ui
+description: Notificare Push UI Flutter Plugin
+version: 3.0.0-alpha.1
+author: Notificare
+homepage: https://notificare.com
+
+environment:
+  sdk: '>=2.12.0 <3.0.0'
+  flutter: ">=1.20.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  json_annotation: ^4.0.1
+  notificare:
+    path: "../notificare_core"
+  notificare_push:
+    path: "../notificare_push"
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  build_runner: ^2.0.0
+  json_serializable: ^4.1.0
+
+flutter:
+  plugin:
+    platforms:
+      android:
+        package: re.notifica.push.ui.flutter
+        pluginClass: NotificarePushUIPlugin
+      ios:
+        pluginClass: NotificarePushUIPlugin
