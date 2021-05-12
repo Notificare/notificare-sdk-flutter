@@ -93,7 +93,7 @@ public class SwiftNotificarePlugin: NSObject, FlutterPlugin {
                 applicationKey: arguments["applicationKey"] as! String,
                 applicationSecret: arguments["applicationKey"] as! String
             ),
-            options: NotificareOptions()
+            options: nil
         )
 
         result(nil)
