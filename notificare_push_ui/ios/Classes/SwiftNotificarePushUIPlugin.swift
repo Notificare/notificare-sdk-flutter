@@ -4,7 +4,7 @@ import NotificareKit
 import NotificarePushUIKit
 
 fileprivate let DEFAULT_ERROR_CODE = "notificare_error"
-fileprivate let NAMESPACE = "re.notifica.push.flutter"
+fileprivate let NAMESPACE = "re.notifica.push.ui.flutter"
 
 public class SwiftNotificarePushUIPlugin: NSObject, FlutterPlugin {
     static let instance = SwiftNotificarePushUIPlugin()
@@ -28,7 +28,7 @@ public class SwiftNotificarePushUIPlugin: NSObject, FlutterPlugin {
         }
     }
     
-    private func presentNotification(_ call: FlutterMethodCall, _ response: FlutterResult) {
+    private func presentNotification(_ call: FlutterMethodCall, _ response: @escaping FlutterResult) {
         let notification: NotificareNotification
         
         do {
@@ -45,16 +45,18 @@ public class SwiftNotificarePushUIPlugin: NSObject, FlutterPlugin {
         }
         
         if notification.requiresViewController {
-            let navigationController = UINavigationController()
+            let navigationController = createNavigationController()
             rootViewController.present(navigationController, animated: true) {
                 NotificarePushUI.shared.presentNotification(notification, in: navigationController)
+                response(nil)
             }
         } else {
             NotificarePushUI.shared.presentNotification(notification, in: rootViewController)
+            response(nil)
         }
     }
     
-    private func presentAction(_ call: FlutterMethodCall, _ response: FlutterResult) {
+    private func presentAction(_ call: FlutterMethodCall, _ response: @escaping FlutterResult) {
         let notification: NotificareNotification
         let action: NotificareNotification.Action
         
@@ -72,7 +74,8 @@ public class SwiftNotificarePushUIPlugin: NSObject, FlutterPlugin {
             return
         }
         
-        NotificarePushUI.shared.presentAction(action, for: notification, with: nil, in: rootViewController)
+        NotificarePushUI.shared.presentAction(action, for: notification, in: rootViewController)
+        response(nil)
     }
     
     private func createNavigationController() -> UINavigationController {
@@ -119,13 +122,16 @@ public class SwiftNotificarePushUIPlugin: NSObject, FlutterPlugin {
 extension NotificareNotification {
     var requiresViewController: Bool {
         get {
-            let type = NotificareNotification.NotificationType.init(rawValue: type)
-            switch type {
-            case .none?, .passbook, .rate, .urlScheme:
-                return false
-            default:
-                return true
+            if let type = NotificareNotification.NotificationType.init(rawValue: type) {
+                switch type {
+                case .alert, .none, .passbook, .rate, .urlScheme:
+                    return false
+                default:
+                    break
+                }
             }
+
+            return true
         }
     }
 }
