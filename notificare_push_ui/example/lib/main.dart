@@ -19,6 +19,7 @@ class _MyAppState extends State<MyApp> {
     super.initState();
 
     Notificare.setUseAdvancedLogging(true);
+    NotificarePush.setPresentationOptions(['alert', 'badge', 'sound']);
     Notificare.launch();
 
     Notificare.onReady.listen((event) {
