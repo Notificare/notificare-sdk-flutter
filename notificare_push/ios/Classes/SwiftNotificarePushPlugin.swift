@@ -38,7 +38,7 @@ public class SwiftNotificarePushPlugin: NSObject, FlutterPlugin {
             case "setAuthorizationOptions": self.setAuthorizationOptions(call, result)
             case "setCategoryOptions": self.setCategoryOptions(call, result)
             case "setPresentationOptions": self.setPresentationOptions(call, result)
-            case "getRemoteNotificationsEnabled": self.getRemoteNotificationsEnabled(call, result)
+            case "isRemoteNotificationsEnabled": self.isRemoteNotificationsEnabled(call, result)
             case "enableRemoteNotifications": self.enableRemoteNotifications(call, result)
             case "disableRemoteNotifications": self.disableRemoteNotifications(call, result)
                 
@@ -160,7 +160,7 @@ public class SwiftNotificarePushPlugin: NSObject, FlutterPlugin {
         response(nil)
     }
     
-    private func getRemoteNotificationsEnabled(_ call: FlutterMethodCall, _ response: FlutterResult) {
+    private func isRemoteNotificationsEnabled(_ call: FlutterMethodCall, _ response: FlutterResult) {
         response(NotificarePush.shared.isRemoteNotificationsEnabled)
     }
     

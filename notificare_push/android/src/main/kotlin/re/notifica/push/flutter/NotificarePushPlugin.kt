@@ -34,14 +34,14 @@ class NotificarePushPlugin : FlutterPlugin, MethodCallHandler {
 
     override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
         when (call.method) {
-            "getRemoteNotificationsEnabled" -> getRemoteNotificationsEnabled(call, result)
+            "isRemoteNotificationsEnabled" -> isRemoteNotificationsEnabled(call, result)
             "enableRemoteNotifications" -> enableRemoteNotifications(call, result)
             "disableRemoteNotifications" -> disableRemoteNotifications(call, result)
             else -> result.notImplemented()
         }
     }
 
-    private fun getRemoteNotificationsEnabled(@Suppress("UNUSED_PARAMETER") call: MethodCall, result: Result) {
+    private fun isRemoteNotificationsEnabled(@Suppress("UNUSED_PARAMETER") call: MethodCall, result: Result) {
         result.success(NotificarePush.isRemoteNotificationsEnabled)
     }
 
