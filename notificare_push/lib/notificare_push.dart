@@ -51,6 +51,10 @@ class NotificarePush {
     }
   }
 
+  static Future<bool> get isRemoteNotificationsEnabled async {
+    return await _channel.invokeMethod('getRemoteNotificationsEnabled');
+  }
+
   static Future<void> enableRemoteNotifications() async {
     await _channel.invokeMapMethod('enableRemoteNotifications');
   }
