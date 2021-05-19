@@ -27,6 +27,8 @@ NotificareDevice _$NotificareDeviceFromJson(Map json) {
       (k, e) => MapEntry(k as String, e as String),
     ),
     const IsoDateTimeConverter().fromJson(json['lastRegistered'] as String),
+    json['allowedUI'] as bool,
+    json['bluetoothEnabled'] as bool,
   );
 }
 
@@ -47,4 +49,6 @@ Map<String, dynamic> _$NotificareDeviceToJson(NotificareDevice instance) =>
       'userData': instance.userData,
       'lastRegistered':
           const IsoDateTimeConverter().toJson(instance.lastRegistered),
+      'allowedUI': instance.allowedUI,
+      'bluetoothEnabled': instance.bluetoothEnabled,
     };
