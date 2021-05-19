@@ -91,7 +91,7 @@ packages:
   notificare:
     dependency: transitive
     description:
-      path: "../../notificare_core"
+      path: "../../notificare"
       relative: true
     source: path
     version: "3.0.0-alpha.1"

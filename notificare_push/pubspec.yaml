@@ -13,7 +13,7 @@ dependencies:
     sdk: flutter
   json_annotation: ^4.0.1
   notificare:
-    path: "../notificare_core"
+    path: "../notificare"
 
 dev_dependencies:
   flutter_test:
