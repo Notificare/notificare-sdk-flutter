@@ -1,11 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:notificare/models/notificare_notification.dart';
 
 part 'notificare_application.g.dart';
 
-@JsonSerializable(
-  anyMap: true,
-  explicitToJson: true,
-)
+@JsonSerializable(anyMap: true, explicitToJson: true)
 class NotificareApplication {
   final String id;
   final String name;
@@ -32,7 +30,7 @@ class NotificareApplication {
   Map<String, dynamic> toJson() => _$NotificareApplicationToJson(this);
 }
 
-@JsonSerializable()
+@JsonSerializable(anyMap: true, explicitToJson: true)
 class NotificareInboxConfig {
   final bool useInbox;
   final bool autoBadge;
@@ -47,7 +45,7 @@ class NotificareInboxConfig {
   Map<String, dynamic> toJson() => _$NotificareInboxConfigToJson(this);
 }
 
-@JsonSerializable()
+@JsonSerializable(anyMap: true, explicitToJson: true)
 class NotificareRegionConfig {
   final String? proximityUUID;
 
@@ -60,7 +58,7 @@ class NotificareRegionConfig {
   Map<String, dynamic> toJson() => _$NotificareRegionConfigToJson(this);
 }
 
-@JsonSerializable()
+@JsonSerializable(anyMap: true, explicitToJson: true)
 class NotificareUserDataField {
   final String type;
   final String key;
@@ -77,14 +75,16 @@ class NotificareUserDataField {
   Map<String, dynamic> toJson() => _$NotificareUserDataFieldToJson(this);
 }
 
-@JsonSerializable()
+@JsonSerializable(anyMap: true, explicitToJson: true)
 class NotificareActionCategory {
   final String type;
   final String name;
+  final List<NotificareNotificationAction> actions;
 
   NotificareActionCategory(
     this.type,
     this.name,
+    this.actions,
   );
 
   factory NotificareActionCategory.fromJson(Map<String, dynamic> json) => _$NotificareActionCategoryFromJson(json);

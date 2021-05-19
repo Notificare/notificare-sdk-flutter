@@ -4,10 +4,7 @@ import 'notificare_time.dart';
 
 part 'notificare_do_not_disturb.g.dart';
 
-@JsonSerializable(
-  anyMap: true,
-  explicitToJson: true,
-)
+@JsonSerializable(anyMap: true, explicitToJson: true)
 class NotificareDoNotDisturb {
   final NotificareTime start;
   final NotificareTime end;

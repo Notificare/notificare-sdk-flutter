@@ -45,8 +45,7 @@ Map<String, dynamic> _$NotificareApplicationToJson(
           instance.actionCategories.map((e) => e.toJson()).toList(),
     };
 
-NotificareInboxConfig _$NotificareInboxConfigFromJson(
-    Map<String, dynamic> json) {
+NotificareInboxConfig _$NotificareInboxConfigFromJson(Map json) {
   return NotificareInboxConfig(
     json['useInbox'] as bool,
     json['autoBadge'] as bool,
@@ -60,8 +59,7 @@ Map<String, dynamic> _$NotificareInboxConfigToJson(
       'autoBadge': instance.autoBadge,
     };
 
-NotificareRegionConfig _$NotificareRegionConfigFromJson(
-    Map<String, dynamic> json) {
+NotificareRegionConfig _$NotificareRegionConfigFromJson(Map json) {
   return NotificareRegionConfig(
     json['proximityUUID'] as String?,
   );
@@ -73,8 +71,7 @@ Map<String, dynamic> _$NotificareRegionConfigToJson(
       'proximityUUID': instance.proximityUUID,
     };
 
-NotificareUserDataField _$NotificareUserDataFieldFromJson(
-    Map<String, dynamic> json) {
+NotificareUserDataField _$NotificareUserDataFieldFromJson(Map json) {
   return NotificareUserDataField(
     json['type'] as String,
     json['key'] as String,
@@ -90,11 +87,14 @@ Map<String, dynamic> _$NotificareUserDataFieldToJson(
       'label': instance.label,
     };
 
-NotificareActionCategory _$NotificareActionCategoryFromJson(
-    Map<String, dynamic> json) {
+NotificareActionCategory _$NotificareActionCategoryFromJson(Map json) {
   return NotificareActionCategory(
     json['type'] as String,
     json['name'] as String,
+    (json['actions'] as List<dynamic>)
+        .map((e) => NotificareNotificationAction.fromJson(
+            Map<String, dynamic>.from(e as Map)))
+        .toList(),
   );
 }
 
@@ -103,4 +103,5 @@ Map<String, dynamic> _$NotificareActionCategoryToJson(
     <String, dynamic>{
       'type': instance.type,
       'name': instance.name,
+      'actions': instance.actions.map((e) => e.toJson()).toList(),
     };
