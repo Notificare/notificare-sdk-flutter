@@ -60,6 +60,7 @@ class NotificarePushUIPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
         val notification = NotificareNotification.fromJson(call.arguments())
 
         NotificarePushUI.presentNotification(activity, notification)
+        result.success(null)
     }
 
     private fun presentAction(call: MethodCall, result: Result) {
@@ -74,6 +75,7 @@ class NotificarePushUIPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
         val action = NotificareNotification.Action.fromJson(json.getJSONObject("action"))
 
         NotificarePushUI.presentAction(activity, notification, action)
+        result.success(null)
     }
 
     companion object {
