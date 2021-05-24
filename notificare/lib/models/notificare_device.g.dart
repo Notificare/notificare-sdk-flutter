@@ -23,9 +23,7 @@ NotificareDevice _$NotificareDeviceFromJson(Map json) {
         ? null
         : NotificareDoNotDisturb.fromJson(
             Map<String, dynamic>.from(json['dnd'] as Map)),
-    (json['userData'] as Map?)?.map(
-      (k, e) => MapEntry(k as String, e as String),
-    ),
+    Map<String, String>.from(json['userData'] as Map),
     const IsoDateTimeConverter().fromJson(json['lastRegistered'] as String),
     json['allowedUI'] as bool,
     json['bluetoothEnabled'] as bool,
