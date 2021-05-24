@@ -356,8 +356,8 @@ class NotificarePlugin : FlutterPlugin {
     }
 
     private fun fetchUserData(pluginResult: Result) {
-        Notificare.deviceManager.fetchUserData(object : NotificareCallback<NotificareUserData?> {
-            override fun onSuccess(result: NotificareUserData?) {
+        Notificare.deviceManager.fetchUserData(object : NotificareCallback<NotificareUserData> {
+            override fun onSuccess(result: NotificareUserData) {
                 onMainThread {
                     pluginResult.success(result)
                 }
@@ -372,7 +372,7 @@ class NotificarePlugin : FlutterPlugin {
     }
 
     private fun updateUserData(call: MethodCall, pluginResult: Result) {
-        val userData = call.arguments<Map<String, String>>()
+        val userData = call.arguments<Map<String, String?>>()
 
         Notificare.deviceManager.updateUserData(userData, object : NotificareCallback<Unit> {
             override fun onSuccess(result: Unit) {
