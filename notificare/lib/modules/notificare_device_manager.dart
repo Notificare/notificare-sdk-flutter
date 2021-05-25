@@ -62,11 +62,11 @@ class NotificareDeviceManager {
     await _channel.invokeMethod('clearDoNotDisturb');
   }
 
-  Future<Map<String, String?>> fetchUserData() async {
-    return (await _channel.invokeMapMethod<String, String?>('fetchUserData'))!;
+  Future<Map<String, String>> fetchUserData() async {
+    return (await _channel.invokeMapMethod<String, String>('fetchUserData'))!;
   }
 
-  Future<void> updateUserData(Map<String, String?> userData) async {
+  Future<void> updateUserData(Map<String, String> userData) async {
     await _channel.invokeMethod('updateUserData', userData);
   }
 }

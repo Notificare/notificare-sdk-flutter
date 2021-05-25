@@ -21,7 +21,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   Notificare:
-    :commit: bd7d1d362c034e26d176db2c91b52f97cdc6552a
+    :commit: 4630d7a32caf641132412df9672b86d23536684a
     :git: "git@github.com:Notificare/notificare-sdk-ios.git"
 
 SPEC CHECKSUMS:

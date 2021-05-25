@@ -8,6 +8,7 @@ import io.flutter.plugin.common.JSONMethodCodec
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.Result
+import org.json.JSONObject
 import re.notifica.Notificare
 import re.notifica.NotificareCallback
 import re.notifica.flutter.events.NotificareEventManager
@@ -372,7 +373,16 @@ class NotificarePlugin : FlutterPlugin {
     }
 
     private fun updateUserData(call: MethodCall, pluginResult: Result) {
-        val userData = call.arguments<Map<String, String?>>()
+        val json = call.arguments<JSONObject>()
+        val userData = mutableMapOf<String, String>()
+
+        val iterator = json.keys()
+        while (iterator.hasNext()) {
+            val key = iterator.next()
+            if (!json.isNull(key)) {
+                userData[key] = json.getString(key)
+            }
+        }
 
         Notificare.deviceManager.updateUserData(userData, object : NotificareCallback<Unit> {
             override fun onSuccess(result: Unit) {
