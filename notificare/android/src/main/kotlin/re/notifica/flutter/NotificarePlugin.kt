@@ -8,6 +8,7 @@ import io.flutter.plugin.common.JSONMethodCodec
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.Result
+import org.json.JSONArray
 import org.json.JSONObject
 import re.notifica.Notificare
 import re.notifica.NotificareCallback
@@ -215,7 +216,12 @@ class NotificarePlugin : FlutterPlugin {
     }
 
     private fun addTags(call: MethodCall, pluginResult: Result) {
-        val tags = call.arguments<List<String>>()
+        val json = call.arguments<JSONArray>()
+
+        val tags = mutableListOf<String>()
+        for (i in 0 until json.length()) {
+            tags.add(json.getString(i))
+        }
 
         Notificare.deviceManager.addTags(tags, object : NotificareCallback<Unit> {
             override fun onSuccess(result: Unit) {
@@ -251,7 +257,12 @@ class NotificarePlugin : FlutterPlugin {
     }
 
     private fun removeTags(call: MethodCall, pluginResult: Result) {
-        val tags = call.arguments<List<String>>()
+        val json = call.arguments<JSONArray>()
+
+        val tags = mutableListOf<String>()
+        for (i in 0 until json.length()) {
+            tags.add(json.getString(i))
+        }
 
         Notificare.deviceManager.removeTags(tags, object : NotificareCallback<Unit> {
             override fun onSuccess(result: Unit) {
