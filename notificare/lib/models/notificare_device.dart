@@ -21,8 +21,6 @@ class NotificareDevice {
   final NotificareDoNotDisturb? dnd;
   final Map<String, String?> userData;
   final DateTime lastRegistered;
-  final bool allowedUI;
-  final bool bluetoothEnabled;
 
   NotificareDevice(
     this.id,
@@ -39,8 +37,6 @@ class NotificareDevice {
     this.dnd,
     this.userData,
     this.lastRegistered,
-    this.allowedUI,
-    this.bluetoothEnabled,
   );
 
   factory NotificareDevice.fromJson(Map<String, dynamic> json) => _$NotificareDeviceFromJson(json);
