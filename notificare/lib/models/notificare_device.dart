@@ -19,7 +19,7 @@ class NotificareDevice {
   final String region;
   final String transport;
   final NotificareDoNotDisturb? dnd;
-  final Map<String, String?> userData;
+  final Map<String, String> userData;
   final DateTime lastRegistered;
 
   NotificareDevice(
