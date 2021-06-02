@@ -346,13 +346,6 @@ public class SwiftNotificarePlugin: NSObject, FlutterPlugin {
 }
 
 extension SwiftNotificarePlugin {
-    public func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [AnyHashable : Any] = [:]) -> Bool {
-        // Ensure Notificare is configured when the application is launched.
-        Notificare.shared.configure()
-        
-        return true
-    }
-    
     public func application(_ application: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         if Notificare.shared.handleTestDeviceUrl(url) {
             return true
