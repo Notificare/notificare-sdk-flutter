@@ -94,4 +94,10 @@ class Notificare {
       return NotificareDevice.fromJson(json.cast());
     });
   }
+
+  static Stream<String> get onUrlOpened {
+    return _getEventStream('url_opened').map((result) {
+      return result as String;
+    });
+  }
 }

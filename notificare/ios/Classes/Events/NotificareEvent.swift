@@ -11,6 +11,7 @@ import NotificareKit
 enum NotificareEventType: String, CaseIterable {
     case ready
     case deviceRegistered = "device_registered"
+    case urlOpened = "url_opened"
 }
 
 protocol NotificareEvent {
@@ -35,5 +36,15 @@ class NotificareEventOnDeviceRegistered: NotificareEvent {
     init(device: NotificareDevice) {
         self.type = .deviceRegistered
         self.payload = try! device.toJson()
+    }
+}
+
+class NotificareEventOnUrlOpened: NotificareEvent {
+    let type: NotificareEventType
+    let payload: Any?
+
+    init(url: String) {
+        self.type = .urlOpened
+        self.payload = url
     }
 }

@@ -4,7 +4,6 @@ version '3.0.0-alpha.1'
 
 buildscript {
     ext.kotlin_version = '1.4.10'
-    ext.notificare_version = '3.0.0-alpha.1'
 
     repositories {
         google()
@@ -50,5 +49,6 @@ android {
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
+    def notificare_version = '3.0.0-alpha.1'
     api "re.notifica:notificare:$notificare_version"
 }

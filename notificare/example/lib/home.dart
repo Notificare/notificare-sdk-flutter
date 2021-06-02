@@ -30,6 +30,16 @@ class _HomeState extends State<Home> {
         ),
       );
     });
+
+    Notificare.onUrlOpened.listen((url) {
+      print('URL opened: $url');
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('URL opened: $url'),
+        ),
+      );
+    });
   }
 
   @override

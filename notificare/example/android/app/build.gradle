@@ -39,12 +39,15 @@ android {
     }
 
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "com.example.notificare_example"
+        applicationId "re.notifica.demo"
         minSdkVersion 23
         targetSdkVersion 30
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+
+        manifestPlaceholders = [
+                notificareApplicationId: localProperties.getProperty('notificare.development.application.id'),
+        ]
     }
 
     buildTypes {
@@ -52,6 +55,10 @@ android {
             // TODO: Add your own signing config for the release build.
             // Signing with the debug keys for now, so `flutter run --release` works.
             signingConfig signingConfigs.debug
+
+            manifestPlaceholders = [
+                    notificareApplicationId: localProperties.getProperty('notificare.production.application.id'),
+            ]
         }
     }
 }

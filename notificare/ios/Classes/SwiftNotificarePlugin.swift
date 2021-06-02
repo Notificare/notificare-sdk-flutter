@@ -16,6 +16,8 @@ public class SwiftNotificarePlugin: NSObject, FlutterPlugin {
     }
     
     private func register(with registrar: FlutterPluginRegistrar) {
+        registrar.addApplicationDelegate(self)
+        
         // Events
         NotificareEventManager.shared.register(for: registrar)
 
@@ -340,6 +342,36 @@ public class SwiftNotificarePlugin: NSObject, FlutterPlugin {
                 response(FlutterError(code: DEFAULT_ERROR_CODE, message: error.localizedDescription, details: nil))
             }
         }
+    }
+}
+
+extension SwiftNotificarePlugin {
+    public func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [AnyHashable : Any] = [:]) -> Bool {
+        // Ensure Notificare is configured when the application is launched.
+        Notificare.shared.configure()
+        
+        return true
+    }
+    
+    public func application(_ application: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        if Notificare.shared.handleTestDeviceUrl(url) {
+            return true
+        }
+        
+        if Notificare.shared.handleDynamicLinkUrl(url) {
+            return true
+        }
+        
+        NotificareEventManager.shared.send(NotificareEventOnUrlOpened(url: url.absoluteString))
+        return true
+    }
+    
+    public func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]) -> Void) -> Bool {
+        guard let url = userActivity.webpageURL else {
+            return false
+        }
+        
+        return Notificare.shared.handleDynamicLinkUrl(url)
     }
 }
 

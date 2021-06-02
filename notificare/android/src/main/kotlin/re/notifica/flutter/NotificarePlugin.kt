@@ -1,26 +1,33 @@
 package re.notifica.flutter
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.os.Handler
 import android.os.Looper
 import io.flutter.embedding.engine.plugins.FlutterPlugin
+import io.flutter.embedding.engine.plugins.activity.ActivityAware
+import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
 import io.flutter.plugin.common.JSONMethodCodec
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.Result
+import io.flutter.plugin.common.PluginRegistry
 import org.json.JSONArray
 import org.json.JSONObject
 import re.notifica.Notificare
 import re.notifica.NotificareCallback
+import re.notifica.flutter.events.NotificareEvent
 import re.notifica.flutter.events.NotificareEventManager
 import re.notifica.models.NotificareApplication
 import re.notifica.models.NotificareDoNotDisturb
 import re.notifica.models.NotificareNotification
 import re.notifica.models.NotificareUserData
 
-class NotificarePlugin : FlutterPlugin {
+class NotificarePlugin : FlutterPlugin, ActivityAware, PluginRegistry.NewIntentListener {
 
     private lateinit var context: Context
+    private lateinit var activity: Activity
     private lateinit var channel: MethodChannel
 
     override fun onAttachedToEngine(binding: FlutterPlugin.FlutterPluginBinding) {
@@ -75,6 +82,49 @@ class NotificarePlugin : FlutterPlugin {
         // Events
         NotificareEventManager.unregister()
     }
+
+    // region ActivityAware
+
+    override fun onAttachedToActivity(binding: ActivityPluginBinding) {
+        // Keep a reference to the current activity.
+        activity = binding.activity
+
+        // Listen to incoming intents.
+        binding.addOnNewIntentListener(this)
+
+        // Handle the initial intent, if any.
+        val intent = binding.activity.intent
+        if (intent != null) onNewIntent(intent)
+    }
+
+    override fun onDetachedFromActivity() {}
+
+    override fun onDetachedFromActivityForConfigChanges() {}
+
+    override fun onReattachedToActivityForConfigChanges(binding: ActivityPluginBinding) {}
+
+    // endregion
+
+    // region PluginRegistry.NewIntentListener
+
+    override fun onNewIntent(intent: Intent): Boolean {
+        // Try handling the test device intent.
+        if (Notificare.handleTestDeviceIntent(intent)) return true
+
+        // Try handling the dynamic link intent.
+        if (Notificare.handleDynamicLinkIntent(activity, intent)) return true
+
+        val url = intent.data?.toString()
+        if (url != null) {
+            NotificareEventManager.send(
+                NotificareEvent.UrlOpened(url)
+            )
+        }
+
+        return false
+    }
+
+    // endregion
 
     // region Notificare
 
