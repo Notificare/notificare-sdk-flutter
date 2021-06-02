@@ -1,16 +1,19 @@
 package re.notifica.push.flutter
 
+import android.content.Intent
 import androidx.annotation.NonNull
-
 import io.flutter.embedding.engine.plugins.FlutterPlugin
+import io.flutter.embedding.engine.plugins.activity.ActivityAware
+import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
 import io.flutter.plugin.common.JSONMethodCodec
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
+import io.flutter.plugin.common.PluginRegistry
 import re.notifica.push.NotificarePush
 
-class NotificarePushPlugin : FlutterPlugin, MethodCallHandler {
+class NotificarePushPlugin : FlutterPlugin, MethodCallHandler, ActivityAware, PluginRegistry.NewIntentListener {
 
     companion object {
         internal const val NAMESPACE = "re.notifica.push.flutter"
@@ -41,6 +44,31 @@ class NotificarePushPlugin : FlutterPlugin, MethodCallHandler {
             else -> result.notImplemented()
         }
     }
+
+    // region ActivityAware
+
+    override fun onAttachedToActivity(binding: ActivityPluginBinding) {
+        binding.addOnNewIntentListener(this)
+
+        val intent = binding.activity.intent
+        if (intent != null) onNewIntent(intent)
+    }
+
+    override fun onDetachedFromActivityForConfigChanges() {}
+
+    override fun onReattachedToActivityForConfigChanges(binding: ActivityPluginBinding) {}
+
+    override fun onDetachedFromActivity() {}
+
+    // endregion
+
+    // region PluginRegistry.NewIntentListener
+
+    override fun onNewIntent(intent: Intent): Boolean {
+        return NotificarePush.handleTrampolineIntent(intent)
+    }
+
+    // endregion
 
     private fun isRemoteNotificationsEnabled(@Suppress("UNUSED_PARAMETER") call: MethodCall, result: Result) {
         result.success(NotificarePush.isRemoteNotificationsEnabled)
