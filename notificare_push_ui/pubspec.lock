@@ -284,13 +284,6 @@ packages:
       relative: true
     source: path
     version: "3.0.0-alpha.1"
-  notificare_push:
-    dependency: "direct main"
-    description:
-      path: "../notificare_push"
-      relative: true
-    source: path
-    version: "3.0.0-alpha.1"
   package_config:
     dependency: transitive
     description:

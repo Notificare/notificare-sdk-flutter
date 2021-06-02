@@ -12,6 +12,9 @@ dependencies:
   flutter:
     sdk: flutter
 
+  notificare_push:
+    path: "../../notificare_push"
+
   notificare_push_ui:
     # When depending on this package from a real application you should use:
     #   notificare_push_ui: ^x.y.z
