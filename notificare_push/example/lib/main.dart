@@ -126,6 +126,7 @@ class _MyAppState extends State<MyApp> {
         body: ListView(
           children: [
             TextButton(child: Text('Check remote notifications enabled'), onPressed: _checkRemoteNotificationsEnabled),
+            TextButton(child: Text('Check allowed UI'), onPressed: _checkAllowedUI),
             TextButton(child: Text('Enable remote notifications'), onPressed: _enableRemoteNotifications),
             TextButton(child: Text('Disable remote notifications'), onPressed: _disableRemoteNotifications),
           ],
@@ -140,6 +141,16 @@ class _MyAppState extends State<MyApp> {
     _messengerKey.currentState?.showSnackBar(
       SnackBar(
         content: Text('Enabled = $enabled'),
+      ),
+    );
+  }
+
+  void _checkAllowedUI() async {
+    final allowed = await NotificarePush.allowedUI;
+
+    _messengerKey.currentState?.showSnackBar(
+      SnackBar(
+        content: Text('Allowed = $allowed'),
       ),
     );
   }
