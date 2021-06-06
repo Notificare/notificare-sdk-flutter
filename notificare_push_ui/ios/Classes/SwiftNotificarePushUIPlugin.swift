@@ -13,7 +13,15 @@ public class SwiftNotificarePushUIPlugin: NSObject, FlutterPlugin {
         instance.register(with: registrar)
     }
     
+    private let eventBroker = NotificarePushUIPluginEventBroker(namespace: NAMESPACE)
+    
     private func register(with registrar: FlutterPluginRegistrar) {
+        // Events
+        eventBroker.setup(registrar: registrar)
+        
+        // Delegate
+        NotificarePushUI.shared.delegate = self
+        
         let channel = FlutterMethodChannel(name: "\(NAMESPACE)/notificare_push_ui", binaryMessenger: registrar.messenger(), codec: FlutterJSONMethodCodec.sharedInstance())
         registrar.addMethodCallDelegate(self, channel: channel)
     }
@@ -133,5 +141,93 @@ extension NotificareNotification {
 
             return true
         }
+    }
+}
+
+extension SwiftNotificarePushUIPlugin: NotificarePushUIDelegate {
+    public func notificare(_ notificarePushUI: NotificarePushUI, willPresentNotification notification: NotificareNotification) {
+        eventBroker.emit(
+            NotificarePushUIPluginEventBroker.OnNotificationWillPresent(
+                notification: notification
+            )
+        )
+    }
+    
+    public func notificare(_ notificarePushUI: NotificarePushUI, didPresentNotification notification: NotificareNotification) {
+        eventBroker.emit(
+            NotificarePushUIPluginEventBroker.OnNotificationPresented(
+                notification: notification
+            )
+        )
+    }
+    
+    public func notificare(_ notificarePushUI: NotificarePushUI, didFinishPresentingNotification notification: NotificareNotification) {
+        eventBroker.emit(
+            NotificarePushUIPluginEventBroker.OnNotificationFinishedPresenting(
+                notification: notification
+            )
+        )
+    }
+    
+    public func notificare(_ notificarePushUI: NotificarePushUI, didFailToPresentNotification notification: NotificareNotification) {
+        eventBroker.emit(
+            NotificarePushUIPluginEventBroker.OnNotificationFailedToPresent(
+                notification: notification
+            )
+        )
+    }
+    
+    public func notificare(_ notificarePushUI: NotificarePushUI, didClickURL url: URL, in notification: NotificareNotification) {
+        eventBroker.emit(
+            NotificarePushUIPluginEventBroker.OnNotificationUrlClicked(
+                notification: notification,
+                url: url
+            )
+        )
+    }
+    
+    public func notificare(_ notificarePushUI: NotificarePushUI, willExecuteAction action: NotificareNotification.Action, for notification: NotificareNotification) {
+        eventBroker.emit(
+            NotificarePushUIPluginEventBroker.OnActionWillExecute(
+                notification: notification,
+                action: action
+            )
+        )
+    }
+    
+    public func notificare(_ notificarePushUI: NotificarePushUI, didExecuteAction action: NotificareNotification.Action, for notification: NotificareNotification) {
+        eventBroker.emit(
+            NotificarePushUIPluginEventBroker.OnActionExecuted(
+                notification: notification,
+                action: action
+            )
+        )
+    }
+    
+    public func notificare(_ notificarePushUI: NotificarePushUI, didNotExecuteAction action: NotificareNotification.Action, for notification: NotificareNotification) {
+        eventBroker.emit(
+            NotificarePushUIPluginEventBroker.OnActionNotExecuted(
+                notification: notification,
+                action: action
+            )
+        )
+    }
+    
+    public func notificare(_ notificarePushUI: NotificarePushUI, didFailToExecuteAction action: NotificareNotification.Action, for notification: NotificareNotification, error: Error?) {
+        eventBroker.emit(
+            NotificarePushUIPluginEventBroker.OnActionFailedToExecute(
+                notification: notification,
+                action: action,
+                error: error
+            )
+        )
+    }
+    
+    public func notificare(_ notificarePushUI: NotificarePushUI, shouldPerformSelectorWithURL url: URL, in action: NotificareNotification.Action, for notification: NotificareNotification) {
+        eventBroker.emit(
+            NotificarePushUIPluginEventBroker.OnCustomActionReceived(
+                url: url
+            )
+        )
     }
 }

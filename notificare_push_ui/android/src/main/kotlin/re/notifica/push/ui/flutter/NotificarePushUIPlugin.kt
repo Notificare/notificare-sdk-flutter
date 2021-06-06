@@ -1,8 +1,8 @@
 package re.notifica.push.ui.flutter
 
 import android.app.Activity
+import android.net.Uri
 import androidx.annotation.NonNull
-
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
@@ -16,15 +16,25 @@ import re.notifica.NotificareLogger
 import re.notifica.models.NotificareNotification
 import re.notifica.push.ui.NotificarePushUI
 
-class NotificarePushUIPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
+class NotificarePushUIPlugin : FlutterPlugin, MethodCallHandler, ActivityAware,
+    NotificarePushUI.NotificationLifecycleListener {
+
+    companion object {
+        internal const val NAMESPACE = "re.notifica.push.ui.flutter"
+        private const val NOTIFICARE_ERROR = "notificare_error"
+    }
 
     private var activity: Activity? = null
 
     private lateinit var channel: MethodChannel
 
     override fun onAttachedToEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
-        channel = MethodChannel(binding.binaryMessenger, "re.notifica.push.ui.flutter/notificare_push_ui", JSONMethodCodec.INSTANCE)
+        channel = MethodChannel(binding.binaryMessenger, "$NAMESPACE/notificare_push_ui", JSONMethodCodec.INSTANCE)
         channel.setMethodCallHandler(this)
+
+        NotificarePushUIPluginEventBroker.register(binding.binaryMessenger)
+
+        NotificarePushUI.addLifecycleListener(this)
     }
 
     override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
@@ -36,6 +46,7 @@ class NotificarePushUIPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
 
     override fun onDetachedFromEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
         channel.setMethodCallHandler(null)
+        NotificarePushUI.removeLifecycleListener(this)
     }
 
     override fun onAttachedToActivity(binding: ActivityPluginBinding) {
@@ -78,7 +89,88 @@ class NotificarePushUIPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
         result.success(null)
     }
 
-    companion object {
-        private const val NOTIFICARE_ERROR = "notificare_error"
+    // region NotificarePushUI.NotificationLifecycleListener
+
+    override fun onNotificationWillPresent(notification: NotificareNotification) {
+        NotificarePushUIPluginEventBroker.emit(
+            NotificarePushUIPluginEventBroker.Event.NotificationWillPresent(
+                notification = notification,
+            )
+        )
     }
+
+    override fun onNotificationPresented(notification: NotificareNotification) {
+        NotificarePushUIPluginEventBroker.emit(
+            NotificarePushUIPluginEventBroker.Event.NotificationPresented(
+                notification = notification,
+            )
+        )
+    }
+
+    override fun onNotificationFinishedPresenting(notification: NotificareNotification) {
+        NotificarePushUIPluginEventBroker.emit(
+            NotificarePushUIPluginEventBroker.Event.NotificationFinishedPresenting(
+                notification = notification,
+            )
+        )
+    }
+
+    override fun onNotificationFailedToPresent(notification: NotificareNotification) {
+        NotificarePushUIPluginEventBroker.emit(
+            NotificarePushUIPluginEventBroker.Event.NotificationFailedToPresent(
+                notification = notification,
+            )
+        )
+    }
+
+    override fun onNotificationUrlClicked(notification: NotificareNotification, uri: Uri) {
+        NotificarePushUIPluginEventBroker.emit(
+            NotificarePushUIPluginEventBroker.Event.NotificationUrlClicked(
+                notification = notification,
+                uri = uri,
+            )
+        )
+    }
+
+    override fun onActionWillExecute(notification: NotificareNotification, action: NotificareNotification.Action) {
+        NotificarePushUIPluginEventBroker.emit(
+            NotificarePushUIPluginEventBroker.Event.ActionWillExecute(
+                notification = notification,
+                action = action,
+            )
+        )
+    }
+
+    override fun onActionExecuted(notification: NotificareNotification, action: NotificareNotification.Action) {
+        NotificarePushUIPluginEventBroker.emit(
+            NotificarePushUIPluginEventBroker.Event.ActionExecuted(
+                notification = notification,
+                action = action,
+            )
+        )
+    }
+
+    override fun onActionFailedToExecute(
+        notification: NotificareNotification,
+        action: NotificareNotification.Action,
+        error: Exception?
+    ) {
+        NotificarePushUIPluginEventBroker.emit(
+            NotificarePushUIPluginEventBroker.Event.ActionFailedToExecute(
+                notification = notification,
+                action = action,
+                error = error,
+            )
+        )
+    }
+
+    override fun onCustomActionReceived(uri: Uri) {
+        NotificarePushUIPluginEventBroker.emit(
+            NotificarePushUIPluginEventBroker.Event.CustomActionReceived(
+                uri = uri,
+            )
+        )
+    }
+
+    // endregion
 }
