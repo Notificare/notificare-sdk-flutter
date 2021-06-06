@@ -35,6 +35,46 @@ class _MyAppState extends State<MyApp> {
           .then((value) => print('Notification presented.'))
           .catchError((error) => print('Failed to present notification: $error'));
     });
+
+    NotificarePushUI.onNotificationWillPresent.listen((notification) {
+      print('---> notification will present');
+    });
+
+    NotificarePushUI.onNotificationPresented.listen((notification) {
+      print('---> notification presented');
+    });
+
+    NotificarePushUI.onNotificationFinishedPresenting.listen((notification) {
+      print('---> notification finished presenting');
+    });
+
+    NotificarePushUI.onNotificationFailedToPresent.listen((notification) {
+      print('---> notification failed to present');
+    });
+
+    NotificarePushUI.onNotificationUrlClicked.listen((data) {
+      print('---> notification url clicked');
+    });
+
+    NotificarePushUI.onActionWillExecute.listen((data) {
+      print('---> action will execute');
+    });
+
+    NotificarePushUI.onActionExecuted.listen((data) {
+      print('---> action executed');
+    });
+
+    NotificarePushUI.onActionNotExecuted.listen((data) {
+      print('---> action not executed');
+    });
+
+    NotificarePushUI.onActionFailedToExecute.listen((data) {
+      print('---> action failed to execute');
+    });
+
+    NotificarePushUI.onCustomActionReceived.listen((data) {
+      print('---> custom action received');
+    });
   }
 
   @override
