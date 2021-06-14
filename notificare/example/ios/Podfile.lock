@@ -8,27 +8,22 @@ PODS:
 DEPENDENCIES:
   - Flutter (from `Flutter`)
   - notificare (from `.symlinks/plugins/notificare/ios`)
-  - "Notificare/NotificareKit (from `git@github.com:Notificare/notificare-sdk-ios.git`, branch `develop`)"
+
+SPEC REPOS:
+  trunk:
+    - Notificare
 
 EXTERNAL SOURCES:
   Flutter:
     :path: Flutter
-  Notificare:
-    :branch: develop
-    :git: "git@github.com:Notificare/notificare-sdk-ios.git"
   notificare:
     :path: ".symlinks/plugins/notificare/ios"
 
-CHECKOUT OPTIONS:
-  Notificare:
-    :commit: c611ce337d330dfb5ac4d11393eee0726055e800
-    :git: "git@github.com:Notificare/notificare-sdk-ios.git"
-
 SPEC CHECKSUMS:
   Flutter: 434fef37c0980e73bb6479ef766c45957d4b510c
-  Notificare: 76e14b15d82fa2674061242bb62e4106b5e4373c
+  Notificare: fdfa61a897596e7770ca6e420c4f03983d1e36c8
   notificare: 76e14b15d82fa2674061242bb62e4106b5e4373c
 
-PODFILE CHECKSUM: 131a07b4286a5fbdbd0e9690d792897b7bc2e198
+PODFILE CHECKSUM: aafe91acc616949ddb318b77800a7f51bffa2a4c
 
 COCOAPODS: 1.10.1
