@@ -121,36 +121,24 @@ class NotificarePush {
     });
   }
 
-  static Stream<bool>? get onNotificationSettingsChanged {
-    if (Platform.isIOS) {
-      return _getEventStream('notification_settings_changed').map((result) {
-        return result as bool;
-      });
-    } else {
-      return null;
-    }
+  static Stream<bool> get onNotificationSettingsChanged {
+    return _getEventStream('notification_settings_changed').map((result) {
+      return result as bool;
+    });
   }
 
-  static Stream<NotificareNotification?>? get onShouldOpenNotificationSettings {
-    if (Platform.isIOS) {
-      return _getEventStream('should_open_notification_settings').map((result) {
-        if (result == null) return null;
+  static Stream<NotificareNotification?> get onShouldOpenNotificationSettings {
+    return _getEventStream('should_open_notification_settings').map((result) {
+      if (result == null) return null;
 
-        final Map<dynamic, dynamic> json = result;
-        return NotificareNotification.fromJson(json.cast());
-      });
-    } else {
-      return null;
-    }
+      final Map<dynamic, dynamic> json = result;
+      return NotificareNotification.fromJson(json.cast());
+    });
   }
 
-  static Stream<String>? get onFailedToRegisterForRemoteNotifications {
-    if (Platform.isIOS) {
-      return _getEventStream('failed_to_register_for_remote_notifications').map((result) {
-        return result as String;
-      });
-    } else {
-      return null;
-    }
+  static Stream<String> get onFailedToRegisterForRemoteNotifications {
+    return _getEventStream('failed_to_register_for_remote_notifications').map((result) {
+      return result as String;
+    });
   }
 }

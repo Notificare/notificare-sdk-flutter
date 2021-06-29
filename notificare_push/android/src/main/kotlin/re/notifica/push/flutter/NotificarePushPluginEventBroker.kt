@@ -53,6 +53,11 @@ internal object NotificarePushPluginEventBroker {
             UNKNOWN_NOTIFICATION_RECEIVED(id = "unknown_notification_received"),
             NOTIFICATION_OPENED(id = "notification_opened"),
             NOTIFICATION_ACTION_OPENED(id = "notification_action_opened"),
+
+            // iOS-only events (declared to prevent missing stream errors)
+            NOTIFICATION_SETTINGS_CHANGED(id = "notification_settings_changed"),
+            SHOULD_OPEN_NOTIFICATION_SETTINGS(id = "should_open_notification_settings"),
+            FAILED_TO_REGISTER_FOR_REMOTE_NOTIFICATIONS(id = "failed_to_register_for_remote_notifications"),
         }
 
         class NotificationReceived(
