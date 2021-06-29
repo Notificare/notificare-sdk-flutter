@@ -95,11 +95,15 @@ class NotificareInboxPlugin : FlutterPlugin, MethodCallHandler {
 
         NotificareInbox.open(item, object : NotificareCallback<NotificareNotification> {
             override fun onSuccess(result: NotificareNotification) {
-                pluginResult.success(result)
+                onMainThread {
+                    pluginResult.success(result.toJson())
+                }
             }
 
             override fun onFailure(e: Exception) {
-                pluginResult.error(NOTIFICARE_ERROR, e.localizedMessage, null)
+                onMainThread {
+                    pluginResult.error(NOTIFICARE_ERROR, e.localizedMessage, null)
+                }
             }
         })
     }

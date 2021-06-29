@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/services.dart';
+import 'package:notificare/models/notificare_notification.dart';
 
 import 'models/notificare_inbox_item.dart';
 
@@ -25,8 +26,9 @@ class NotificareInbox {
     await _channel.invokeMethod('refresh');
   }
 
-  static Future<void> open(NotificareInboxItem item) async {
-    await _channel.invokeMethod('open', item.toJson());
+  static Future<NotificareNotification> open(NotificareInboxItem item) async {
+    final json = await _channel.invokeMapMethod<String, dynamic>('open', item.toJson());
+    return NotificareNotification.fromJson(json!);
   }
 
   static Future<void> markAsRead(NotificareInboxItem item) async {
