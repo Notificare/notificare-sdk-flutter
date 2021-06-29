@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/services.dart';
@@ -18,36 +17,18 @@ class NotificarePush {
   static Future<void> setAuthorizationOptions(List<String> options) async {
     if (Platform.isIOS) {
       await _channel.invokeMapMethod('setAuthorizationOptions', options);
-    } else {
-      log(
-        'Setting the authorization options has no effect on this platform.',
-        time: DateTime.now(),
-        name: 'Notificare',
-      );
     }
   }
 
   static Future<void> setCategoryOptions(List<String> options) async {
     if (Platform.isIOS) {
       await _channel.invokeMapMethod('setCategoryOptions', options);
-    } else {
-      log(
-        'Setting the category options has no effect on this platform.',
-        time: DateTime.now(),
-        name: 'Notificare',
-      );
     }
   }
 
   static Future<void> setPresentationOptions(List<String> options) async {
     if (Platform.isIOS) {
       await _channel.invokeMapMethod('setPresentationOptions', options);
-    } else {
-      log(
-        'Setting the presentation options has no effect on this platform.',
-        time: DateTime.now(),
-        name: 'Notificare',
-      );
     }
   }
 
