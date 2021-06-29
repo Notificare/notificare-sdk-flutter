@@ -87,7 +87,7 @@ class _HomeState extends State<Home> {
   }
 
   void _register() {
-    Notificare.deviceManager.register('helder@notifica.re', 'Helder Pinhal').then((value) {
+    Notificare.deviceManager.register(userId: 'helder@notifica.re', userName: 'Helder Pinhal').then((value) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('Done.'),
@@ -104,7 +104,7 @@ class _HomeState extends State<Home> {
   }
 
   void _registerAnonymous() {
-    Notificare.deviceManager.register(null, null).then((value) {
+    Notificare.deviceManager.register(userId: null, userName: null).then((value) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('Done.'),

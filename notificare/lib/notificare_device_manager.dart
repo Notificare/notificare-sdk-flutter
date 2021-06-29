@@ -20,7 +20,10 @@ class NotificareDeviceManager {
     await _channel.invokeMethod('updatePreferredLanguage', language);
   }
 
-  Future<void> register(String? userId, String? userName) async {
+  Future<void> register({
+    required String? userId,
+    required String? userName,
+  }) async {
     await _channel.invokeMethod('register', {'userId': userId, 'userName': userName});
   }
 

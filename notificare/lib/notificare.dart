@@ -41,7 +41,10 @@ class Notificare {
     return await _channel.invokeMethod('setUseAdvancedLogging', useAdvancedLogging);
   }
 
-  static Future<void> configure(String applicationKey, String applicationSecret) async {
+  static Future<void> configure({
+    required String applicationKey,
+    required String applicationSecret,
+  }) async {
     await _channel.invokeMethod(
       'configure',
       {
