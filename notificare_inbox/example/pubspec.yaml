@@ -12,6 +12,9 @@ dependencies:
   flutter:
     sdk: flutter
 
+  notificare_push:
+    path: "../../notificare_push"
+
   notificare_inbox:
     # When depending on this package from a real application you should use:
     #   notificare_inbox: ^x.y.z
