@@ -58,6 +58,9 @@ public class SwiftNotificarePlugin: NSObject, FlutterPlugin {
             case "fetchUserData": self.fetchUserData(call, result)
             case "updateUserData": self.updateUserData(call, result)
             
+            // Notificare Events Manager
+            case "logCustom": self.logCustom(call, result)
+            
             // Unhandled
             default: result(FlutterMethodNotImplemented)
             }
@@ -335,6 +338,24 @@ public class SwiftNotificarePlugin: NSObject, FlutterPlugin {
         let userData = call.arguments as! [String: String]
 
         Notificare.shared.deviceManager.updateUserData(userData) { result in
+            switch result {
+            case .success:
+                response(nil)
+            case .failure(let error):
+                response(FlutterError(code: DEFAULT_ERROR_CODE, message: error.localizedDescription, details: nil))
+            }
+        }
+    }
+    
+    // MARK: - Notificare Events Manager
+    
+    private func logCustom(_ call: FlutterMethodCall, _ response: @escaping  FlutterResult) {
+        let arguments = call.arguments as! [String: Any]
+        
+        let eventName = arguments["event"] as! String
+        let eventData = arguments["data"] as? [String: Any]
+        
+        Notificare.shared.eventsManager.logCustom(eventName, data: eventData) { result in
             switch result {
             case .success:
                 response(nil)

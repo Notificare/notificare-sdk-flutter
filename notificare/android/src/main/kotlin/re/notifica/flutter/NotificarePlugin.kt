@@ -19,10 +19,7 @@ import re.notifica.Notificare
 import re.notifica.NotificareCallback
 import re.notifica.flutter.events.NotificareEvent
 import re.notifica.flutter.events.NotificareEventManager
-import re.notifica.models.NotificareApplication
-import re.notifica.models.NotificareDoNotDisturb
-import re.notifica.models.NotificareNotification
-import re.notifica.models.NotificareUserData
+import re.notifica.models.*
 
 class NotificarePlugin : FlutterPlugin, ActivityAware, PluginRegistry.NewIntentListener {
 
@@ -69,6 +66,9 @@ class NotificarePlugin : FlutterPlugin, ActivityAware, PluginRegistry.NewIntentL
                 "clearDoNotDisturb" -> clearDoNotDisturb(result)
                 "fetchUserData" -> fetchUserData(result)
                 "updateUserData" -> updateUserData(call, result)
+
+                // Events Manager
+                "logCustom" -> logCustom(call, result)
 
                 // Unhandled
                 else -> result.notImplemented()
@@ -206,7 +206,7 @@ class NotificarePlugin : FlutterPlugin, ActivityAware, PluginRegistry.NewIntentL
 
     // endregion
 
-    // region Device Manager
+    // region Notificare Device Manager
 
     private fun getCurrentDevice(pluginResult: Result) {
         pluginResult.success(Notificare.deviceManager.currentDevice?.toJson())
@@ -458,6 +458,32 @@ class NotificarePlugin : FlutterPlugin, ActivityAware, PluginRegistry.NewIntentL
                 }
             }
         })
+    }
+
+    // endregion
+
+    // region Notificare Events Manager
+
+    private fun logCustom(call: MethodCall, response: Result) {
+        val event: String
+        val data: NotificareEventData?
+
+        try {
+            event = requireNotNull(call.argument<String>("event"))
+            data = call.argument<JSONObject>("data")?.let { json ->
+                val jsonStr = json.toString()
+                re.notifica.models.NotificareEvent.dataAdapter.fromJson(jsonStr)
+            }
+        } catch (e: Exception) {
+            onMainThread {
+                response.error(DEFAULT_ERROR_CODE, e.message, null)
+            }
+
+            return
+        }
+
+        Notificare.eventsManager.logCustom(event, data)
+        onMainThread { response.success(null) }
     }
 
     // endregion

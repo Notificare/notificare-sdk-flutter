@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:notificare/models/notificare_application.dart';
 import 'package:notificare/models/notificare_device.dart';
 import 'package:notificare/models/notificare_notification.dart';
+import 'package:notificare/notificare_events_manager.dart';
 
 import 'notificare_device_manager.dart';
 
@@ -17,6 +18,7 @@ class Notificare {
 
   // Modules
   static final deviceManager = NotificareDeviceManager(_channel);
+  static final eventsManager = NotificareEventsManager(_channel);
 
   static Future<bool> get isConfigured async {
     return await _channel.invokeMethod('isConfigured');

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:notificare/notificare.dart';
 import 'package:notificare_example/home.dart';
