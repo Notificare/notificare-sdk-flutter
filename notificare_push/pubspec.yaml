@@ -13,8 +13,8 @@ dependencies:
   flutter:
     sdk: flutter
   json_annotation: ^4.0.1
-  notificare:
-    path: "../notificare"
+  notificare: ^3.0.0-alpha.1
+  #  path: "../notificare"
 
 dev_dependencies:
   flutter_test:

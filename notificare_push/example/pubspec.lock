@@ -91,9 +91,9 @@ packages:
   notificare:
     dependency: transitive
     description:
-      path: "../../notificare"
-      relative: true
-    source: path
+      name: notificare
+      url: "https://pub.dartlang.org"
+    source: hosted
     version: "3.0.0-alpha.1"
   notificare_push:
     dependency: "direct main"
