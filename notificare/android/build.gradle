@@ -49,7 +49,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     def moshi_version = '1.12.0'
-    implementation "com.squareup.moshi:moshi-kotlin:$moshi_version"
+    implementation "com.squareup.moshi:moshi:$moshi_version"
 
     def notificare_version = '3.0.0-alpha.1'
     api "re.notifica:notificare:$notificare_version"
