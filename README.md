@@ -68,7 +68,7 @@ dependencies:
   # Optional modules
   notificare_inbox: ^3.0.0-alpha.1
   notificare_push: ^3.0.0-alpha.1
-  notificare_push_ui ^3.0.0-alpha.1
+  notificare_push_ui: ^3.0.0-alpha.1
 ```
 
 ## Getting Started
