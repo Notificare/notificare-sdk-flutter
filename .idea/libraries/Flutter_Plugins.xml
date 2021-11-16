@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Flutter Plugins" type="FlutterPluginsLibraryType">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/notificare" />
+      <root url="file://$PROJECT_DIR$/notificare_push" />
+      <root url="file://$PROJECT_DIR$/notificare_inbox" />
+      <root url="file://$PROJECT_DIR$/notificare_push_ui" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

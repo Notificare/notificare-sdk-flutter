@@ -6,9 +6,6 @@
 
 build/
 
-.idea/
-*.iml
-
 google-services.json
 notificare-services.json
 NotificareServices.plist
