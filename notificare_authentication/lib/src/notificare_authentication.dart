@@ -1,7 +1,5 @@
 import 'package:flutter/services.dart';
 import 'package:notificare_authentication/notificare_authentication.dart';
-import 'package:notificare_authentication/src/models/notificare_user.dart';
-import 'package:notificare_authentication/src/models/notificare_user_preference.dart';
 
 class NotificareAuthentication {
   // Channels
