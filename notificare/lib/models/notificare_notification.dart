@@ -60,6 +60,8 @@ class NotificareNotificationAction {
   final String? target;
   final bool keyboard;
   final bool camera;
+  final bool? destructive;
+  final NotificareNotificationActionIcon? icon;
 
   NotificareNotificationAction({
     required this.type,
@@ -67,12 +69,32 @@ class NotificareNotificationAction {
     required this.target,
     required this.keyboard,
     required this.camera,
+    this.destructive,
+    this.icon,
   });
 
   factory NotificareNotificationAction.fromJson(Map<String, dynamic> json) =>
       _$NotificareNotificationActionFromJson(json);
 
   Map<String, dynamic> toJson() => _$NotificareNotificationActionToJson(this);
+}
+
+@JsonSerializable(anyMap: true, explicitToJson: true)
+class NotificareNotificationActionIcon {
+  final String? android;
+  final String? ios;
+  final String? web;
+
+  NotificareNotificationActionIcon({
+    this.android,
+    this.ios,
+    this.web,
+  });
+
+  factory NotificareNotificationActionIcon.fromJson(Map<String, dynamic> json) =>
+      _$NotificareNotificationActionIconFromJson(json);
+
+  Map<String, dynamic> toJson() => _$NotificareNotificationActionIconToJson(this);
 }
 
 @JsonSerializable(anyMap: true, explicitToJson: true)

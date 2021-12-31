@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:notificare/models/notificare_notification.dart';
 
 part 'notificare_application.g.dart';
 
@@ -79,7 +80,7 @@ class NotificareActionCategory {
   final String type;
   final String name;
   final String? description;
-  final List<NotificareActionCategoryAction> actions;
+  final List<NotificareNotificationAction> actions;
 
   NotificareActionCategory({
     required this.type,
@@ -91,48 +92,4 @@ class NotificareActionCategory {
   factory NotificareActionCategory.fromJson(Map<String, dynamic> json) => _$NotificareActionCategoryFromJson(json);
 
   Map<String, dynamic> toJson() => _$NotificareActionCategoryToJson(this);
-}
-
-@JsonSerializable(anyMap: true, explicitToJson: true)
-class NotificareActionCategoryAction {
-  final String type;
-  final String label;
-  final String? target;
-  final bool camera;
-  final bool keyboard;
-  final bool destructive;
-  final NotificareActionCategoryActionIcon? icon;
-
-  NotificareActionCategoryAction({
-    required this.type,
-    required this.label,
-    this.target,
-    required this.camera,
-    required this.keyboard,
-    required this.destructive,
-    this.icon,
-  });
-
-  factory NotificareActionCategoryAction.fromJson(Map<String, dynamic> json) =>
-      _$NotificareActionCategoryActionFromJson(json);
-
-  Map<String, dynamic> toJson() => _$NotificareActionCategoryActionToJson(this);
-}
-
-@JsonSerializable(anyMap: true, explicitToJson: true)
-class NotificareActionCategoryActionIcon {
-  final String? android;
-  final String? ios;
-  final String? web;
-
-  NotificareActionCategoryActionIcon({
-    this.android,
-    this.ios,
-    this.web,
-  });
-
-  factory NotificareActionCategoryActionIcon.fromJson(Map<String, dynamic> json) =>
-      _$NotificareActionCategoryActionIconFromJson(json);
-
-  Map<String, dynamic> toJson() => _$NotificareActionCategoryActionIconToJson(this);
 }

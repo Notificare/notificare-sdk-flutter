@@ -67,6 +67,11 @@ NotificareNotificationAction _$NotificareNotificationActionFromJson(Map json) =>
       target: json['target'] as String?,
       keyboard: json['keyboard'] as bool,
       camera: json['camera'] as bool,
+      destructive: json['destructive'] as bool?,
+      icon: json['icon'] == null
+          ? null
+          : NotificareNotificationActionIcon.fromJson(
+              Map<String, dynamic>.from(json['icon'] as Map)),
     );
 
 Map<String, dynamic> _$NotificareNotificationActionToJson(
@@ -77,6 +82,24 @@ Map<String, dynamic> _$NotificareNotificationActionToJson(
       'target': instance.target,
       'keyboard': instance.keyboard,
       'camera': instance.camera,
+      'destructive': instance.destructive,
+      'icon': instance.icon?.toJson(),
+    };
+
+NotificareNotificationActionIcon _$NotificareNotificationActionIconFromJson(
+        Map json) =>
+    NotificareNotificationActionIcon(
+      android: json['android'] as String?,
+      ios: json['ios'] as String?,
+      web: json['web'] as String?,
+    );
+
+Map<String, dynamic> _$NotificareNotificationActionIconToJson(
+        NotificareNotificationActionIcon instance) =>
+    <String, dynamic>{
+      'android': instance.android,
+      'ios': instance.ios,
+      'web': instance.web,
     };
 
 NotificareNotificationAttachment _$NotificareNotificationAttachmentFromJson(

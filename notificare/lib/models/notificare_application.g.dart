@@ -89,7 +89,7 @@ NotificareActionCategory _$NotificareActionCategoryFromJson(Map json) =>
       name: json['name'] as String,
       description: json['description'] as String?,
       actions: (json['actions'] as List<dynamic>)
-          .map((e) => NotificareActionCategoryAction.fromJson(
+          .map((e) => NotificareNotificationAction.fromJson(
               Map<String, dynamic>.from(e as Map)))
           .toList(),
     );
@@ -101,47 +101,4 @@ Map<String, dynamic> _$NotificareActionCategoryToJson(
       'name': instance.name,
       'description': instance.description,
       'actions': instance.actions.map((e) => e.toJson()).toList(),
-    };
-
-NotificareActionCategoryAction _$NotificareActionCategoryActionFromJson(
-        Map json) =>
-    NotificareActionCategoryAction(
-      type: json['type'] as String,
-      label: json['label'] as String,
-      target: json['target'] as String?,
-      camera: json['camera'] as bool,
-      keyboard: json['keyboard'] as bool,
-      destructive: json['destructive'] as bool,
-      icon: json['icon'] == null
-          ? null
-          : NotificareActionCategoryActionIcon.fromJson(
-              Map<String, dynamic>.from(json['icon'] as Map)),
-    );
-
-Map<String, dynamic> _$NotificareActionCategoryActionToJson(
-        NotificareActionCategoryAction instance) =>
-    <String, dynamic>{
-      'type': instance.type,
-      'label': instance.label,
-      'target': instance.target,
-      'camera': instance.camera,
-      'keyboard': instance.keyboard,
-      'destructive': instance.destructive,
-      'icon': instance.icon?.toJson(),
-    };
-
-NotificareActionCategoryActionIcon _$NotificareActionCategoryActionIconFromJson(
-        Map json) =>
-    NotificareActionCategoryActionIcon(
-      android: json['android'] as String?,
-      ios: json['ios'] as String?,
-      web: json['web'] as String?,
-    );
-
-Map<String, dynamic> _$NotificareActionCategoryActionIconToJson(
-        NotificareActionCategoryActionIcon instance) =>
-    <String, dynamic>{
-      'android': instance.android,
-      'ios': instance.ios,
-      'web': instance.web,
     };
