@@ -20,7 +20,7 @@ public class SwiftNotificarePushUIPlugin: NSObject, FlutterPlugin {
         eventBroker.setup(registrar: registrar)
         
         // Delegate
-        NotificarePushUI.shared.delegate = self
+        Notificare.shared.pushUI().delegate = self
         
         let channel = FlutterMethodChannel(name: "\(NAMESPACE)/notificare_push_ui", binaryMessenger: registrar.messenger(), codec: FlutterJSONMethodCodec.sharedInstance())
         registrar.addMethodCallDelegate(self, channel: channel)
@@ -55,11 +55,11 @@ public class SwiftNotificarePushUIPlugin: NSObject, FlutterPlugin {
         if notification.requiresViewController {
             let navigationController = createNavigationController()
             rootViewController.present(navigationController, animated: true) {
-                NotificarePushUI.shared.presentNotification(notification, in: navigationController)
+                Notificare.shared.pushUI().presentNotification(notification, in: navigationController)
                 response(nil)
             }
         } else {
-            NotificarePushUI.shared.presentNotification(notification, in: rootViewController)
+            Notificare.shared.pushUI().presentNotification(notification, in: rootViewController)
             response(nil)
         }
     }
@@ -82,7 +82,7 @@ public class SwiftNotificarePushUIPlugin: NSObject, FlutterPlugin {
             return
         }
         
-        NotificarePushUI.shared.presentAction(action, for: notification, in: rootViewController)
+        Notificare.shared.pushUI().presentAction(action, for: notification, in: rootViewController)
         response(nil)
     }
     

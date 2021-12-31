@@ -6,11 +6,11 @@ import 'package:notificare_push_ui/notificare_push_ui_events.dart';
 
 class NotificarePushUI {
   static const MethodChannel _channel =
-      const MethodChannel('re.notifica.push.ui.flutter/notificare_push_ui', JSONMethodCodec());
+      MethodChannel('re.notifica.push.ui.flutter/notificare_push_ui', JSONMethodCodec());
 
   // Events
-  static Map<String, EventChannel> _eventChannels = new Map();
-  static Map<String, Stream<dynamic>> _eventStreams = new Map();
+  static final Map<String, EventChannel> _eventChannels = {};
+  static final Map<String, Stream<dynamic>> _eventStreams = {};
 
   static Future<void> presentNotification(NotificareNotification notification) async {
     await _channel.invokeMethod('presentNotification', notification.toJson());

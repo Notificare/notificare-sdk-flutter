@@ -12,14 +12,16 @@ import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
 import org.json.JSONObject
-import re.notifica.NotificareLogger
+import re.notifica.Notificare
+import re.notifica.internal.NotificareLogger
 import re.notifica.models.NotificareNotification
 import re.notifica.push.ui.NotificarePushUI
+import re.notifica.push.ui.ktx.pushUI
 
-class NotificarePushUIPlugin : FlutterPlugin, MethodCallHandler, ActivityAware,
+public class NotificarePushUIPlugin : FlutterPlugin, MethodCallHandler, ActivityAware,
     NotificarePushUI.NotificationLifecycleListener {
 
-    companion object {
+    public companion object {
         internal const val NAMESPACE = "re.notifica.push.ui.flutter"
         private const val NOTIFICARE_ERROR = "notificare_error"
     }
@@ -34,7 +36,7 @@ class NotificarePushUIPlugin : FlutterPlugin, MethodCallHandler, ActivityAware,
 
         NotificarePushUIPluginEventBroker.register(binding.binaryMessenger)
 
-        NotificarePushUI.addLifecycleListener(this)
+        Notificare.pushUI().addLifecycleListener(this)
     }
 
     override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
@@ -46,7 +48,7 @@ class NotificarePushUIPlugin : FlutterPlugin, MethodCallHandler, ActivityAware,
 
     override fun onDetachedFromEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
         channel.setMethodCallHandler(null)
-        NotificarePushUI.removeLifecycleListener(this)
+        Notificare.pushUI().removeLifecycleListener(this)
     }
 
     override fun onAttachedToActivity(binding: ActivityPluginBinding) {
@@ -70,7 +72,7 @@ class NotificarePushUIPlugin : FlutterPlugin, MethodCallHandler, ActivityAware,
 
         val notification = NotificareNotification.fromJson(call.arguments())
 
-        NotificarePushUI.presentNotification(activity, notification)
+        Notificare.pushUI().presentNotification(activity, notification)
         result.success(null)
     }
 
@@ -85,7 +87,7 @@ class NotificarePushUIPlugin : FlutterPlugin, MethodCallHandler, ActivityAware,
         val notification = NotificareNotification.fromJson(json.getJSONObject("notification"))
         val action = NotificareNotification.Action.fromJson(json.getJSONObject("action"))
 
-        NotificarePushUI.presentAction(activity, notification, action)
+        Notificare.pushUI().presentAction(activity, notification, action)
         result.success(null)
     }
 
@@ -164,9 +166,15 @@ class NotificarePushUIPlugin : FlutterPlugin, MethodCallHandler, ActivityAware,
         )
     }
 
-    override fun onCustomActionReceived(uri: Uri) {
+    override fun onCustomActionReceived(
+        notification: NotificareNotification,
+        action: NotificareNotification.Action,
+        uri: Uri
+    ) {
         NotificarePushUIPluginEventBroker.emit(
             NotificarePushUIPluginEventBroker.Event.CustomActionReceived(
+                notification = notification,
+                action = action,
                 uri = uri,
             )
         )

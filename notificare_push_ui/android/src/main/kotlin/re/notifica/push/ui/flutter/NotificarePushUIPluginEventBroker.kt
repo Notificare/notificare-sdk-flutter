@@ -146,10 +146,16 @@ internal object NotificarePushUIPluginEventBroker {
         }
 
         class CustomActionReceived(
+            notification: NotificareNotification,
+            action: NotificareNotification.Action,
             uri: Uri,
         ) : Event() {
             override val type = Type.CUSTOM_ACTION_RECEIVED
-            override val payload = uri.toString()
+            override val payload = mapOf(
+                "notification" to notification.toJson(),
+                "action" to action.toJson(),
+                "uri" to uri.toString(),
+            )
         }
     }
 
