@@ -2,7 +2,10 @@ class NotificareTime {
   final int hours;
   final int minutes;
 
-  NotificareTime(this.hours, this.minutes) {
+  NotificareTime({
+    required this.hours,
+    required this.minutes,
+  }) {
     if (hours < 0 || hours > 23) {
       throw ArgumentError.value(hours, 'hours', 'Invalid time');
     }
@@ -20,7 +23,10 @@ class NotificareTime {
       final hours = int.parse(parts[0]);
       final minutes = int.parse(parts[1]);
 
-      return NotificareTime(hours, minutes);
+      return NotificareTime(
+        hours: hours,
+        minutes: minutes,
+      );
     } on FormatException {
       throw ArgumentError.value(time, 'time', 'Invalid time string');
     }

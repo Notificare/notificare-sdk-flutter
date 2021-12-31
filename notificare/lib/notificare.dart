@@ -4,21 +4,26 @@ import 'package:flutter/services.dart';
 import 'package:notificare/models/notificare_application.dart';
 import 'package:notificare/models/notificare_device.dart';
 import 'package:notificare/models/notificare_notification.dart';
-import 'package:notificare/notificare_events_manager.dart';
-
-import 'notificare_device_manager.dart';
+import 'package:notificare/notificare_device_module.dart';
+import 'package:notificare/notificare_events_module.dart';
 
 class Notificare {
   // Channels
-  static const MethodChannel _channel = const MethodChannel('re.notifica.flutter/notificare', JSONMethodCodec());
+  static const MethodChannel _channel = MethodChannel('re.notifica.flutter/notificare', JSONMethodCodec());
 
   // Events
-  static Map<String, EventChannel> _eventChannels = new Map();
-  static Map<String, Stream<dynamic>> _eventStreams = new Map();
+  static final Map<String, EventChannel> _eventChannels = {};
+  static final Map<String, Stream<dynamic>> _eventStreams = {};
 
   // Modules
-  static final deviceManager = NotificareDeviceManager(_channel);
-  static final eventsManager = NotificareEventsManager(_channel);
+  static final _device = NotificareDeviceModule(_channel);
+  static final _events = NotificareEventsModule(_channel);
+
+  static NotificareDeviceModule device() => _device;
+
+  static NotificareEventsModule events() => _events;
+
+  // Methods
 
   static Future<bool> get isConfigured async {
     return await _channel.invokeMethod('isConfigured');
@@ -28,30 +33,9 @@ class Notificare {
     return await _channel.invokeMethod('isReady');
   }
 
-  static Future<bool> get useAdvancedLogging async {
-    return await _channel.invokeMethod('getUseAdvancedLogging');
-  }
-
   static Future<NotificareApplication?> get application async {
     final json = await _channel.invokeMapMethod<String, dynamic>('getApplication');
     return json != null ? NotificareApplication.fromJson(json) : null;
-  }
-
-  static Future<void> setUseAdvancedLogging(bool useAdvancedLogging) async {
-    return await _channel.invokeMethod('setUseAdvancedLogging', useAdvancedLogging);
-  }
-
-  static Future<void> configure({
-    required String applicationKey,
-    required String applicationSecret,
-  }) async {
-    await _channel.invokeMethod(
-      'configure',
-      {
-        'applicationKey': applicationKey,
-        'applicationSecret': applicationSecret,
-      },
-    );
   }
 
   static Future<void> launch() async {

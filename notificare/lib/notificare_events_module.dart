@@ -1,11 +1,9 @@
 import 'package:flutter/services.dart';
-import 'package:notificare/models/notificare_device.dart';
-import 'package:notificare/models/notificare_do_not_disturb.dart';
 
-class NotificareEventsManager {
+class NotificareEventsModule {
   final MethodChannel _channel;
 
-  NotificareEventsManager(this._channel);
+  NotificareEventsModule(this._channel);
 
   Future<void> logCustom(
     String event, {

@@ -2,10 +2,10 @@ import 'package:flutter/services.dart';
 import 'package:notificare/models/notificare_device.dart';
 import 'package:notificare/models/notificare_do_not_disturb.dart';
 
-class NotificareDeviceManager {
+class NotificareDeviceModule {
   final MethodChannel _channel;
 
-  NotificareDeviceManager(this._channel);
+  NotificareDeviceModule(this._channel);
 
   Future<NotificareDevice?> get currentDevice async {
     final json = await _channel.invokeMapMethod<String, dynamic>('getCurrentDevice');

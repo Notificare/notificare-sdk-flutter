@@ -19,6 +19,8 @@ import re.notifica.Notificare
 import re.notifica.NotificareCallback
 import re.notifica.flutter.events.NotificareEvent
 import re.notifica.flutter.events.NotificareEventManager
+import re.notifica.ktx.device
+import re.notifica.ktx.events
 import re.notifica.models.*
 
 class NotificarePlugin : FlutterPlugin, ActivityAware, PluginRegistry.NewIntentListener {
@@ -39,18 +41,15 @@ class NotificarePlugin : FlutterPlugin, ActivityAware, PluginRegistry.NewIntentL
         channel.setMethodCallHandler { call, result ->
             when (call.method) {
                 // Notificare
-                "isConfigured" -> getConfigured(result)
-                "isReady" -> getReady(result)
-                "getUseAdvancedLogging" -> getUseAdvancedLogging(call, result)
-                "setUseAdvancedLogging" -> setUseAdvancedLogging(call, result)
-                "configure" -> configure(call, result)
+                "isConfigured" -> isConfigured(result)
+                "isReady" -> isReady(result)
                 "launch" -> launch(result)
                 "unlaunch" -> unlaunch(result)
                 "getApplication" -> getApplication(call, result)
                 "fetchApplication" -> fetchApplication(call, result)
                 "fetchNotification" -> fetchNotification(call, result)
 
-                // Device Manager
+                // Device module
                 "getCurrentDevice" -> getCurrentDevice(result)
                 "register" -> register(call, result)
                 "fetchTags" -> fetchTags(result)
@@ -67,7 +66,7 @@ class NotificarePlugin : FlutterPlugin, ActivityAware, PluginRegistry.NewIntentL
                 "fetchUserData" -> fetchUserData(result)
                 "updateUserData" -> updateUserData(call, result)
 
-                // Events Manager
+                // Events module
                 "logCustom" -> logCustom(call, result)
 
                 // Unhandled
@@ -128,32 +127,12 @@ class NotificarePlugin : FlutterPlugin, ActivityAware, PluginRegistry.NewIntentL
 
     // region Notificare
 
-    private fun getConfigured(result: Result) {
+    private fun isConfigured(result: Result) {
         result.success(Notificare.isConfigured)
     }
 
-    private fun getReady(result: Result) {
+    private fun isReady(result: Result) {
         result.success(Notificare.isReady)
-    }
-
-    private fun getUseAdvancedLogging(@Suppress("UNUSED_PARAMETER") call: MethodCall, result: Result) {
-        result.success(Notificare.useAdvancedLogging)
-    }
-
-    private fun setUseAdvancedLogging(@Suppress("UNUSED_PARAMETER") call: MethodCall, result: Result) {
-        Notificare.useAdvancedLogging = call.arguments()
-        result.success(null)
-    }
-
-    private fun configure(call: MethodCall, result: Result) {
-        val applicationKey = call.argument<String>("applicationKey")
-            ?: throw IllegalArgumentException("applicationKey cannot be null")
-
-        val applicationSecret = call.argument<String>("applicationSecret")
-            ?: throw IllegalArgumentException("applicationSecret cannot be null")
-
-        Notificare.configure(context, applicationKey, applicationSecret)
-        result.success(null)
     }
 
     private fun launch(result: Result) {
@@ -209,14 +188,16 @@ class NotificarePlugin : FlutterPlugin, ActivityAware, PluginRegistry.NewIntentL
     // region Notificare Device Manager
 
     private fun getCurrentDevice(pluginResult: Result) {
-        pluginResult.success(Notificare.deviceManager.currentDevice?.toJson())
+        pluginResult.success(Notificare.device().currentDevice?.toJson())
     }
 
     private fun register(call: MethodCall, pluginResult: Result) {
-        val userId = call.argument<String?>("userId")
-        val userName = call.argument<String?>("userName")
+        val arguments = call.arguments<JSONObject>()
 
-        Notificare.deviceManager.register(userId, userName, object : NotificareCallback<Unit> {
+        val userId = if (!arguments.isNull("userId")) arguments.getString("userId") else null
+        val userName = if (!arguments.isNull("userName")) arguments.getString("userName") else null
+
+        Notificare.device().register(userId, userName, object : NotificareCallback<Unit> {
             override fun onSuccess(result: Unit) {
                 onMainThread {
                     pluginResult.success(null)
@@ -232,7 +213,7 @@ class NotificarePlugin : FlutterPlugin, ActivityAware, PluginRegistry.NewIntentL
     }
 
     private fun fetchTags(pluginResult: Result) {
-        Notificare.deviceManager.fetchTags(object : NotificareCallback<List<String>> {
+        Notificare.device().fetchTags(object : NotificareCallback<List<String>> {
             override fun onSuccess(result: List<String>) {
                 onMainThread {
                     pluginResult.success(result)
@@ -250,7 +231,7 @@ class NotificarePlugin : FlutterPlugin, ActivityAware, PluginRegistry.NewIntentL
     private fun addTag(call: MethodCall, pluginResult: Result) {
         val tag = call.arguments<String>()
 
-        Notificare.deviceManager.addTag(tag, object : NotificareCallback<Unit> {
+        Notificare.device().addTag(tag, object : NotificareCallback<Unit> {
             override fun onSuccess(result: Unit) {
                 onMainThread {
                     pluginResult.success(null)
@@ -273,7 +254,7 @@ class NotificarePlugin : FlutterPlugin, ActivityAware, PluginRegistry.NewIntentL
             tags.add(json.getString(i))
         }
 
-        Notificare.deviceManager.addTags(tags, object : NotificareCallback<Unit> {
+        Notificare.device().addTags(tags, object : NotificareCallback<Unit> {
             override fun onSuccess(result: Unit) {
                 onMainThread {
                     pluginResult.success(null)
@@ -291,7 +272,7 @@ class NotificarePlugin : FlutterPlugin, ActivityAware, PluginRegistry.NewIntentL
     private fun removeTag(call: MethodCall, pluginResult: Result) {
         val tag = call.arguments<String>()
 
-        Notificare.deviceManager.removeTag(tag, object : NotificareCallback<Unit> {
+        Notificare.device().removeTag(tag, object : NotificareCallback<Unit> {
             override fun onSuccess(result: Unit) {
                 onMainThread {
                     pluginResult.success(null)
@@ -314,7 +295,7 @@ class NotificarePlugin : FlutterPlugin, ActivityAware, PluginRegistry.NewIntentL
             tags.add(json.getString(i))
         }
 
-        Notificare.deviceManager.removeTags(tags, object : NotificareCallback<Unit> {
+        Notificare.device().removeTags(tags, object : NotificareCallback<Unit> {
             override fun onSuccess(result: Unit) {
                 onMainThread {
                     pluginResult.success(null)
@@ -330,7 +311,7 @@ class NotificarePlugin : FlutterPlugin, ActivityAware, PluginRegistry.NewIntentL
     }
 
     private fun clearTags(pluginResult: Result) {
-        Notificare.deviceManager.clearTags(object : NotificareCallback<Unit> {
+        Notificare.device().clearTags(object : NotificareCallback<Unit> {
             override fun onSuccess(result: Unit) {
                 onMainThread {
                     pluginResult.success(null)
@@ -346,13 +327,13 @@ class NotificarePlugin : FlutterPlugin, ActivityAware, PluginRegistry.NewIntentL
     }
 
     private fun getPreferredLanguage(result: Result) {
-        result.success(Notificare.deviceManager.preferredLanguage)
+        result.success(Notificare.device().preferredLanguage)
     }
 
     private fun updatePreferredLanguage(call: MethodCall, pluginResult: Result) {
         val language = call.arguments<String?>()
 
-        Notificare.deviceManager.updatePreferredLanguage(language, object : NotificareCallback<Unit> {
+        Notificare.device().updatePreferredLanguage(language, object : NotificareCallback<Unit> {
             override fun onSuccess(result: Unit) {
                 onMainThread {
                     pluginResult.success(null)
@@ -368,7 +349,7 @@ class NotificarePlugin : FlutterPlugin, ActivityAware, PluginRegistry.NewIntentL
     }
 
     private fun fetchDoNotDisturb(pluginResult: Result) {
-        Notificare.deviceManager.fetchDoNotDisturb(object : NotificareCallback<NotificareDoNotDisturb?> {
+        Notificare.device().fetchDoNotDisturb(object : NotificareCallback<NotificareDoNotDisturb?> {
             override fun onSuccess(result: NotificareDoNotDisturb?) {
                 onMainThread {
                     pluginResult.success(result?.toJson())
@@ -386,7 +367,7 @@ class NotificarePlugin : FlutterPlugin, ActivityAware, PluginRegistry.NewIntentL
     private fun updateDoNotDisturb(call: MethodCall, pluginResult: Result) {
         val dnd = NotificareDoNotDisturb.fromJson(call.arguments())
 
-        Notificare.deviceManager.updateDoNotDisturb(dnd, object : NotificareCallback<Unit> {
+        Notificare.device().updateDoNotDisturb(dnd, object : NotificareCallback<Unit> {
             override fun onSuccess(result: Unit) {
                 onMainThread {
                     pluginResult.success(null)
@@ -402,7 +383,7 @@ class NotificarePlugin : FlutterPlugin, ActivityAware, PluginRegistry.NewIntentL
     }
 
     private fun clearDoNotDisturb(pluginResult: Result) {
-        Notificare.deviceManager.clearDoNotDisturb(object : NotificareCallback<Unit> {
+        Notificare.device().clearDoNotDisturb(object : NotificareCallback<Unit> {
             override fun onSuccess(result: Unit) {
                 onMainThread {
                     pluginResult.success(null)
@@ -418,7 +399,7 @@ class NotificarePlugin : FlutterPlugin, ActivityAware, PluginRegistry.NewIntentL
     }
 
     private fun fetchUserData(pluginResult: Result) {
-        Notificare.deviceManager.fetchUserData(object : NotificareCallback<NotificareUserData> {
+        Notificare.device().fetchUserData(object : NotificareCallback<NotificareUserData> {
             override fun onSuccess(result: NotificareUserData) {
                 onMainThread {
                     pluginResult.success(result)
@@ -445,7 +426,7 @@ class NotificarePlugin : FlutterPlugin, ActivityAware, PluginRegistry.NewIntentL
             }
         }
 
-        Notificare.deviceManager.updateUserData(userData, object : NotificareCallback<Unit> {
+        Notificare.device().updateUserData(userData, object : NotificareCallback<Unit> {
             override fun onSuccess(result: Unit) {
                 onMainThread {
                     pluginResult.success(null)
@@ -470,10 +451,7 @@ class NotificarePlugin : FlutterPlugin, ActivityAware, PluginRegistry.NewIntentL
 
         try {
             event = requireNotNull(call.argument<String>("event"))
-            data = call.argument<JSONObject>("data")?.let { json ->
-                val jsonStr = json.toString()
-                re.notifica.models.NotificareEvent.dataAdapter.fromJson(jsonStr)
-            }
+            data = call.argument<JSONObject>("data")?.let { re.notifica.models.NotificareEvent.createData(it) }
         } catch (e: Exception) {
             onMainThread {
                 response.error(DEFAULT_ERROR_CODE, e.message, null)
@@ -482,8 +460,19 @@ class NotificarePlugin : FlutterPlugin, ActivityAware, PluginRegistry.NewIntentL
             return
         }
 
-        Notificare.eventsManager.logCustom(event, data)
-        onMainThread { response.success(null) }
+        Notificare.events().logCustom(event, data, object : NotificareCallback<Unit> {
+            override fun onSuccess(result: Unit) {
+                onMainThread {
+                    onMainThread { response.success(null) }
+                }
+            }
+
+            override fun onFailure(e: Exception) {
+                onMainThread {
+                    response.error(DEFAULT_ERROR_CODE, e.message, null)
+                }
+            }
+        })
     }
 
     // endregion

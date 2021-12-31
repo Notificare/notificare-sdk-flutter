@@ -1,5 +1,4 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:notificare/models/notificare_notification.dart';
 
 part 'notificare_application.g.dart';
 
@@ -9,21 +8,21 @@ class NotificareApplication {
   final String name;
   final String category;
   final Map<String, bool> services;
-  final NotificareInboxConfig? inboxConfig; // nullable
-  final NotificareRegionConfig? regionConfig; // nullable
+  final NotificareInboxConfig? inboxConfig;
+  final NotificareRegionConfig? regionConfig;
   final List<NotificareUserDataField> userDataFields;
   final List<NotificareActionCategory> actionCategories;
 
-  NotificareApplication(
-    this.id,
-    this.name,
-    this.category,
-    this.services,
+  NotificareApplication({
+    required this.id,
+    required this.name,
+    required this.category,
+    required this.services,
     this.inboxConfig,
     this.regionConfig,
-    this.userDataFields,
-    this.actionCategories,
-  );
+    required this.userDataFields,
+    required this.actionCategories,
+  });
 
   factory NotificareApplication.fromJson(Map<String, dynamic> json) => _$NotificareApplicationFromJson(json);
 
@@ -35,10 +34,10 @@ class NotificareInboxConfig {
   final bool useInbox;
   final bool autoBadge;
 
-  NotificareInboxConfig(
-    this.useInbox,
-    this.autoBadge,
-  );
+  NotificareInboxConfig({
+    required this.useInbox,
+    required this.autoBadge,
+  });
 
   factory NotificareInboxConfig.fromJson(Map<String, dynamic> json) => _$NotificareInboxConfigFromJson(json);
 
@@ -49,9 +48,9 @@ class NotificareInboxConfig {
 class NotificareRegionConfig {
   final String? proximityUUID;
 
-  NotificareRegionConfig(
+  NotificareRegionConfig({
     this.proximityUUID,
-  );
+  });
 
   factory NotificareRegionConfig.fromJson(Map<String, dynamic> json) => _$NotificareRegionConfigFromJson(json);
 
@@ -64,11 +63,11 @@ class NotificareUserDataField {
   final String key;
   final String label;
 
-  NotificareUserDataField(
-    this.type,
-    this.key,
-    this.label,
-  );
+  NotificareUserDataField({
+    required this.type,
+    required this.key,
+    required this.label,
+  });
 
   factory NotificareUserDataField.fromJson(Map<String, dynamic> json) => _$NotificareUserDataFieldFromJson(json);
 
@@ -79,15 +78,61 @@ class NotificareUserDataField {
 class NotificareActionCategory {
   final String type;
   final String name;
-  final List<NotificareNotificationAction> actions;
+  final String? description;
+  final List<NotificareActionCategoryAction> actions;
 
-  NotificareActionCategory(
-    this.type,
-    this.name,
-    this.actions,
-  );
+  NotificareActionCategory({
+    required this.type,
+    required this.name,
+    this.description,
+    required this.actions,
+  });
 
   factory NotificareActionCategory.fromJson(Map<String, dynamic> json) => _$NotificareActionCategoryFromJson(json);
 
   Map<String, dynamic> toJson() => _$NotificareActionCategoryToJson(this);
+}
+
+@JsonSerializable(anyMap: true, explicitToJson: true)
+class NotificareActionCategoryAction {
+  final String type;
+  final String label;
+  final String? target;
+  final bool camera;
+  final bool keyboard;
+  final bool destructive;
+  final NotificareActionCategoryActionIcon? icon;
+
+  NotificareActionCategoryAction({
+    required this.type,
+    required this.label,
+    this.target,
+    required this.camera,
+    required this.keyboard,
+    required this.destructive,
+    this.icon,
+  });
+
+  factory NotificareActionCategoryAction.fromJson(Map<String, dynamic> json) =>
+      _$NotificareActionCategoryActionFromJson(json);
+
+  Map<String, dynamic> toJson() => _$NotificareActionCategoryActionToJson(this);
+}
+
+@JsonSerializable(anyMap: true, explicitToJson: true)
+class NotificareActionCategoryActionIcon {
+  final String? android;
+  final String? ios;
+  final String? web;
+
+  NotificareActionCategoryActionIcon({
+    this.android,
+    this.ios,
+    this.web,
+  });
+
+  factory NotificareActionCategoryActionIcon.fromJson(Map<String, dynamic> json) =>
+      _$NotificareActionCategoryActionIconFromJson(json);
+
+  Map<String, dynamic> toJson() => _$NotificareActionCategoryActionIconToJson(this);
 }

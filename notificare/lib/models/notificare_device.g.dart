@@ -6,27 +6,26 @@ part of 'notificare_device.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-NotificareDevice _$NotificareDeviceFromJson(Map json) {
-  return NotificareDevice(
-    json['id'] as String,
-    json['userId'] as String?,
-    json['userName'] as String?,
-    (json['timeZoneOffset'] as num).toDouble(),
-    json['osVersion'] as String,
-    json['sdkVersion'] as String,
-    json['appVersion'] as String,
-    json['deviceString'] as String,
-    json['language'] as String,
-    json['region'] as String,
-    json['transport'] as String,
-    json['dnd'] == null
-        ? null
-        : NotificareDoNotDisturb.fromJson(
-            Map<String, dynamic>.from(json['dnd'] as Map)),
-    Map<String, String>.from(json['userData'] as Map),
-    const IsoDateTimeConverter().fromJson(json['lastRegistered'] as String),
-  );
-}
+NotificareDevice _$NotificareDeviceFromJson(Map json) => NotificareDevice(
+      id: json['id'] as String,
+      userId: json['userId'] as String?,
+      userName: json['userName'] as String?,
+      timeZoneOffset: (json['timeZoneOffset'] as num).toDouble(),
+      osVersion: json['osVersion'] as String,
+      sdkVersion: json['sdkVersion'] as String,
+      appVersion: json['appVersion'] as String,
+      deviceString: json['deviceString'] as String,
+      language: json['language'] as String,
+      region: json['region'] as String,
+      transport: json['transport'] as String,
+      dnd: json['dnd'] == null
+          ? null
+          : NotificareDoNotDisturb.fromJson(
+              Map<String, dynamic>.from(json['dnd'] as Map)),
+      userData: Map<String, String>.from(json['userData'] as Map),
+      lastRegistered: const IsoDateTimeConverter()
+          .fromJson(json['lastRegistered'] as String),
+    );
 
 Map<String, dynamic> _$NotificareDeviceToJson(NotificareDevice instance) =>
     <String, dynamic>{

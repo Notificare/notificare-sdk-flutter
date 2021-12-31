@@ -22,22 +22,22 @@ class NotificareDevice {
   final Map<String, String> userData;
   final DateTime lastRegistered;
 
-  NotificareDevice(
-    this.id,
+  NotificareDevice({
+    required this.id,
     this.userId,
     this.userName,
-    this.timeZoneOffset,
-    this.osVersion,
-    this.sdkVersion,
-    this.appVersion,
-    this.deviceString,
-    this.language,
-    this.region,
-    this.transport,
+    required this.timeZoneOffset,
+    required this.osVersion,
+    required this.sdkVersion,
+    required this.appVersion,
+    required this.deviceString,
+    required this.language,
+    required this.region,
+    required this.transport,
     this.dnd,
-    this.userData,
-    this.lastRegistered,
-  );
+    required this.userData,
+    required this.lastRegistered,
+  });
 
   factory NotificareDevice.fromJson(Map<String, dynamic> json) => _$NotificareDeviceFromJson(json);
 

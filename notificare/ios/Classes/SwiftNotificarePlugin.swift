@@ -2,8 +2,8 @@ import Flutter
 import UIKit
 import NotificareKit
 
-typealias FlutterDictionary = [String: Any?]
-let DEFAULT_ERROR_CODE = "notificare_error"
+private typealias FlutterDictionary = [String: Any?]
+private let DEFAULT_ERROR_CODE = "notificare_error"
 
 public class SwiftNotificarePlugin: NSObject, FlutterPlugin {
 
@@ -30,18 +30,15 @@ public class SwiftNotificarePlugin: NSObject, FlutterPlugin {
             switch call.method {
             
             // Notificare
-            case "isConfigured": self.getConfigured(call, result)
-            case "isReady": self.getReady(call, result)
-            case "getUseAdvancedLogging": self.getUseAdvancedLogging(call, result)
-            case "setUseAdvancedLogging": self.setUseAdvancedLogging(call, result)
-            case "configure": self.configure(call, result)
+            case "isConfigured": self.isConfigured(call, result)
+            case "isReady": self.isReady(call, result)
             case "launch": self.launch(call, result)
             case "unlaunch": self.unlaunch(call, result)
             case "getApplication": self.getApplication(call, result)
             case "fetchApplication": self.fetchApplication(call, result)
             case "fetchNotification": self.fetchNotification(call, result)
 
-            // Notificare Device Manager
+            // Notificare Device Module
             case "getCurrentDevice": self.getCurrentDevice(call, result)
             case "register": self.register(call, result)
             case "fetchTags": self.fetchTags(call, result)
@@ -58,7 +55,7 @@ public class SwiftNotificarePlugin: NSObject, FlutterPlugin {
             case "fetchUserData": self.fetchUserData(call, result)
             case "updateUserData": self.updateUserData(call, result)
             
-            // Notificare Events Manager
+            // Notificare Events Module
             case "logCustom": self.logCustom(call, result)
             
             // Unhandled
@@ -73,35 +70,12 @@ public class SwiftNotificarePlugin: NSObject, FlutterPlugin {
     
     // MARK: - Notificare
     
-    private func getConfigured(_ call: FlutterMethodCall, _ result: FlutterResult) {
+    private func isConfigured(_ call: FlutterMethodCall, _ result: FlutterResult) {
         result(Notificare.shared.isConfigured)
     }
 
-    private func getReady(_ call: FlutterMethodCall, _ result: FlutterResult) {
+    private func isReady(_ call: FlutterMethodCall, _ result: FlutterResult) {
         result(Notificare.shared.isReady)
-    }
-    
-    private func getUseAdvancedLogging(_ call: FlutterMethodCall, _ result: FlutterResult) {
-        result(Notificare.shared.useAdvancedLogging)
-    }
-    
-    private func setUseAdvancedLogging(_ call: FlutterMethodCall, _ result: FlutterResult) {
-        Notificare.shared.useAdvancedLogging = call.arguments as! Bool
-        result(nil)
-    }
-
-    private func configure(_ call: FlutterMethodCall, _ result: FlutterResult) {
-        let arguments = call.arguments as! [String: Any?]
-
-        Notificare.shared.configure(
-            servicesInfo: NotificareServicesInfo(
-                applicationKey: arguments["applicationKey"] as! String,
-                applicationSecret: arguments["applicationKey"] as! String
-            ),
-            options: nil
-        )
-
-        result(nil)
     }
 
     private func launch(_ call: FlutterMethodCall, _ result: FlutterResult) {
@@ -161,7 +135,7 @@ public class SwiftNotificarePlugin: NSObject, FlutterPlugin {
 
     private func getCurrentDevice(_ call: FlutterMethodCall, _ response: @escaping FlutterResult) {
         do {
-            let json = try Notificare.shared.deviceManager.currentDevice?.toJson()
+            let json = try Notificare.shared.device().currentDevice?.toJson()
             response(json)
         } catch {
             response(FlutterError(code: DEFAULT_ERROR_CODE, message: error.localizedDescription, details: nil))
@@ -171,7 +145,7 @@ public class SwiftNotificarePlugin: NSObject, FlutterPlugin {
     private func register(_ call: FlutterMethodCall, _ response: @escaping FlutterResult) {
         let arguments = call.arguments as! FlutterDictionary
 
-        Notificare.shared.deviceManager.register(
+        Notificare.shared.device().register(
             userId: arguments["userId"] as? String,
             userName: arguments["userName"] as? String
         ) { result in
@@ -185,7 +159,7 @@ public class SwiftNotificarePlugin: NSObject, FlutterPlugin {
     }
 
     private func fetchTags(_ call: FlutterMethodCall, _ response: @escaping FlutterResult) {
-        Notificare.shared.deviceManager.fetchTags { result in
+        Notificare.shared.device().fetchTags { result in
             switch result {
             case .success(let tags):
                 response(tags)
@@ -198,7 +172,7 @@ public class SwiftNotificarePlugin: NSObject, FlutterPlugin {
     private func addTag(_ call: FlutterMethodCall, _ response: @escaping FlutterResult) {
         let tag = call.arguments as! String
 
-        Notificare.shared.deviceManager.addTag(tag) { result in
+        Notificare.shared.device().addTag(tag) { result in
             switch result {
             case .success:
                 response(nil)
@@ -211,7 +185,7 @@ public class SwiftNotificarePlugin: NSObject, FlutterPlugin {
     private func addTags(_ call: FlutterMethodCall, _ response: @escaping  FlutterResult) {
         let tags = call.arguments as! [String]
 
-        Notificare.shared.deviceManager.addTags(tags) { result in
+        Notificare.shared.device().addTags(tags) { result in
             switch result {
             case .success:
                 response(nil)
@@ -224,7 +198,7 @@ public class SwiftNotificarePlugin: NSObject, FlutterPlugin {
     private func removeTag(_ call: FlutterMethodCall, _ response: @escaping  FlutterResult) {
         let tag = call.arguments as! String
 
-        Notificare.shared.deviceManager.removeTag(tag) { result in
+        Notificare.shared.device().removeTag(tag) { result in
             switch result {
             case .success:
                 response(nil)
@@ -237,7 +211,7 @@ public class SwiftNotificarePlugin: NSObject, FlutterPlugin {
     private func removeTags(_ call: FlutterMethodCall, _ response: @escaping  FlutterResult) {
         let tags = call.arguments as! [String]
 
-        Notificare.shared.deviceManager.removeTags(tags) { result in
+        Notificare.shared.device().removeTags(tags) { result in
             switch result {
             case .success:
                 response(nil)
@@ -248,7 +222,7 @@ public class SwiftNotificarePlugin: NSObject, FlutterPlugin {
     }
 
     private func clearTags(_ call: FlutterMethodCall, _ response: @escaping  FlutterResult) {
-        Notificare.shared.deviceManager.clearTags { result in
+        Notificare.shared.device().clearTags { result in
             switch result {
             case .success:
                 response(nil)
@@ -259,13 +233,13 @@ public class SwiftNotificarePlugin: NSObject, FlutterPlugin {
     }
 
     private func getPreferredLanguage(_ call: FlutterMethodCall, _ response: @escaping  FlutterResult) {
-        response(Notificare.shared.deviceManager.preferredLanguage)
+        response(Notificare.shared.device().preferredLanguage)
     }
 
     private func updatePreferredLanguage(_ call: FlutterMethodCall, _ response: @escaping  FlutterResult) {
         let language = call.arguments as! String?
 
-        Notificare.shared.deviceManager.updatePreferredLanguage(language) { result in
+        Notificare.shared.device().updatePreferredLanguage(language) { result in
             switch result {
             case .success:
                 response(nil)
@@ -276,7 +250,7 @@ public class SwiftNotificarePlugin: NSObject, FlutterPlugin {
     }
 
     private func fetchDoNotDisturb(_ call: FlutterMethodCall, _ response: @escaping  FlutterResult) {
-        Notificare.shared.deviceManager.fetchDoNotDisturb { result in
+        Notificare.shared.device().fetchDoNotDisturb { result in
             switch result {
             case .success(let dnd):
                 do {
@@ -302,7 +276,7 @@ public class SwiftNotificarePlugin: NSObject, FlutterPlugin {
             return
         }
 
-        Notificare.shared.deviceManager.updateDoNotDisturb(dnd) { result in
+        Notificare.shared.device().updateDoNotDisturb(dnd) { result in
             switch result {
             case .success:
                 response(nil)
@@ -313,7 +287,7 @@ public class SwiftNotificarePlugin: NSObject, FlutterPlugin {
     }
 
     private func clearDoNotDisturb(_ call: FlutterMethodCall, _ response: @escaping  FlutterResult) {
-        Notificare.shared.deviceManager.clearDoNotDisturb { result in
+        Notificare.shared.device().clearDoNotDisturb { result in
             switch result {
             case .success:
                 response(nil)
@@ -324,7 +298,7 @@ public class SwiftNotificarePlugin: NSObject, FlutterPlugin {
     }
 
     private func fetchUserData(_ call: FlutterMethodCall, _ response: @escaping  FlutterResult) {
-        Notificare.shared.deviceManager.fetchUserData { result in
+        Notificare.shared.device().fetchUserData { result in
             switch result {
             case .success(let userData):
                 response(userData)
@@ -337,7 +311,7 @@ public class SwiftNotificarePlugin: NSObject, FlutterPlugin {
     private func updateUserData(_ call: FlutterMethodCall, _ response: @escaping  FlutterResult) {
         let userData = call.arguments as! [String: String]
 
-        Notificare.shared.deviceManager.updateUserData(userData) { result in
+        Notificare.shared.device().updateUserData(userData) { result in
             switch result {
             case .success:
                 response(nil)
@@ -355,7 +329,7 @@ public class SwiftNotificarePlugin: NSObject, FlutterPlugin {
         let eventName = arguments["event"] as! String
         let eventData = arguments["data"] as? [String: Any]
         
-        Notificare.shared.eventsManager.logCustom(eventName, data: eventData) { result in
+        Notificare.shared.events().logCustom(eventName, data: eventData) { result in
             switch result {
             case .success:
                 response(nil)
