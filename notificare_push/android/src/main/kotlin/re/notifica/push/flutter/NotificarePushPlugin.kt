@@ -2,6 +2,7 @@ package re.notifica.push.flutter
 
 import android.content.Intent
 import androidx.annotation.NonNull
+import androidx.lifecycle.Observer
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
@@ -22,6 +23,16 @@ class NotificarePushPlugin : FlutterPlugin, MethodCallHandler, ActivityAware, Pl
 
     private lateinit var channel: MethodChannel
 
+    private val allowedUIObserver = Observer<Boolean> { allowedUI ->
+        if (allowedUI == null) return@Observer
+
+        NotificarePushPluginEventBroker.emit(
+            NotificarePushPluginEventBroker.Event.NotificationSettingsChanged(
+                allowedUI = allowedUI,
+            )
+        )
+    }
+
     override fun onAttachedToEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
         Notificare.push().intentReceiver = NotificarePushPluginReceiver::class.java
 
@@ -29,9 +40,13 @@ class NotificarePushPlugin : FlutterPlugin, MethodCallHandler, ActivityAware, Pl
         channel.setMethodCallHandler(this)
 
         NotificarePushPluginEventBroker.register(binding.binaryMessenger)
+
+        Notificare.push().observableAllowedUI.observeForever(allowedUIObserver)
     }
 
     override fun onDetachedFromEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
+        Notificare.push().observableAllowedUI.removeObserver(allowedUIObserver)
+
         channel.setMethodCallHandler(null)
         NotificarePushPluginEventBroker.unregister()
     }
