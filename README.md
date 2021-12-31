@@ -10,9 +10,6 @@ The Notificare Flutter SDK makes it quick and easy to communicate efficiently wi
 Get started with our [📚 integration guides](https://docs.notifica.re/sdk/v3/flutter/setup) and [example projects](#examples), or [📘 browse the SDK reference]() (coming soon).
 
 
-> :warning: **The v3 SDK is currently in alpha. If you are running a production application, take a look at the v2.x SDK instead.**
-
-
 Table of contents
 =================
 
@@ -27,26 +24,22 @@ Table of contents
 
 ## Features
 
-**Push notifications**: Use the SDK to receive push notifications and automatically track its engagement.
+**Push notifications**: Receive push notifications and automatically track its engagement.
 
-**Push notifications UI**: We provide native screens and elements to display your push notifications and handle its actions with zero effort.
+**Push notifications UI**: Use native screens and elements to display your push notifications and handle its actions with zero effort.
 
 **Inbox**: Apps with a built-in message inbox enjoy higher conversions due to its nature of keeping messages around that can be opened as many times as users want. The SDK gives you all the tools necessary to build your inbox UI.
 
-**Geo-location**
-> coming soon
+**Geo**: Transform your user's location into relevant information, automate how you segment your users based on location behaviour and create truly contextual notifications.
 
-**Loyalty**
-> coming soon
+**Loyalty**: Harness the power of digital cards that live beyond your app and are always in your customer’s pocket.
 
 **Monetise**
 > coming soon
 
-**Assets**
-> coming soon
+**Assets**: Add powerful contextual marketing features to your apps. Show the right content to the right users at the right time or location. Maximise the content you're already creating without increasing development costs.
 
-**Scannables**
-> coming soon
+**Scannables**: Unlock new content by scanning NFC tags or QR codes that integrate seamlessly in your mobile applications.
 
 
 ## Installation
@@ -63,12 +56,17 @@ Add the Flutter packages to your `pubspec.yaml` and follow the Getting Started g
 ```yaml
 dependencies:
   # Required
-  notificare: ^3.0.0-alpha.1
+  notificare: ^3.0.0-beta.1
 
   # Optional modules
-  notificare_inbox: ^3.0.0-alpha.1
-  notificare_push: ^3.0.0-alpha.1
-  notificare_push_ui: ^3.0.0-alpha.1
+  notificare_assets: ^3.0.0-beta.1
+  notificare_authentication: ^3.0.0-beta.1
+  notificare_geo: ^3.0.0-beta.1
+  notificare_inbox: ^3.0.0-beta.1
+  notificare_loyalty: ^3.0.0-beta.1
+  notificare_push: ^3.0.0-beta.1
+  notificare_push_ui: ^3.0.0-beta.1
+  notificare_scannables: ^3.0.0-beta.1
 ```
 
 ## Getting Started
@@ -78,5 +76,4 @@ Get started with our [📚 integration guides](https://docs.notifica.re/sdk/v3/f
 
 
 ### Examples
-- The [Demo app example project](https://github.com/Notificare/notificare-demo-flutter) demonstrates how to integrate and use our various modules in a single app.
 - The [example project](https://github.com/Notificare/notificare-sdk-flutter/tree/main/sample) demonstrates other integrations in a simplified fashion, to quickly understand how a given feature should be implemented.
