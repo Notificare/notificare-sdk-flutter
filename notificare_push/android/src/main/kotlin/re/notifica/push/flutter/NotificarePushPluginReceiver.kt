@@ -1,5 +1,6 @@
 package re.notifica.push.flutter
 
+import android.content.Context
 import re.notifica.models.NotificareNotification
 import re.notifica.push.NotificarePushIntentReceiver
 import re.notifica.push.models.NotificareSystemNotification
@@ -7,7 +8,7 @@ import re.notifica.push.models.NotificareUnknownNotification
 
 class NotificarePushPluginReceiver : NotificarePushIntentReceiver() {
 
-    override fun onNotificationReceived(notification: NotificareNotification) {
+    override fun onNotificationReceived(context: Context, notification: NotificareNotification) {
         NotificarePushPluginEventBroker.emit(
             NotificarePushPluginEventBroker.Event.NotificationReceived(
                 notification = notification,
@@ -15,7 +16,7 @@ class NotificarePushPluginReceiver : NotificarePushIntentReceiver() {
         )
     }
 
-    override fun onSystemNotificationReceived(notification: NotificareSystemNotification) {
+    override fun onSystemNotificationReceived(context: Context, notification: NotificareSystemNotification) {
         NotificarePushPluginEventBroker.emit(
             NotificarePushPluginEventBroker.Event.SystemNotificationReceived(
                 notification = notification,
@@ -23,7 +24,7 @@ class NotificarePushPluginReceiver : NotificarePushIntentReceiver() {
         )
     }
 
-    override fun onUnknownNotificationReceived(notification: NotificareUnknownNotification) {
+    override fun onUnknownNotificationReceived(context: Context, notification: NotificareUnknownNotification) {
         NotificarePushPluginEventBroker.emit(
             NotificarePushPluginEventBroker.Event.UnknownNotificationReceived(
                 notification = notification,
@@ -31,7 +32,7 @@ class NotificarePushPluginReceiver : NotificarePushIntentReceiver() {
         )
     }
 
-    override fun onNotificationOpened(notification: NotificareNotification) {
+    override fun onNotificationOpened(context: Context, notification: NotificareNotification) {
         NotificarePushPluginEventBroker.emit(
             NotificarePushPluginEventBroker.Event.NotificationOpened(
                 notification = notification,
@@ -39,7 +40,11 @@ class NotificarePushPluginReceiver : NotificarePushIntentReceiver() {
         )
     }
 
-    override fun onActionOpened(notification: NotificareNotification, action: NotificareNotification.Action) {
+    override fun onActionOpened(
+        context: Context,
+        notification: NotificareNotification,
+        action: NotificareNotification.Action,
+    ) {
         NotificarePushPluginEventBroker.emit(
             NotificarePushPluginEventBroker.Event.NotificationActionOpened(
                 notification = notification,
