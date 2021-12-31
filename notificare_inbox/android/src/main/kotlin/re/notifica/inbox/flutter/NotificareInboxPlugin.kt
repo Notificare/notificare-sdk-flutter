@@ -16,6 +16,8 @@ import re.notifica.inbox.flutter.events.NotificareEvent
 import re.notifica.inbox.flutter.events.NotificareEventManager
 import re.notifica.inbox.ktx.inbox
 import re.notifica.inbox.models.NotificareInboxItem
+import re.notifica.inbox.models.fromJson
+import re.notifica.inbox.models.toJson
 import re.notifica.models.NotificareNotification
 import java.util.*
 
