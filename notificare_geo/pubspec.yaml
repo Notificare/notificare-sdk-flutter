@@ -1,0 +1,33 @@
+name: notificare_geo
+description: Notificare Geo Flutter Plugin
+version: 3.0.0-beta.1
+homepage: https://notificare.com
+documentation: https://docs.notifica.re/sdk/v3/flutter/setup
+repository: https://github.com/Notificare/notificare-sdk-flutter/tree/main/notificare_geo
+
+environment:
+  sdk: '>=2.12.0 <3.0.0'
+  flutter: ">=1.20.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  json_annotation: ^4.0.1
+  notificare:
+    path: "../notificare"
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^1.0.0
+  build_runner: ^2.0.0
+  json_serializable: ^4.1.0
+
+flutter:
+  plugin:
+    platforms:
+      android:
+        package: re.notifica.geo.flutter
+        pluginClass: NotificareGeoPlugin
+      ios:
+        pluginClass: NotificareGeoPlugin
