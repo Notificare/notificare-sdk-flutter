@@ -1,9 +1,9 @@
 //noinspection GrPackage
 group 're.notifica.push.flutter'
-version '3.0.0-alpha.1'
+version '3.0.0-beta.1'
 
 buildscript {
-    ext.kotlin_version = '1.5.10'
+    ext.kotlin_version = '1.5.30'
 
     repositories {
         google()
@@ -11,7 +11,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.2.1'
+        classpath 'com.android.tools.build:gradle:7.0.3'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
@@ -33,7 +33,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 31
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
@@ -44,11 +44,9 @@ android {
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-
-    def notificare_version = '3.0.0-alpha.1'
+    def notificare_version = '3.0.0-beta.1'
     api "re.notifica:notificare:$notificare_version"
     api "re.notifica:notificare-push:$notificare_version"
-    implementation "re.notifica:notificare-push-fcm:$notificare_version"
+    implementation "re.notifica:notificare-push-gms:$notificare_version"
     implementation "re.notifica:notificare-push-hms:$notificare_version"
 }

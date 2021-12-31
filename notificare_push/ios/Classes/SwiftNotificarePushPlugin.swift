@@ -20,7 +20,7 @@ public class SwiftNotificarePushPlugin: NSObject, FlutterPlugin {
         eventBroker.setup(registrar: registrar)
         
         // Delegate
-        NotificarePush.shared.delegate = self
+        Notificare.shared.push().delegate = self
         
         // NOTE: We need to have a blank implementation of the didReceiveRemoteNotification to allow the native
         // side to swizzle the method.
@@ -38,8 +38,8 @@ public class SwiftNotificarePushPlugin: NSObject, FlutterPlugin {
             case "setAuthorizationOptions": self.setAuthorizationOptions(call, result)
             case "setCategoryOptions": self.setCategoryOptions(call, result)
             case "setPresentationOptions": self.setPresentationOptions(call, result)
-            case "isRemoteNotificationsEnabled": self.isRemoteNotificationsEnabled(call, result)
-            case "getAllowedUI": self.getAllowedUI(call, result)
+            case "hasRemoteNotificationsEnabled": self.hasRemoteNotificationsEnabled(call, result)
+            case "allowedUI": self.allowedUI(call, result)
             case "enableRemoteNotifications": self.enableRemoteNotifications(call, result)
             case "disableRemoteNotifications": self.disableRemoteNotifications(call, result)
                 
@@ -91,7 +91,7 @@ public class SwiftNotificarePushPlugin: NSObject, FlutterPlugin {
             }
         }
         
-        NotificarePush.shared.authorizationOptions = authorizationOptions
+        Notificare.shared.push().authorizationOptions = authorizationOptions
         response(nil)
     }
     
@@ -125,7 +125,7 @@ public class SwiftNotificarePushPlugin: NSObject, FlutterPlugin {
             }
         }
         
-        NotificarePush.shared.categoryOptions = categoryOptions
+        Notificare.shared.push().categoryOptions = categoryOptions
         response(nil)
     }
     
@@ -157,20 +157,20 @@ public class SwiftNotificarePushPlugin: NSObject, FlutterPlugin {
             }
         }
         
-        NotificarePush.shared.presentationOptions = presentationOptions
+        Notificare.shared.push().presentationOptions = presentationOptions
         response(nil)
     }
     
-    private func isRemoteNotificationsEnabled(_ call: FlutterMethodCall, _ response: FlutterResult) {
-        response(NotificarePush.shared.isRemoteNotificationsEnabled)
+    private func hasRemoteNotificationsEnabled(_ call: FlutterMethodCall, _ response: FlutterResult) {
+        response(Notificare.shared.push().hasRemoteNotificationsEnabled)
     }
     
-    private func getAllowedUI(_ call: FlutterMethodCall, _ response: FlutterResult) {
-        response(NotificarePush.shared.allowedUI)
+    private func allowedUI(_ call: FlutterMethodCall, _ response: FlutterResult) {
+        response(Notificare.shared.push().allowedUI)
     }
     
     private func enableRemoteNotifications(_ call: FlutterMethodCall, _ response: @escaping FlutterResult) {
-        NotificarePush.shared.enableRemoteNotifications{ result in
+        Notificare.shared.push().enableRemoteNotifications{ result in
             switch result {
             case .success:
                 response(nil)
@@ -181,7 +181,7 @@ public class SwiftNotificarePushPlugin: NSObject, FlutterPlugin {
     }
     
     private func disableRemoteNotifications(_ call: FlutterMethodCall, _ response: FlutterResult) {
-        NotificarePush.shared.disableRemoteNotifications()
+        Notificare.shared.push().disableRemoteNotifications()
         response(nil)
     }
 }

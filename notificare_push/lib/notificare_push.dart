@@ -7,12 +7,11 @@ import 'package:notificare_push/events/notification_action_opened_event.dart';
 import 'package:notificare_push/models/notificare_system_notification.dart';
 
 class NotificarePush {
-  static const MethodChannel _channel =
-      const MethodChannel('re.notifica.push.flutter/notificare_push', JSONMethodCodec());
+  static const MethodChannel _channel = MethodChannel('re.notifica.push.flutter/notificare_push', JSONMethodCodec());
 
   // Events
-  static Map<String, EventChannel> _eventChannels = new Map();
-  static Map<String, Stream<dynamic>> _eventStreams = new Map();
+  static final Map<String, EventChannel> _eventChannels = {};
+  static final Map<String, Stream<dynamic>> _eventStreams = {};
 
   static Future<void> setAuthorizationOptions(List<String> options) async {
     if (Platform.isIOS) {
@@ -32,12 +31,12 @@ class NotificarePush {
     }
   }
 
-  static Future<bool> get isRemoteNotificationsEnabled async {
-    return await _channel.invokeMethod('isRemoteNotificationsEnabled');
+  static Future<bool> get hasRemoteNotificationsEnabled async {
+    return await _channel.invokeMethod('hasRemoteNotificationsEnabled');
   }
 
   static Future<bool> get allowedUI async {
-    return await _channel.invokeMethod('getAllowedUI');
+    return await _channel.invokeMethod('allowedUI');
   }
 
   static Future<void> enableRemoteNotifications() async {

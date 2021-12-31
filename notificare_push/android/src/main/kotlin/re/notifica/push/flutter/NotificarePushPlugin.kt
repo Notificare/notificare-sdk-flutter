@@ -11,7 +11,8 @@ import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
 import io.flutter.plugin.common.PluginRegistry
-import re.notifica.push.NotificarePush
+import re.notifica.Notificare
+import re.notifica.push.ktx.push
 
 class NotificarePushPlugin : FlutterPlugin, MethodCallHandler, ActivityAware, PluginRegistry.NewIntentListener {
 
@@ -22,7 +23,7 @@ class NotificarePushPlugin : FlutterPlugin, MethodCallHandler, ActivityAware, Pl
     private lateinit var channel: MethodChannel
 
     override fun onAttachedToEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
-        NotificarePush.intentReceiver = NotificarePushPluginReceiver::class.java
+        Notificare.push().intentReceiver = NotificarePushPluginReceiver::class.java
 
         channel = MethodChannel(binding.binaryMessenger, "$NAMESPACE/notificare_push", JSONMethodCodec.INSTANCE)
         channel.setMethodCallHandler(this)
@@ -37,8 +38,8 @@ class NotificarePushPlugin : FlutterPlugin, MethodCallHandler, ActivityAware, Pl
 
     override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
         when (call.method) {
-            "isRemoteNotificationsEnabled" -> isRemoteNotificationsEnabled(call, result)
-            "getAllowedUI" -> getAllowedUI(call, result)
+            "hasRemoteNotificationsEnabled" -> hasRemoteNotificationsEnabled(call, result)
+            "allowedUI" -> allowedUI(call, result)
             "enableRemoteNotifications" -> enableRemoteNotifications(call, result)
             "disableRemoteNotifications" -> disableRemoteNotifications(call, result)
             else -> result.notImplemented()
@@ -65,26 +66,26 @@ class NotificarePushPlugin : FlutterPlugin, MethodCallHandler, ActivityAware, Pl
     // region PluginRegistry.NewIntentListener
 
     override fun onNewIntent(intent: Intent): Boolean {
-        return NotificarePush.handleTrampolineIntent(intent)
+        return Notificare.push().handleTrampolineIntent(intent)
     }
 
     // endregion
 
-    private fun isRemoteNotificationsEnabled(@Suppress("UNUSED_PARAMETER") call: MethodCall, result: Result) {
-        result.success(NotificarePush.isRemoteNotificationsEnabled)
+    private fun hasRemoteNotificationsEnabled(@Suppress("UNUSED_PARAMETER") call: MethodCall, result: Result) {
+        result.success(Notificare.push().hasRemoteNotificationsEnabled)
     }
 
-    private fun getAllowedUI(@Suppress("UNUSED_PARAMETER") call: MethodCall, result: Result) {
-        result.success(NotificarePush.allowedUI)
+    private fun allowedUI(@Suppress("UNUSED_PARAMETER") call: MethodCall, result: Result) {
+        result.success(Notificare.push().allowedUI)
     }
 
     private fun enableRemoteNotifications(@Suppress("UNUSED_PARAMETER") call: MethodCall, result: Result) {
-        NotificarePush.enableRemoteNotifications()
+        Notificare.push().enableRemoteNotifications()
         result.success(null)
     }
 
     private fun disableRemoteNotifications(@Suppress("UNUSED_PARAMETER") call: MethodCall, result: Result) {
-        NotificarePush.disableRemoteNotifications()
+        Notificare.push().disableRemoteNotifications()
         result.success(null)
     }
 }
