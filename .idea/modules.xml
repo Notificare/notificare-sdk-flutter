@@ -3,9 +3,15 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/notificare/notificare.iml" filepath="$PROJECT_DIR$/notificare/notificare.iml" />
+      <module fileurl="file://$PROJECT_DIR$/notificare_assets/notificare_assets.iml" filepath="$PROJECT_DIR$/notificare_assets/notificare_assets.iml" />
+      <module fileurl="file://$PROJECT_DIR$/notificare_authentication/notificare_authentication.iml" filepath="$PROJECT_DIR$/notificare_authentication/notificare_authentication.iml" />
+      <module fileurl="file://$PROJECT_DIR$/notificare_geo/notificare_geo.iml" filepath="$PROJECT_DIR$/notificare_geo/notificare_geo.iml" />
       <module fileurl="file://$PROJECT_DIR$/notificare_inbox/notificare_inbox.iml" filepath="$PROJECT_DIR$/notificare_inbox/notificare_inbox.iml" />
+      <module fileurl="file://$PROJECT_DIR$/notificare_loyalty/notificare_loyalty.iml" filepath="$PROJECT_DIR$/notificare_loyalty/notificare_loyalty.iml" />
       <module fileurl="file://$PROJECT_DIR$/notificare_push/notificare_push.iml" filepath="$PROJECT_DIR$/notificare_push/notificare_push.iml" />
       <module fileurl="file://$PROJECT_DIR$/notificare_push_ui/notificare_push_ui.iml" filepath="$PROJECT_DIR$/notificare_push_ui/notificare_push_ui.iml" />
+      <module fileurl="file://$PROJECT_DIR$/notificare_scannables/notificare_scannables.iml" filepath="$PROJECT_DIR$/notificare_scannables/notificare_scannables.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sample/sample.iml" filepath="$PROJECT_DIR$/sample/sample.iml" />
     </modules>
   </component>
 </project>
