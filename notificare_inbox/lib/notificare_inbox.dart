@@ -2,16 +2,15 @@ import 'dart:async';
 
 import 'package:flutter/services.dart';
 import 'package:notificare/models/notificare_notification.dart';
-
-import 'models/notificare_inbox_item.dart';
+import 'package:notificare_inbox/models/notificare_inbox_item.dart';
 
 class NotificareInbox {
   // Channels
-  static const MethodChannel _channel = MethodChannel('re.notifica.inbox.flutter/notificare_inbox', JSONMethodCodec());
+  static const _channel = MethodChannel('re.notifica.inbox.flutter/notificare_inbox', JSONMethodCodec());
 
   // Events
-  static Map<String, EventChannel> _eventChannels = new Map();
-  static Map<String, Stream<dynamic>> _eventStreams = new Map();
+  static final Map<String, EventChannel> _eventChannels = {};
+  static final Map<String, Stream<dynamic>> _eventStreams = {};
 
   static Future<List<NotificareInboxItem>> get items async {
     final json = await _channel.invokeListMethod<Map<String, dynamic>>('getItems');

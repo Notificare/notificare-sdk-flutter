@@ -1,5 +1,6 @@
 import Flutter
 import UIKit
+import NotificareKit
 import NotificareInboxKit
 
 fileprivate let DEFAULT_ERROR_CODE = "notificare_error"
@@ -16,7 +17,7 @@ public class SwiftNotificareInboxPlugin: NSObject, FlutterPlugin {
     
     private func register(with registrar: FlutterPluginRegistrar) {
         // Delegate
-        NotificareInbox.shared.delegate = self
+        Notificare.shared.inbox().delegate = self
         
         // Events
         events.setup(registrar: registrar)
@@ -47,7 +48,7 @@ public class SwiftNotificareInboxPlugin: NSObject, FlutterPlugin {
 
     private func getItems(_ call: FlutterMethodCall, _ response: FlutterResult) {
         do {
-            let items = try NotificareInbox.shared.items.map { item in
+            let items = try Notificare.shared.inbox().items.map { item in
                 try item.toJson()
             }
             
@@ -58,11 +59,11 @@ public class SwiftNotificareInboxPlugin: NSObject, FlutterPlugin {
     }
     
     private func getBadge(_ call: FlutterMethodCall, _ response: FlutterResult) {
-        response(NotificareInbox.shared.badge)
+        response(Notificare.shared.inbox().badge)
     }
     
     private func refresh(_ call: FlutterMethodCall, _ response: FlutterResult) {
-        NotificareInbox.shared.refresh()
+        Notificare.shared.inbox().refresh()
         response(nil)
     }
     
@@ -77,7 +78,7 @@ public class SwiftNotificareInboxPlugin: NSObject, FlutterPlugin {
             return
         }
 
-        NotificareInbox.shared.open(item) { result in
+        Notificare.shared.inbox().open(item) { result in
             switch result {
             case let .success(notification):
                 do {
@@ -103,7 +104,7 @@ public class SwiftNotificareInboxPlugin: NSObject, FlutterPlugin {
             return
         }
 
-        NotificareInbox.shared.markAsRead(item) { result in
+        Notificare.shared.inbox().markAsRead(item) { result in
             switch result {
             case .success:
                 response(nil)
@@ -114,7 +115,7 @@ public class SwiftNotificareInboxPlugin: NSObject, FlutterPlugin {
     }
     
     private func markAllAsRead(_ call: FlutterMethodCall, _ response: @escaping FlutterResult) {
-        NotificareInbox.shared.markAllAsRead { result in
+        Notificare.shared.inbox().markAllAsRead { result in
             switch result {
             case .success:
                 response(nil)
@@ -135,7 +136,7 @@ public class SwiftNotificareInboxPlugin: NSObject, FlutterPlugin {
             return
         }
 
-        NotificareInbox.shared.remove(item) { result in
+        Notificare.shared.inbox().remove(item) { result in
             switch result {
             case .success:
                 response(nil)
@@ -146,7 +147,7 @@ public class SwiftNotificareInboxPlugin: NSObject, FlutterPlugin {
     }
     
     private func clear(_ call: FlutterMethodCall, _ response: @escaping FlutterResult) {
-        NotificareInbox.shared.clear { result in
+        Notificare.shared.inbox().clear { result in
             switch result {
             case .success:
                 response(nil)

@@ -4,17 +4,17 @@ import android.os.Handler
 import android.os.Looper
 import androidx.annotation.NonNull
 import androidx.lifecycle.Observer
-
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.plugin.common.JSONMethodCodec
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
+import re.notifica.Notificare
 import re.notifica.NotificareCallback
-import re.notifica.inbox.NotificareInbox
 import re.notifica.inbox.flutter.events.NotificareEvent
 import re.notifica.inbox.flutter.events.NotificareEventManager
+import re.notifica.inbox.ktx.inbox
 import re.notifica.inbox.models.NotificareInboxItem
 import re.notifica.models.NotificareNotification
 import java.util.*
@@ -41,16 +41,20 @@ class NotificareInboxPlugin : FlutterPlugin, MethodCallHandler {
     override fun onAttachedToEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
         NotificareEventManager.register(binding.binaryMessenger)
 
-        channel = MethodChannel(binding.binaryMessenger, "re.notifica.inbox.flutter/notificare_inbox", JSONMethodCodec.INSTANCE)
+        channel = MethodChannel(
+            binding.binaryMessenger,
+            "re.notifica.inbox.flutter/notificare_inbox",
+            JSONMethodCodec.INSTANCE
+        )
         channel.setMethodCallHandler(this)
 
-        NotificareInbox.observableItems.observeForever(itemsObserver)
-        NotificareInbox.observableBadge.observeForever(badgeObserver)
+        Notificare.inbox().observableItems.observeForever(itemsObserver)
+        Notificare.inbox().observableBadge.observeForever(badgeObserver)
     }
 
     override fun onDetachedFromEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
-        NotificareInbox.observableItems.removeObserver(itemsObserver)
-        NotificareInbox.observableBadge.removeObserver(badgeObserver)
+        Notificare.inbox().observableItems.removeObserver(itemsObserver)
+        Notificare.inbox().observableBadge.removeObserver(badgeObserver)
 
         channel.setMethodCallHandler(null)
 
@@ -74,26 +78,26 @@ class NotificareInboxPlugin : FlutterPlugin, MethodCallHandler {
     private fun getItems(@Suppress("UNUSED_PARAMETER") call: MethodCall, result: Result) {
         onMainThread {
             result.success(
-                NotificareInbox.items.map { it.toJson() }
+                Notificare.inbox().items.map { it.toJson() }
             )
         }
     }
 
     private fun getBadge(@Suppress("UNUSED_PARAMETER") call: MethodCall, result: Result) {
         onMainThread {
-            result.success(NotificareInbox.badge)
+            result.success(Notificare.inbox().badge)
         }
     }
 
     private fun refresh(@Suppress("UNUSED_PARAMETER") call: MethodCall, result: Result) {
-        NotificareInbox.refresh()
+        Notificare.inbox().refresh()
         result.success(null)
     }
 
     private fun open(@Suppress("UNUSED_PARAMETER") call: MethodCall, pluginResult: Result) {
         val item = NotificareInboxItem.fromJson(call.arguments())
 
-        NotificareInbox.open(item, object : NotificareCallback<NotificareNotification> {
+        Notificare.inbox().open(item, object : NotificareCallback<NotificareNotification> {
             override fun onSuccess(result: NotificareNotification) {
                 onMainThread {
                     pluginResult.success(result.toJson())
@@ -111,7 +115,7 @@ class NotificareInboxPlugin : FlutterPlugin, MethodCallHandler {
     private fun markAsRead(@Suppress("UNUSED_PARAMETER") call: MethodCall, pluginResult: Result) {
         val item = NotificareInboxItem.fromJson(call.arguments())
 
-        NotificareInbox.markAsRead(item, object : NotificareCallback<Unit> {
+        Notificare.inbox().markAsRead(item, object : NotificareCallback<Unit> {
             override fun onSuccess(result: Unit) {
                 pluginResult.success(null)
             }
@@ -123,7 +127,7 @@ class NotificareInboxPlugin : FlutterPlugin, MethodCallHandler {
     }
 
     private fun markAllAsRead(@Suppress("UNUSED_PARAMETER") call: MethodCall, pluginResult: Result) {
-        NotificareInbox.markAllAsRead(object : NotificareCallback<Unit> {
+        Notificare.inbox().markAllAsRead(object : NotificareCallback<Unit> {
             override fun onSuccess(result: Unit) {
                 pluginResult.success(null)
             }
@@ -137,7 +141,7 @@ class NotificareInboxPlugin : FlutterPlugin, MethodCallHandler {
     private fun remove(@Suppress("UNUSED_PARAMETER") call: MethodCall, pluginResult: Result) {
         val item = NotificareInboxItem.fromJson(call.arguments())
 
-        NotificareInbox.remove(item, object : NotificareCallback<Unit> {
+        Notificare.inbox().remove(item, object : NotificareCallback<Unit> {
             override fun onSuccess(result: Unit) {
                 pluginResult.success(null)
             }
@@ -149,7 +153,7 @@ class NotificareInboxPlugin : FlutterPlugin, MethodCallHandler {
     }
 
     private fun clear(@Suppress("UNUSED_PARAMETER") call: MethodCall, pluginResult: Result) {
-        NotificareInbox.clear(object : NotificareCallback<Unit> {
+        Notificare.inbox() .clear(object : NotificareCallback<Unit> {
             override fun onSuccess(result: Unit) {
                 pluginResult.success(null)
             }
