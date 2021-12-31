@@ -6,16 +6,15 @@ part of 'notificare_ranged_beacons_event.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-NotificareRangedBeaconsEvent _$NotificareRangedBeaconsEventFromJson(Map json) {
-  return NotificareRangedBeaconsEvent(
-    region: NotificareRegion.fromJson(
-        Map<String, dynamic>.from(json['region'] as Map)),
-    beacons: (json['beacons'] as List<dynamic>)
-        .map((e) =>
-            NotificareBeacon.fromJson(Map<String, dynamic>.from(e as Map)))
-        .toList(),
-  );
-}
+NotificareRangedBeaconsEvent _$NotificareRangedBeaconsEventFromJson(Map json) =>
+    NotificareRangedBeaconsEvent(
+      region: NotificareRegion.fromJson(
+          Map<String, dynamic>.from(json['region'] as Map)),
+      beacons: (json['beacons'] as List<dynamic>)
+          .map((e) =>
+              NotificareBeacon.fromJson(Map<String, dynamic>.from(e as Map)))
+          .toList(),
+    );
 
 Map<String, dynamic> _$NotificareRangedBeaconsEventToJson(
         NotificareRangedBeaconsEvent instance) =>

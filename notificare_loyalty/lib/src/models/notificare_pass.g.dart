@@ -6,27 +6,25 @@ part of 'notificare_pass.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-NotificarePass _$NotificarePassFromJson(Map json) {
-  return NotificarePass(
-    id: json['id'] as String,
-    type: json['type'] as String?,
-    version: json['version'] as int,
-    passbook: json['passbook'] as String?,
-    template: json['template'] as String?,
-    serial: json['serial'] as String,
-    barcode: json['barcode'] as String,
-    redeem: json['redeem'] as String,
-    redeemHistory: (json['redeemHistory'] as List<dynamic>)
-        .map((e) => NotificarePassRedemption.fromJson(
-            Map<String, dynamic>.from(e as Map)))
-        .toList(),
-    limit: json['limit'] as int,
-    token: json['token'] as String,
-    data: Map<String, dynamic>.from(json['data'] as Map),
-    date: const IsoDateTimeConverter().fromJson(json['date'] as String),
-    googlePaySaveLink: json['googlePaySaveLink'] as String?,
-  );
-}
+NotificarePass _$NotificarePassFromJson(Map json) => NotificarePass(
+      id: json['id'] as String,
+      type: json['type'] as String?,
+      version: json['version'] as int,
+      passbook: json['passbook'] as String?,
+      template: json['template'] as String?,
+      serial: json['serial'] as String,
+      barcode: json['barcode'] as String,
+      redeem: json['redeem'] as String,
+      redeemHistory: (json['redeemHistory'] as List<dynamic>)
+          .map((e) => NotificarePassRedemption.fromJson(
+              Map<String, dynamic>.from(e as Map)))
+          .toList(),
+      limit: json['limit'] as int,
+      token: json['token'] as String,
+      data: Map<String, dynamic>.from(json['data'] as Map),
+      date: const IsoDateTimeConverter().fromJson(json['date'] as String),
+      googlePaySaveLink: json['googlePaySaveLink'] as String?,
+    );
 
 Map<String, dynamic> _$NotificarePassToJson(NotificarePass instance) =>
     <String, dynamic>{
@@ -46,12 +44,11 @@ Map<String, dynamic> _$NotificarePassToJson(NotificarePass instance) =>
       'googlePaySaveLink': instance.googlePaySaveLink,
     };
 
-NotificarePassRedemption _$NotificarePassRedemptionFromJson(Map json) {
-  return NotificarePassRedemption(
-    comments: json['comments'] as String?,
-    date: const IsoDateTimeConverter().fromJson(json['date'] as String),
-  );
-}
+NotificarePassRedemption _$NotificarePassRedemptionFromJson(Map json) =>
+    NotificarePassRedemption(
+      comments: json['comments'] as String?,
+      date: const IsoDateTimeConverter().fromJson(json['date'] as String),
+    );
 
 Map<String, dynamic> _$NotificarePassRedemptionToJson(
         NotificarePassRedemption instance) =>

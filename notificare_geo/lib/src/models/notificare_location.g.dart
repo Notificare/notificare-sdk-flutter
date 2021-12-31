@@ -6,20 +6,18 @@ part of 'notificare_location.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-NotificareLocation _$NotificareLocationFromJson(Map json) {
-  return NotificareLocation(
-    latitude: (json['latitude'] as num).toDouble(),
-    longitude: (json['longitude'] as num).toDouble(),
-    altitude: (json['altitude'] as num).toDouble(),
-    course: (json['course'] as num).toDouble(),
-    speed: (json['speed'] as num).toDouble(),
-    floor: json['floor'] as int?,
-    horizontalAccuracy: (json['horizontalAccuracy'] as num).toDouble(),
-    verticalAccuracy: (json['verticalAccuracy'] as num).toDouble(),
-    timestamp:
-        const IsoDateTimeConverter().fromJson(json['timestamp'] as String),
-  );
-}
+NotificareLocation _$NotificareLocationFromJson(Map json) => NotificareLocation(
+      latitude: (json['latitude'] as num).toDouble(),
+      longitude: (json['longitude'] as num).toDouble(),
+      altitude: (json['altitude'] as num).toDouble(),
+      course: (json['course'] as num).toDouble(),
+      speed: (json['speed'] as num).toDouble(),
+      floor: json['floor'] as int?,
+      horizontalAccuracy: (json['horizontalAccuracy'] as num).toDouble(),
+      verticalAccuracy: (json['verticalAccuracy'] as num).toDouble(),
+      timestamp:
+          const IsoDateTimeConverter().fromJson(json['timestamp'] as String),
+    );
 
 Map<String, dynamic> _$NotificareLocationToJson(NotificareLocation instance) =>
     <String, dynamic>{

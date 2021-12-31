@@ -6,13 +6,12 @@ part of 'notificare_system_notification.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-NotificareSystemNotification _$NotificareSystemNotificationFromJson(Map json) {
-  return NotificareSystemNotification(
-    id: json['id'] as String,
-    type: json['type'] as String,
-    extra: Map<String, String>.from(json['extra'] as Map),
-  );
-}
+NotificareSystemNotification _$NotificareSystemNotificationFromJson(Map json) =>
+    NotificareSystemNotification(
+      id: json['id'] as String,
+      type: json['type'] as String,
+      extra: Map<String, String?>.from(json['extra'] as Map),
+    );
 
 Map<String, dynamic> _$NotificareSystemNotificationToJson(
         NotificareSystemNotification instance) =>
