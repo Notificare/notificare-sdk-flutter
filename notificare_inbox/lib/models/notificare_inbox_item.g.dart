@@ -16,7 +16,6 @@ NotificareInboxItem _$NotificareInboxItemFromJson(Map json) =>
       expires: json['expires'] == null
           ? null
           : DateTime.parse(json['expires'] as String),
-      visible: json['visible'] as bool,
     );
 
 Map<String, dynamic> _$NotificareInboxItemToJson(
@@ -27,5 +26,4 @@ Map<String, dynamic> _$NotificareInboxItemToJson(
       'time': const IsoDateTimeConverter().toJson(instance.time),
       'opened': instance.opened,
       'expires': instance.expires?.toIso8601String(),
-      'visible': instance.visible,
     };

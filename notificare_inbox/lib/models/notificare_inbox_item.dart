@@ -12,7 +12,6 @@ class NotificareInboxItem {
   final DateTime time;
   final bool opened;
   final DateTime? expires;
-  final bool visible;
 
   NotificareInboxItem({
     required this.id,
@@ -20,7 +19,6 @@ class NotificareInboxItem {
     required this.time,
     required this.opened,
     required this.expires,
-    required this.visible,
   });
 
   factory NotificareInboxItem.fromJson(Map<String, dynamic> json) => _$NotificareInboxItemFromJson(json);
