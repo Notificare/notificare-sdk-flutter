@@ -201,10 +201,14 @@ extension NotificarePushUIPluginEventBroker {
         )
     }
     
-    static func OnCustomActionReceived(url: URL) -> Event {
+    static func OnCustomActionReceived(notification: NotificareNotification, action: NotificareNotification.Action, url: URL) -> Event {
         return Event(
             type: .customActionReceived,
-            payload: url.absoluteString
+            payload: [
+                "notification": try! notification.toJson(),
+                "action": try! action.toJson(),
+                "uri": url.absoluteString,
+            ]
         )
     }
 }

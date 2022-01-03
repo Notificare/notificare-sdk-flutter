@@ -6,6 +6,7 @@ import 'package:notificare_push_ui/src/events/notificare_action_executed_event.d
 import 'package:notificare_push_ui/src/events/notificare_action_failed_to_execute_event.dart';
 import 'package:notificare_push_ui/src/events/notificare_action_not_executed_event.dart';
 import 'package:notificare_push_ui/src/events/notificare_action_will_execute_event.dart';
+import 'package:notificare_push_ui/src/events/notificare_custom_action_received_event.dart';
 import 'package:notificare_push_ui/src/events/notificare_notification_url_clicked_event.dart';
 
 class NotificarePushUI {
@@ -104,9 +105,10 @@ class NotificarePushUI {
     });
   }
 
-  static Stream<String> get onCustomActionReceived {
+  static Stream<NotificareCustomActionReceivedEvent> get onCustomActionReceived {
     return _getEventStream('custom_action_received').map((result) {
-      return result as String;
+      final Map<dynamic, dynamic> json = result;
+      return NotificareCustomActionReceivedEvent.fromJson(json.cast());
     });
   }
 }
