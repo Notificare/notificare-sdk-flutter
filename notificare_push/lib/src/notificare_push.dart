@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/services.dart';
 import 'package:notificare/notificare.dart';
-import 'package:notificare_push/src/events/notification_action_opened_event.dart';
+import 'package:notificare_push/src/events/notificare_notification_action_opened_event.dart';
 import 'package:notificare_push/src/models/notificare_system_notification.dart';
 
 class NotificarePush {
@@ -89,15 +89,10 @@ class NotificarePush {
     });
   }
 
-  static Stream<NotificationActionOpenedEvent> get onNotificationActionOpened {
+  static Stream<NotificareNotificationActionOpenedEvent> get onNotificationActionOpened {
     return _getEventStream('notification_action_opened').map((result) {
-      final Map<dynamic, dynamic> notification = result['notification'];
-      final Map<dynamic, dynamic> action = result['action'];
-
-      return NotificationActionOpenedEvent(
-        notification: NotificareNotification.fromJson(notification.cast()),
-        action: NotificareNotificationAction.fromJson(action.cast()),
-      );
+      final Map<dynamic, dynamic> json = result;
+      return NotificareNotificationActionOpenedEvent.fromJson(json.cast());
     });
   }
 
