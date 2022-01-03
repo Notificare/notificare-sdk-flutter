@@ -108,6 +108,14 @@ class _AppState extends State<App> {
       await NotificarePushUI.presentAction(data.notification, data.action);
     });
 
+    NotificarePush.onNotificationSettingsChanged.listen((granted) {
+      scaffoldMessengerKey.currentState!.showSnackBar(
+        SnackBar(
+          content: Text('allowedUI = $granted'),
+        ),
+      );
+    });
+
     // endregion
 
     // region Notificare Push UI events
