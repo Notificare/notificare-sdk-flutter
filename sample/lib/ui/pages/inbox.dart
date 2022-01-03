@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:notificare_inbox/models/notificare_inbox_item.dart';
 import 'package:notificare_inbox/notificare_inbox.dart';
 import 'package:notificare_push_ui/notificare_push_ui.dart';
 import 'package:sample/ui/views/inbox_item.dart';

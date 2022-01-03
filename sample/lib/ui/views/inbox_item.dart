@@ -1,7 +1,7 @@
 import 'package:collection/collection.dart';
-import 'package:timeago/timeago.dart' as timeago;
 import 'package:flutter/material.dart';
-import 'package:notificare_inbox/models/notificare_inbox_item.dart';
+import 'package:notificare_inbox/notificare_inbox.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 class InboxItem extends StatelessWidget {
   final NotificareInboxItem item;
