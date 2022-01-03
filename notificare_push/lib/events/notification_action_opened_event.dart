@@ -1,4 +1,4 @@
-import 'package:notificare/models/notificare_notification.dart';
+import 'package:notificare/notificare.dart';
 
 class NotificationActionOpenedEvent {
   final NotificareNotification notification;

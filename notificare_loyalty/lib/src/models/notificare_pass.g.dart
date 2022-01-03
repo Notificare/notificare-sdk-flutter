@@ -22,7 +22,7 @@ NotificarePass _$NotificarePassFromJson(Map json) => NotificarePass(
       limit: json['limit'] as int,
       token: json['token'] as String,
       data: Map<String, dynamic>.from(json['data'] as Map),
-      date: const IsoDateTimeConverter().fromJson(json['date'] as String),
+      date: const NotificareIsoDateTimeConverter().fromJson(json['date'] as String),
       googlePaySaveLink: json['googlePaySaveLink'] as String?,
     );
 
@@ -40,19 +40,19 @@ Map<String, dynamic> _$NotificarePassToJson(NotificarePass instance) =>
       'limit': instance.limit,
       'token': instance.token,
       'data': instance.data,
-      'date': const IsoDateTimeConverter().toJson(instance.date),
+      'date': const NotificareIsoDateTimeConverter().toJson(instance.date),
       'googlePaySaveLink': instance.googlePaySaveLink,
     };
 
 NotificarePassRedemption _$NotificarePassRedemptionFromJson(Map json) =>
     NotificarePassRedemption(
       comments: json['comments'] as String?,
-      date: const IsoDateTimeConverter().fromJson(json['date'] as String),
+      date: const NotificareIsoDateTimeConverter().fromJson(json['date'] as String),
     );
 
 Map<String, dynamic> _$NotificarePassRedemptionToJson(
         NotificarePassRedemption instance) =>
     <String, dynamic>{
       'comments': instance.comments,
-      'date': const IsoDateTimeConverter().toJson(instance.date),
+      'date': const NotificareIsoDateTimeConverter().toJson(instance.date),
     };

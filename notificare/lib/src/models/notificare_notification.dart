@@ -1,10 +1,10 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:notificare/converters/iso_date_time_converter.dart';
+import 'package:notificare/src/converters/notificare_iso_date_time_converter.dart';
 
 part 'notificare_notification.g.dart';
 
 @JsonSerializable(anyMap: true, explicitToJson: true)
-@IsoDateTimeConverter()
+@NotificareIsoDateTimeConverter()
 class NotificareNotification {
   final String id;
   final bool partial;

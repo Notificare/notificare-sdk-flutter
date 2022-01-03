@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/services.dart';
-import 'package:notificare/models/notificare_notification.dart';
+import 'package:notificare/notificare.dart';
 import 'package:notificare_push_ui/src/events/notificare_action_executed_event.dart';
 import 'package:notificare_push_ui/src/events/notificare_action_failed_to_execute_event.dart';
 import 'package:notificare_push_ui/src/events/notificare_action_not_executed_event.dart';

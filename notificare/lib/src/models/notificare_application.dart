@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:notificare/models/notificare_notification.dart';
+import 'package:notificare/src/models/notificare_notification.dart';
 
 part 'notificare_application.g.dart';
 

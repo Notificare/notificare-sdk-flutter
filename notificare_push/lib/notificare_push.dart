@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/services.dart';
-import 'package:notificare/models/notificare_notification.dart';
+import 'package:notificare/notificare.dart';
 import 'package:notificare_push/events/notification_action_opened_event.dart';
 import 'package:notificare_push/models/notificare_system_notification.dart';
 

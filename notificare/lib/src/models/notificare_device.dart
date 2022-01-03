@@ -1,11 +1,11 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:notificare/converters/iso_date_time_converter.dart';
-import 'package:notificare/models/notificare_do_not_disturb.dart';
+import 'package:notificare/src/converters/notificare_iso_date_time_converter.dart';
+import 'package:notificare/src/models/notificare_do_not_disturb.dart';
 
 part 'notificare_device.g.dart';
 
 @JsonSerializable(anyMap: true, explicitToJson: true)
-@IsoDateTimeConverter()
+@NotificareIsoDateTimeConverter()
 class NotificareDevice {
   final String id;
   final String? userId;

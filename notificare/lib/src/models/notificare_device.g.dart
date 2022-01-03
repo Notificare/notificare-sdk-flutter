@@ -23,7 +23,7 @@ NotificareDevice _$NotificareDeviceFromJson(Map json) => NotificareDevice(
           : NotificareDoNotDisturb.fromJson(
               Map<String, dynamic>.from(json['dnd'] as Map)),
       userData: Map<String, String>.from(json['userData'] as Map),
-      lastRegistered: const IsoDateTimeConverter()
+      lastRegistered: const NotificareIsoDateTimeConverter()
           .fromJson(json['lastRegistered'] as String),
     );
 
@@ -43,5 +43,5 @@ Map<String, dynamic> _$NotificareDeviceToJson(NotificareDevice instance) =>
       'dnd': instance.dnd?.toJson(),
       'userData': instance.userData,
       'lastRegistered':
-          const IsoDateTimeConverter().toJson(instance.lastRegistered),
+          const NotificareIsoDateTimeConverter().toJson(instance.lastRegistered),
     };

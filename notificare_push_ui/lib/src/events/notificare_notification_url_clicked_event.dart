@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:notificare/models/notificare_notification.dart';
+import 'package:notificare/notificare.dart';
 
 part 'notificare_notification_url_clicked_event.g.dart';
 

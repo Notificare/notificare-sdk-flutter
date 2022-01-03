@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/services.dart';
-import 'package:notificare/models/notificare_notification.dart';
+import 'package:notificare/notificare.dart';
 import 'package:notificare_inbox/models/notificare_inbox_item.dart';
 
 class NotificareInbox {

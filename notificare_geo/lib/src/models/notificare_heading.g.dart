@@ -14,7 +14,7 @@ NotificareHeading _$NotificareHeadingFromJson(Map json) => NotificareHeading(
       y: (json['y'] as num).toDouble(),
       z: (json['z'] as num).toDouble(),
       timestamp:
-          const IsoDateTimeConverter().fromJson(json['timestamp'] as String),
+          const NotificareIsoDateTimeConverter().fromJson(json['timestamp'] as String),
     );
 
 Map<String, dynamic> _$NotificareHeadingToJson(NotificareHeading instance) =>
@@ -25,5 +25,5 @@ Map<String, dynamic> _$NotificareHeadingToJson(NotificareHeading instance) =>
       'x': instance.x,
       'y': instance.y,
       'z': instance.z,
-      'timestamp': const IsoDateTimeConverter().toJson(instance.timestamp),
+      'timestamp': const NotificareIsoDateTimeConverter().toJson(instance.timestamp),
     };

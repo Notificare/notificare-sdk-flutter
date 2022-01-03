@@ -16,7 +16,7 @@ NotificareLocation _$NotificareLocationFromJson(Map json) => NotificareLocation(
       horizontalAccuracy: (json['horizontalAccuracy'] as num).toDouble(),
       verticalAccuracy: (json['verticalAccuracy'] as num).toDouble(),
       timestamp:
-          const IsoDateTimeConverter().fromJson(json['timestamp'] as String),
+          const NotificareIsoDateTimeConverter().fromJson(json['timestamp'] as String),
     );
 
 Map<String, dynamic> _$NotificareLocationToJson(NotificareLocation instance) =>
@@ -29,5 +29,5 @@ Map<String, dynamic> _$NotificareLocationToJson(NotificareLocation instance) =>
       'floor': instance.floor,
       'horizontalAccuracy': instance.horizontalAccuracy,
       'verticalAccuracy': instance.verticalAccuracy,
-      'timestamp': const IsoDateTimeConverter().toJson(instance.timestamp),
+      'timestamp': const NotificareIsoDateTimeConverter().toJson(instance.timestamp),
     };

@@ -12,10 +12,10 @@ NotificareUser _$NotificareUserFromJson(Map json) => NotificareUser(
       pushEmailAddress: json['pushEmailAddress'] as String?,
       segments:
           (json['segments'] as List<dynamic>).map((e) => e as String).toList(),
-      registrationDate: const IsoDateTimeConverter()
+      registrationDate: const NotificareIsoDateTimeConverter()
           .fromJson(json['registrationDate'] as String),
       lastActive:
-          const IsoDateTimeConverter().fromJson(json['lastActive'] as String),
+          const NotificareIsoDateTimeConverter().fromJson(json['lastActive'] as String),
     );
 
 Map<String, dynamic> _$NotificareUserToJson(NotificareUser instance) =>
@@ -25,6 +25,6 @@ Map<String, dynamic> _$NotificareUserToJson(NotificareUser instance) =>
       'pushEmailAddress': instance.pushEmailAddress,
       'segments': instance.segments,
       'registrationDate':
-          const IsoDateTimeConverter().toJson(instance.registrationDate),
-      'lastActive': const IsoDateTimeConverter().toJson(instance.lastActive),
+          const NotificareIsoDateTimeConverter().toJson(instance.registrationDate),
+      'lastActive': const NotificareIsoDateTimeConverter().toJson(instance.lastActive),
     };
