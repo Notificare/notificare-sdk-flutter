@@ -99,7 +99,11 @@ public class SwiftNotificarePushUIPlugin: NSObject, FlutterPlugin {
         if let colorStr = theme?.backgroundColor {
             navigationController.view.backgroundColor = UIColor(hexString: colorStr)
         } else {
-            navigationController.view.backgroundColor = .white
+            if #available(iOS 13.0, *) {
+                navigationController.view.backgroundColor = .systemBackground
+            } else {
+                navigationController.view.backgroundColor = .white
+            }
         }
         
         let closeButton: UIBarButtonItem
