@@ -14,6 +14,12 @@ public class SwiftNotificarePushUIPlugin: NSObject, FlutterPlugin {
     }
     
     private let eventBroker = NotificarePushUIPluginEventBroker(namespace: NAMESPACE)
+
+    private var rootViewController: UIViewController? {
+        get {
+            UIApplication.shared.delegate?.window??.rootViewController
+        }
+    }
     
     private func register(with registrar: FlutterPluginRegistrar) {
         // Events
@@ -47,7 +53,7 @@ public class SwiftNotificarePushUIPlugin: NSObject, FlutterPlugin {
             return
         }
         
-        guard let rootViewController = UIApplication.shared.keyWindow?.rootViewController else {
+        guard let rootViewController = rootViewController else {
             response(FlutterError(code: DEFAULT_ERROR_CODE, message: "Cannot present a notification with a nil root view controller.", details: nil))
             return
         }
@@ -77,7 +83,7 @@ public class SwiftNotificarePushUIPlugin: NSObject, FlutterPlugin {
             return
         }
         
-        guard let rootViewController = UIApplication.shared.keyWindow?.rootViewController else {
+        guard let rootViewController = rootViewController else {
             response(FlutterError(code: DEFAULT_ERROR_CODE, message: "Cannot present a notification with a nil root view controller.", details: nil))
             return
         }
@@ -119,7 +125,7 @@ public class SwiftNotificarePushUIPlugin: NSObject, FlutterPlugin {
     }
     
     @objc private func onCloseClicked() {
-        guard let rootViewController = UIApplication.shared.keyWindow?.rootViewController else {
+        guard let rootViewController = rootViewController else {
             return
         }
         
