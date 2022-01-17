@@ -42,6 +42,6 @@ Map<String, dynamic> _$NotificareDeviceToJson(NotificareDevice instance) =>
       'transport': instance.transport,
       'dnd': instance.dnd?.toJson(),
       'userData': instance.userData,
-      'lastRegistered':
-          const NotificareIsoDateTimeConverter().toJson(instance.lastRegistered),
+      'lastRegistered': const NotificareIsoDateTimeConverter()
+          .toJson(instance.lastRegistered),
     };

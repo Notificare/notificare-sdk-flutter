@@ -17,6 +17,7 @@ class NotificareNotification {
   final List<NotificareNotificationAction> actions;
   final List<NotificareNotificationAttachment> attachments;
   final Map<String, dynamic> extra;
+  final String? targetContentIdentifier;
 
   NotificareNotification({
     required this.id,
@@ -30,6 +31,7 @@ class NotificareNotification {
     required this.actions,
     required this.attachments,
     required this.extra,
+    required this.targetContentIdentifier,
   });
 
   factory NotificareNotification.fromJson(Map<String, dynamic> json) => _$NotificareNotificationFromJson(json);

@@ -11,7 +11,8 @@ NotificareNotification _$NotificareNotificationFromJson(Map json) =>
       id: json['id'] as String,
       partial: json['partial'] as bool,
       type: json['type'] as String,
-      time: const NotificareIsoDateTimeConverter().fromJson(json['time'] as String),
+      time: const NotificareIsoDateTimeConverter()
+          .fromJson(json['time'] as String),
       title: json['title'] as String?,
       subtitle: json['subtitle'] as String?,
       message: json['message'] as String,
@@ -28,6 +29,7 @@ NotificareNotification _$NotificareNotificationFromJson(Map json) =>
               Map<String, dynamic>.from(e as Map)))
           .toList(),
       extra: Map<String, dynamic>.from(json['extra'] as Map),
+      targetContentIdentifier: json['targetContentIdentifier'] as String?,
     );
 
 Map<String, dynamic> _$NotificareNotificationToJson(
@@ -44,6 +46,7 @@ Map<String, dynamic> _$NotificareNotificationToJson(
       'actions': instance.actions.map((e) => e.toJson()).toList(),
       'attachments': instance.attachments.map((e) => e.toJson()).toList(),
       'extra': instance.extra,
+      'targetContentIdentifier': instance.targetContentIdentifier,
     };
 
 NotificareNotificationContent _$NotificareNotificationContentFromJson(
