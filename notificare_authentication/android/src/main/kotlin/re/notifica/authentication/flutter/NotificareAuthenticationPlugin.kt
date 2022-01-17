@@ -364,7 +364,7 @@ class NotificareAuthenticationPlugin : FlutterPlugin, MethodCallHandler, Activit
             onMainThread {
                 response.error(
                     NOTIFICARE_ERROR,
-                    "To execute this method, you must provide either a NotificareUser or a NotificarePreferenceOption.",
+                    "To execute this method, you must provide either a NotificareUserSegment or a NotificarePreferenceOption.",
                     null
                 )
             }
@@ -425,7 +425,7 @@ class NotificareAuthenticationPlugin : FlutterPlugin, MethodCallHandler, Activit
             onMainThread {
                 response.error(
                     NOTIFICARE_ERROR,
-                    "To execute this method, you must provide either a NotificareUser or a NotificarePreferenceOption.",
+                    "To execute this method, you must provide either a NotificareUserSegment or a NotificarePreferenceOption.",
                     null
                 )
             }
