@@ -10,6 +10,12 @@ public class SwiftNotificareScannablesPlugin: NSObject, FlutterPlugin {
     private static let instance = SwiftNotificareScannablesPlugin()
     private let events = NotificareScannablesPluginEvents(packageId: "re.notifica.scannables.flutter")
     
+    private var rootViewController: UIViewController? {
+        get {
+            UIApplication.shared.delegate?.window??.rootViewController
+        }
+    }
+    
     public static func register(with registrar: FlutterPluginRegistrar) {
         let channel = FlutterMethodChannel(name: "re.notifica.scannables.flutter/notificare_scannables", binaryMessenger: registrar.messenger(), codec: FlutterJSONMethodCodec.sharedInstance())
         registrar.addMethodCallDelegate(instance, channel: channel)
@@ -38,18 +44,13 @@ public class SwiftNotificareScannablesPlugin: NSObject, FlutterPlugin {
     }
     
     private func startScannableSession(_ call: FlutterMethodCall, _ response: @escaping FlutterResult) {
-        if Notificare.shared.scannables().canStartNfcScannableSession {
-            Notificare.shared.scannables().startNfcScannableSession()
-            response(nil)
-        } else {
-            guard let rootViewController = UIApplication.shared.delegate?.window??.rootViewController else {
-                response(FlutterError(code: DEFAULT_ERROR_CODE, message: "Cannot start a scannable session with a nil root view controller.", details: nil))
-                return
-            }
-            
-            Notificare.shared.scannables().startQrCodeScannableSession(controller: rootViewController, modal: true)
-            response(nil)
+        guard let rootViewController = rootViewController else {
+            response(FlutterError(code: DEFAULT_ERROR_CODE, message: "Cannot start a scannable session with a nil root view controller.", details: nil))
+            return
         }
+        
+        Notificare.shared.scannables().startScannableSession(controller: rootViewController)
+        response(nil)
     }
     
     private func startNfcScannableSession(_ call: FlutterMethodCall, _ response: @escaping FlutterResult) {
@@ -58,7 +59,7 @@ public class SwiftNotificareScannablesPlugin: NSObject, FlutterPlugin {
     }
     
     private func startQrCodeScannableSession(_ call: FlutterMethodCall, _ response: @escaping FlutterResult) {
-        guard let rootViewController = UIApplication.shared.delegate?.window??.rootViewController else {
+        guard let rootViewController = rootViewController else {
             response(FlutterError(code: DEFAULT_ERROR_CODE, message: "Cannot start a scannable session with a nil root view controller.", details: nil))
             return
         }
