@@ -463,7 +463,7 @@ class NotificarePlugin : FlutterPlugin, ActivityAware, PluginRegistry.NewIntentL
         Notificare.events().logCustom(event, data, object : NotificareCallback<Unit> {
             override fun onSuccess(result: Unit) {
                 onMainThread {
-                    onMainThread { response.success(null) }
+                    response.success(null)
                 }
             }
 
