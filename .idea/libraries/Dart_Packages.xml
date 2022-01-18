@@ -336,6 +336,14 @@
             </list>
           </value>
         </entry>
+        <entry key="notificare">
+          <value>
+            <list>
+              <option value="$USER_HOME$/Library/Flutter/.pub-cache/hosted/pub.dartlang.org/notificare-3.0.0-beta.1/lib" />
+              <option value="$USER_HOME$/Library/Flutter/.pub-cache/hosted/pub.dartlang.org/notificare-3.0.0-alpha.1/lib" />
+            </list>
+          </value>
+        </entry>
         <entry key="package_config">
           <value>
             <list>
@@ -614,6 +622,8 @@
       <root url="file://$USER_HOME$/Library/Flutter/.pub-cache/hosted/pub.dartlang.org/meta-1.7.0/lib" />
       <root url="file://$USER_HOME$/Library/Flutter/.pub-cache/hosted/pub.dartlang.org/mime-1.0.0/lib" />
       <root url="file://$USER_HOME$/Library/Flutter/.pub-cache/hosted/pub.dartlang.org/mime-1.0.1/lib" />
+      <root url="file://$USER_HOME$/Library/Flutter/.pub-cache/hosted/pub.dartlang.org/notificare-3.0.0-alpha.1/lib" />
+      <root url="file://$USER_HOME$/Library/Flutter/.pub-cache/hosted/pub.dartlang.org/notificare-3.0.0-beta.1/lib" />
       <root url="file://$USER_HOME$/Library/Flutter/.pub-cache/hosted/pub.dartlang.org/package_config-2.0.0/lib" />
       <root url="file://$USER_HOME$/Library/Flutter/.pub-cache/hosted/pub.dartlang.org/package_config-2.0.2/lib" />
       <root url="file://$USER_HOME$/Library/Flutter/.pub-cache/hosted/pub.dartlang.org/path-1.8.0/lib" />
