@@ -2,6 +2,8 @@ import 'package:flutter/services.dart';
 import 'package:notificare_assets/src/models/notificare_asset.dart';
 
 class NotificareAssets {
+  NotificareAssets._();
+
   // Channels
   static const _channel = MethodChannel('re.notifica.assets.flutter/notificare_assets', JSONMethodCodec());
 

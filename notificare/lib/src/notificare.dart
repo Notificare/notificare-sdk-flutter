@@ -8,6 +8,8 @@ import 'package:notificare/src/notificare_device_module.dart';
 import 'package:notificare/src/notificare_events_module.dart';
 
 class Notificare {
+  Notificare._();
+
   // Channels
   static const MethodChannel _channel = MethodChannel('re.notifica.flutter/notificare', JSONMethodCodec());
 

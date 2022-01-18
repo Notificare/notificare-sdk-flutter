@@ -10,6 +10,8 @@ import 'package:notificare_push_ui/src/events/notificare_custom_action_received_
 import 'package:notificare_push_ui/src/events/notificare_notification_url_clicked_event.dart';
 
 class NotificarePushUI {
+  NotificarePushUI._();
+
   static const MethodChannel _channel =
       MethodChannel('re.notifica.push.ui.flutter/notificare_push_ui', JSONMethodCodec());
 

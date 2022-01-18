@@ -2,6 +2,8 @@ import 'package:flutter/services.dart';
 import 'package:notificare_authentication/notificare_authentication.dart';
 
 class NotificareAuthentication {
+  NotificareAuthentication._();
+
   // Channels
   static const _channel =
       MethodChannel('re.notifica.authentication.flutter/notificare_authentication', JSONMethodCodec());

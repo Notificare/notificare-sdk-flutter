@@ -7,6 +7,8 @@ import 'package:notificare_geo/src/models/notificare_region.dart';
 import 'package:notificare_geo/src/models/notificare_visit.dart';
 
 class NotificareGeo {
+  NotificareGeo._();
+
   static const MethodChannel _channel = MethodChannel('re.notifica.geo.flutter/notificare_geo', JSONMethodCodec());
 
   // Events

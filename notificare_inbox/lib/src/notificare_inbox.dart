@@ -5,6 +5,8 @@ import 'package:notificare/notificare.dart';
 import 'package:notificare_inbox/src/models/notificare_inbox_item.dart';
 
 class NotificareInbox {
+  NotificareInbox._();
+
   // Channels
   static const _channel = MethodChannel('re.notifica.inbox.flutter/notificare_inbox', JSONMethodCodec());
 

@@ -2,6 +2,8 @@ import 'package:flutter/services.dart';
 import 'package:notificare_scannables/src/models/notificare_scannable.dart';
 
 class NotificareScannables {
+  NotificareScannables._();
+
   static const MethodChannel _channel =
       MethodChannel('re.notifica.scannables.flutter/notificare_scannables', JSONMethodCodec());
 

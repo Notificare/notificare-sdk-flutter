@@ -7,6 +7,8 @@ import 'package:notificare_push/src/events/notificare_notification_action_opened
 import 'package:notificare_push/src/models/notificare_system_notification.dart';
 
 class NotificarePush {
+  NotificarePush._();
+
   static const MethodChannel _channel = MethodChannel('re.notifica.push.flutter/notificare_push', JSONMethodCodec());
 
   // Events
