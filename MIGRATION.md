@@ -59,15 +59,15 @@ dependencies:
     sdk: flutter
 
   # Notificare dependencies
-  notificare: ^3.0.0-beta.1
-  notificare_assets: ^3.0.0-beta.1
-  notificare_authentication: ^3.0.0-beta.1
-  notificare_geo: ^3.0.0-beta.1
-  notificare_inbox: ^3.0.0-beta.1
-  notificare_loyalty: ^3.0.0-beta.1
-  notificare_push: ^3.0.0-beta.1
-  notificare_push_ui: ^3.0.0-beta.1
-  notificare_scannables: ^3.0.0-beta.1
+  notificare: ^3.0.0-beta.2
+  notificare_assets: ^3.0.0-beta.2
+  notificare_authentication: ^3.0.0-beta.2
+  notificare_geo: ^3.0.0-beta.2
+  notificare_inbox: ^3.0.0-beta.2
+  notificare_loyalty: ^3.0.0-beta.2
+  notificare_push: ^3.0.0-beta.2
+  notificare_push_ui: ^3.0.0-beta.2
+  notificare_scannables: ^3.0.0-beta.2
 ```
 
 ## Package cherry-picking
