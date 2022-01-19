@@ -56,6 +56,14 @@ class _AppState extends State<App> {
       }
     });
 
+    Notificare.onUnlaunched.listen((event) {
+      scaffoldMessengerKey.currentState!.showSnackBar(
+        const SnackBar(
+          content: Text('Notificare finished un-launching.'),
+        ),
+      );
+    });
+
     Notificare.onDeviceRegistered.listen((device) {
       scaffoldMessengerKey.currentState!.showSnackBar(
         SnackBar(
