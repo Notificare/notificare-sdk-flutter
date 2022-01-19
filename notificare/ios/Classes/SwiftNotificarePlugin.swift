@@ -368,6 +368,10 @@ extension SwiftNotificarePlugin: NotificareDelegate {
     public func notificare(_ notificare: Notificare, onReady application: NotificareApplication) {
         NotificareEventManager.shared.send(NotificareEventOnReady(application: application))
     }
+    
+    public func notificareDidUnlaunch(_ notificare: Notificare) {
+        NotificareEventManager.shared.send(NotificareEventOnUnlaunched())
+    }
 
     public func notificare(_ notificare: Notificare, didRegisterDevice device: NotificareDevice) {
         NotificareEventManager.shared.send(NotificareEventOnDeviceRegistered(device: device))

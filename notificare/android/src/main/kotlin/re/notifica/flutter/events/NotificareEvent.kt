@@ -10,6 +10,7 @@ internal sealed class NotificareEvent {
 
     enum class Type(val id: String) {
         READY(id = "ready"),
+        UNLAUNCHED(id = "unlaunched"),
         DEVICE_REGISTERED(id = "device_registered"),
         URL_OPENED(id = "url_opened"),
     }
@@ -19,6 +20,11 @@ internal sealed class NotificareEvent {
     ) : NotificareEvent() {
         override val type = Type.READY
         override val payload = application.toJson()
+    }
+
+    class Unlaunched : NotificareEvent() {
+        override val type = Type.UNLAUNCHED
+        override val payload: Nothing? = null
     }
 
     class DeviceRegistered(

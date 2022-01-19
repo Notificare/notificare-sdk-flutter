@@ -20,4 +20,10 @@ class NotificarePluginReceiver : NotificareIntentReceiver() {
             NotificareEvent.Ready(application)
         )
     }
+
+    override fun onUnlaunched(context: Context) {
+        NotificareEventManager.send(
+            NotificareEvent.Unlaunched()
+        )
+    }
 }

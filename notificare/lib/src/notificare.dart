@@ -79,6 +79,10 @@ class Notificare {
     });
   }
 
+  static Stream<void> get onUnlaunched {
+    return _getEventStream('unlaunched');
+  }
+
   static Stream<NotificareDevice> get onDeviceRegistered {
     return _getEventStream('device_registered').map((result) {
       final Map<dynamic, dynamic> json = result;
