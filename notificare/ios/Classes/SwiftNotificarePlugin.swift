@@ -359,6 +359,10 @@ extension SwiftNotificarePlugin {
             return false
         }
         
+        if Notificare.shared.handleTestDeviceUrl(url) {
+            return true
+        }
+        
         return Notificare.shared.handleDynamicLinkUrl(url)
     }
 }
