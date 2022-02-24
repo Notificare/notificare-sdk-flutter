@@ -14,8 +14,8 @@ For support please use: http://support.notifica.re
   s.source           = { :path => '.' }
   s.source_files = 'Classes/**/*'
   s.dependency 'Flutter'
-  s.dependency 'Notificare/NotificareKit', '3.0.0-beta.2'
-  s.dependency 'Notificare/NotificareInboxKit', '3.0.0-beta.2'
+  s.dependency 'Notificare/NotificareKit', '3.0.0'
+  s.dependency 'Notificare/NotificareInboxKit', '3.0.0'
   s.platform = :ios, '10.0'
   s.swift_version = '5.0'
 end
