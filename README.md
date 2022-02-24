@@ -2,7 +2,7 @@
 
 # Notificare Flutter SDK
 
-[![GitHub release](https://img.shields.io/github/v/release/notificare/notificare-sdk-flutter?include_prereleases)](https://github.com/notificare/notificare-sdk-flutter/releases)
+[![GitHub release](https://img.shields.io/github/v/release/notificare/notificare-sdk-flutter)](https://github.com/notificare/notificare-sdk-flutter/releases)
 [![License](https://img.shields.io/github/license/notificare/notificare-sdk-flutter)](https://github.com/notificare/notificare-sdk-flutter/blob/main/LICENSE)
 
 The Notificare Flutter SDK makes it quick and easy to communicate efficiently with many of the Notificare API services and enables you to seamlessly integrate our various features, from Push Notifications to Contextualised Storage.
@@ -14,7 +14,6 @@ Table of contents
 =================
 
 * [Features](#features)
-* [Releases](#releases)
 * [Installation](#installation)
   * [Requirements](#requirements)
   * [Configuration](#configuration)
@@ -56,17 +55,17 @@ Add the Flutter packages to your `pubspec.yaml` and follow the Getting Started g
 ```yaml
 dependencies:
   # Required
-  notificare: ^3.0.0-beta.2
+  notificare: ^3.0.0
 
   # Optional modules
-  notificare_assets: ^3.0.0-beta.2
-  notificare_authentication: ^3.0.0-beta.2
-  notificare_geo: ^3.0.0-beta.2
-  notificare_inbox: ^3.0.0-beta.2
-  notificare_loyalty: ^3.0.0-beta.2
-  notificare_push: ^3.0.0-beta.2
-  notificare_push_ui: ^3.0.0-beta.2
-  notificare_scannables: ^3.0.0-beta.2
+  notificare_assets: ^3.0.0
+  notificare_authentication: ^3.0.0
+  notificare_geo: ^3.0.0
+  notificare_inbox: ^3.0.0
+  notificare_loyalty: ^3.0.0
+  notificare_push: ^3.0.0
+  notificare_push_ui: ^3.0.0
+  notificare_scannables: ^3.0.0
 ```
 
 ## Getting Started
