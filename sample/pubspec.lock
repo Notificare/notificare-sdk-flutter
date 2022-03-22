@@ -103,11 +103,11 @@ packages:
     source: hosted
     version: "1.7.0"
   notificare:
-    dependency: transitive
+    dependency: "direct main"
     description:
-      name: notificare
-      url: "https://pub.dartlang.org"
-    source: hosted
+      path: "../notificare"
+      relative: true
+    source: path
     version: "3.0.0"
   notificare_assets:
     dependency: "direct main"
