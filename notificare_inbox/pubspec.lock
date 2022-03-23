@@ -311,7 +311,7 @@ packages:
       path: "../notificare"
       relative: true
     source: path
-    version: "3.0.0"
+    version: "3.0.1"
   package_config:
     dependency: transitive
     description:
