@@ -235,8 +235,6 @@ extension SwiftNotificarePushPlugin: NotificarePushDelegate {
         )
     }
     
-//    func notificare(_ notificarePush: NotificarePushKit.NotificarePush, didReceiveUnknownAction action: String, for notification: [AnyHashable : Any], with data: [AnyHashable : Any])
-    
     public func notificare(_ notificarePush: NotificarePush, didOpenNotification notification: NotificareNotification) {
         eventBroker.emit(
             NotificarePushPluginEventBroker.OnNotificationOpened(
@@ -245,11 +243,29 @@ extension SwiftNotificarePushPlugin: NotificarePushDelegate {
         )
     }
 
+    public func notificare(_ notificarePush: NotificarePush, didOpenUnknownNotification userInfo: [AnyHashable : Any]) {
+        eventBroker.emit(
+            NotificarePushPluginEventBroker.OnUnknownNotificationOpened(
+                notification: userInfo
+            )
+        )
+    }
+    
     public func notificare(_ notificarePush: NotificarePush, didOpenAction action: NotificareNotification.Action, for notification: NotificareNotification) {
         eventBroker.emit(
             NotificarePushPluginEventBroker.OnNotificationActionOpened(
                 notification: notification,
                 action: action
+            )
+        )
+    }
+    
+    public func notificare(_ notificarePush: NotificarePush, didOpenUnknownAction action: String, for notification: [AnyHashable : Any], responseText: String?) {
+        eventBroker.emit(
+            NotificarePushPluginEventBroker.OnUnknownNotificationActionOpened(
+                notification: notification,
+                action: action,
+                responseText: responseText
             )
         )
     }

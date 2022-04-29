@@ -43,7 +43,7 @@ android {
 }
 
 dependencies {
-    def notificare_version = '3.0.1'
+    def notificare_version = '3.1.0'
     api "re.notifica:notificare:$notificare_version"
     api "re.notifica:notificare-push:$notificare_version"
     implementation "re.notifica:notificare-push-gms:$notificare_version"
