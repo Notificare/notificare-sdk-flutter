@@ -102,7 +102,9 @@ extension NotificarePushPluginEventBroker {
         case systemNotificationReceived = "system_notification_received"
         case unknownNotificationReceived = "unknown_notification_received"
         case notificationOpened = "notification_opened"
+        case unknownNotificationOpened = "unknown_notification_opened"
         case notificationActionOpened = "notification_action_opened"
+        case unknownNotificationActionOpened = "unknown_notification_action_opened"
         case shouldOpenNotificationSettings = "should_open_notification_settings"
         case notificationSettingsChanged = "notification_settings_changed"
         case failedToRegisterForRemoteNotifications = "failed_to_register_for_remote_notifications"
@@ -131,7 +133,7 @@ extension NotificarePushPluginEventBroker {
     
     static func OnUnknownNotificationReceived(userInfo: [AnyHashable: Any]) -> Event {
         return Event(
-            type: .notificationReceived,
+            type: .unknownNotificationReceived,
             payload: userInfo.filter { $0.key is String } as! [String: Any]
         )
     }
@@ -143,6 +145,13 @@ extension NotificarePushPluginEventBroker {
         )
     }
     
+    static func OnUnknownNotificationOpened(notification: [AnyHashable: Any]) -> Event {
+        return Event(
+            type: .unknownNotificationOpened,
+            payload: notification.filter { $0.key is String } as! [String: Any]
+        )
+    }
+    
     static func OnNotificationActionOpened(notification: NotificareNotification, action: NotificareNotification.Action) -> Event {
         return Event(
             type: .notificationActionOpened,
@@ -150,6 +159,22 @@ extension NotificarePushPluginEventBroker {
                 "notification": try! notification.toJson(),
                 "action": try! action.toJson()
             ]
+        )
+    }
+    
+    static func OnUnknownNotificationActionOpened(notification: [AnyHashable: Any], action: String, responseText: String?) -> Event {
+        var payload: [String: Any] = [
+            "notification": notification.filter { $0.key is String } as! [String: Any],
+            "action": action,
+        ]
+        
+        if let responseText = responseText {
+            payload["responseText"] = responseText
+        }
+        
+        return Event(
+            type: .unknownNotificationActionOpened,
+            payload: payload
         )
     }
     
