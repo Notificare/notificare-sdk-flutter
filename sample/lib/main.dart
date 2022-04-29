@@ -101,6 +101,8 @@ class _AppState extends State<App> {
     });
 
     NotificarePush.onUnknownNotificationReceived.listen((notification) {
+      debugPrint("Unknown notification received: $notification");
+
       scaffoldMessengerKey.currentState!.showSnackBar(
         const SnackBar(
           content: Text('Unknown notification received.'),
@@ -112,8 +114,28 @@ class _AppState extends State<App> {
       await NotificarePushUI.presentNotification(notification);
     });
 
+    NotificarePush.onUnknownNotificationOpened.listen((notification) {
+      debugPrint("Unknown notification opened: $notification");
+
+      scaffoldMessengerKey.currentState!.showSnackBar(
+        const SnackBar(
+          content: Text('Unknown notification opened.'),
+        ),
+      );
+    });
+
     NotificarePush.onNotificationActionOpened.listen((data) async {
       await NotificarePushUI.presentAction(data.notification, data.action);
+    });
+
+    NotificarePush.onUnknownNotificationActionOpened.listen((data) {
+      debugPrint("Unknown notification action opened: $data");
+
+      scaffoldMessengerKey.currentState!.showSnackBar(
+        const SnackBar(
+          content: Text('Unknown notification action opened.'),
+        ),
+      );
     });
 
     NotificarePush.onNotificationSettingsChanged.listen((granted) {
