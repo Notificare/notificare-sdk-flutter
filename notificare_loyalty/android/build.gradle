@@ -1,6 +1,6 @@
 //noinspection GrPackage
 group 're.notifica.loyalty.flutter'
-version '3.0.1'
+version '3.1.0'
 
 buildscript {
     ext.kotlin_version = '1.6.10'
@@ -50,7 +50,7 @@ android {
 }
 
 dependencies {
-    def notificare_version = '3.0.1'
+    def notificare_version = '3.1.0'
     api "re.notifica:notificare:$notificare_version"
     api "re.notifica:notificare-loyalty:$notificare_version"
 }
