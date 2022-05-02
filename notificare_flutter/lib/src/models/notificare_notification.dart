@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:notificare/src/converters/notificare_iso_date_time_converter.dart';
+import 'package:notificare_flutter/src/converters/notificare_iso_date_time_converter.dart';
 
 part 'notificare_notification.g.dart';
 

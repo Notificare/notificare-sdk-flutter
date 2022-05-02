@@ -1,8 +1,5 @@
 PODS:
   - Flutter (1.0.0)
-  - notificare (3.0.1):
-    - Flutter
-    - Notificare/NotificareKit (= 3.1.0)
   - Notificare/NotificareAssetsKit (3.1.0)
   - Notificare/NotificareAuthenticationKit (3.1.0)
   - Notificare/NotificareGeoKit (3.1.0)
@@ -19,6 +16,9 @@ PODS:
   - notificare_authentication (3.0.1):
     - Flutter
     - Notificare/NotificareAuthenticationKit (= 3.1.0)
+    - Notificare/NotificareKit (= 3.1.0)
+  - notificare_flutter (3.0.1):
+    - Flutter
     - Notificare/NotificareKit (= 3.1.0)
   - notificare_geo (3.0.1):
     - Flutter
@@ -49,9 +49,9 @@ PODS:
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
-  - notificare (from `.symlinks/plugins/notificare/ios`)
   - notificare_assets (from `.symlinks/plugins/notificare_assets/ios`)
   - notificare_authentication (from `.symlinks/plugins/notificare_authentication/ios`)
+  - notificare_flutter (from `.symlinks/plugins/notificare_flutter/ios`)
   - notificare_geo (from `.symlinks/plugins/notificare_geo/ios`)
   - notificare_inbox (from `.symlinks/plugins/notificare_inbox/ios`)
   - notificare_loyalty (from `.symlinks/plugins/notificare_loyalty/ios`)
@@ -67,12 +67,12 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   Flutter:
     :path: Flutter
-  notificare:
-    :path: ".symlinks/plugins/notificare/ios"
   notificare_assets:
     :path: ".symlinks/plugins/notificare_assets/ios"
   notificare_authentication:
     :path: ".symlinks/plugins/notificare_authentication/ios"
+  notificare_flutter:
+    :path: ".symlinks/plugins/notificare_flutter/ios"
   notificare_geo:
     :path: ".symlinks/plugins/notificare_geo/ios"
   notificare_inbox:
@@ -91,9 +91,9 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
   Notificare: 2bb9d3effaac6548e500722af8b4769523f52a97
-  notificare: de77a5870b5aa0b34d8a3e9f5bb4ca4ea8d9f551
   notificare_assets: 56c78e1aa8ddd955b46347f99ccf121678bf2c5e
   notificare_authentication: d5784db8dbefe38266e6844f5c913fc24a480aad
+  notificare_flutter: a483767a9ee604d03e8aa4b24c071510965a76eb
   notificare_geo: f5ebea2d43c6c5df6fb7e59c0026b8de6f9eb0c4
   notificare_inbox: 4e42b5b0883ccea85f6207e5aca093325e669f98
   notificare_loyalty: 31e3e523e92bbacc0ca37280268a979487caa870

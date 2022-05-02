@@ -130,6 +130,13 @@ packages:
       relative: true
     source: path
     version: "3.0.1"
+  notificare_flutter:
+    dependency: "direct overridden"
+    description:
+      path: "../notificare_flutter"
+      relative: true
+    source: path
+    version: "3.0.1"
   notificare_geo:
     dependency: "direct main"
     description:

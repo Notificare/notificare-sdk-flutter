@@ -7,3 +7,6 @@
 build/
 
 local.properties
+
+.flutter-plugins
+.flutter-plugins-dependencies

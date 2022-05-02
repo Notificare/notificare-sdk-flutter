@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/notificare/notificare.iml" filepath="$PROJECT_DIR$/notificare/notificare.iml" />
       <module fileurl="file://$PROJECT_DIR$/notificare_assets/notificare_assets.iml" filepath="$PROJECT_DIR$/notificare_assets/notificare_assets.iml" />
       <module fileurl="file://$PROJECT_DIR$/notificare_authentication/notificare_authentication.iml" filepath="$PROJECT_DIR$/notificare_authentication/notificare_authentication.iml" />
+      <module fileurl="file://$PROJECT_DIR$/notificare_flutter/notificare_flutter.iml" filepath="$PROJECT_DIR$/notificare_flutter/notificare_flutter.iml" />
       <module fileurl="file://$PROJECT_DIR$/notificare_geo/notificare_geo.iml" filepath="$PROJECT_DIR$/notificare_geo/notificare_geo.iml" />
       <module fileurl="file://$PROJECT_DIR$/notificare_inbox/notificare_inbox.iml" filepath="$PROJECT_DIR$/notificare_inbox/notificare_inbox.iml" />
       <module fileurl="file://$PROJECT_DIR$/notificare_loyalty/notificare_loyalty.iml" filepath="$PROJECT_DIR$/notificare_loyalty/notificare_loyalty.iml" />

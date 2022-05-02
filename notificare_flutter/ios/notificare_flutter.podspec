@@ -1,5 +1,5 @@
 Pod::Spec.new do |s|
-  s.name             = 'notificare'
+  s.name             = 'notificare_flutter'
   s.version          = '3.0.1'
   s.summary          = 'Notificare Flutter Plugin'
   s.description      = <<-DESC

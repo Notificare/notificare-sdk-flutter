@@ -1,11 +1,11 @@
 import 'dart:async';
 
 import 'package:flutter/services.dart';
-import 'package:notificare/src/models/notificare_application.dart';
-import 'package:notificare/src/models/notificare_device.dart';
-import 'package:notificare/src/models/notificare_notification.dart';
-import 'package:notificare/src/notificare_device_module.dart';
-import 'package:notificare/src/notificare_events_module.dart';
+import 'package:notificare_flutter/src/models/notificare_application.dart';
+import 'package:notificare_flutter/src/models/notificare_device.dart';
+import 'package:notificare_flutter/src/models/notificare_notification.dart';
+import 'package:notificare_flutter/src/notificare_device_module.dart';
+import 'package:notificare_flutter/src/notificare_events_module.dart';
 
 class Notificare {
   Notificare._();

@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:notificare/src/converters/notificare_iso_date_time_converter.dart';
-import 'package:notificare/src/models/notificare_do_not_disturb.dart';
+import 'package:notificare_flutter/src/converters/notificare_iso_date_time_converter.dart';
+import 'package:notificare_flutter/src/models/notificare_do_not_disturb.dart';
 
 part 'notificare_device.g.dart';
 

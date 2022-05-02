@@ -1,6 +1,6 @@
 import 'package:flutter/services.dart';
-import 'package:notificare/src/models/notificare_device.dart';
-import 'package:notificare/src/models/notificare_do_not_disturb.dart';
+import 'package:notificare_flutter/src/models/notificare_device.dart';
+import 'package:notificare_flutter/src/models/notificare_do_not_disturb.dart';
 
 class NotificareDeviceModule {
   final MethodChannel _channel;
