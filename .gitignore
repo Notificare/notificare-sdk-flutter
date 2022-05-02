@@ -1,12 +1,6 @@
 .DS_Store
-.dart_tool/
 
 .idea/libraries/
-
-.packages
-.pub/
-
-build/
 
 google-services.json
 notificare-services.json
