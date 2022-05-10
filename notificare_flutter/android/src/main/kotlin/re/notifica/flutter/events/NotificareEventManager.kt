@@ -8,28 +8,17 @@ import io.flutter.plugin.common.JSONMethodCodec
 
 internal object NotificareEventManager {
 
-    private val channels = mutableMapOf<NotificareEvent.Type, EventChannel>()
-
     private val streams: Map<NotificareEvent.Type, NotificareEventStream> by lazy {
-        NotificareEvent.Type.values().map {
+        NotificareEvent.Type.values().associate {
             it to NotificareEventStream(it)
-        }.toMap()
-    }
-
-    fun register(messenger: BinaryMessenger) {
-        streams.forEach { (eventType, stream) ->
-            val channel = channels[eventType]
-                ?: EventChannel(messenger, stream.name, JSONMethodCodec.INSTANCE).also {
-                    // Keep a copy of it.
-                    channels[eventType] = it
-                }
-
-            channel.setStreamHandler(stream)
         }
     }
 
-    fun unregister() {
-        channels.forEach { it.value.setStreamHandler(null) }
+    fun register(messenger: BinaryMessenger) {
+        streams.values.forEach {
+            val channel = EventChannel(messenger, it.name, JSONMethodCodec.INSTANCE)
+            channel.setStreamHandler(it)
+        }
     }
 
     fun send(event: NotificareEvent) {
