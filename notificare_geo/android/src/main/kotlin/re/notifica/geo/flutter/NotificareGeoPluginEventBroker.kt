@@ -12,28 +12,17 @@ import re.notifica.geo.models.toJson
 
 internal object NotificareGeoPluginEventBroker {
 
-    private val channels = mutableMapOf<Event.Type, EventChannel>()
-
     private val streams: Map<Event.Type, Stream> by lazy {
-        Event.Type.values().map {
+        Event.Type.values().associate {
             it to Stream(it)
-        }.toMap()
-    }
-
-    fun register(messenger: BinaryMessenger) {
-        streams.forEach { (eventType, stream) ->
-            val channel = channels[eventType]
-                ?: EventChannel(messenger, stream.name, JSONMethodCodec.INSTANCE).also {
-                    // Keep a copy of it.
-                    channels[eventType] = it
-                }
-
-            channel.setStreamHandler(stream)
         }
     }
 
-    fun unregister() {
-        channels.forEach { it.value.setStreamHandler(null) }
+    fun register(messenger: BinaryMessenger) {
+        streams.values.forEach {
+            val channel = EventChannel(messenger, it.name, JSONMethodCodec.INSTANCE)
+            channel.setStreamHandler(it)
+        }
     }
 
     fun emit(event: Event) {

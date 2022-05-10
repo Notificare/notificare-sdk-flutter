@@ -33,7 +33,6 @@ class NotificareGeoPlugin : FlutterPlugin, MethodCallHandler, NotificareGeo.List
         channel.setMethodCallHandler(null)
 
         Notificare.geo().removeListener(this)
-        NotificareGeoPluginEventBroker.unregister()
     }
 
     override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
