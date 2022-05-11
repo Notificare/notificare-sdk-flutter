@@ -39,7 +39,6 @@ class NotificareAuthenticationPlugin : FlutterPlugin, MethodCallHandler, Activit
 
     override fun onDetachedFromEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
         channel.setMethodCallHandler(null)
-        NotificareAuthenticationPluginEventBroker.unregister()
     }
 
     override fun onMethodCall(call: MethodCall, result: MethodChannel.Result) {
