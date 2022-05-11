@@ -69,49 +69,7 @@ internal object NotificarePushPluginEventBroker {
             notification: NotificareUnknownNotification
         ) : Event() {
             override val type = Type.UNKNOWN_NOTIFICATION_RECEIVED
-            override val payload = mapOf(
-                "messageId" to notification.messageId,
-                "messageType" to notification.messageType,
-                "senderId" to notification.senderId,
-                "collapseKey" to notification.collapseKey,
-                "from" to notification.from,
-                "to" to notification.to,
-                "sentTime" to notification.sentTime,
-                "ttl" to notification.ttl,
-                "priority" to notification.priority,
-                "originalPriority" to notification.originalPriority,
-                "notification" to notification.notification?.let {
-                    mapOf(
-                        "title" to it.title,
-                        "titleLocalizationKey" to it.titleLocalizationKey,
-                        "titleLocalizationArgs" to it.titleLocalizationArgs,
-                        "body" to it.body,
-                        "bodyLocalizationKey" to it.bodyLocalizationKey,
-                        "bodyLocalizationArgs" to it.bodyLocalizationArgs,
-                        "icon" to it.icon,
-                        "imageUrl" to it.imageUrl,
-                        "sound" to it.sound,
-                        "tag" to it.tag,
-                        "color" to it.color,
-                        "clickAction" to it.clickAction,
-                        "channelId" to it.channelId,
-                        "link" to it.link?.toString(),
-                        "ticker" to it.ticker,
-                        "sticky" to it.sticky,
-                        "localOnly" to it.localOnly,
-                        "defaultSound" to it.defaultSound,
-                        "defaultVibrateSettings" to it.defaultVibrateSettings,
-                        "defaultLightSettings" to it.defaultLightSettings,
-                        "notificationPriority" to it.notificationPriority,
-                        "visibility" to it.visibility,
-                        "notificationCount" to it.notificationCount,
-                        "eventTime" to it.eventTime,
-                        "lightSettings" to it.lightSettings,
-                        "vibrateSettings" to it.vibrateSettings,
-                    )
-                },
-                "data" to notification.data,
-            )
+            override val payload = notification.toJson()
         }
 
         class NotificationOpened(
