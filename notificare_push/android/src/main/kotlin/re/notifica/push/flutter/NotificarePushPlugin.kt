@@ -48,7 +48,6 @@ class NotificarePushPlugin : FlutterPlugin, MethodCallHandler, ActivityAware, Pl
         Notificare.push().observableAllowedUI.removeObserver(allowedUIObserver)
 
         channel.setMethodCallHandler(null)
-        NotificarePushPluginEventBroker.unregister()
     }
 
     override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {

@@ -59,8 +59,6 @@ class NotificareInboxPlugin : FlutterPlugin, MethodCallHandler {
         Notificare.inbox().observableBadge.removeObserver(badgeObserver)
 
         channel.setMethodCallHandler(null)
-
-        NotificareEventManager.unregister()
     }
 
     override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {

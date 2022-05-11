@@ -1,6 +1,6 @@
 //noinspection GrPackage
 group 're.notifica.push.flutter'
-version '3.1.0'
+version '3.1.1'
 
 buildscript {
     ext.kotlin_version = '1.6.10'
@@ -43,7 +43,7 @@ android {
 }
 
 dependencies {
-    def notificare_version = '3.1.0'
+    def notificare_version = '3.1.1'
     api "re.notifica:notificare:$notificare_version"
     api "re.notifica:notificare-push:$notificare_version"
     implementation "re.notifica:notificare-push-gms:$notificare_version"

@@ -77,9 +77,6 @@ class NotificarePlugin : FlutterPlugin, ActivityAware, PluginRegistry.NewIntentL
 
     override fun onDetachedFromEngine(binding: FlutterPlugin.FlutterPluginBinding) {
         channel.setMethodCallHandler(null)
-
-        // Events
-        NotificareEventManager.unregister()
     }
 
     // region ActivityAware

@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## 3.1.1
+
+- Prevent stale event channels after engine recreation
+
+#### Native changes
+
+##### Android
+
+- Improve bitmap loading
+- Prevent crashing when generating notifications with invalid attachments
+- Include JSON serialisation methods for unknown notifications
+
 ## 3.1.0
 
 - Include complete remote message information in unknown notification events

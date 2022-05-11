@@ -1,6 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 
-class NotificareIsoDateTimeConverter implements JsonConverter<DateTime, String> {
+class NotificareIsoDateTimeConverter
+    implements JsonConverter<DateTime, String> {
   const NotificareIsoDateTimeConverter();
 
   @override

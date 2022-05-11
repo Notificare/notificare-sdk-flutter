@@ -38,7 +38,6 @@ class NotificareScannablesPlugin : FlutterPlugin, MethodCallHandler, ActivityAwa
         channel.setMethodCallHandler(null)
 
         Notificare.scannables().removeListener(this)
-        NotificareScannablesPluginEventBroker.unregister()
     }
 
     override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
