@@ -163,7 +163,9 @@ class NotificarePlugin : FlutterPlugin, ActivityAware, PluginRegistry.NewIntentL
     }
 
     private fun fetchNotification(@Suppress("UNUSED_PARAMETER") call: MethodCall, response: Result) {
-        val id = call.arguments<String>()
+        val id = call.arguments<String>() ?: return onMainThread {
+            response.error(DEFAULT_ERROR_CODE, "Invalid request arguments.", null)
+        }
 
         Notificare.fetchNotification(id, object : NotificareCallback<NotificareNotification> {
             override fun onSuccess(result: NotificareNotification) {
@@ -189,7 +191,9 @@ class NotificarePlugin : FlutterPlugin, ActivityAware, PluginRegistry.NewIntentL
     }
 
     private fun register(call: MethodCall, pluginResult: Result) {
-        val arguments = call.arguments<JSONObject>()
+        val arguments = call.arguments<JSONObject>() ?: return onMainThread {
+            pluginResult.error(DEFAULT_ERROR_CODE, "Invalid request arguments.", null)
+        }
 
         val userId = if (!arguments.isNull("userId")) arguments.getString("userId") else null
         val userName = if (!arguments.isNull("userName")) arguments.getString("userName") else null
@@ -226,7 +230,9 @@ class NotificarePlugin : FlutterPlugin, ActivityAware, PluginRegistry.NewIntentL
     }
 
     private fun addTag(call: MethodCall, pluginResult: Result) {
-        val tag = call.arguments<String>()
+        val tag = call.arguments<String>() ?: return onMainThread {
+            pluginResult.error(DEFAULT_ERROR_CODE, "Invalid request arguments.", null)
+        }
 
         Notificare.device().addTag(tag, object : NotificareCallback<Unit> {
             override fun onSuccess(result: Unit) {
@@ -244,7 +250,9 @@ class NotificarePlugin : FlutterPlugin, ActivityAware, PluginRegistry.NewIntentL
     }
 
     private fun addTags(call: MethodCall, pluginResult: Result) {
-        val json = call.arguments<JSONArray>()
+        val json = call.arguments<JSONArray>() ?: return onMainThread {
+            pluginResult.error(DEFAULT_ERROR_CODE, "Invalid request arguments.", null)
+        }
 
         val tags = mutableListOf<String>()
         for (i in 0 until json.length()) {
@@ -267,7 +275,9 @@ class NotificarePlugin : FlutterPlugin, ActivityAware, PluginRegistry.NewIntentL
     }
 
     private fun removeTag(call: MethodCall, pluginResult: Result) {
-        val tag = call.arguments<String>()
+        val tag = call.arguments<String>() ?: return onMainThread {
+            pluginResult.error(DEFAULT_ERROR_CODE, "Invalid request arguments.", null)
+        }
 
         Notificare.device().removeTag(tag, object : NotificareCallback<Unit> {
             override fun onSuccess(result: Unit) {
@@ -285,7 +295,9 @@ class NotificarePlugin : FlutterPlugin, ActivityAware, PluginRegistry.NewIntentL
     }
 
     private fun removeTags(call: MethodCall, pluginResult: Result) {
-        val json = call.arguments<JSONArray>()
+        val json = call.arguments<JSONArray>() ?: return onMainThread {
+            pluginResult.error(DEFAULT_ERROR_CODE, "Invalid request arguments.", null)
+        }
 
         val tags = mutableListOf<String>()
         for (i in 0 until json.length()) {
@@ -362,7 +374,11 @@ class NotificarePlugin : FlutterPlugin, ActivityAware, PluginRegistry.NewIntentL
     }
 
     private fun updateDoNotDisturb(call: MethodCall, pluginResult: Result) {
-        val dnd = NotificareDoNotDisturb.fromJson(call.arguments())
+        val arguments = call.arguments<JSONObject>() ?: return onMainThread {
+            pluginResult.error(DEFAULT_ERROR_CODE, "Invalid request arguments.", null)
+        }
+
+        val dnd = NotificareDoNotDisturb.fromJson(arguments)
 
         Notificare.device().updateDoNotDisturb(dnd, object : NotificareCallback<Unit> {
             override fun onSuccess(result: Unit) {
@@ -412,7 +428,10 @@ class NotificarePlugin : FlutterPlugin, ActivityAware, PluginRegistry.NewIntentL
     }
 
     private fun updateUserData(call: MethodCall, pluginResult: Result) {
-        val json = call.arguments<JSONObject>()
+        val json = call.arguments<JSONObject>() ?: return onMainThread {
+            pluginResult.error(DEFAULT_ERROR_CODE, "Invalid request arguments.", null)
+        }
+
         val userData = mutableMapOf<String, String>()
 
         val iterator = json.keys()
@@ -477,6 +496,8 @@ class NotificarePlugin : FlutterPlugin, ActivityAware, PluginRegistry.NewIntentL
     internal companion object {
         const val DEFAULT_ERROR_CODE = "notificare_error"
 
-        internal fun onMainThread(action: () -> Unit) = Handler(Looper.getMainLooper()).post { action() }
+        internal fun onMainThread(action: () -> Unit) {
+            Handler(Looper.getMainLooper()).post { action() }
+        }
     }
 }

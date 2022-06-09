@@ -10,6 +10,7 @@ import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
+import org.json.JSONObject
 import re.notifica.Notificare
 import re.notifica.NotificareCallback
 import re.notifica.inbox.flutter.events.NotificareEvent
@@ -95,7 +96,11 @@ class NotificareInboxPlugin : FlutterPlugin, MethodCallHandler {
     }
 
     private fun open(@Suppress("UNUSED_PARAMETER") call: MethodCall, pluginResult: Result) {
-        val item = NotificareInboxItem.fromJson(call.arguments())
+        val arguments = call.arguments<JSONObject>() ?: return onMainThread {
+            pluginResult.error(NOTIFICARE_ERROR, "Invalid request arguments.", null)
+        }
+
+        val item = NotificareInboxItem.fromJson(arguments)
 
         Notificare.inbox().open(item, object : NotificareCallback<NotificareNotification> {
             override fun onSuccess(result: NotificareNotification) {
@@ -113,7 +118,11 @@ class NotificareInboxPlugin : FlutterPlugin, MethodCallHandler {
     }
 
     private fun markAsRead(@Suppress("UNUSED_PARAMETER") call: MethodCall, pluginResult: Result) {
-        val item = NotificareInboxItem.fromJson(call.arguments())
+        val arguments = call.arguments<JSONObject>() ?: return onMainThread {
+            pluginResult.error(NOTIFICARE_ERROR, "Invalid request arguments.", null)
+        }
+
+        val item = NotificareInboxItem.fromJson(arguments)
 
         Notificare.inbox().markAsRead(item, object : NotificareCallback<Unit> {
             override fun onSuccess(result: Unit) {
@@ -139,7 +148,11 @@ class NotificareInboxPlugin : FlutterPlugin, MethodCallHandler {
     }
 
     private fun remove(@Suppress("UNUSED_PARAMETER") call: MethodCall, pluginResult: Result) {
-        val item = NotificareInboxItem.fromJson(call.arguments())
+        val arguments = call.arguments<JSONObject>() ?: return onMainThread {
+            pluginResult.error(NOTIFICARE_ERROR, "Invalid request arguments.", null)
+        }
+
+        val item = NotificareInboxItem.fromJson(arguments)
 
         Notificare.inbox().remove(item, object : NotificareCallback<Unit> {
             override fun onSuccess(result: Unit) {
@@ -153,7 +166,7 @@ class NotificareInboxPlugin : FlutterPlugin, MethodCallHandler {
     }
 
     private fun clear(@Suppress("UNUSED_PARAMETER") call: MethodCall, pluginResult: Result) {
-        Notificare.inbox() .clear(object : NotificareCallback<Unit> {
+        Notificare.inbox().clear(object : NotificareCallback<Unit> {
             override fun onSuccess(result: Unit) {
                 pluginResult.success(null)
             }
@@ -167,6 +180,8 @@ class NotificareInboxPlugin : FlutterPlugin, MethodCallHandler {
     companion object {
         internal const val NOTIFICARE_ERROR = "notificare_error"
 
-        internal fun onMainThread(action: () -> Unit) = Handler(Looper.getMainLooper()).post { action() }
+        internal fun onMainThread(action: () -> Unit) {
+            Handler(Looper.getMainLooper()).post { action() }
+        }
     }
 }

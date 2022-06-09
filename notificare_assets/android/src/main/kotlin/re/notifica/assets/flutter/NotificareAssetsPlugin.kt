@@ -38,7 +38,9 @@ class NotificareAssetsPlugin : FlutterPlugin, MethodCallHandler {
     }
 
     private fun fetch(@Suppress("UNUSED_PARAMETER") call: MethodCall, pluginResult: MethodChannel.Result) {
-        val group = call.arguments<String>()
+        val group = call.arguments<String>() ?: return onMainThread {
+            pluginResult.error(NOTIFICARE_ERROR, "Invalid request arguments.", null)
+        }
 
         Notificare.assets().fetch(group, object : NotificareCallback<List<NotificareAsset>> {
             override fun onSuccess(result: List<NotificareAsset>) {
@@ -58,6 +60,8 @@ class NotificareAssetsPlugin : FlutterPlugin, MethodCallHandler {
     internal companion object {
         internal const val NOTIFICARE_ERROR = "notificare_error"
 
-        internal fun onMainThread(action: () -> Unit) = Handler(Looper.getMainLooper()).post { action() }
+        internal fun onMainThread(action: () -> Unit) {
+            Handler(Looper.getMainLooper()).post { action() }
+        }
     }
 }
