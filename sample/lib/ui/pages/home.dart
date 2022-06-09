@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:notificare/notificare.dart';
 import 'package:notificare_assets/notificare_assets.dart';
@@ -446,12 +444,11 @@ class _HomePageState extends State<HomePage> {
 
   void _onEnableLocationUpdatesClicked() async {
     try {
-      if (!await _ensureForegroundLocationPermission()) return;
-      if (!await _ensureBackgroundLocationPermission()) return;
-      if (Platform.isAndroid) {
-        if (!await _ensureBluetoothScanPermission()) return;
-      }
+      final hasFullCapabilities = await _ensureForegroundLocationPermission() &&
+          await _ensureBackgroundLocationPermission() &&
+          await _ensureBluetoothScanPermission();
 
+      // Calling enableLocationUpdates() will evaluate the given permissions, if any, and enable the available capabilities.
       await NotificareGeo.enableLocationUpdates();
 
       ScaffoldMessenger.of(context).showSnackBar(
@@ -471,6 +468,12 @@ class _HomePageState extends State<HomePage> {
 
   Future<bool> _ensureForegroundLocationPermission() async {
     if (await Permission.locationWhenInUse.isGranted) return true;
+
+    if (await Permission.locationWhenInUse.isPermanentlyDenied) {
+      // TODO: Show some informational UI, educating the user to change the permission via the Settings app.
+      await openAppSettings();
+      return false;
+    }
 
     if (await Permission.locationWhenInUse.shouldShowRequestRationale) {
       await showDialog(
@@ -501,6 +504,12 @@ class _HomePageState extends State<HomePage> {
   Future<bool> _ensureBackgroundLocationPermission() async {
     if (await Permission.locationAlways.isGranted) return true;
 
+    if (await Permission.locationAlways.isPermanentlyDenied) {
+      // TODO: Show some informational UI, educating the user to change the permission via the Settings app.
+      await openAppSettings();
+      return false;
+    }
+
     if (await Permission.locationAlways.shouldShowRequestRationale) {
       await showDialog(
           context: context,
@@ -529,6 +538,12 @@ class _HomePageState extends State<HomePage> {
 
   Future<bool> _ensureBluetoothScanPermission() async {
     if (await Permission.bluetoothScan.isGranted) return true;
+
+    if (await Permission.bluetoothScan.isPermanentlyDenied) {
+      // TODO: Show some informational UI, educating the user to change the permission via the Settings app.
+      await openAppSettings();
+      return false;
+    }
 
     if (await Permission.bluetoothScan.shouldShowRequestRationale) {
       await showDialog(
