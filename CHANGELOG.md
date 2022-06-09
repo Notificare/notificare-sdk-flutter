@@ -1,5 +1,36 @@
 # CHANGELOG
 
+## 3.2.0
+
+- Add support for Flutter 3.0
+
+#### Native changes
+
+##### Android
+
+- Fix notification content when opening partial inbox items
+- Use GMS/HMS `message.sentTime` when creating inbox items
+- Log events methods correctly throw when failures are not recoverable
+- Improve session control mechanism
+- Fix session length
+- Fix GMS/HMS token refresh race condition for late configured apps
+- Add `InAppBrowser` notification type
+- Aliased `WebView` action into `InAppBrowser`, aligning with the notification type
+- Ensure listeners are called on the main thread
+- Allow non-ASCII header values
+
+##### iOS
+
+- Fix notification content when opening partial inbox items
+- Fix marking partial items as read
+- Improve ISO date parser
+- Add safeguards and warnings for corrupted items in the inbox database
+- Log events methods correctly throw when failures are not recoverable
+- Improve session control mechanism
+- Add `InAppBrowser` notification type
+- Aliased `WebView` action into `InAppBrowser`, aligning with the notification type
+- Ensure delegate methods are called on the main thread
+
 ## 3.1.1
 
 - Prevent stale event channels after engine recreation

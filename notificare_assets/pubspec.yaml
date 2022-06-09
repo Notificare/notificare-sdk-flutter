@@ -1,8 +1,8 @@
 name: notificare_assets
 description: Notificare Assets Flutter Plugin
-version: 3.1.1
+version: 3.2.0
 homepage: https://notificare.com
-documentation: https://docs.notifica.re/sdk/v3/flutter/setup
+documentation: https://docs.notifica.re/sdk/v3/flutter/setup/
 repository: https://github.com/Notificare/notificare-sdk-flutter/tree/main/notificare_assets
 
 environment:
