@@ -118,6 +118,7 @@ class NotificareScannablesPlugin : FlutterPlugin, MethodCallHandler, ActivityAwa
 
     private fun fetch(@Suppress("UNUSED_PARAMETER") call: MethodCall, response: Result) {
         val tag = call.arguments<String>()
+            ?: return response.error(NOTIFICARE_ERROR, "Invalid request arguments.", null)
 
         Notificare.scannables().fetch(tag, object : NotificareCallback<NotificareScannable> {
             override fun onSuccess(result: NotificareScannable) {

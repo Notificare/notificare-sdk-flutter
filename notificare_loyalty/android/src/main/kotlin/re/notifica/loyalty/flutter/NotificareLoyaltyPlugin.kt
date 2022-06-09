@@ -12,6 +12,7 @@ import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
+import org.json.JSONObject
 import re.notifica.Notificare
 import re.notifica.NotificareCallback
 import re.notifica.loyalty.ktx.loyalty
@@ -60,7 +61,9 @@ class NotificareLoyaltyPlugin : FlutterPlugin, MethodCallHandler, ActivityAware 
     // endregion
 
     private fun fetchPassBySerial(@Suppress("UNUSED_PARAMETER") call: MethodCall, response: Result) {
-        val serial = call.arguments<String>()
+        val serial = call.arguments<String>() ?: return onMainThread {
+            response.error(NOTIFICARE_ERROR, "Invalid request arguments.", null)
+        }
 
         Notificare.loyalty().fetchPassBySerial(serial, object : NotificareCallback<NotificarePass> {
             override fun onSuccess(result: NotificarePass) {
@@ -78,7 +81,9 @@ class NotificareLoyaltyPlugin : FlutterPlugin, MethodCallHandler, ActivityAware 
     }
 
     private fun fetchPassByBarcode(@Suppress("UNUSED_PARAMETER") call: MethodCall, response: Result) {
-        val barcode = call.arguments<String>()
+        val barcode = call.arguments<String>() ?: return onMainThread {
+            response.error(NOTIFICARE_ERROR, "Invalid request arguments.", null)
+        }
 
         Notificare.loyalty().fetchPassByBarcode(barcode, object : NotificareCallback<NotificarePass> {
             override fun onSuccess(result: NotificarePass) {
@@ -96,7 +101,11 @@ class NotificareLoyaltyPlugin : FlutterPlugin, MethodCallHandler, ActivityAware 
     }
 
     private fun present(@Suppress("UNUSED_PARAMETER") call: MethodCall, response: Result) {
-        val pass = NotificarePass.fromJson(call.arguments())
+        val arguments = call.arguments<JSONObject>() ?: return onMainThread {
+            response.error(NOTIFICARE_ERROR, "Invalid request arguments.", null)
+        }
+
+        val pass = NotificarePass.fromJson(arguments)
         val activity = activity ?: run {
             response.error(NOTIFICARE_ERROR, "Cannot present a pass without an activity attached.", null)
             return
@@ -109,6 +118,8 @@ class NotificareLoyaltyPlugin : FlutterPlugin, MethodCallHandler, ActivityAware 
     internal companion object {
         internal const val NOTIFICARE_ERROR = "notificare_error"
 
-        internal fun onMainThread(action: () -> Unit) = Handler(Looper.getMainLooper()).post { action() }
+        internal fun onMainThread(action: () -> Unit) {
+            Handler(Looper.getMainLooper()).post { action() }
+        }
     }
 }

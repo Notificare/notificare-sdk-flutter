@@ -162,7 +162,9 @@ class NotificareAuthenticationPlugin : FlutterPlugin, MethodCallHandler, Activit
     }
 
     private fun changePassword(@Suppress("UNUSED_PARAMETER") call: MethodCall, response: MethodChannel.Result) {
-        val password = call.arguments<String>()
+        val password = call.arguments<String>() ?: return onMainThread {
+            response.error(NOTIFICARE_ERROR, "Invalid request arguments.", null)
+        }
 
         Notificare.authentication().changePassword(password, object : NotificareCallback<Unit> {
             override fun onSuccess(result: Unit) {
@@ -199,7 +201,9 @@ class NotificareAuthenticationPlugin : FlutterPlugin, MethodCallHandler, Activit
     }
 
     private fun createAccount(@Suppress("UNUSED_PARAMETER") call: MethodCall, response: MethodChannel.Result) {
-        val arguments = call.arguments<JSONObject>()
+        val arguments = call.arguments<JSONObject>() ?: return onMainThread {
+            response.error(NOTIFICARE_ERROR, "Invalid request arguments.", null)
+        }
 
         val email = requireNotNull(call.argument<String>("email"))
         val password = requireNotNull(call.argument<String>("password"))
@@ -221,7 +225,9 @@ class NotificareAuthenticationPlugin : FlutterPlugin, MethodCallHandler, Activit
     }
 
     private fun validateUser(@Suppress("UNUSED_PARAMETER") call: MethodCall, response: MethodChannel.Result) {
-        val token = call.arguments<String>()
+        val token = call.arguments<String>() ?: return onMainThread {
+            response.error(NOTIFICARE_ERROR, "Invalid request arguments.", null)
+        }
 
         Notificare.authentication().validateUser(token, object : NotificareCallback<Unit> {
             override fun onSuccess(result: Unit) {
@@ -239,7 +245,9 @@ class NotificareAuthenticationPlugin : FlutterPlugin, MethodCallHandler, Activit
     }
 
     private fun sendPasswordReset(@Suppress("UNUSED_PARAMETER") call: MethodCall, response: MethodChannel.Result) {
-        val email = call.arguments<String>()
+        val email = call.arguments<String>() ?: return onMainThread {
+            response.error(NOTIFICARE_ERROR, "Invalid request arguments.", null)
+        }
 
         Notificare.authentication().sendPasswordReset(email, object : NotificareCallback<Unit> {
             override fun onSuccess(result: Unit) {
@@ -308,7 +316,11 @@ class NotificareAuthenticationPlugin : FlutterPlugin, MethodCallHandler, Activit
     }
 
     private fun addUserSegment(@Suppress("UNUSED_PARAMETER") call: MethodCall, response: MethodChannel.Result) {
-        val segment = NotificareUserSegment.fromJson(call.arguments())
+        val arguments = call.arguments<JSONObject>() ?: return onMainThread {
+            response.error(NOTIFICARE_ERROR, "Invalid request arguments.", null)
+        }
+
+        val segment = NotificareUserSegment.fromJson(arguments)
 
         Notificare.authentication().addUserSegment(segment, object : NotificareCallback<Unit> {
             override fun onSuccess(result: Unit) {
@@ -326,7 +338,11 @@ class NotificareAuthenticationPlugin : FlutterPlugin, MethodCallHandler, Activit
     }
 
     private fun removeUserSegment(@Suppress("UNUSED_PARAMETER") call: MethodCall, response: MethodChannel.Result) {
-        val segment = NotificareUserSegment.fromJson(call.arguments())
+        val arguments = call.arguments<JSONObject>() ?: return onMainThread {
+            response.error(NOTIFICARE_ERROR, "Invalid request arguments.", null)
+        }
+
+        val segment = NotificareUserSegment.fromJson(arguments)
 
         Notificare.authentication().removeUserSegment(segment, object : NotificareCallback<Unit> {
             override fun onSuccess(result: Unit) {
@@ -347,7 +363,9 @@ class NotificareAuthenticationPlugin : FlutterPlugin, MethodCallHandler, Activit
         @Suppress("UNUSED_PARAMETER") call: MethodCall,
         response: MethodChannel.Result
     ) {
-        val arguments = call.arguments<JSONObject>()
+        val arguments = call.arguments<JSONObject>() ?: return onMainThread {
+            response.error(NOTIFICARE_ERROR, "Invalid request arguments.", null)
+        }
 
         val preference = NotificareUserPreference.fromJson(requireNotNull(call.argument("preference")))
 
@@ -408,7 +426,9 @@ class NotificareAuthenticationPlugin : FlutterPlugin, MethodCallHandler, Activit
         @Suppress("UNUSED_PARAMETER") call: MethodCall,
         response: MethodChannel.Result
     ) {
-        val arguments = call.arguments<JSONObject>()
+        val arguments = call.arguments<JSONObject>() ?: return onMainThread {
+            response.error(NOTIFICARE_ERROR, "Invalid request arguments.", null)
+        }
 
         val preference = NotificareUserPreference.fromJson(requireNotNull(call.argument("preference")))
 
@@ -469,6 +489,8 @@ class NotificareAuthenticationPlugin : FlutterPlugin, MethodCallHandler, Activit
     internal companion object {
         internal const val NOTIFICARE_ERROR = "notificare_error"
 
-        internal fun onMainThread(action: () -> Unit) = Handler(Looper.getMainLooper()).post { action() }
+        internal fun onMainThread(action: () -> Unit) {
+            Handler(Looper.getMainLooper()).post { action() }
+        }
     }
 }

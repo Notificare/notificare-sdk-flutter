@@ -70,7 +70,10 @@ public class NotificarePushUIPlugin : FlutterPlugin, MethodCallHandler, Activity
             return
         }
 
-        val notification = NotificareNotification.fromJson(call.arguments())
+        val arguments = call.arguments<JSONObject>()
+            ?: return result.error(NOTIFICARE_ERROR, "Invalid request arguments.", null)
+
+        val notification = NotificareNotification.fromJson(arguments)
 
         Notificare.pushUI().presentNotification(activity, notification)
         result.success(null)
@@ -84,6 +87,8 @@ public class NotificarePushUIPlugin : FlutterPlugin, MethodCallHandler, Activity
         }
 
         val json: JSONObject = call.arguments()
+            ?: return result.error(NOTIFICARE_ERROR, "Invalid request arguments.", null)
+
         val notification = NotificareNotification.fromJson(json.getJSONObject("notification"))
         val action = NotificareNotification.Action.fromJson(json.getJSONObject("action"))
 
