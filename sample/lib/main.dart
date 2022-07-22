@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:notificare/notificare.dart';
 import 'package:notificare_authentication/notificare_authentication.dart';
 import 'package:notificare_geo/notificare_geo.dart';
+import 'package:notificare_monetize/notificare_monetize.dart';
 import 'package:notificare_push/notificare_push.dart';
 import 'package:notificare_push_ui/notificare_push_ui.dart';
 import 'package:notificare_scannables/notificare_scannables.dart';
@@ -332,6 +333,85 @@ class _AppState extends State<App> {
         SnackBar(
           content: Text('Scannable session failed: $error'),
           backgroundColor: Colors.red.shade900,
+        ),
+      );
+    });
+
+    // endregion
+
+    // region Notificare Monetize events
+
+    NotificareMonetize.onBillingSetupFinished.listen((event) {
+      scaffoldMessengerKey.currentState!.showSnackBar(
+        const SnackBar(
+          content: Text('Billing setup finished.'),
+        ),
+      );
+    });
+
+    NotificareMonetize.onBillingSetupFailed.listen((event) {
+      scaffoldMessengerKey.currentState!.showSnackBar(
+        SnackBar(
+          content: Text('Billing setup failed: ${event.toJson()}'),
+          backgroundColor: Colors.red.shade900,
+        ),
+      );
+    });
+
+    NotificareMonetize.onProductsUpdated.listen((products) {
+      debugPrint('products updated = ${products.map((e) => e.toJson())}');
+
+      scaffoldMessengerKey.currentState!.showSnackBar(
+        const SnackBar(
+          content: Text('Products updated.'),
+        ),
+      );
+    });
+
+    NotificareMonetize.onPurchasesUpdated.listen((purchases) {
+      debugPrint('purchases updated = ${purchases.map((e) => e.toJson())}');
+
+      scaffoldMessengerKey.currentState!.showSnackBar(
+        const SnackBar(
+          content: Text('Purchases updated.'),
+        ),
+      );
+    });
+
+    NotificareMonetize.onPurchaseFinished.listen((purchase) {
+      debugPrint('purchase finished = ${purchase.toJson()}');
+
+      scaffoldMessengerKey.currentState!.showSnackBar(
+        const SnackBar(
+          content: Text('Purchase finished.'),
+        ),
+      );
+    });
+
+    NotificareMonetize.onPurchaseRestored.listen((purchase) {
+      debugPrint('purchase restored = ${purchase.toJson()}');
+
+      scaffoldMessengerKey.currentState!.showSnackBar(
+        const SnackBar(
+          content: Text('Purchase restored.'),
+        ),
+      );
+    });
+
+    NotificareMonetize.onPurchaseCanceled.listen((purchase) {
+      scaffoldMessengerKey.currentState!.showSnackBar(
+        const SnackBar(
+          content: Text('Purchase canceled.'),
+        ),
+      );
+    });
+
+    NotificareMonetize.onPurchaseFailed.listen((event) {
+      debugPrint('purchase failed = ${event.toJson()}');
+
+      scaffoldMessengerKey.currentState!.showSnackBar(
+        SnackBar(
+          content: Text('Purchase failed: ${event.toJson()}'),
         ),
       );
     });
