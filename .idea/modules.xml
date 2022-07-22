@@ -15,6 +15,7 @@
       <module fileurl="file://$PROJECT_DIR$/notificare_inbox/android/notificare_inbox_android.iml" filepath="$PROJECT_DIR$/notificare_inbox/android/notificare_inbox_android.iml" />
       <module fileurl="file://$PROJECT_DIR$/notificare_loyalty/notificare_loyalty.iml" filepath="$PROJECT_DIR$/notificare_loyalty/notificare_loyalty.iml" />
       <module fileurl="file://$PROJECT_DIR$/notificare_loyalty/android/notificare_loyalty_android.iml" filepath="$PROJECT_DIR$/notificare_loyalty/android/notificare_loyalty_android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/notificare_monetize/notificare_monetize.iml" filepath="$PROJECT_DIR$/notificare_monetize/notificare_monetize.iml" />
       <module fileurl="file://$PROJECT_DIR$/notificare_push/notificare_push.iml" filepath="$PROJECT_DIR$/notificare_push/notificare_push.iml" />
       <module fileurl="file://$PROJECT_DIR$/notificare_push/android/notificare_push_android.iml" filepath="$PROJECT_DIR$/notificare_push/android/notificare_push_android.iml" />
       <module fileurl="file://$PROJECT_DIR$/notificare_push_ui/notificare_push_ui.iml" filepath="$PROJECT_DIR$/notificare_push_ui/notificare_push_ui.iml" />

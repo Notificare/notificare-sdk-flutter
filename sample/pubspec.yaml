@@ -55,6 +55,8 @@ dependencies:
     path: "../notificare_scannables"
   notificare_loyalty:
     path: "../notificare_loyalty"
+  notificare_monetize:
+    path: "../notificare_monetize"
 
 dev_dependencies:
   flutter_test:
