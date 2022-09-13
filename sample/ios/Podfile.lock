@@ -3,6 +3,7 @@ PODS:
   - Notificare/NotificareAssetsKit (3.4.0-beta.2)
   - Notificare/NotificareAuthenticationKit (3.4.0-beta.2)
   - Notificare/NotificareGeoKit (3.4.0-beta.2)
+  - Notificare/NotificareInAppMessagingKit (3.4.0-beta.2)
   - Notificare/NotificareInboxKit (3.4.0-beta.2)
   - Notificare/NotificareKit (3.4.0-beta.2)
   - Notificare/NotificareLoyaltyKit (3.4.0-beta.2)
@@ -24,6 +25,10 @@ PODS:
   - notificare_geo (3.3.0):
     - Flutter
     - Notificare/NotificareGeoKit (= 3.4.0-beta.2)
+    - Notificare/NotificareKit (= 3.4.0-beta.2)
+  - notificare_in_app_messaging (3.3.0):
+    - Flutter
+    - Notificare/NotificareInAppMessagingKit (= 3.4.0-beta.2)
     - Notificare/NotificareKit (= 3.4.0-beta.2)
   - notificare_inbox (3.3.0):
     - Flutter
@@ -58,6 +63,7 @@ DEPENDENCIES:
   - notificare_authentication (from `.symlinks/plugins/notificare_authentication/ios`)
   - notificare_flutter (from `.symlinks/plugins/notificare_flutter/ios`)
   - notificare_geo (from `.symlinks/plugins/notificare_geo/ios`)
+  - notificare_in_app_messaging (from `.symlinks/plugins/notificare_in_app_messaging/ios`)
   - notificare_inbox (from `.symlinks/plugins/notificare_inbox/ios`)
   - notificare_loyalty (from `.symlinks/plugins/notificare_loyalty/ios`)
   - notificare_monetize (from `.symlinks/plugins/notificare_monetize/ios`)
@@ -81,6 +87,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/notificare_flutter/ios"
   notificare_geo:
     :path: ".symlinks/plugins/notificare_geo/ios"
+  notificare_in_app_messaging:
+    :path: ".symlinks/plugins/notificare_in_app_messaging/ios"
   notificare_inbox:
     :path: ".symlinks/plugins/notificare_inbox/ios"
   notificare_loyalty:
@@ -103,6 +111,7 @@ SPEC CHECKSUMS:
   notificare_authentication: e55581c7bd5b98c9c5f5d8c651db80651ed1fe0a
   notificare_flutter: 02ae955f967c15f1b467e5e39973f04f3bbfcfce
   notificare_geo: 670ddf555c7d59239c7b45a410dc5d13b05307c3
+  notificare_in_app_messaging: 3dec507d05be59061c665b83e6264c74a146b26e
   notificare_inbox: 93432baee9bc853d490929a931bb1f0d1b52f747
   notificare_loyalty: decf43aacccd376a205824de2fd01cee0a1f5eca
   notificare_monetize: 972d14b5b6103ccbc0f45158d53a7bec215f3163
