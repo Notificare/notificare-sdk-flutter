@@ -185,8 +185,8 @@ class _AppState extends State<App> {
 
     NotificarePushUI.onNotificationUrlClicked.listen((data) {
       scaffoldMessengerKey.currentState!.showSnackBar(
-        const SnackBar(
-          content: Text('Notification url clicked.'),
+        SnackBar(
+          content: Text('Notification url clicked: ${data.url}'),
         ),
       );
     });
