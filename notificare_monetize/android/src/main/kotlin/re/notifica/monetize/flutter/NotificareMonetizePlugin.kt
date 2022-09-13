@@ -66,6 +66,8 @@ public class NotificareMonetizePlugin : FlutterPlugin, MethodCallHandler, Activi
 
     override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
         when (call.method) {
+            "getProducts" -> getProducts(call, result)
+            "getPurchases" -> getPurchases(call, result)
             "refresh" -> refresh(call, result)
             "startPurchaseFlow" -> startPurchaseFlow(call, result)
             else -> result.notImplemented()
@@ -87,6 +89,24 @@ public class NotificareMonetizePlugin : FlutterPlugin, MethodCallHandler, Activi
     override fun onDetachedFromActivityForConfigChanges() {}
 
     // endregion
+
+    private fun getProducts(@Suppress("UNUSED_PARAMETER") call: MethodCall, response: Result) {
+        try {
+            val products = Notificare.monetize().products.map { it.toJson() }
+            response.success(products)
+        } catch (e: Exception) {
+            response.error(NOTIFICARE_ERROR, e.message, null)
+        }
+    }
+
+    private fun getPurchases(@Suppress("UNUSED_PARAMETER") call: MethodCall, response: Result) {
+        try {
+            val purchases = Notificare.monetize().purchases.map { it.toJson() }
+            response.success(purchases)
+        } catch (e: Exception) {
+            response.error(NOTIFICARE_ERROR, e.message, null)
+        }
+    }
 
     private fun refresh(@Suppress("UNUSED_PARAMETER") call: MethodCall, response: Result) {
         Notificare.monetize().refresh(object : NotificareCallback<Unit> {
