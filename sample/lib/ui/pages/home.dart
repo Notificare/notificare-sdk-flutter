@@ -3,6 +3,7 @@ import 'package:notificare/notificare.dart';
 import 'package:notificare_assets/notificare_assets.dart';
 import 'package:notificare_authentication/notificare_authentication.dart';
 import 'package:notificare_geo/notificare_geo.dart';
+import 'package:notificare_in_app_messaging/notificare_in_app_messaging.dart';
 import 'package:notificare_loyalty/notificare_loyalty.dart';
 import 'package:notificare_push/notificare_push.dart';
 import 'package:notificare_scannables/notificare_scannables.dart';
@@ -302,6 +303,28 @@ class _HomePageState extends State<HomePage> {
               child: const Text('Fetch pass'),
               style: AppTheme.buttonStyle,
               onPressed: _onFetchPassClicked,
+            ),
+            Container(
+              padding: const EdgeInsets.only(top: 16),
+              child: Text(
+                'In-app messaging',
+                style: Theme.of(context).textTheme.headline6,
+              ),
+            ),
+            TextButton(
+              child: const Text('Check suppressed state'),
+              style: AppTheme.buttonStyle,
+              onPressed: _onCheckSuppressedStateClicked,
+            ),
+            TextButton(
+              child: const Text('Suppress messages'),
+              style: AppTheme.buttonStyle,
+              onPressed: _onSuppressMessagesClicked,
+            ),
+            TextButton(
+              child: const Text('Un-suppress messages'),
+              style: AppTheme.buttonStyle,
+              onPressed: _onUnSuppressMessagesClicked,
             ),
           ],
         ),
@@ -1270,6 +1293,63 @@ class _HomePageState extends State<HomePage> {
       );
 
       await NotificareLoyalty.present(pass: pass);
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Done.'),
+        ),
+      );
+    } catch (error) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('$error'),
+          backgroundColor: Colors.red.shade900,
+        ),
+      );
+    }
+  }
+
+  void _onCheckSuppressedStateClicked() async {
+    try {
+      final suppressed = await NotificareInAppMessaging.hasMessagesSuppressed;
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Suppressed = $suppressed'),
+        ),
+      );
+    } catch (error) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('$error'),
+          backgroundColor: Colors.red.shade900,
+        ),
+      );
+    }
+  }
+
+  void _onSuppressMessagesClicked() async {
+    try {
+      await NotificareInAppMessaging.setMessagesSuppressed(true);
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Done.'),
+        ),
+      );
+    } catch (error) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('$error'),
+          backgroundColor: Colors.red.shade900,
+        ),
+      );
+    }
+  }
+
+  void _onUnSuppressMessagesClicked() async {
+    try {
+      await NotificareInAppMessaging.setMessagesSuppressed(false);
+
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Done.'),

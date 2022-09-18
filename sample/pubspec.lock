@@ -144,6 +144,13 @@ packages:
       relative: true
     source: path
     version: "3.3.0"
+  notificare_in_app_messaging:
+    dependency: "direct main"
+    description:
+      path: "../notificare_in_app_messaging"
+      relative: true
+    source: path
+    version: "3.3.0"
   notificare_inbox:
     dependency: "direct main"
     description:

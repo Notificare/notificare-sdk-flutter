@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:notificare/notificare.dart';
 import 'package:notificare_authentication/notificare_authentication.dart';
 import 'package:notificare_geo/notificare_geo.dart';
+import 'package:notificare_in_app_messaging/notificare_in_app_messaging.dart';
 import 'package:notificare_monetize/notificare_monetize.dart';
 import 'package:notificare_push/notificare_push.dart';
 import 'package:notificare_push_ui/notificare_push_ui.dart';
@@ -412,6 +413,60 @@ class _AppState extends State<App> {
       scaffoldMessengerKey.currentState!.showSnackBar(
         SnackBar(
           content: Text('Purchase failed: ${event.toJson()}'),
+        ),
+      );
+    });
+
+    // endregion
+
+    // region Notificare In-App Messaging events
+
+    NotificareInAppMessaging.onMessagePresented.listen((message) {
+      debugPrint("message presented = ${message.toJson()}");
+
+      scaffoldMessengerKey.currentState!.showSnackBar(
+        const SnackBar(
+          content: Text('In-app message presented.'),
+        ),
+      );
+    });
+
+    NotificareInAppMessaging.onMessageFinishedPresenting.listen((message) {
+      debugPrint("message finished presenting = ${message.toJson()}");
+
+      scaffoldMessengerKey.currentState!.showSnackBar(
+        const SnackBar(
+          content: Text('In-app message finished presenting.'),
+        ),
+      );
+    });
+
+    NotificareInAppMessaging.onMessageFailedToPresent.listen((message) {
+      debugPrint("message failed to present present = ${message.toJson()}");
+
+      scaffoldMessengerKey.currentState!.showSnackBar(
+        const SnackBar(
+          content: Text('In-app message failed to present.'),
+        ),
+      );
+    });
+
+    NotificareInAppMessaging.onActionExecuted.listen((event) {
+      debugPrint("action executed = ${event.toJson()}");
+
+      scaffoldMessengerKey.currentState!.showSnackBar(
+        const SnackBar(
+          content: Text('In-app message action executed.'),
+        ),
+      );
+    });
+
+    NotificareInAppMessaging.onActionFailedToExecute.listen((event) {
+      debugPrint("action failed to execute = ${event.toJson()}");
+
+      scaffoldMessengerKey.currentState!.showSnackBar(
+        const SnackBar(
+          content: Text('In-app message action failed to execute.'),
         ),
       );
     });
