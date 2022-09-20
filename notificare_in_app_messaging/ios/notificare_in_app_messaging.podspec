@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'notificare_in_app_messaging'
-  s.version          = '3.3.0'
+  s.version          = '3.4.0-beta.2'
   s.summary          = 'Notificare In-App Messaging Flutter Plugin'
   s.description      = <<-DESC
 The Notificare Flutter Plugin implements the power of smart notifications, location services, contextual marketing and powerful loyalty solutions provided by the Notificare platform in Flutter applications.
