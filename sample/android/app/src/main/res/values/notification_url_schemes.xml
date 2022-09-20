@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="notification_url_schemes">
+        <item>re.notifica.sample.app</item>
+    </string-array>
+</resources>

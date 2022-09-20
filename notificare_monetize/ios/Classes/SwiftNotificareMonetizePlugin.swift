@@ -20,6 +20,8 @@ public class SwiftNotificareMonetizePlugin: NSObject, FlutterPlugin {
     
     public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
         switch call.method {
+        case "getProducts": getProducts(call, result)
+        case "getPurchases": getPurchases(call, result)
         case "refresh": refresh(call, result)
         case "startPurchaseFlow": startPurchaseFlow(call, result)
 
@@ -29,6 +31,24 @@ public class SwiftNotificareMonetizePlugin: NSObject, FlutterPlugin {
     }
     
     // MARK: - Methods
+
+    private func getProducts(_ call: FlutterMethodCall, _ response: @escaping FlutterResult) {
+        do {
+            let products = try Notificare.shared.monetize().products.map { try $0.toJson() }
+            response(products)
+        } catch {
+            response(FlutterError(code: DEFAULT_ERROR_CODE, message: error.localizedDescription, details: nil))
+        }
+    }
+
+    private func getPurchases(_ call: FlutterMethodCall, _ response: @escaping FlutterResult) {
+        do {
+            let purchases = try Notificare.shared.monetize().purchases.map { try $0.toJson() }
+            response(purchases)
+        } catch {
+            response(FlutterError(code: DEFAULT_ERROR_CODE, message: error.localizedDescription, details: nil))
+        }
+    }
     
     private func refresh(_ call: FlutterMethodCall, _ response: @escaping FlutterResult) {
         Notificare.shared.monetize().refresh { result in

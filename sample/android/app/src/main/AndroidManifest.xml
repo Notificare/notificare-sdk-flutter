@@ -10,7 +10,7 @@
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
             android:exported="true"
             android:hardwareAccelerated="true"
-            android:launchMode="singleTop"
+            android:launchMode="singleTask"
             android:theme="@style/Theme.Sample"
             android:windowSoftInputMode="adjustResize">
             <!-- Specifies an Android theme to apply to this Activity as soon as
@@ -32,6 +32,14 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="${applicationId}" />
             </intent-filter>
             <intent-filter>
                 <action android:name="re.notifica.intent.action.RemoteMessageOpened" />
@@ -68,5 +76,9 @@
         <meta-data
             android:name="re.notifica.debug_logging_enabled"
             android:value="true" />
+
+        <meta-data
+            android:name="re.notifica.push.ui.notification_url_schemes"
+            android:resource="@array/notification_url_schemes" />
     </application>
 </manifest>

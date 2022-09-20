@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 3.4.0-beta.2
+
+- Add in-app messaging module
+
 ## 3.3.0
 
 - Add monetise module
