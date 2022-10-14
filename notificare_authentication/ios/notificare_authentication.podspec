@@ -1,6 +1,11 @@
+require 'yaml'
+
+pubspec = YAML.load(File.read(File.join(__dir__, "..", "pubspec.yaml")))
+notificare_version = '3.4.0-beta.3'
+
 Pod::Spec.new do |s|
-  s.name             = 'notificare_authentication'
-  s.version          = '3.4.0-beta.2'
+  s.name             = pubspec['name']
+  s.version          = pubspec['version']
   s.summary          = 'Notificare Authentication Flutter Plugin'
   s.description      = <<-DESC
 The Notificare Flutter Plugin implements the power of smart notifications, location services, contextual marketing and powerful loyalty solutions provided by the Notificare platform in Flutter applications.
@@ -14,8 +19,8 @@ For support please use: http://support.notifica.re
   s.source           = { :path => '.' }
   s.source_files = 'Classes/**/*'
   s.dependency 'Flutter'
-  s.dependency 'Notificare/NotificareKit', '3.4.0-beta.2'
-  s.dependency 'Notificare/NotificareAuthenticationKit', '3.4.0-beta.2'
+  s.dependency 'Notificare/NotificareKit', notificare_version
+  s.dependency 'Notificare/NotificareAuthenticationKit', notificare_version
   s.platform = :ios, '10.0'
   s.swift_version = '5.0'
 end

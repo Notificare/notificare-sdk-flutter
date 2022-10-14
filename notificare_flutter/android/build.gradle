@@ -1,6 +1,4 @@
-//noinspection GrPackage
 group 're.notifica.flutter'
-version '3.4.0.beta-2'
 
 buildscript {
     ext.kotlin_version = '1.6.10'
