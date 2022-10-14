@@ -35,7 +35,7 @@ desc <<-DESC
 Updates the version of each Flutter package.
 
 #### Options
-* `version`: The version of the native libraries.
+* `version`: The new version for the libraries.
 
 #### Examples
 ```sh
@@ -103,9 +103,9 @@ lane :publish do |options|
 
   directories.each do |directory|
     if dry_run
-      UI.message("Publishing '#{directory}' package.")
-    else
       UI.message("Validating '#{directory}' package.")
+    else
+      UI.message("Publishing '#{directory}' package.")
     end
 
     stream_shell_command("cd #{directory} && flutter pub publish #{publish_arguments}")

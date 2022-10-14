@@ -42,7 +42,7 @@ bundle exec fastlane update_native_libraries version:3.4.0 platform:ios
 Updates the version of each Flutter package.
 
 #### Options
-* `version`: The version of the native libraries.
+* `version`: The new version for the libraries.
 
 #### Examples
 ```sh
