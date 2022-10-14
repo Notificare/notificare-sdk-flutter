@@ -25,7 +25,7 @@ Updates the versions of the native libraries.
 * `version`: The version of the native libraries.
 * `platform`: The platform to update. Leave blank to update both.
 
-#### Example
+#### Examples
 ```sh
 bundle exec fastlane update_native_libraries version:3.4.0
 bundle exec fastlane update_native_libraries version:3.4.0 platform:android
@@ -44,7 +44,7 @@ Updates the version of each Flutter package.
 #### Options
 * `version`: The version of the native libraries.
 
-#### Example
+#### Examples
 ```sh
 bundle exec fastlane bump version:3.4.0
 ```
@@ -58,7 +58,7 @@ bundle exec fastlane bump version:3.4.0
 
 Updates the lockfile of each package and sample app pods.
 
-#### Example
+#### Examples
 ```sh
 bundle exec fastlane update_sample
 ```
@@ -75,7 +75,7 @@ Validates and publishes each Flutter package.
 #### Options
 * `dry_run`: Only run in validation mode.
 
-#### Example
+#### Examples
 ```sh
 bundle exec fastlane publish
 bundle exec fastlane publish dry_run:true
