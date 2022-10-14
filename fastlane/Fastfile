@@ -89,7 +89,7 @@ bundle exec fastlane publish dry_run:true
 DESC
 lane :publish do |options|
   dry_run = options[:dry_run] ||= false
-  publish_arguments = dry_run ? '--dry-run' : '-f'
+  publish_arguments = dry_run ? '--dry-run' : ''
 
   ensure_git_status_clean unless dry_run
 
