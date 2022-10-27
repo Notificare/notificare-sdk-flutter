@@ -42,6 +42,6 @@ android {
 }
 
 dependencies {
-    def notificare_version = '3.4.0-beta.2'
+    def notificare_version = '3.4.0'
     api "re.notifica:notificare:$notificare_version"
 }

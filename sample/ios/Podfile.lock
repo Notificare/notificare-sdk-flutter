@@ -1,59 +1,59 @@
 PODS:
   - Flutter (1.0.0)
-  - Notificare/NotificareAssetsKit (3.4.0-beta.3)
-  - Notificare/NotificareAuthenticationKit (3.4.0-beta.3)
-  - Notificare/NotificareGeoKit (3.4.0-beta.3)
-  - Notificare/NotificareInAppMessagingKit (3.4.0-beta.3)
-  - Notificare/NotificareInboxKit (3.4.0-beta.3)
-  - Notificare/NotificareKit (3.4.0-beta.3)
-  - Notificare/NotificareLoyaltyKit (3.4.0-beta.3)
-  - Notificare/NotificareMonetizeKit (3.4.0-beta.3)
-  - Notificare/NotificarePushKit (3.4.0-beta.3)
-  - Notificare/NotificarePushUIKit (3.4.0-beta.3)
-  - Notificare/NotificareScannablesKit (3.4.0-beta.3)
-  - notificare_assets (3.4.0-beta.3):
+  - Notificare/NotificareAssetsKit (3.4.0)
+  - Notificare/NotificareAuthenticationKit (3.4.0)
+  - Notificare/NotificareGeoKit (3.4.0)
+  - Notificare/NotificareInAppMessagingKit (3.4.0)
+  - Notificare/NotificareInboxKit (3.4.0)
+  - Notificare/NotificareKit (3.4.0)
+  - Notificare/NotificareLoyaltyKit (3.4.0)
+  - Notificare/NotificareMonetizeKit (3.4.0)
+  - Notificare/NotificarePushKit (3.4.0)
+  - Notificare/NotificarePushUIKit (3.4.0)
+  - Notificare/NotificareScannablesKit (3.4.0)
+  - notificare_assets (3.4.0):
     - Flutter
-    - Notificare/NotificareAssetsKit (= 3.4.0-beta.3)
-    - Notificare/NotificareKit (= 3.4.0-beta.3)
-  - notificare_authentication (3.4.0-beta.3):
+    - Notificare/NotificareAssetsKit (= 3.4.0)
+    - Notificare/NotificareKit (= 3.4.0)
+  - notificare_authentication (3.4.0):
     - Flutter
-    - Notificare/NotificareAuthenticationKit (= 3.4.0-beta.3)
-    - Notificare/NotificareKit (= 3.4.0-beta.3)
-  - notificare_flutter (3.4.0-beta.3):
+    - Notificare/NotificareAuthenticationKit (= 3.4.0)
+    - Notificare/NotificareKit (= 3.4.0)
+  - notificare_flutter (3.4.0):
     - Flutter
-    - Notificare/NotificareKit (= 3.4.0-beta.3)
-  - notificare_geo (3.4.0-beta.3):
+    - Notificare/NotificareKit (= 3.4.0)
+  - notificare_geo (3.4.0):
     - Flutter
-    - Notificare/NotificareGeoKit (= 3.4.0-beta.3)
-    - Notificare/NotificareKit (= 3.4.0-beta.3)
-  - notificare_in_app_messaging (3.4.0-beta.3):
+    - Notificare/NotificareGeoKit (= 3.4.0)
+    - Notificare/NotificareKit (= 3.4.0)
+  - notificare_in_app_messaging (3.4.0):
     - Flutter
-    - Notificare/NotificareInAppMessagingKit (= 3.4.0-beta.3)
-    - Notificare/NotificareKit (= 3.4.0-beta.3)
-  - notificare_inbox (3.4.0-beta.3):
+    - Notificare/NotificareInAppMessagingKit (= 3.4.0)
+    - Notificare/NotificareKit (= 3.4.0)
+  - notificare_inbox (3.4.0):
     - Flutter
-    - Notificare/NotificareInboxKit (= 3.4.0-beta.3)
-    - Notificare/NotificareKit (= 3.4.0-beta.3)
-  - notificare_loyalty (3.4.0-beta.3):
+    - Notificare/NotificareInboxKit (= 3.4.0)
+    - Notificare/NotificareKit (= 3.4.0)
+  - notificare_loyalty (3.4.0):
     - Flutter
-    - Notificare/NotificareKit (= 3.4.0-beta.3)
-    - Notificare/NotificareLoyaltyKit (= 3.4.0-beta.3)
-  - notificare_monetize (3.4.0-beta.3):
+    - Notificare/NotificareKit (= 3.4.0)
+    - Notificare/NotificareLoyaltyKit (= 3.4.0)
+  - notificare_monetize (3.4.0):
     - Flutter
-    - Notificare/NotificareKit (= 3.4.0-beta.3)
-    - Notificare/NotificareMonetizeKit (= 3.4.0-beta.3)
-  - notificare_push (3.4.0-beta.3):
+    - Notificare/NotificareKit (= 3.4.0)
+    - Notificare/NotificareMonetizeKit (= 3.4.0)
+  - notificare_push (3.4.0):
     - Flutter
-    - Notificare/NotificareKit (= 3.4.0-beta.3)
-    - Notificare/NotificarePushKit (= 3.4.0-beta.3)
-  - notificare_push_ui (3.4.0-beta.3):
+    - Notificare/NotificareKit (= 3.4.0)
+    - Notificare/NotificarePushKit (= 3.4.0)
+  - notificare_push_ui (3.4.0):
     - Flutter
-    - Notificare/NotificareKit (= 3.4.0-beta.3)
-    - Notificare/NotificarePushUIKit (= 3.4.0-beta.3)
-  - notificare_scannables (3.4.0-beta.3):
+    - Notificare/NotificareKit (= 3.4.0)
+    - Notificare/NotificarePushUIKit (= 3.4.0)
+  - notificare_scannables (3.4.0):
     - Flutter
-    - Notificare/NotificareKit (= 3.4.0-beta.3)
-    - Notificare/NotificareScannablesKit (= 3.4.0-beta.3)
+    - Notificare/NotificareKit (= 3.4.0)
+    - Notificare/NotificareScannablesKit (= 3.4.0)
   - "permission_handler (5.1.0+2)":
     - Flutter
 
@@ -106,18 +106,18 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
-  Notificare: a69677b0a35134194e3951a0c51bfe8280b6710d
-  notificare_assets: 6b94ada9bf78c026dd5ca374194dd3b4d24bada6
-  notificare_authentication: ff007a359a8582ac0083d363a80173bb9f1b406e
-  notificare_flutter: e2dd43c62fc52df3ca7df7e3d0614e872c80e71c
-  notificare_geo: f26e6fe6ddcd3da227cd50cc4a1a01f1bc303469
-  notificare_in_app_messaging: fed9ee9b0e36ec3d77999e07a9a20287ffdd8686
-  notificare_inbox: d394f58853c5e0a042f9af12f40f537f5dbf0c02
-  notificare_loyalty: e1973b1a1cd6512ed0429e6ec2e5029eaa9f23fd
-  notificare_monetize: 963e18907069d12eb3753a5cb951045fe5043b8a
-  notificare_push: 73173c9576f26c1dbab6a8ef45b5c0f3f9fe37d8
-  notificare_push_ui: c6b2e5a54d5f8163ee2b8f8a16e92f604aa5502c
-  notificare_scannables: b52647331cccfda5ccbc293a408eeaa8e0315353
+  Notificare: b2e179defeeb294d8514d1efa74caab07f059f5c
+  notificare_assets: ef4267bba08ed42db11a079e92833f171f2aed43
+  notificare_authentication: 17de943f8c93fe6ba187d72f7b242daa05fdcc01
+  notificare_flutter: 38e9792523a95d15dfadd03176f8238d5b14130f
+  notificare_geo: ea0c34d65d23d0a48c22131b057a25be4964b657
+  notificare_in_app_messaging: b2f8c98625347c2a1315b0095ac762e1e03bcf45
+  notificare_inbox: faef8a747404b23244d9e2168b9bff665afc2ca0
+  notificare_loyalty: 7adb777a3fc905f16032e2478015c1662763101b
+  notificare_monetize: 188beffeaed7fa0254d2851ace27808ff730d5b0
+  notificare_push: 6d789ee726d99686ca77a8a8c5078cf0f656264b
+  notificare_push_ui: b9b26a9989a6d9a382c93767b9027a78f5b204cc
+  notificare_scannables: 1007031d719657f5d6f7c9a28cd3b08f5fed79c2
   permission_handler: ccb20a9fad0ee9b1314a52b70b76b473c5f8dab0
 
 PODFILE CHECKSUM: fda2901ee98992655f2b15c6264fc73cd0874c46

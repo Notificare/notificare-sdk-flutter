@@ -1,7 +1,7 @@
 require 'yaml'
 
 pubspec = YAML.load(File.read(File.join(__dir__, "..", "pubspec.yaml")))
-notificare_version = '3.4.0-beta.3'
+notificare_version = '3.4.0'
 
 Pod::Spec.new do |s|
   s.name             = pubspec['name']
@@ -21,6 +21,6 @@ For support please use: http://support.notifica.re
   s.dependency 'Flutter'
   s.dependency 'Notificare/NotificareKit', notificare_version
   s.dependency 'Notificare/NotificarePushUIKit', notificare_version
-  s.platform = :ios, '10.0'
+  s.platform = :ios, '11.0'
   s.swift_version = '5.0'
 end
