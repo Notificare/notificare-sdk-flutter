@@ -1,6 +1,6 @@
 name: notificare_geo
 description: Notificare Geo Flutter Plugin
-version: 3.4.0-beta.3
+version: 3.4.0
 homepage: https://notificare.com
 documentation: https://docs.notifica.re/sdk/v3/flutter/setup/
 repository: https://github.com/Notificare/notificare-sdk-flutter/tree/main/notificare_geo
