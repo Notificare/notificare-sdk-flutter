@@ -351,7 +351,7 @@ extension SwiftNotificarePlugin {
         }
         
         NotificareEventManager.shared.send(NotificareEventOnUrlOpened(url: url.absoluteString))
-        return true
+        return false
     }
     
     public func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]) -> Void) -> Bool {
