@@ -2,6 +2,8 @@
 
 ## 3.4.2
 
+- Preserve deep link propagation
+
 #### Native changes
 
 ##### iOS
