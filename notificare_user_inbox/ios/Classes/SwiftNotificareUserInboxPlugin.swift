@@ -31,12 +31,10 @@ public class SwiftNotificareUserInboxPlugin: NSObject, FlutterPlugin {
     // MARK: - Methods
     
     private func parseResponseFromJSON(_ call: FlutterMethodCall, _ response: @escaping FlutterResult) {
-        let result: NotificareUserInboxResponse
-        
         do {
             let json = call.arguments as! [String: Any]
             
-            result = try Notificare.shared.userInbox().parseResponse(json: json)
+            let result = try Notificare.shared.userInbox().parseResponse(json: json)
             
             response(try result.toJson())
         } catch {
@@ -45,12 +43,10 @@ public class SwiftNotificareUserInboxPlugin: NSObject, FlutterPlugin {
     }
     
     private func parseResponseFromString(_ call: FlutterMethodCall, _ response: @escaping FlutterResult) {
-        let result: NotificareUserInboxResponse
-        
         do {
             let json = call.arguments as! String
             
-            result = try Notificare.shared.userInbox().parseResponse(string: json)
+            let result = try Notificare.shared.userInbox().parseResponse(string: json)
             
             response(try result.toJson())
         } catch {
