@@ -462,12 +462,20 @@ class NotificarePlugin : FlutterPlugin, ActivityAware, PluginRegistry.NewIntentL
     // region Notificare Events Manager
 
     private fun logCustom(call: MethodCall, response: Result) {
+        val arguments = call.arguments<JSONObject>() ?: return onMainThread {
+            response.error(DEFAULT_ERROR_CODE, "Invalid request arguments.", null)
+        }
+
         val event: String
         val data: NotificareEventData?
 
         try {
-            event = requireNotNull(call.argument<String>("event"))
-            data = call.argument<JSONObject>("data")?.let { re.notifica.models.NotificareEvent.createData(it) }
+            event = requireNotNull(arguments.getString("event"))
+            data = if (!arguments.isNull("data")) {
+                arguments.getJSONObject("data").let { re.notifica.models.NotificareEvent.createData(it) }
+            } else {
+                null
+            }
         } catch (e: Exception) {
             onMainThread {
                 response.error(DEFAULT_ERROR_CODE, e.message, null)
