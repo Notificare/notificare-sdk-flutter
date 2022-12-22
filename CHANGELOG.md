@@ -1,6 +1,31 @@
 # CHANGELOG
 
-## upcoming release
+## 3.4.2
+
+- Preserve deep link propagation
+
+#### Native changes
+
+##### iOS
+
+- Fix notification settings update race condition
+- Prevent WebView notifications content from being dismissed while the view is presented
+- Add `Identifiable` compliance to applicable data models
+- Optional CoreNFC framework linking to support older devices
+- Refactor internal modules to keep track of their instances
+- Improve pass-support availability checks
+
+## 3.4.1
+
+- Fix locale-sensitive time formatting on `NotificareTime` objects
+
+## 3.4.0
+
+#### Important changes since 3.3.0
+
+- In-app messaging module
+- Add option to preserve existing notification categories
+- Drop support for iOS 10
 
 ## 3.4.0-beta.3
 

@@ -21,6 +21,6 @@ For support please use: http://support.notifica.re
   s.dependency 'Flutter'
   s.dependency 'Notificare/NotificareKit', notificare_version
   s.dependency 'Notificare/NotificareInAppMessagingKit', notificare_version
-  s.platform = :ios, '10.0'
+  s.platform = :ios, '11.0'
   s.swift_version = '5.0'
 end
