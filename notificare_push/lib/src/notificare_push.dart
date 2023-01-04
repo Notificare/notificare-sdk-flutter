@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:notificare/notificare.dart';
 import 'package:notificare_push/notificare_push.dart';
 import 'package:notificare_push/src/events/notificare_notification_action_opened_event.dart';
+import 'package:notificare_push/src/models/notificare_live_activity_update.dart';
 import 'package:notificare_push/src/models/notificare_system_notification.dart';
 
 class NotificarePush {
@@ -131,6 +132,34 @@ class NotificarePush {
   static Stream<String> get onFailedToRegisterForRemoteNotifications {
     return _getEventStream('failed_to_register_for_remote_notifications').map((result) {
       return result as String;
+    });
+  }
+
+  static Future<void> registerLiveActivity(
+      {required String activityId, String? token, List<String>? topics}) async {
+    final json = {
+      "activityId": activityId,
+      "token": token,
+      "topics": topics,
+    };
+
+    await _channel.invokeMethod('registerLiveActivity', json);
+  }
+
+  static Future<void> endLiveActivity(String activityId) async {
+    await _channel.invokeMethod('endLiveActivity', activityId);
+  }
+
+  static Stream<NotificareLiveActivityUpdate> get onLiveActivityUpdate {
+    return _getEventStream('live_activity_update').map((result) {
+      final Map<dynamic, dynamic> json = result;
+      return NotificareLiveActivityUpdate.fromJson(json.cast());
+    });
+  }
+
+  static Stream<String> get onTokenChanged {
+    return _getEventStream('token_changed').map((token) {
+      return token;
     });
   }
 }

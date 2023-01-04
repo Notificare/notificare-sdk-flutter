@@ -108,6 +108,8 @@ extension NotificarePushPluginEventBroker {
         case shouldOpenNotificationSettings = "should_open_notification_settings"
         case notificationSettingsChanged = "notification_settings_changed"
         case failedToRegisterForRemoteNotifications = "failed_to_register_for_remote_notifications"
+        case liveActivityUpdate = "live_activity_update"
+        case tokenChanged = "token_changed"
     }
     
     struct Event {

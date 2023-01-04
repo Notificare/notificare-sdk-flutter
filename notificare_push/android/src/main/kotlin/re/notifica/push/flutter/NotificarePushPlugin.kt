@@ -1,6 +1,8 @@
 package re.notifica.push.flutter
 
 import android.content.Intent
+import android.os.Handler
+import android.os.Looper
 import androidx.annotation.NonNull
 import androidx.lifecycle.Observer
 import io.flutter.embedding.engine.plugins.FlutterPlugin
@@ -12,13 +14,21 @@ import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
 import io.flutter.plugin.common.PluginRegistry
+import org.json.JSONObject
 import re.notifica.Notificare
+import re.notifica.NotificareCallback
 import re.notifica.push.ktx.push
 
 class NotificarePushPlugin : FlutterPlugin, MethodCallHandler, ActivityAware, PluginRegistry.NewIntentListener {
 
     companion object {
         internal const val NAMESPACE = "re.notifica.push.flutter"
+
+        internal const val NOTIFICARE_ERROR = "notificare_error"
+
+        internal fun onMainThread(action: () -> Unit) {
+            Handler(Looper.getMainLooper()).post { action() }
+        }
     }
 
     private lateinit var channel: MethodChannel
@@ -56,6 +66,8 @@ class NotificarePushPlugin : FlutterPlugin, MethodCallHandler, ActivityAware, Pl
             "allowedUI" -> allowedUI(call, result)
             "enableRemoteNotifications" -> enableRemoteNotifications(call, result)
             "disableRemoteNotifications" -> disableRemoteNotifications(call, result)
+            "registerLiveActivity" -> registerLiveActivity(call, result)
+            "endLiveActivity" -> endLiveActivity(call, result)
             else -> result.notImplemented()
         }
     }
@@ -101,5 +113,47 @@ class NotificarePushPlugin : FlutterPlugin, MethodCallHandler, ActivityAware, Pl
     private fun disableRemoteNotifications(@Suppress("UNUSED_PARAMETER") call: MethodCall, result: Result) {
         Notificare.push().disableRemoteNotifications()
         result.success(null)
+    }
+
+    private fun registerLiveActivity(@Suppress("UNUSED_PARAMETER") call: MethodCall, pluginResult: Result) {
+        val arguments = call.arguments<JSONObject>() ?: return onMainThread {
+            pluginResult.error(NOTIFICARE_ERROR, "Invalid request arguments.", null)
+        }
+
+        val topics = mutableListOf<String>()
+        val activityId = arguments.getString("activityId")
+
+        if (!arguments.isNull("topics")) {
+            val json = arguments.getJSONArray("topics")
+            for (i in 0 until json.length()) {
+                topics.add(json.getString(i))
+            }
+        }
+
+        Notificare.push().registerLiveActivity(activityId, topics, object : NotificareCallback<Unit> {
+            override fun onSuccess(result: Unit) {
+                pluginResult.success(null)
+            }
+
+            override fun onFailure(e: Exception) {
+                pluginResult.error(NOTIFICARE_ERROR, e.localizedMessage, null)
+            }
+        })
+    }
+
+    private fun endLiveActivity(@Suppress("UNUSED_PARAMETER") call: MethodCall, pluginResult: Result) {
+        val activityId = call.arguments<String>() ?: return onMainThread {
+            pluginResult.error(NOTIFICARE_ERROR, "Invalid request arguments.", null)
+        }
+
+        Notificare.push().endLiveActivity(activityId, object : NotificareCallback<Unit> {
+            override fun onSuccess(result: Unit) {
+                pluginResult.success(null)
+            }
+
+            override fun onFailure(e: Exception) {
+                pluginResult.error(NOTIFICARE_ERROR, e.localizedMessage, null)
+            }
+        })
     }
 }

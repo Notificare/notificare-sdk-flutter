@@ -6,6 +6,7 @@ import io.flutter.plugin.common.BinaryMessenger
 import io.flutter.plugin.common.EventChannel
 import io.flutter.plugin.common.JSONMethodCodec
 import re.notifica.models.NotificareNotification
+import re.notifica.push.models.NotificareLiveActivityUpdate
 import re.notifica.push.models.NotificareSystemNotification
 import re.notifica.push.models.NotificareUnknownNotification
 
@@ -43,6 +44,8 @@ internal object NotificarePushPluginEventBroker {
             NOTIFICATION_OPENED(id = "notification_opened"),
             NOTIFICATION_ACTION_OPENED(id = "notification_action_opened"),
             NOTIFICATION_SETTINGS_CHANGED(id = "notification_settings_changed"),
+            LIVE_ACTIVITY_UPDATE(id = "live_activity_update"),
+            TOKEN_CHANGED(id = "token_changed"),
 
             // iOS-only events (declared to prevent missing stream errors)
             UNKNOWN_NOTIFICATION_OPENED(id = "unknown_notification_opened"),
@@ -95,6 +98,20 @@ internal object NotificarePushPluginEventBroker {
         ) : Event() {
             override val type = Type.NOTIFICATION_SETTINGS_CHANGED
             override val payload = allowedUI
+        }
+
+        class LiveActivityUpdate(
+            update: NotificareLiveActivityUpdate
+        ) : Event() {
+            override val type = Type.LIVE_ACTIVITY_UPDATE
+            override val payload = update.toJson()
+        }
+
+        class TokenChanged(
+            token: String
+        ) : Event() {
+            override val type = Type.TOKEN_CHANGED
+            override val payload = token
         }
     }
 

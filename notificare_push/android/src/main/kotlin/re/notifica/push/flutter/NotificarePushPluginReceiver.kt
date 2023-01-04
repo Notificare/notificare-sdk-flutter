@@ -3,6 +3,7 @@ package re.notifica.push.flutter
 import android.content.Context
 import re.notifica.models.NotificareNotification
 import re.notifica.push.NotificarePushIntentReceiver
+import re.notifica.push.models.NotificareLiveActivityUpdate
 import re.notifica.push.models.NotificareSystemNotification
 import re.notifica.push.models.NotificareUnknownNotification
 
@@ -49,6 +50,25 @@ class NotificarePushPluginReceiver : NotificarePushIntentReceiver() {
             NotificarePushPluginEventBroker.Event.NotificationActionOpened(
                 notification = notification,
                 action = action,
+            )
+        )
+    }
+
+    override fun onLiveActivityUpdate(
+        context: Context,
+        update: NotificareLiveActivityUpdate
+    ) {
+        NotificarePushPluginEventBroker.emit(
+            NotificarePushPluginEventBroker.Event.LiveActivityUpdate(
+                update = update
+            )
+        )
+    }
+
+    override fun onTokenChanged(context: Context, token: String) {
+        NotificarePushPluginEventBroker.emit(
+            NotificarePushPluginEventBroker.Event.TokenChanged(
+                token = token
             )
         )
     }

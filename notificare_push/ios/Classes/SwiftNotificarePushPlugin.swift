@@ -42,6 +42,8 @@ public class SwiftNotificarePushPlugin: NSObject, FlutterPlugin {
             case "allowedUI": self.allowedUI(call, result)
             case "enableRemoteNotifications": self.enableRemoteNotifications(call, result)
             case "disableRemoteNotifications": self.disableRemoteNotifications(call, result)
+            case "registerLiveActivity": self.registerLiveActivity(call, result)
+            case "endLiveActivity": self.endLiveActivity(call, result)
                 
             // Unhandled
             default: result(FlutterMethodNotImplemented)
@@ -183,6 +185,49 @@ public class SwiftNotificarePushPlugin: NSObject, FlutterPlugin {
     private func disableRemoteNotifications(_ call: FlutterMethodCall, _ response: FlutterResult) {
         Notificare.shared.push().disableRemoteNotifications()
         response(nil)
+    }
+    
+    private func registerLiveActivity(_ call: FlutterMethodCall, _ response: @escaping FlutterResult) {
+        let json = call.arguments as! [String: Any]
+        let activityId = json["activityId"] as! String
+        let topics = json["topics"] as? [String] ?? []
+        
+        guard let token = json["token"] as? String else {
+            response(FlutterError(code: DEFAULT_ERROR_CODE, message: "Live Activity requires token to be registered", details: nil))
+            return
+        }
+        
+        guard #available(iOS 16.1, * ) else {
+            response(FlutterError(code: DEFAULT_ERROR_CODE, message: "Live Activity is only available for iOS versions 16.1 and up.", details: nil))
+            return
+        }
+        
+        Notificare.shared.push().registerLiveActivity(activityId, token: token, topics: topics) { result in
+            switch result {
+            case .success:
+                response(nil)
+            case let .failure(error):
+                response(FlutterError(code: DEFAULT_ERROR_CODE, message: error.localizedDescription, details: nil))
+            }
+        }
+    }
+    
+    private func endLiveActivity(_ call: FlutterMethodCall, _ response: @escaping FlutterResult) {
+        let activityId = call.arguments as! String
+        
+        guard #available(iOS 16.1, * ) else {
+            response(FlutterError(code: DEFAULT_ERROR_CODE, message: "Live Activity is only available for iOS versions 16.1 and up.", details: nil))
+            return
+        }
+        
+        Notificare.shared.push().endLiveActivity(activityId) { result in
+            switch result {
+            case .success:
+                response(nil)
+            case let .failure(error):
+                response(FlutterError(code: DEFAULT_ERROR_CODE, message: error.localizedDescription, details: nil))
+            }
+        }
     }
 }
 
