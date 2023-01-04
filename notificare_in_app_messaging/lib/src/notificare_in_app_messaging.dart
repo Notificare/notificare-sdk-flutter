@@ -19,8 +19,11 @@ class NotificareInAppMessaging {
     return await _channel.invokeMethod('hasMessagesSuppressed');
   }
 
-  static Future<void> setMessagesSuppressed(bool suppressed) async {
-    await _channel.invokeMethod('setMessagesSuppressed', suppressed);
+  static Future<void> setMessagesSuppressed(bool suppressed, {bool? evaluateContext}) async {
+    await _channel.invokeMethod('setMessagesSuppressed', {
+      "suppressed": suppressed,
+      "evaluateContext": evaluateContext,
+    });
   }
 
   // Events
