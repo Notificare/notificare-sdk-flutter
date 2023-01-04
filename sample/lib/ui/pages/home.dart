@@ -428,22 +428,57 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _onEnableRemoteNotificationsClicked() async {
-    try {
-      await NotificarePush.enableRemoteNotifications();
+    if (await _ensureNotificationsPermission()) {
+      try {
+        await NotificarePush.enableRemoteNotifications();
 
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Done.'),
-        ),
-      );
-    } catch (error) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('$error'),
-          backgroundColor: Colors.red.shade900,
-        ),
-      );
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Done.'),
+          ),
+        );
+      } catch (error) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('$error'),
+            backgroundColor: Colors.red.shade900,
+          ),
+        );
+      }
     }
+  }
+
+  Future<bool> _ensureNotificationsPermission() async {
+    const permission = Permission.notification;
+    if (await permission.isGranted) return true;
+
+    if (await permission.shouldShowRequestRationale) {
+      await showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: const Text('Sample'),
+              content: const Text('We need access to notifications in order to show relevant content.'),
+              actions: [
+                TextButton(
+                  style: TextButton.styleFrom(
+                    foregroundColor: Colors.black,
+                  ),
+                  onPressed: () async {
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text('Ok'),
+                ),
+              ],
+            );
+          });
+
+      return await permission.request().isGranted;
+    }
+
+    final granted = await permission.request().isGranted;
+
+    return granted;
   }
 
   void _onDisableRemoteNotificationsClicked() async {

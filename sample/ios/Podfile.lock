@@ -1,60 +1,60 @@
 PODS:
   - Flutter (1.0.0)
-  - Notificare/NotificareAssetsKit (3.4.2)
-  - Notificare/NotificareAuthenticationKit (3.4.2)
-  - Notificare/NotificareGeoKit (3.4.2)
-  - Notificare/NotificareInAppMessagingKit (3.4.2)
-  - Notificare/NotificareInboxKit (3.4.2)
-  - Notificare/NotificareKit (3.4.2)
-  - Notificare/NotificareLoyaltyKit (3.4.2)
-  - Notificare/NotificareMonetizeKit (3.4.2)
-  - Notificare/NotificarePushKit (3.4.2)
-  - Notificare/NotificarePushUIKit (3.4.2)
-  - Notificare/NotificareScannablesKit (3.4.2)
+  - Notificare/NotificareAssetsKit (3.5.0)
+  - Notificare/NotificareAuthenticationKit (3.5.0)
+  - Notificare/NotificareGeoKit (3.5.0)
+  - Notificare/NotificareInAppMessagingKit (3.5.0)
+  - Notificare/NotificareInboxKit (3.5.0)
+  - Notificare/NotificareKit (3.5.0)
+  - Notificare/NotificareLoyaltyKit (3.5.0)
+  - Notificare/NotificareMonetizeKit (3.5.0)
+  - Notificare/NotificarePushKit (3.5.0)
+  - Notificare/NotificarePushUIKit (3.5.0)
+  - Notificare/NotificareScannablesKit (3.5.0)
   - notificare_assets (3.4.2):
     - Flutter
-    - Notificare/NotificareAssetsKit (= 3.4.2)
-    - Notificare/NotificareKit (= 3.4.2)
+    - Notificare/NotificareAssetsKit (= 3.5.0)
+    - Notificare/NotificareKit (= 3.5.0)
   - notificare_authentication (3.4.2):
     - Flutter
-    - Notificare/NotificareAuthenticationKit (= 3.4.2)
-    - Notificare/NotificareKit (= 3.4.2)
+    - Notificare/NotificareAuthenticationKit (= 3.5.0)
+    - Notificare/NotificareKit (= 3.5.0)
   - notificare_flutter (3.4.2):
     - Flutter
-    - Notificare/NotificareKit (= 3.4.2)
+    - Notificare/NotificareKit (= 3.5.0)
   - notificare_geo (3.4.2):
     - Flutter
-    - Notificare/NotificareGeoKit (= 3.4.2)
-    - Notificare/NotificareKit (= 3.4.2)
+    - Notificare/NotificareGeoKit (= 3.5.0)
+    - Notificare/NotificareKit (= 3.5.0)
   - notificare_in_app_messaging (3.4.2):
     - Flutter
-    - Notificare/NotificareInAppMessagingKit (= 3.4.2)
-    - Notificare/NotificareKit (= 3.4.2)
+    - Notificare/NotificareInAppMessagingKit (= 3.5.0)
+    - Notificare/NotificareKit (= 3.5.0)
   - notificare_inbox (3.4.2):
     - Flutter
-    - Notificare/NotificareInboxKit (= 3.4.2)
-    - Notificare/NotificareKit (= 3.4.2)
+    - Notificare/NotificareInboxKit (= 3.5.0)
+    - Notificare/NotificareKit (= 3.5.0)
   - notificare_loyalty (3.4.2):
     - Flutter
-    - Notificare/NotificareKit (= 3.4.2)
-    - Notificare/NotificareLoyaltyKit (= 3.4.2)
+    - Notificare/NotificareKit (= 3.5.0)
+    - Notificare/NotificareLoyaltyKit (= 3.5.0)
   - notificare_monetize (3.4.2):
     - Flutter
-    - Notificare/NotificareKit (= 3.4.2)
-    - Notificare/NotificareMonetizeKit (= 3.4.2)
+    - Notificare/NotificareKit (= 3.5.0)
+    - Notificare/NotificareMonetizeKit (= 3.5.0)
   - notificare_push (3.4.2):
     - Flutter
-    - Notificare/NotificareKit (= 3.4.2)
-    - Notificare/NotificarePushKit (= 3.4.2)
+    - Notificare/NotificareKit (= 3.5.0)
+    - Notificare/NotificarePushKit (= 3.5.0)
   - notificare_push_ui (3.4.2):
     - Flutter
-    - Notificare/NotificareKit (= 3.4.2)
-    - Notificare/NotificarePushUIKit (= 3.4.2)
+    - Notificare/NotificareKit (= 3.5.0)
+    - Notificare/NotificarePushUIKit (= 3.5.0)
   - notificare_scannables (3.4.2):
     - Flutter
-    - Notificare/NotificareKit (= 3.4.2)
-    - Notificare/NotificareScannablesKit (= 3.4.2)
-  - "permission_handler (5.1.0+2)":
+    - Notificare/NotificareKit (= 3.5.0)
+    - Notificare/NotificareScannablesKit (= 3.5.0)
+  - permission_handler_apple (9.0.4):
     - Flutter
 
 DEPENDENCIES:
@@ -70,7 +70,7 @@ DEPENDENCIES:
   - notificare_push (from `.symlinks/plugins/notificare_push/ios`)
   - notificare_push_ui (from `.symlinks/plugins/notificare_push_ui/ios`)
   - notificare_scannables (from `.symlinks/plugins/notificare_scannables/ios`)
-  - permission_handler (from `.symlinks/plugins/permission_handler/ios`)
+  - permission_handler_apple (from `.symlinks/plugins/permission_handler_apple/ios`)
 
 SPEC REPOS:
   trunk:
@@ -101,24 +101,24 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/notificare_push_ui/ios"
   notificare_scannables:
     :path: ".symlinks/plugins/notificare_scannables/ios"
-  permission_handler:
-    :path: ".symlinks/plugins/permission_handler/ios"
+  permission_handler_apple:
+    :path: ".symlinks/plugins/permission_handler_apple/ios"
 
 SPEC CHECKSUMS:
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
-  Notificare: d931c694d553741618418adbcb85be11c9ef5be7
-  notificare_assets: ea75f60c138da4a0494196b80b95fb1bc97b1410
-  notificare_authentication: 83d1397127f5b9832d5112b79a3d77368fae21b0
-  notificare_flutter: 494da8e98f88fe94ceb62c194aebf31f1a274a24
-  notificare_geo: 632ef1a423c0545b14e3438dc8264110e7f362ac
-  notificare_in_app_messaging: bccff67a753603ca7423fbd36acfa7f7a751b095
-  notificare_inbox: bc92a946e49f96d931cfa979ff7f8e2b0080cd8a
-  notificare_loyalty: 42137b5d09485f52ad037c8fb8bcf8ee5d8253c3
-  notificare_monetize: 7183d4557a9a2c16ac1e8e2babb25e0acf828eb5
-  notificare_push: e3d3ccfd30c259bcaa54646ad236114a14490c13
-  notificare_push_ui: 7eca7b3e1241ac89afeafb5d86939a5c8dc81302
-  notificare_scannables: c62fb99ee986e579ddb1b33892863beb1562ed3f
-  permission_handler: ccb20a9fad0ee9b1314a52b70b76b473c5f8dab0
+  Notificare: 565453a81fc1a53d38268d86be2050b88d4f4700
+  notificare_assets: edc734a2922512c2deea97f5ef6e80a5ed509f42
+  notificare_authentication: ebfef12a116af94e316bb2db718e82b5662c3616
+  notificare_flutter: 35818c58b1ec94cdc0d5529164950f637103acfc
+  notificare_geo: 48a3b118e145934835830a1571f3fd60b973528c
+  notificare_in_app_messaging: 1ce0870d88d620fef9492370ee723e86d35347bf
+  notificare_inbox: 64b6a22ece0185768112f7b00f7447be9e8cf5fb
+  notificare_loyalty: dfc3794b99e3344be871b6c47b028a6cb25a50e0
+  notificare_monetize: 695c3ec91f747abfec47585eeefd0ab5d6d4b6f8
+  notificare_push: 4835581a7c31a82f989ca1001990d7d6d6df17ba
+  notificare_push_ui: eb33612dd71d0b51ac38c7b448e87118dfdc5ac2
+  notificare_scannables: ac148c950fe50c3eb730dc7225f33591334fe782
+  permission_handler_apple: 44366e37eaf29454a1e7b1b7d736c2cceaeb17ce
 
 PODFILE CHECKSUM: fda2901ee98992655f2b15c6264fc73cd0874c46
 
