@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:notificare/notificare.dart';
 import 'package:notificare_push/notificare_push.dart';
 import 'package:notificare_push/src/events/notificare_notification_action_opened_event.dart';
+import 'package:notificare_push/src/events/notificare_notification_received_event.dart';
 import 'package:notificare_push/src/models/notificare_system_notification.dart';
 
 class NotificarePush {
@@ -64,10 +65,18 @@ class NotificarePush {
     return _eventStreams[eventType]!;
   }
 
+  @Deprecated('Listen to onNotificationInfoReceived(notification, deliveryMechanism) instead.')
   static Stream<NotificareNotification> get onNotificationReceived {
     return _getEventStream('notification_received').map((result) {
       final Map<dynamic, dynamic> json = result;
       return NotificareNotification.fromJson(json.cast());
+    });
+  }
+
+  static Stream<NotificareNotificationReceivedEvent> get onNotificationInfoReceived {
+    return _getEventStream('notification_info_received').map((result) {
+      final Map<dynamic, dynamic> json = result;
+      return NotificareNotificationReceivedEvent.fromJson(json.cast());
     });
   }
 
