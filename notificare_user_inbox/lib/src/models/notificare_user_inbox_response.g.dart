@@ -6,15 +6,19 @@ part of 'notificare_user_inbox_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-NotificareUserInboxResponse _$NotificareUserInboxResponseFromJson(Map json) => NotificareUserInboxResponse(
+NotificareUserInboxResponse _$NotificareUserInboxResponseFromJson(Map json) =>
+    NotificareUserInboxResponse(
       count: json['count'] as int,
-      unread: json['count'] as int,
+      unread: json['unread'] as int,
       items: (json['items'] as List<dynamic>)
-          .map((e) => NotificareUserInboxItem.fromJson(Map<String, dynamic>.from(e as Map)))
+          .map((e) => NotificareUserInboxItem.fromJson(
+              Map<String, dynamic>.from(e as Map)))
           .toList(),
     );
 
-Map<String, dynamic> _$NotificareUserInboxResponseToJson(NotificareUserInboxResponse instance) => <String, dynamic>{
+Map<String, dynamic> _$NotificareUserInboxResponseToJson(
+        NotificareUserInboxResponse instance) =>
+    <String, dynamic>{
       'count': instance.count,
       'unread': instance.unread,
       'items': instance.items.map((e) => e.toJson()).toList(),
