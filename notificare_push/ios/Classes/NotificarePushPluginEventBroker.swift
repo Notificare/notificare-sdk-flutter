@@ -99,6 +99,7 @@ extension NotificarePushPluginEventBroker {
 extension NotificarePushPluginEventBroker {
     enum EventType: String, CaseIterable {
         case notificationReceived = "notification_received"
+        case notificationInfoReceived = "notification_info_received"
         case systemNotificationReceived = "system_notification_received"
         case unknownNotificationReceived = "unknown_notification_received"
         case notificationOpened = "notification_opened"
@@ -121,6 +122,16 @@ extension NotificarePushPluginEventBroker {
         return Event(
             type: .notificationReceived,
             payload: try! notification.toJson()
+        )
+    }
+    
+    static func OnNotificationReceived(notification: NotificareNotification, deliveryMechanism: NotificareNotificationDeliveryMechanism) -> Event {
+        return Event(
+            type: .notificationInfoReceived,
+            payload: [
+                "notification": try! notification.toJson(),
+                "deliveryMechanism": deliveryMechanism.rawValue
+            ]
         )
     }
     

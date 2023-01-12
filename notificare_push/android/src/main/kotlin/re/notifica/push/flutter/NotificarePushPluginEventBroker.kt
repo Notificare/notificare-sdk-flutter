@@ -6,6 +6,7 @@ import io.flutter.plugin.common.BinaryMessenger
 import io.flutter.plugin.common.EventChannel
 import io.flutter.plugin.common.JSONMethodCodec
 import re.notifica.models.NotificareNotification
+import re.notifica.push.models.NotificareNotificationDeliveryMechanism
 import re.notifica.push.models.NotificareSystemNotification
 import re.notifica.push.models.NotificareUnknownNotification
 
@@ -38,6 +39,7 @@ internal object NotificarePushPluginEventBroker {
 
         enum class Type(val id: String) {
             NOTIFICATION_RECEIVED(id = "notification_received"),
+            NOTIFICATION_INFO_RECEIVED(id = "notification_info_received"),
             SYSTEM_NOTIFICATION_RECEIVED(id = "system_notification_received"),
             UNKNOWN_NOTIFICATION_RECEIVED(id = "unknown_notification_received"),
             NOTIFICATION_OPENED(id = "notification_opened"),
@@ -56,6 +58,17 @@ internal object NotificarePushPluginEventBroker {
         ) : Event() {
             override val type = Type.NOTIFICATION_RECEIVED
             override val payload = notification.toJson()
+        }
+
+        class NotificationInfoReceived(
+            notification: NotificareNotification,
+            deliveryMechanism: NotificareNotificationDeliveryMechanism
+        ) : Event() {
+            override val type = Type.NOTIFICATION_INFO_RECEIVED
+            override val payload = mapOf(
+                "notification" to notification.toJson(),
+                "deliveryMechanism" to deliveryMechanism.rawValue,
+            )
         }
 
         class SystemNotificationReceived(
