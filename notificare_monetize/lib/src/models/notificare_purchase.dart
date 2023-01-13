@@ -5,7 +5,6 @@ part 'notificare_purchase.g.dart';
 
 @JsonSerializable(anyMap: true, explicitToJson: true)
 @NotificareIsoDateTimeConverter()
-@NotificareNullableIsoDateTimeConverter()
 class NotificarePurchase {
   final String id;
   final String productIdentifier;
