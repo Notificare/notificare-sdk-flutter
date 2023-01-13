@@ -5,7 +5,6 @@ part 'notificare_inbox_item.g.dart';
 
 @JsonSerializable(anyMap: true, explicitToJson: true)
 @NotificareIsoDateTimeConverter()
-@NotificareNullableIsoDateTimeConverter()
 class NotificareInboxItem {
   final String id;
   final NotificareNotification notification;
