@@ -35,12 +35,16 @@ public class SwiftNotificareInAppMessagingPlugin: NSObject, FlutterPlugin {
     }
 
     private func setMessagesSuppressed(_ call: FlutterMethodCall, _ response: @escaping FlutterResult) {
-        guard let suppressed = call.arguments as? Bool else {
+        guard let arguments = call.arguments as? [String: Any] else {
             response(FlutterError(code: DEFAULT_ERROR_CODE, message: "Invalid request parameters.", details: nil))
             return
         }
-
-        Notificare.shared.inAppMessaging().hasMessagesSuppressed = suppressed
+        
+        let suppressed = arguments["suppressed"] as! Bool
+        let evaluateContext = arguments["evaluateContext"] as? Bool ?? false
+        
+        Notificare.shared.inAppMessaging().setMessagesSuppressed(suppressed, evaluateContext: evaluateContext)
+        
         response(nil)
     }
 }

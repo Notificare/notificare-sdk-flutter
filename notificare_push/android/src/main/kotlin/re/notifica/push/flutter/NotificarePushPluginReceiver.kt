@@ -3,15 +3,28 @@ package re.notifica.push.flutter
 import android.content.Context
 import re.notifica.models.NotificareNotification
 import re.notifica.push.NotificarePushIntentReceiver
+import re.notifica.push.models.NotificareNotificationDeliveryMechanism
 import re.notifica.push.models.NotificareSystemNotification
 import re.notifica.push.models.NotificareUnknownNotification
 
 class NotificarePushPluginReceiver : NotificarePushIntentReceiver() {
 
-    override fun onNotificationReceived(context: Context, notification: NotificareNotification) {
+    override fun onNotificationReceived(
+        context: Context,
+        notification: NotificareNotification,
+        deliveryMechanism: NotificareNotificationDeliveryMechanism
+    ) {
+        // Continue emitting the legacy event to preserve backwards compatibility.
         NotificarePushPluginEventBroker.emit(
             NotificarePushPluginEventBroker.Event.NotificationReceived(
                 notification = notification,
+            )
+        )
+
+        NotificarePushPluginEventBroker.emit(
+            NotificarePushPluginEventBroker.Event.NotificationInfoReceived(
+                notification = notification,
+                deliveryMechanism = deliveryMechanism
             )
         )
     }

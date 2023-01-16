@@ -73,7 +73,7 @@ packages:
       name: json_annotation
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.4.0"
+    version: "4.7.0"
   lints:
     dependency: transitive
     description:
@@ -108,84 +108,91 @@ packages:
       path: "../notificare"
       relative: true
     source: path
-    version: "3.4.2"
+    version: "3.5.0"
   notificare_assets:
     dependency: "direct main"
     description:
       path: "../notificare_assets"
       relative: true
     source: path
-    version: "3.4.2"
+    version: "3.5.0"
   notificare_authentication:
     dependency: "direct main"
     description:
       path: "../notificare_authentication"
       relative: true
     source: path
-    version: "3.4.2"
+    version: "3.5.0"
   notificare_flutter:
     dependency: "direct overridden"
     description:
       path: "../notificare_flutter"
       relative: true
     source: path
-    version: "3.4.2"
+    version: "3.5.0"
   notificare_geo:
     dependency: "direct main"
     description:
       path: "../notificare_geo"
       relative: true
     source: path
-    version: "3.4.2"
+    version: "3.5.0"
   notificare_in_app_messaging:
     dependency: "direct main"
     description:
       path: "../notificare_in_app_messaging"
       relative: true
     source: path
-    version: "3.4.2"
+    version: "3.5.0"
   notificare_inbox:
     dependency: "direct main"
     description:
       path: "../notificare_inbox"
       relative: true
     source: path
-    version: "3.4.2"
+    version: "3.5.0"
   notificare_loyalty:
     dependency: "direct main"
     description:
       path: "../notificare_loyalty"
       relative: true
     source: path
-    version: "3.4.2"
+    version: "3.5.0"
   notificare_monetize:
     dependency: "direct main"
     description:
       path: "../notificare_monetize"
       relative: true
     source: path
-    version: "3.4.2"
+    version: "3.5.0"
   notificare_push:
     dependency: "direct main"
     description:
       path: "../notificare_push"
       relative: true
     source: path
-    version: "3.4.2"
+    version: "3.5.0"
   notificare_push_ui:
     dependency: "direct main"
     description:
       path: "../notificare_push_ui"
       relative: true
     source: path
-    version: "3.4.2"
+    version: "3.5.0"
   notificare_scannables:
     dependency: "direct main"
     description:
       path: "../notificare_scannables"
       relative: true
     source: path
-    version: "3.4.2"
+    version: "3.5.0"
+  notificare_user_inbox:
+    dependency: "direct main"
+    description:
+      path: "../notificare_user_inbox"
+      relative: true
+    source: path
+    version: "3.5.0"
   path:
     dependency: transitive
     description:
@@ -199,14 +206,35 @@ packages:
       name: permission_handler
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "8.3.0"
+    version: "10.2.0"
+  permission_handler_android:
+    dependency: transitive
+    description:
+      name: permission_handler_android
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "10.2.0"
+  permission_handler_apple:
+    dependency: transitive
+    description:
+      name: permission_handler_apple
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "9.0.7"
   permission_handler_platform_interface:
     dependency: transitive
     description:
       name: permission_handler_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.7.0"
+    version: "3.9.0"
+  permission_handler_windows:
+    dependency: transitive
+    description:
+      name: permission_handler_windows
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.2"
   plugin_platform_interface:
     dependency: transitive
     description:
@@ -276,5 +304,5 @@ packages:
     source: hosted
     version: "2.1.2"
 sdks:
-  dart: ">=2.17.0-0 <3.0.0"
-  flutter: ">=2.5.0"
+  dart: ">=2.17.0 <3.0.0"
+  flutter: ">=2.8.0"

@@ -14,8 +14,8 @@ NotificareInboxItem _$NotificareInboxItemFromJson(Map json) =>
       time: const NotificareIsoDateTimeConverter()
           .fromJson(json['time'] as String),
       opened: json['opened'] as bool,
-      expires: const NotificareNullableIsoDateTimeConverter()
-          .fromJson(json['expires'] as String?),
+      expires: _$JsonConverterFromJson<String, DateTime>(
+          json['expires'], const NotificareIsoDateTimeConverter().fromJson),
     );
 
 Map<String, dynamic> _$NotificareInboxItemToJson(
@@ -25,6 +25,18 @@ Map<String, dynamic> _$NotificareInboxItemToJson(
       'notification': instance.notification.toJson(),
       'time': const NotificareIsoDateTimeConverter().toJson(instance.time),
       'opened': instance.opened,
-      'expires': const NotificareNullableIsoDateTimeConverter()
-          .toJson(instance.expires),
+      'expires': _$JsonConverterToJson<String, DateTime>(
+          instance.expires, const NotificareIsoDateTimeConverter().toJson),
     };
+
+Value? _$JsonConverterFromJson<Json, Value>(
+  Object? json,
+  Value? Function(Json json) fromJson,
+) =>
+    json == null ? null : fromJson(json as Json);
+
+Json? _$JsonConverterToJson<Json, Value>(
+  Value? value,
+  Json? Function(Value value) toJson,
+) =>
+    value == null ? null : toJson(value);

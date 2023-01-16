@@ -5,6 +5,7 @@ import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.plugin.common.JSONMethodCodec
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
+import org.json.JSONObject
 import re.notifica.Notificare
 import re.notifica.iam.NotificareInAppMessaging
 import re.notifica.iam.ktx.inAppMessaging
@@ -45,10 +46,19 @@ class NotificareInAppMessagingPlugin : FlutterPlugin, MethodChannel.MethodCallHa
     }
 
     private fun setMessagesSuppressed(@Suppress("UNUSED_PARAMETER") call: MethodCall, result: MethodChannel.Result) {
-        val suppressed = call.arguments<Boolean>()
+        val arguments = call.arguments<JSONObject>()
             ?: return result.error(NOTIFICARE_ERROR, "Invalid request arguments.", null)
 
-        Notificare.inAppMessaging().hasMessagesSuppressed = suppressed
+        val suppressed = arguments.getBoolean("suppressed")
+        val evaluateContext =
+            if (!arguments.isNull("evaluateContext")) {
+                arguments.getBoolean("evaluateContext")
+            } else {
+                false
+            }
+
+        Notificare.inAppMessaging().setMessagesSuppressed(suppressed, evaluateContext)
+
         result.success(null)
     }
 
