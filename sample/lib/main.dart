@@ -86,10 +86,12 @@ class _AppState extends State<App> {
 
     // region Notificare Push events
 
-    NotificarePush.onNotificationReceived.listen((notification) {
+    NotificarePush.onNotificationInfoReceived.listen((event) {
+      debugPrint("Notification received (${event.deliveryMechanism}): ${event.notification.toJson()}");
+
       scaffoldMessengerKey.currentState!.showSnackBar(
-        const SnackBar(
-          content: Text('Notification received.'),
+        SnackBar(
+          content: Text('Notification (${event.deliveryMechanism}) received.'),
         ),
       );
     });
