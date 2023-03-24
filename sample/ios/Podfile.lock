@@ -8,6 +8,7 @@ PODS:
   - Notificare/NotificareKit (3.5.0)
   - Notificare/NotificareLoyaltyKit (3.5.0)
   - Notificare/NotificareMonetizeKit (3.5.0)
+  - Notificare/NotificareNotificationServiceExtensionKit (3.5.0)
   - Notificare/NotificarePushKit (3.5.0)
   - Notificare/NotificarePushUIKit (3.5.0)
   - Notificare/NotificareScannablesKit (3.5.0)
@@ -64,6 +65,7 @@ PODS:
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
+  - Notificare/NotificareNotificationServiceExtensionKit (>= 3.5.0)
   - notificare_assets (from `.symlinks/plugins/notificare_assets/ios`)
   - notificare_authentication (from `.symlinks/plugins/notificare_authentication/ios`)
   - notificare_flutter (from `.symlinks/plugins/notificare_flutter/ios`)
@@ -129,6 +131,6 @@ SPEC CHECKSUMS:
   notificare_user_inbox: 1fbf19ca366aff79571502943d9f96635c7ceeb5
   permission_handler_apple: 44366e37eaf29454a1e7b1b7d736c2cceaeb17ce
 
-PODFILE CHECKSUM: 748485b8dbdeb9e83d14a9a23b8aa0fa66c8fdb7
+PODFILE CHECKSUM: 6ebf484731c7a52a875c19d92485437a5cf5e6cd
 
 COCOAPODS: 1.11.3
