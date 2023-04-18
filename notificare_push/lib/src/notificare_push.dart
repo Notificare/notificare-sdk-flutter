@@ -4,9 +4,6 @@ import 'dart:io';
 import 'package:flutter/services.dart';
 import 'package:notificare/notificare.dart';
 import 'package:notificare_push/notificare_push.dart';
-import 'package:notificare_push/src/events/notificare_notification_action_opened_event.dart';
-import 'package:notificare_push/src/events/notificare_notification_received_event.dart';
-import 'package:notificare_push/src/models/notificare_system_notification.dart';
 
 class NotificarePush {
   NotificarePush._();
