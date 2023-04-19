@@ -1,14 +1,14 @@
 group 're.notifica.assets.flutter'
 
 buildscript {
-    ext.kotlin_version = '1.6.10'
+    ext.kotlin_version = '1.7.20'
     repositories {
         google()
         mavenCentral()
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.1.2'
+        classpath 'com.android.tools.build:gradle:7.4.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
@@ -27,7 +27,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 31
+    compileSdkVersion 33
 
     defaultConfig {
         minSdkVersion 23
@@ -48,7 +48,7 @@ android {
 }
 
 dependencies {
-    def notificare_version = '3.5.0'
+    def notificare_version = '3.5.1'
     api "re.notifica:notificare:$notificare_version"
     api "re.notifica:notificare-assets:$notificare_version"
 }

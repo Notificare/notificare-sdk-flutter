@@ -62,7 +62,7 @@ class Notificare {
   static Stream<dynamic> _getEventStream(String eventType) {
     if (_eventChannels[eventType] == null) {
       final name = 're.notifica.flutter/events/$eventType';
-      _eventChannels[eventType] = EventChannel(name, JSONMethodCodec());
+      _eventChannels[eventType] = EventChannel(name, const JSONMethodCodec());
     }
 
     if (_eventStreams[eventType] == null) {

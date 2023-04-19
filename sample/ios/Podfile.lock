@@ -1,71 +1,71 @@
 PODS:
   - Flutter (1.0.0)
-  - Notificare/NotificareAssetsKit (3.5.0)
-  - Notificare/NotificareAuthenticationKit (3.5.0)
-  - Notificare/NotificareGeoKit (3.5.0)
-  - Notificare/NotificareInAppMessagingKit (3.5.0)
-  - Notificare/NotificareInboxKit (3.5.0)
-  - Notificare/NotificareKit (3.5.0)
-  - Notificare/NotificareLoyaltyKit (3.5.0)
-  - Notificare/NotificareMonetizeKit (3.5.0)
-  - Notificare/NotificareNotificationServiceExtensionKit (3.5.0)
-  - Notificare/NotificarePushKit (3.5.0)
-  - Notificare/NotificarePushUIKit (3.5.0)
-  - Notificare/NotificareScannablesKit (3.5.0)
-  - Notificare/NotificareUserInboxKit (3.5.0)
+  - Notificare/NotificareAssetsKit (3.5.1)
+  - Notificare/NotificareAuthenticationKit (3.5.1)
+  - Notificare/NotificareGeoKit (3.5.1)
+  - Notificare/NotificareInAppMessagingKit (3.5.1)
+  - Notificare/NotificareInboxKit (3.5.1)
+  - Notificare/NotificareKit (3.5.1)
+  - Notificare/NotificareLoyaltyKit (3.5.1)
+  - Notificare/NotificareMonetizeKit (3.5.1)
+  - Notificare/NotificareNotificationServiceExtensionKit (3.5.1)
+  - Notificare/NotificarePushKit (3.5.1)
+  - Notificare/NotificarePushUIKit (3.5.1)
+  - Notificare/NotificareScannablesKit (3.5.1)
+  - Notificare/NotificareUserInboxKit (3.5.1)
   - notificare_assets (3.5.0):
     - Flutter
-    - Notificare/NotificareAssetsKit (= 3.5.0)
-    - Notificare/NotificareKit (= 3.5.0)
+    - Notificare/NotificareAssetsKit (= 3.5.1)
+    - Notificare/NotificareKit (= 3.5.1)
   - notificare_authentication (3.5.0):
     - Flutter
-    - Notificare/NotificareAuthenticationKit (= 3.5.0)
-    - Notificare/NotificareKit (= 3.5.0)
+    - Notificare/NotificareAuthenticationKit (= 3.5.1)
+    - Notificare/NotificareKit (= 3.5.1)
   - notificare_flutter (3.5.0):
     - Flutter
-    - Notificare/NotificareKit (= 3.5.0)
+    - Notificare/NotificareKit (= 3.5.1)
   - notificare_geo (3.5.0):
     - Flutter
-    - Notificare/NotificareGeoKit (= 3.5.0)
-    - Notificare/NotificareKit (= 3.5.0)
+    - Notificare/NotificareGeoKit (= 3.5.1)
+    - Notificare/NotificareKit (= 3.5.1)
   - notificare_in_app_messaging (3.5.0):
     - Flutter
-    - Notificare/NotificareInAppMessagingKit (= 3.5.0)
-    - Notificare/NotificareKit (= 3.5.0)
+    - Notificare/NotificareInAppMessagingKit (= 3.5.1)
+    - Notificare/NotificareKit (= 3.5.1)
   - notificare_inbox (3.5.0):
     - Flutter
-    - Notificare/NotificareInboxKit (= 3.5.0)
-    - Notificare/NotificareKit (= 3.5.0)
+    - Notificare/NotificareInboxKit (= 3.5.1)
+    - Notificare/NotificareKit (= 3.5.1)
   - notificare_loyalty (3.5.0):
     - Flutter
-    - Notificare/NotificareKit (= 3.5.0)
-    - Notificare/NotificareLoyaltyKit (= 3.5.0)
+    - Notificare/NotificareKit (= 3.5.1)
+    - Notificare/NotificareLoyaltyKit (= 3.5.1)
   - notificare_monetize (3.5.0):
     - Flutter
-    - Notificare/NotificareKit (= 3.5.0)
-    - Notificare/NotificareMonetizeKit (= 3.5.0)
+    - Notificare/NotificareKit (= 3.5.1)
+    - Notificare/NotificareMonetizeKit (= 3.5.1)
   - notificare_push (3.5.0):
     - Flutter
-    - Notificare/NotificareKit (= 3.5.0)
-    - Notificare/NotificarePushKit (= 3.5.0)
+    - Notificare/NotificareKit (= 3.5.1)
+    - Notificare/NotificarePushKit (= 3.5.1)
   - notificare_push_ui (3.5.0):
     - Flutter
-    - Notificare/NotificareKit (= 3.5.0)
-    - Notificare/NotificarePushUIKit (= 3.5.0)
+    - Notificare/NotificareKit (= 3.5.1)
+    - Notificare/NotificarePushUIKit (= 3.5.1)
   - notificare_scannables (3.5.0):
     - Flutter
-    - Notificare/NotificareKit (= 3.5.0)
-    - Notificare/NotificareScannablesKit (= 3.5.0)
+    - Notificare/NotificareKit (= 3.5.1)
+    - Notificare/NotificareScannablesKit (= 3.5.1)
   - notificare_user_inbox (3.5.0):
     - Flutter
-    - Notificare/NotificareKit (= 3.5.0)
-    - Notificare/NotificareUserInboxKit (= 3.5.0)
+    - Notificare/NotificareKit (= 3.5.1)
+    - Notificare/NotificareUserInboxKit (= 3.5.1)
   - permission_handler_apple (9.0.4):
     - Flutter
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
-  - Notificare/NotificareNotificationServiceExtensionKit (>= 3.5.0)
+  - Notificare/NotificareNotificationServiceExtensionKit (>= 3.5.1)
   - notificare_assets (from `.symlinks/plugins/notificare_assets/ios`)
   - notificare_authentication (from `.symlinks/plugins/notificare_authentication/ios`)
   - notificare_flutter (from `.symlinks/plugins/notificare_flutter/ios`)
@@ -116,21 +116,21 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
-  Notificare: 565453a81fc1a53d38268d86be2050b88d4f4700
-  notificare_assets: 00c733c5d272e79c11029f5baa867183e3341ccc
-  notificare_authentication: 4368e146a03459641994ba4db738ecb143a6eeba
-  notificare_flutter: bc6cd8bf75e4436a6bf7a755e78c61e419fcb3ac
-  notificare_geo: b82f7ba06847829d420f370f0c09d9cda6a42151
-  notificare_in_app_messaging: 7d39463dfad3e298b0baad2b39fd75659ae7b5df
-  notificare_inbox: 75b0fca5f4d40d36979e3a878e43aca3610862ff
-  notificare_loyalty: d7790066d5913680d19bc45aad0f271a9abe55bc
-  notificare_monetize: e52b26065f34f33035a2c0227eb3fe107c9618eb
-  notificare_push: 122bfec83c74d60c5420bab7fc81e6be3e0fe192
-  notificare_push_ui: ad286bc5b1b17da559085dc69e1a6ad294080dbd
-  notificare_scannables: b28ca633fd8321efaa547a982ded12a68f5d4264
-  notificare_user_inbox: 1fbf19ca366aff79571502943d9f96635c7ceeb5
+  Notificare: b7610c289ce3bd37fea8b33b995942f1f5e598f6
+  notificare_assets: 3d4b8fe319b2a6fe50b1fb72b5ce5f252a335215
+  notificare_authentication: 888f4486ba859e862e4e2ec5e2b41f329a086cfd
+  notificare_flutter: 251f1f159b70eed5b266c5856d8a9fe862f3dc87
+  notificare_geo: 212bb9ea399ce02880fe38ed0d6914cbcedecf14
+  notificare_in_app_messaging: e30de522ef19367f7359eb156c502aa817008d90
+  notificare_inbox: 00858d5ff8310dfdd634f8801ae7e7f9cf2e21b1
+  notificare_loyalty: 888b709051b1224b85b968ca284c57421c012cdd
+  notificare_monetize: 7d9092907d99ee1098fee47434a5f250258b32cd
+  notificare_push: d6523106a277f733c85eecb84ad87c47e94525ff
+  notificare_push_ui: 20179c6cdc0aeddc0afbb463749e31e2aca1983d
+  notificare_scannables: 9ab51bc7fc8a1f81d0327dd54e0c963ed9d64acb
+  notificare_user_inbox: 33907b65712b195ea0528d546dd21040bb7ce4d6
   permission_handler_apple: 44366e37eaf29454a1e7b1b7d736c2cceaeb17ce
 
-PODFILE CHECKSUM: 6ebf484731c7a52a875c19d92485437a5cf5e6cd
+PODFILE CHECKSUM: c72177f6017e8ead419efafec886eb60bd682717
 
 COCOAPODS: 1.11.3

@@ -256,11 +256,6 @@ class _HomePageState extends State<HomePage> {
               onPressed: _onValidateUserClicked,
             ),
             TextButton(
-              child: const Text('Generate push email'),
-              style: AppTheme.buttonStyle,
-              onPressed: _onGeneratePushEmailClicked,
-            ),
-            TextButton(
               child: const Text('Add user segment'),
               style: AppTheme.buttonStyle,
               onPressed: _onAddUserSegmentClicked,
@@ -1164,25 +1159,6 @@ class _HomePageState extends State<HomePage> {
   void _onValidateUserClicked() async {
     try {
       await NotificareAuthentication.validateUser(token: 'token');
-
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Done.'),
-        ),
-      );
-    } catch (error) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('$error'),
-          backgroundColor: Colors.red.shade900,
-        ),
-      );
-    }
-  }
-
-  void _onGeneratePushEmailClicked() async {
-    try {
-      await NotificareAuthentication.generatePushEmailAddress();
 
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
