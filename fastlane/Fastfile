@@ -57,6 +57,81 @@ lane :bump do |options|
 end
 
 desc <<-DESC
+Updates the Android compile SDK version of each Flutter package.
+
+#### Options
+* `version`: The new version for the Android compile SDK.
+
+#### Examples
+```sh
+bundle exec fastlane update_compile_sdk_version version:33
+```
+DESC
+lane :update_compile_sdk_version do |options|
+  version = options[:version]
+
+  if version.nil?
+    UI.user_error!("Missing required 'version' parameter.")
+  end
+
+  files = Dir['../notificare*/android/build.gradle']
+  regex = /compileSdkVersion .*$/
+  replacement = "compileSdkVersion #{version}"
+
+  files.each { |file| update_file(file, regex, replacement) }
+end
+
+desc <<-DESC
+Updates Kotlin version version of each Flutter package.
+
+#### Options
+* `version`: The new version for Kotlin.
+
+#### Examples
+```sh
+bundle exec fastlane update_kotlin_version version:1.7.20
+```
+DESC
+lane :update_kotlin_version do |options|
+  version = options[:version]
+
+  if version.nil?
+    UI.user_error!("Missing required 'version' parameter.")
+  end
+
+  files = Dir['../notificare*/android/build.gradle']
+  regex = /ext.kotlin_version = '.*'/
+  replacement = "ext.kotlin_version = '#{version}'"
+
+  files.each { |file| update_file(file, regex, replacement) }
+end
+
+desc <<-DESC
+Updates the Android Gradle Plugin version of each Flutter package.
+
+#### Options
+* `version`: The new version for the Android Gradle Plugin.
+
+#### Examples
+```sh
+bundle exec fastlane update_android_gradle_plugin version:7.4.2
+```
+DESC
+lane :update_android_gradle_plugin do |options|
+  version = options[:version]
+
+  if version.nil?
+    UI.user_error!("Missing required 'version' parameter.")
+  end
+
+  files = Dir['../notificare*/android/build.gradle']
+  regex = /classpath 'com.android.tools.build:gradle:.*'/
+  replacement = "classpath 'com.android.tools.build:gradle:#{version}'"
+
+  files.each { |file| update_file(file, regex, replacement) }
+end
+
+desc <<-DESC
 Updates the lockfile of each package and sample app pods.
 
 #### Examples

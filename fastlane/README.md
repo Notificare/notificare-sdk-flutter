@@ -50,6 +50,57 @@ bundle exec fastlane bump version:3.4.0
 ```
 
 
+### update_compile_sdk_version
+
+```sh
+[bundle exec] fastlane update_compile_sdk_version
+```
+
+Updates the Android compile SDK version of each Flutter package.
+
+#### Options
+* `version`: The new version for the Android compile SDK.
+
+#### Examples
+```sh
+bundle exec fastlane update_compile_sdk_version version:33
+```
+
+
+### update_kotlin_version
+
+```sh
+[bundle exec] fastlane update_kotlin_version
+```
+
+Updates Kotlin version version of each Flutter package.
+
+#### Options
+* `version`: The new version for Kotlin.
+
+#### Examples
+```sh
+bundle exec fastlane update_kotlin_version version:1.7.20
+```
+
+
+### update_android_gradle_plugin
+
+```sh
+[bundle exec] fastlane update_android_gradle_plugin
+```
+
+Updates the Android Gradle Plugin version of each Flutter package.
+
+#### Options
+* `version`: The new version for the Android Gradle Plugin.
+
+#### Examples
+```sh
+bundle exec fastlane update_android_gradle_plugin version:7.4.2
+```
+
+
 ### update_sample
 
 ```sh
