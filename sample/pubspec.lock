@@ -137,13 +137,6 @@ packages:
       relative: true
     source: path
     version: "3.5.1"
-  notificare_authentication:
-    dependency: "direct main"
-    description:
-      path: "../notificare_authentication"
-      relative: true
-    source: path
-    version: "3.5.1"
   notificare_flutter:
     dependency: "direct overridden"
     description:
