@@ -1,7 +1,6 @@
 PODS:
   - Flutter (1.0.0)
   - Notificare/NotificareAssetsKit (3.5.1)
-  - Notificare/NotificareAuthenticationKit (3.5.1)
   - Notificare/NotificareGeoKit (3.5.1)
   - Notificare/NotificareInAppMessagingKit (3.5.1)
   - Notificare/NotificareInboxKit (3.5.1)
@@ -16,10 +15,6 @@ PODS:
   - notificare_assets (3.5.1):
     - Flutter
     - Notificare/NotificareAssetsKit (= 3.5.1)
-    - Notificare/NotificareKit (= 3.5.1)
-  - notificare_authentication (3.5.1):
-    - Flutter
-    - Notificare/NotificareAuthenticationKit (= 3.5.1)
     - Notificare/NotificareKit (= 3.5.1)
   - notificare_flutter (3.5.1):
     - Flutter
@@ -67,7 +62,6 @@ DEPENDENCIES:
   - Flutter (from `Flutter`)
   - Notificare/NotificareNotificationServiceExtensionKit (>= 3.5.1)
   - notificare_assets (from `.symlinks/plugins/notificare_assets/ios`)
-  - notificare_authentication (from `.symlinks/plugins/notificare_authentication/ios`)
   - notificare_flutter (from `.symlinks/plugins/notificare_flutter/ios`)
   - notificare_geo (from `.symlinks/plugins/notificare_geo/ios`)
   - notificare_in_app_messaging (from `.symlinks/plugins/notificare_in_app_messaging/ios`)
@@ -89,8 +83,6 @@ EXTERNAL SOURCES:
     :path: Flutter
   notificare_assets:
     :path: ".symlinks/plugins/notificare_assets/ios"
-  notificare_authentication:
-    :path: ".symlinks/plugins/notificare_authentication/ios"
   notificare_flutter:
     :path: ".symlinks/plugins/notificare_flutter/ios"
   notificare_geo:
@@ -118,7 +110,6 @@ SPEC CHECKSUMS:
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
   Notificare: b7610c289ce3bd37fea8b33b995942f1f5e598f6
   notificare_assets: b6efc9d601b976e3131cf7041b11dc52c6f2f5d8
-  notificare_authentication: 3aa8a3501b635137bb2bd7ed29e3917d62af755a
   notificare_flutter: 95dd662233914772abe893adcc6a0982f0c0084b
   notificare_geo: 92833bee6d0eae6acf77d0d5d6848e0677e415c8
   notificare_in_app_messaging: ee04e7f881034ee2a9ead03a5d7bbc8fc5312787
@@ -133,4 +124,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: c72177f6017e8ead419efafec886eb60bd682717
 
-COCOAPODS: 1.11.3
+COCOAPODS: 1.12.1

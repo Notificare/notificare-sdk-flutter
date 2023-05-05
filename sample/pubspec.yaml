@@ -49,8 +49,6 @@ dependencies:
     path: "../notificare_in_app_messaging"
   notificare_assets:
     path: "../notificare_assets"
-  notificare_authentication:
-    path: "../notificare_authentication"
   notificare_geo:
     path: "../notificare_geo"
   notificare_scannables:
