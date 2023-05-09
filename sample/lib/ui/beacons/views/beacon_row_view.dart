@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:notificare_geo/notificare_geo.dart';
 
-class BeaconRow extends StatelessWidget {
-   final NotificareBeacon beacon;
+class BeaconRowView extends StatelessWidget {
+  final NotificareBeacon beacon;
 
-  const BeaconRow({
+  const BeaconRowView({
     Key? key,
     required this.beacon,
   }) : super(key: key);
@@ -20,10 +20,10 @@ class BeaconRow extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(beacon.name, style: Theme.of(context).textTheme.bodyText1),
-                Text("${beacon.major}:${beacon.minor}", style: Theme.of(context).textTheme.bodyText2),
-                Text(beacon.id, style: Theme.of(context).textTheme.caption),
-                Text(beacon.proximity, style: Theme.of(context).textTheme.caption),
+                Text(beacon.name, style: Theme.of(context).textTheme.bodyLarge),
+                Text("${beacon.major}:${beacon.minor}", style: Theme.of(context).textTheme.bodyMedium),
+                Text(beacon.id, style: Theme.of(context).textTheme.bodySmall),
+                Text(beacon.proximity, style: Theme.of(context).textTheme.bodySmall),
               ],
             ),
           ),
