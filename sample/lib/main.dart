@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 import 'package:notificare/notificare.dart';
-import 'package:notificare_authentication/notificare_authentication.dart';
 import 'package:notificare_geo/notificare_geo.dart';
 import 'package:notificare_in_app_messaging/notificare_in_app_messaging.dart';
 import 'package:notificare_inbox/notificare_inbox.dart';
@@ -268,26 +267,6 @@ class _AppState extends State<App> {
       scaffoldMessengerKey.currentState!.showSnackBar(
         const SnackBar(
           content: Text('Notification custom action received.'),
-        ),
-      );
-    });
-
-    // endregion
-
-    // region Notificare Authentication events
-
-    NotificareAuthentication.onPasswordResetTokenReceived.listen((token) {
-      scaffoldMessengerKey.currentState!.showSnackBar(
-        SnackBar(
-          content: Text('Reset password token received: $token'),
-        ),
-      );
-    });
-
-    NotificareAuthentication.onValidateUserTokenReceived.listen((token) {
-      scaffoldMessengerKey.currentState!.showSnackBar(
-        SnackBar(
-          content: Text('Validate user token received: $token'),
         ),
       );
     });
