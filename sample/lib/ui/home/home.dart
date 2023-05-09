@@ -36,7 +36,6 @@ class _HomeViewState extends State<HomeView> with WidgetsBindingObserver {
     super.initState();
 
     widget.isReady.addListener(_onReady);
-    widget.allowedUi.addListener(_onNotificationSettingsChanged);
   }
 
   @override
@@ -88,11 +87,14 @@ class _HomeViewState extends State<HomeView> with WidgetsBindingObserver {
     _checkNotificationsEnabled();
     _checkLocationEnabled();
 
+    widget.allowedUi.addListener(_onNotificationSettingsChanged);
     widget.isReady.removeListener(_onReady);
   }
 
   void _onNotificationSettingsChanged() {
-    _checkNotificationsEnabled();
+    if (widget.allowedUi.value != _hasNotificationsEnabled) {
+      _checkNotificationsEnabled();
+    }
   }
 
   // Check initial status

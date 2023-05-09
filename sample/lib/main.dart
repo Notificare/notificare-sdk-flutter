@@ -68,6 +68,8 @@ class _AppState extends State<App> {
     // region Notificare events
 
     Notificare.onReady.listen((application) async {
+      _allowedUi.value = await NotificarePush.allowedUI;
+
       setState(() {
         _isReady.value = true;
       });
@@ -176,9 +178,7 @@ class _AppState extends State<App> {
     });
 
     NotificarePush.onNotificationSettingsChanged.listen((granted) {
-      setState(() {
-        _allowedUi.value = granted;
-      });
+      _allowedUi.value = granted;
 
       scaffoldMessengerKey.currentState!.showSnackBar(
         SnackBar(
