@@ -60,7 +60,6 @@ dependencies:
 
   # Optional modules
   notificare_assets: ^3.0.0
-  notificare_authentication: ^3.0.0
   notificare_geo: ^3.0.0
   notificare_inbox: ^3.0.0
   notificare_loyalty: ^3.0.0
