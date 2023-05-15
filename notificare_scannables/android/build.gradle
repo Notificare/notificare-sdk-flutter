@@ -50,7 +50,7 @@ android {
 }
 
 dependencies {
-    def notificare_version = '3.5.1'
+    def notificare_version = '3.5.2'
     api "re.notifica:notificare:$notificare_version"
     api "re.notifica:notificare-scannables:$notificare_version"
     implementation "re.notifica:notificare-scannables-gms:$notificare_version"
