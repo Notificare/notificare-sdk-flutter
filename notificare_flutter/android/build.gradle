@@ -42,6 +42,6 @@ android {
 }
 
 dependencies {
-    def notificare_version = '3.5.2'
+    def notificare_version = '3.5.3'
     api "re.notifica:notificare:$notificare_version"
 }
