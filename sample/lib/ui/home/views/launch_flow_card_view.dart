@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:logger/logger.dart';
 import 'package:notificare/notificare.dart';
 
-class LaunchFlowCardView extends StatefulWidget {
+import '../../../logger/logger.dart';
+
+class LaunchFlowCardView extends StatelessWidget {
   final bool isReady;
 
   const LaunchFlowCardView({
@@ -10,11 +11,6 @@ class LaunchFlowCardView extends StatefulWidget {
     required this.isReady,
   });
 
-  @override
-  LaunchFlowCardViewState createState() => LaunchFlowCardViewState();
-}
-
-class LaunchFlowCardViewState extends State<LaunchFlowCardView> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -31,10 +27,8 @@ class LaunchFlowCardViewState extends State<LaunchFlowCardView> {
               IconButton(
                 padding: EdgeInsets.zero,
                 constraints: const BoxConstraints(),
-                onPressed: () => _launchFlowInfo(),
-                icon: const Icon(
-                  Icons.info,
-                ),
+                onPressed: () => _showNotificareStatusInfo(context),
+                icon: const Icon(Icons.info),
               ),
             ],
           ),
@@ -49,11 +43,18 @@ class LaunchFlowCardViewState extends State<LaunchFlowCardView> {
             child: Row(
               children: [
                 Expanded(
-                    child: TextButton(
-                        onPressed: !widget.isReady ? null : () => _unLaunch(), child: const Text("Unlaunch"))),
+                  child: TextButton(
+                    onPressed: !isReady ? null : () => _unLaunchNotificare(context),
+                    child: const Text("Unlaunch"),
+                  ),
+                ),
                 const VerticalDivider(width: 1),
                 Expanded(
-                    child: TextButton(onPressed: widget.isReady ? null : () => _launch(), child: const Text("Launch"))),
+                  child: TextButton(
+                    onPressed: isReady ? null : () => _launchNotificare(context),
+                    child: const Text("Launch"),
+                  ),
+                ),
               ],
             ),
           ),
@@ -64,20 +65,19 @@ class LaunchFlowCardViewState extends State<LaunchFlowCardView> {
 
   // Launch Flow
 
-  void _launch() async {
+  void _launchNotificare(BuildContext context) async {
     try {
-      Logger().i('Notificare launch clicked.');
+      logger.i('Notificare launch clicked.');
       await Notificare.launch();
 
-      Logger().i('Notificare launched successfully.');
+      logger.i('Notificare launched successfully.');
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Notificare launched successfully.'),
         ),
       );
     } catch (error) {
-      Logger().e('Notificare launch failed.', error);
-
+      logger.e('Notificare launch failed.', error);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('$error'),
@@ -87,20 +87,19 @@ class LaunchFlowCardViewState extends State<LaunchFlowCardView> {
     }
   }
 
-  void _unLaunch() async {
+  void _unLaunchNotificare(BuildContext context) async {
     try {
-      Logger().i('Notificare unlaunch clicked.');
+      logger.i('Notificare unlaunch clicked.');
       await Notificare.unlaunch();
 
-      Logger().i('Notificare unlaunched successfully.');
+      logger.i('Notificare unlaunched successfully.');
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Notificare unlaunched successfully.'),
         ),
       );
     } catch (error) {
-      Logger().e('Notificare unlaunch failed.', error);
-
+      logger.e('Notificare unlaunch failed.', error);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('$error'),
@@ -110,7 +109,7 @@ class LaunchFlowCardViewState extends State<LaunchFlowCardView> {
     }
   }
 
-  Future<void> _launchFlowInfo() async {
+  Future<void> _showNotificareStatusInfo(BuildContext context) async {
     try {
       final isConfigured = await Notificare.isConfigured;
       final isReady = await Notificare.isReady;
@@ -159,8 +158,7 @@ class LaunchFlowCardViewState extends State<LaunchFlowCardView> {
         },
       );
     } catch (error) {
-      Logger().e('Launch flow info error.', error);
-
+      logger.e('Launch flow info error.', error);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('$error'),

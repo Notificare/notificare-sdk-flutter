@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:logger/logger.dart';
 import 'package:notificare/notificare.dart';
+import 'package:sample/theme/theme.dart';
 
-import '../../main.dart';
+import '../../logger/logger.dart';
 
 class CustomEventsView extends StatefulWidget {
   const CustomEventsView({Key? key}) : super(key: key);
@@ -67,7 +67,10 @@ class _CustomEventsViewState extends State<CustomEventsView> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      const Text("Data fields", style: App.secondaryText),
+                      const Text(
+                        "Data fields",
+                        style: AppTheme.secondaryText,
+                      ),
                       Checkbox(
                         value: _shouldIncludeFields,
                         onChanged: _didChangeDataFieldCheckBox,
@@ -102,7 +105,7 @@ class _CustomEventsViewState extends State<CustomEventsView> {
 
   void _onRegisterCustomEventClicked() async {
     try {
-      Logger().i('Register custom event clicked.');
+      logger.i('Register custom event clicked.');
 
       if (_shouldIncludeFields) {
         await Notificare.events().logCustom(_eventName, data: _dataFields);
@@ -111,20 +114,20 @@ class _CustomEventsViewState extends State<CustomEventsView> {
       }
 
       _controller.clear();
+
       setState(() {
         _eventName = "";
         _shouldIncludeFields = false;
       });
 
-      Logger().i('Registered custom event successfully.');
+      logger.i('Registered custom event successfully.');
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Registered custom event successfully.'),
         ),
       );
     } catch (error) {
-      Logger().e('Register custom event failed.', error);
-
+      logger.e('Register custom event failed.', error);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('$error'),

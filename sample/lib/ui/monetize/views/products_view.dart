@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:logger/logger.dart';
 import 'package:notificare_monetize/notificare_monetize.dart';
 import 'package:sample/ui/monetize/views/monetize_data_field_view.dart';
+
+import '../../../logger/logger.dart';
 
 class ProductsView extends StatefulWidget {
   const ProductsView({Key? key}) : super(key: key);
@@ -17,7 +18,7 @@ class _ProductsViewState extends State<ProductsView> {
   void initState() {
     super.initState();
 
-    _getProducts();
+    _loadProducts();
   }
 
   @override
@@ -58,32 +59,35 @@ class _ProductsViewState extends State<ProductsView> {
                           ],
                         ),
                       ),
-                      TextButton(onPressed: () => _onPurchaseProductClicked(product), child: const Text("Buy")),
+                      TextButton(
+                        onPressed: () => _onPurchaseProductClicked(product),
+                        child: const Text("Buy"),
+                      ),
                     ],
                   ),
                 );
               },
-            ));
+            ),
+          );
   }
 
-  void _getProducts() async {
+  void _loadProducts() async {
     try {
-      Logger().i('Getting products.');
+      logger.i('Getting products.');
       final products = await NotificareMonetize.products;
 
       setState(() {
         _products = products;
       });
 
-      Logger().i('Got products successfully.');
+      logger.i('Got products successfully.');
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Got products successfully.'),
         ),
       );
     } catch (error) {
-      Logger().e('Getting products failed.', error);
-
+      logger.e('Getting products failed.', error);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('$error'),
@@ -95,18 +99,17 @@ class _ProductsViewState extends State<ProductsView> {
 
   void _onPurchaseProductClicked(NotificareProduct product) async {
     try {
-      Logger().i('Purchase product clicked.');
+      logger.i('Purchase product clicked.');
       await NotificareMonetize.startPurchaseFlow(product);
 
-      Logger().i('Purchased successfully.');
+      logger.i('Purchased flow started.');
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('Purchased successfully.'),
+          content: Text('Purchased flow started.'),
         ),
       );
     } catch (error) {
-      Logger().e('Purchase failed.', error);
-
+      logger.e('Purchase flow failed.', error);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('$error'),

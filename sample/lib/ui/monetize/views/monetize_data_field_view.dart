@@ -1,9 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:sample/theme/theme.dart';
 
-import '../../../main.dart';
-
-class MonetizeDataFieldView extends StatefulWidget {
+class MonetizeDataFieldView extends StatelessWidget {
   final String dataKey;
   final String dataValue;
 
@@ -14,21 +13,16 @@ class MonetizeDataFieldView extends StatefulWidget {
   });
 
   @override
-  State<StatefulWidget> createState() => _MonetizeDataFieldViewState();
-}
-
-class _MonetizeDataFieldViewState extends State<MonetizeDataFieldView> {
-  @override
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.fromLTRB(0, 12, 12, 12),
       child: Row(
         children: [
-          Text(widget.dataKey),
+          Text(dataKey),
           const Spacer(),
           Text(
-            widget.dataValue,
-            style: App.secondaryText,
+            dataValue,
+            style: AppTheme.secondaryText,
           )
         ],
       ),

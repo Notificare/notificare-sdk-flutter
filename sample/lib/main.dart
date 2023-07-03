@@ -1,16 +1,14 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:logger/logger.dart';
 import 'package:notificare/notificare.dart';
 import 'package:notificare_geo/notificare_geo.dart';
 import 'package:notificare_in_app_messaging/notificare_in_app_messaging.dart';
-import 'package:notificare_inbox/notificare_inbox.dart';
 import 'package:notificare_monetize/notificare_monetize.dart';
 import 'package:notificare_push/notificare_push.dart';
 import 'package:notificare_push_ui/notificare_push_ui.dart';
 import 'package:notificare_scannables/notificare_scannables.dart';
 import 'package:sample/ui/home/home.dart';
+
+import 'logger/logger.dart';
 
 void main() {
   runApp(const App());
@@ -19,61 +17,33 @@ void main() {
 class App extends StatefulWidget {
   const App({Key? key}) : super(key: key);
 
-  static const primaryBlue = Color(0xFF4272F7);
-  static const secondaryText = TextStyle(color: Colors.black26);
-
   @override
   State<StatefulWidget> createState() => _AppState();
 }
 
 class _AppState extends State<App> {
   final scaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
-  final _isReady = ValueNotifier(false);
-  final _allowedUi = ValueNotifier(false);
-
-  late StreamSubscription<int> _inboxBadgeStream;
-  int _inboxBadge = 0;
 
   @override
   void initState() {
     super.initState();
 
-    _observeInboxBadge();
-    configureNotificare();
+    _configureNotificare();
   }
 
-  @override
-  dispose() {
-    super.dispose();
 
-    _inboxBadgeStream.cancel();
-  }
 
-  void _observeInboxBadge() {
-    _inboxBadgeStream = NotificareInbox.onBadgeUpdated.listen((badge) {
-      setState(() {
-        _inboxBadge = badge;
-      });
-    });
-  }
-
-  void configureNotificare() async {
+  void _configureNotificare() async {
     try {
       await NotificarePush.setPresentationOptions(['banner', 'badge', 'sound']);
       await Notificare.launch();
     } catch (error) {
-      Logger().e('Something went wrong.', error);
+      logger.e('Something went wrong.', error);
     }
 
     // region Notificare events
 
     Notificare.onReady.listen((application) async {
-      _allowedUi.value = await NotificarePush.allowedUI;
-
-      setState(() {
-        _isReady.value = true;
-      });
-
       scaffoldMessengerKey.currentState!.showSnackBar(
         SnackBar(
           content: Text('Notificare: ${application.name}'),
@@ -90,10 +60,6 @@ class _AppState extends State<App> {
     });
 
     Notificare.onUnlaunched.listen((event) {
-      setState(() {
-        _isReady.value = false;
-      });
-
       scaffoldMessengerKey.currentState!.showSnackBar(
         const SnackBar(
           content: Text('Notificare finished un-launching.'),
@@ -122,7 +88,7 @@ class _AppState extends State<App> {
     // region Notificare Push events
 
     NotificarePush.onNotificationInfoReceived.listen((event) {
-      Logger().i('Notification received (${event.deliveryMechanism}): ${event.notification.toJson()}');
+      logger.i('Notification received (${event.deliveryMechanism}): ${event.notification.toJson()}');
 
       scaffoldMessengerKey.currentState!.showSnackBar(
         SnackBar(
@@ -140,7 +106,7 @@ class _AppState extends State<App> {
     });
 
     NotificarePush.onUnknownNotificationReceived.listen((notification) {
-      Logger().i('Unknown notification received: $notification');
+      logger.i('Unknown notification received: $notification');
 
       scaffoldMessengerKey.currentState!.showSnackBar(
         const SnackBar(
@@ -154,7 +120,7 @@ class _AppState extends State<App> {
     });
 
     NotificarePush.onUnknownNotificationOpened.listen((notification) {
-      Logger().i('Unknown notification opened: $notification');
+      logger.i('Unknown notification opened: $notification');
 
       scaffoldMessengerKey.currentState!.showSnackBar(
         const SnackBar(
@@ -168,7 +134,7 @@ class _AppState extends State<App> {
     });
 
     NotificarePush.onUnknownNotificationActionOpened.listen((data) {
-      Logger().i('Unknown notification action opened: $data');
+      logger.i('Unknown notification action opened: $data');
 
       scaffoldMessengerKey.currentState!.showSnackBar(
         const SnackBar(
@@ -178,8 +144,6 @@ class _AppState extends State<App> {
     });
 
     NotificarePush.onNotificationSettingsChanged.listen((granted) {
-      _allowedUi.value = granted;
-
       scaffoldMessengerKey.currentState!.showSnackBar(
         SnackBar(
           content: Text('allowedUI = $granted'),
@@ -379,7 +343,7 @@ class _AppState extends State<App> {
     });
 
     NotificareMonetize.onProductsUpdated.listen((products) {
-      Logger().i('products updated = ${products.map((e) => e.toJson())}');
+      logger.i('products updated = ${products.map((e) => e.toJson())}');
 
       scaffoldMessengerKey.currentState!.showSnackBar(
         const SnackBar(
@@ -389,7 +353,7 @@ class _AppState extends State<App> {
     });
 
     NotificareMonetize.onPurchasesUpdated.listen((purchases) {
-      Logger().i('purchases updated = ${purchases.map((e) => e.toJson())}');
+      logger.i('purchases updated = ${purchases.map((e) => e.toJson())}');
 
       scaffoldMessengerKey.currentState!.showSnackBar(
         const SnackBar(
@@ -399,7 +363,7 @@ class _AppState extends State<App> {
     });
 
     NotificareMonetize.onPurchaseFinished.listen((purchase) {
-      Logger().i('purchase finished = ${purchase.toJson()}');
+      logger.i('purchase finished = ${purchase.toJson()}');
 
       scaffoldMessengerKey.currentState!.showSnackBar(
         const SnackBar(
@@ -409,7 +373,7 @@ class _AppState extends State<App> {
     });
 
     NotificareMonetize.onPurchaseRestored.listen((purchase) {
-      Logger().i('purchase restored = ${purchase.toJson()}');
+      logger.i('purchase restored = ${purchase.toJson()}');
 
       scaffoldMessengerKey.currentState!.showSnackBar(
         const SnackBar(
@@ -427,7 +391,7 @@ class _AppState extends State<App> {
     });
 
     NotificareMonetize.onPurchaseFailed.listen((event) {
-      Logger().i('purchase failed = ${event.toJson()}');
+      logger.i('purchase failed = ${event.toJson()}');
 
       scaffoldMessengerKey.currentState!.showSnackBar(
         SnackBar(
@@ -441,7 +405,7 @@ class _AppState extends State<App> {
     // region Notificare In-App Messaging events
 
     NotificareInAppMessaging.onMessagePresented.listen((message) {
-      Logger().i('message presented = ${message.toJson()}');
+      logger.i('message presented = ${message.toJson()}');
 
       scaffoldMessengerKey.currentState!.showSnackBar(
         const SnackBar(
@@ -451,7 +415,7 @@ class _AppState extends State<App> {
     });
 
     NotificareInAppMessaging.onMessageFinishedPresenting.listen((message) {
-      Logger().i('message finished presenting = ${message.toJson()}');
+      logger.i('message finished presenting = ${message.toJson()}');
 
       scaffoldMessengerKey.currentState!.showSnackBar(
         const SnackBar(
@@ -461,7 +425,7 @@ class _AppState extends State<App> {
     });
 
     NotificareInAppMessaging.onMessageFailedToPresent.listen((message) {
-      Logger().i('message failed to present present = ${message.toJson()}');
+      logger.i('message failed to present present = ${message.toJson()}');
 
       scaffoldMessengerKey.currentState!.showSnackBar(
         const SnackBar(
@@ -471,7 +435,7 @@ class _AppState extends State<App> {
     });
 
     NotificareInAppMessaging.onActionExecuted.listen((event) {
-      Logger().i('action executed = ${event.toJson()}');
+      logger.i('action executed = ${event.toJson()}');
 
       scaffoldMessengerKey.currentState!.showSnackBar(
         const SnackBar(
@@ -481,7 +445,7 @@ class _AppState extends State<App> {
     });
 
     NotificareInAppMessaging.onActionFailedToExecute.listen((event) {
-      Logger().i('action failed to execute = ${event.toJson()}');
+      logger.i('action failed to execute = ${event.toJson()}');
 
       scaffoldMessengerKey.currentState!.showSnackBar(
         const SnackBar(
@@ -501,10 +465,6 @@ class _AppState extends State<App> {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: HomeView(
-          isReady: _isReady,
-          allowedUi: _allowedUi,
-          inboxBadge: _inboxBadge,
-        ));
+        home: const HomeView());
   }
 }

@@ -20,10 +20,22 @@ class BeaconRowView extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(beacon.name, style: Theme.of(context).textTheme.bodyLarge),
-                Text("${beacon.major}:${beacon.minor}", style: Theme.of(context).textTheme.bodyMedium),
-                Text(beacon.id, style: Theme.of(context).textTheme.bodySmall),
-                Text(beacon.proximity, style: Theme.of(context).textTheme.bodySmall),
+                Text(
+                  beacon.name,
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
+                Text(
+                  "${beacon.major}:${beacon.minor}",
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+                Text(
+                  beacon.id,
+                  style: Theme.of(context).textTheme.bodySmall,
+                ),
+                Text(
+                  beacon.proximity,
+                  style: Theme.of(context).textTheme.bodySmall,
+                ),
               ],
             ),
           ),

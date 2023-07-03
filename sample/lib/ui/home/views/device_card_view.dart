@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../device/device.dart';
 
-class DeviceCardViewView extends StatelessWidget {
-  const DeviceCardViewView({
+class DeviceCardView extends StatelessWidget {
+  const DeviceCardView({
     super.key,
   });
 
@@ -40,12 +40,17 @@ class DeviceCardViewView extends StatelessWidget {
                 child: Row(
                   children: [
                     const Icon(Icons.phone_android),
-                    const SizedBox(
-                      width: 12,
+                    const SizedBox(width: 12),
+                    Text(
+                      "Current Device",
+                      style: Theme.of(context).textTheme.titleSmall,
                     ),
-                    Text("Current Device", style: Theme.of(context).textTheme.titleSmall),
                     const Spacer(),
-                    const Icon(Icons.arrow_forward_ios, size: 14, color: Colors.black26),
+                    const Icon(
+                      Icons.arrow_forward_ios,
+                      size: 14,
+                      color: Colors.black26,
+                    ),
                   ],
                 ),
               ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:logger/logger.dart';
 import 'package:notificare_monetize/notificare_monetize.dart';
 
+import '../../../logger/logger.dart';
 import 'monetize_data_field_view.dart';
 
 class PurchasesView extends StatefulWidget {
@@ -18,7 +18,7 @@ class _PurchasesViewState extends State<PurchasesView> {
   void initState() {
     super.initState();
 
-    _getPurchases();
+    _loadPurchases();
   }
 
   @override
@@ -59,24 +59,23 @@ class _PurchasesViewState extends State<PurchasesView> {
           );
   }
 
-  void _getPurchases() async {
+  void _loadPurchases() async {
     try {
-      Logger().i('Getting purchases.');
+      logger.i('Getting purchases.');
       final purchases = await NotificareMonetize.purchases;
 
       setState(() {
         _purchases = purchases;
       });
 
-      Logger().i('Got purchases successfully.');
+      logger.i('Got purchases successfully.');
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Got purchases successfully.'),
         ),
       );
     } catch (error) {
-      Logger().e('Getting purchases failed.', error);
-
+      logger.e('Getting purchases failed.', error);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('$error'),

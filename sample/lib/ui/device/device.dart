@@ -3,7 +3,8 @@ import 'package:logger/logger.dart';
 import 'package:notificare/notificare.dart';
 import 'package:sample/ui/device/views/device_data_field_view.dart';
 
-import '../../main.dart';
+import '../../logger/logger.dart';
+import '../../theme/theme.dart';
 
 class DeviceView extends StatefulWidget {
   const DeviceView({Key? key}) : super(key: key);
@@ -20,7 +21,7 @@ class _DeviceViewState extends State<DeviceView> {
   void initState() {
     super.initState();
 
-    _getDeviceData();
+    _loadDeviceData();
   }
 
   @override
@@ -71,11 +72,11 @@ class _DeviceViewState extends State<DeviceView> {
                               );
                             },
                           )
-                        : Row(
-                            children: const [
+                        : const Row(
+                            children: [
                               Text(
                                 "No data",
-                                style: App.secondaryText,
+                                style: AppTheme.secondaryText,
                               ),
                             ],
                           ),
@@ -95,7 +96,10 @@ class _DeviceViewState extends State<DeviceView> {
                     margin: const EdgeInsets.fromLTRB(12, 12, 0, 12),
                     child: Row(
                       children: [
-                        Text("User Data", style: Theme.of(context).textTheme.titleSmall),
+                        Text(
+                          "User Data",
+                          style: Theme.of(context).textTheme.titleSmall,
+                        ),
                       ],
                     ),
                   ),
@@ -119,11 +123,11 @@ class _DeviceViewState extends State<DeviceView> {
                               );
                             },
                           )
-                        : Row(
-                            children: const [
+                        : const Row(
+                            children: [
                               Text(
                                 "No data",
-                                style: App.secondaryText,
+                                style: AppTheme.secondaryText,
                               ),
                             ],
                           ),
@@ -151,10 +155,15 @@ class _DeviceViewState extends State<DeviceView> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  TextButton(onPressed: _onRegisterDeviceWithUserClicked, child: const Text("Register with User")),
+                  TextButton(
+                    onPressed: _onRegisterDeviceWithUserClicked,
+                    child: const Text("Register with User"),
+                  ),
                   const Divider(height: 0),
                   TextButton(
-                      onPressed: _onRegisterDeviceWithAnonymousUserClicked, child: const Text("Register as Anonymous")),
+                    onPressed: _onRegisterDeviceWithAnonymousUserClicked,
+                    child: const Text("Register as Anonymous"),
+                  ),
                 ],
               ),
             ),
@@ -179,10 +188,14 @@ class _DeviceViewState extends State<DeviceView> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   TextButton(
-                      onPressed: _onUpdatePreferredLanguageClicked, child: const Text("Update preferred language")),
+                    onPressed: _onUpdatePreferredLanguageClicked,
+                    child: const Text("Update preferred language"),
+                  ),
                   const Divider(height: 0),
                   TextButton(
-                      onPressed: _onClearPreferredLanguageClicked, child: const Text("Clear preferred language")),
+                    onPressed: _onClearPreferredLanguageClicked,
+                    child: const Text("Clear preferred language"),
+                  ),
                 ],
               ),
             ),
@@ -206,7 +219,10 @@ class _DeviceViewState extends State<DeviceView> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  TextButton(onPressed: _onUpdateUserDataClicked, child: const Text("Update user data")),
+                  TextButton(
+                    onPressed: _onUpdateUserDataClicked,
+                    child: const Text("Update user data"),
+                  ),
                 ],
               ),
             ),
@@ -216,9 +232,9 @@ class _DeviceViewState extends State<DeviceView> {
     );
   }
 
-  void _getDeviceData() async {
+  void _loadDeviceData() async {
     try {
-      Logger().i('Getting current device data.');
+      logger.i('Getting current device data.');
 
       final currentDevice = await Notificare.device().currentDevice;
       if (currentDevice == null) {
@@ -250,10 +266,9 @@ class _DeviceViewState extends State<DeviceView> {
         _userData = userData;
       });
 
-      Logger().i('Got current device data successfully.');
+      logger.i('Got current device data successfully.');
     } catch (error) {
-      Logger().e('Getting current device data error.', error);
-
+      logger.e('Getting current device data error.', error);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('$error'),
@@ -265,23 +280,22 @@ class _DeviceViewState extends State<DeviceView> {
 
   void _onRegisterDeviceWithUserClicked() async {
     try {
-      Logger().i('Notificare register device with user clicked.');
+      logger.i('Notificare register device with user clicked.');
       await Notificare.device().register(
         userId: 'helder@notifica.re',
         userName: 'Helder Pinhal',
       );
 
-      _getDeviceData();
+      _loadDeviceData();
 
-      Logger().i('Notificare registered device with user successfully.');
+      logger.i('Notificare registered device with user successfully.');
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Notificare registered device with user successfully.'),
         ),
       );
     } catch (error) {
-      Logger().e('Notificare register device with user error.', error);
-
+      logger.e('Notificare register device with user error.', error);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('$error'),
@@ -293,23 +307,22 @@ class _DeviceViewState extends State<DeviceView> {
 
   void _onRegisterDeviceWithAnonymousUserClicked() async {
     try {
-      Logger().i('Notificare register device with anonymous clicked.');
+      logger.i('Notificare register device with anonymous clicked.');
       await Notificare.device().register(
         userId: null,
         userName: null,
       );
 
-      _getDeviceData();
+      _loadDeviceData();
 
-      Logger().i('Notificare registered device with anonymous successfully.');
+      logger.i('Notificare registered device with anonymous successfully.');
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Notificare registered device with anonymous successfully.'),
         ),
       );
     } catch (error) {
-      Logger().e('Notificare register device with anonymous error.', error);
-
+      logger.e('Notificare register device with anonymous error.', error);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('$error'),
@@ -321,20 +334,19 @@ class _DeviceViewState extends State<DeviceView> {
 
   void _onUpdatePreferredLanguageClicked() async {
     try {
-      Logger().i('Update preferred language clicked.');
+      logger.i('Update preferred language clicked.');
       await Notificare.device().updatePreferredLanguage('nl-NL');
 
-      _getDeviceData();
+      _loadDeviceData();
 
-      Logger().i('Updated preferred language successfully.');
+      logger.i('Updated preferred language successfully.');
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Updated preferred language successfully.'),
         ),
       );
     } catch (error) {
-      Logger().e('Update preferred language error.', error);
-
+      logger.e('Update preferred language error.', error);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('$error'),
@@ -346,20 +358,19 @@ class _DeviceViewState extends State<DeviceView> {
 
   void _onClearPreferredLanguageClicked() async {
     try {
-      Logger().i('Clear preferred language clicked.');
+      logger.i('Clear preferred language clicked.');
       await Notificare.device().updatePreferredLanguage(null);
 
-      _getDeviceData();
+      _loadDeviceData();
 
-      Logger().i('Clear preferred language successfully.');
+      logger.i('Clear preferred language successfully.');
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Clear preferred language successfully.'),
         ),
       );
     } catch (error) {
-      Logger().e('Clear preferred language error.', error);
-
+      logger.e('Clear preferred language error.', error);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('$error'),
@@ -377,7 +388,7 @@ class _DeviceViewState extends State<DeviceView> {
         'lastName': 'Pinhal',
       });
 
-      _getDeviceData();
+      _loadDeviceData();
 
       Logger().i('Updated user data successfully.');
       ScaffoldMessenger.of(context).showSnackBar(
@@ -387,7 +398,6 @@ class _DeviceViewState extends State<DeviceView> {
       );
     } catch (error) {
       Logger().e('Updated user data error.', error);
-
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('$error'),

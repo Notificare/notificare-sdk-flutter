@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:logger/logger.dart';
 import 'package:notificare_assets/notificare_assets.dart';
 import 'package:sample/ui/assets/views/assets_list_view.dart';
+
+import '../../logger/logger.dart';
 
 class AssetsView extends StatefulWidget {
   const AssetsView({Key? key}) : super(key: key);
@@ -80,7 +81,7 @@ class _AssetsViewState extends State<AssetsView> {
 
   void _onFetchAssetsClicked() async {
     try {
-      Logger().i('Fetch assets clicked.');
+      logger.i('Fetch assets clicked.');
       final assets = await NotificareAssets.fetch(group: _assetName);
 
       _controller.clear();
@@ -89,7 +90,7 @@ class _AssetsViewState extends State<AssetsView> {
         _assetName = "";
       });
 
-      Logger().i('Fetched assets successfully.');
+      logger.i('Fetched assets successfully.');
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Fetched assets successfully.'),
@@ -97,15 +98,14 @@ class _AssetsViewState extends State<AssetsView> {
       );
 
       for (var asset in assets) {
-        Logger().i(asset.toJson());
+        logger.i(asset.toJson());
       }
     } catch (error) {
       setState(() {
         _assets = List.empty();
       });
 
-      Logger().e('Fetch assets error.', error);
-
+      logger.e('Fetch assets error.', error);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('$error'),

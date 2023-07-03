@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../../main.dart';
+import '../../../theme/theme.dart';
 
-class AssetDataFieldView extends StatefulWidget {
+class AssetDataFieldView extends StatelessWidget {
   final String dataKey;
   final String dataValue;
 
@@ -13,21 +13,16 @@ class AssetDataFieldView extends StatefulWidget {
   });
 
   @override
-  State<StatefulWidget> createState() => _AssetDataFieldViewState();
-}
-
-class _AssetDataFieldViewState extends State<AssetDataFieldView> {
-  @override
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.fromLTRB(0, 12, 12, 12),
       child: Row(
         children: [
-          Text(widget.dataKey),
+          Text(dataKey),
           const Spacer(),
           Text(
-            widget.dataValue,
-            style: App.secondaryText,
+            dataValue,
+            style: AppTheme.secondaryText,
           )
         ],
       ),

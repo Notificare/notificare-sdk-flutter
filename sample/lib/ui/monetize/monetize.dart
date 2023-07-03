@@ -29,8 +29,14 @@ class _MonetizeViewState extends State<MonetizeView> {
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.list), label: 'Products'),
-          BottomNavigationBarItem(icon: Icon(Icons.shopping_cart), label: 'Purchases'),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.list),
+            label: 'Products',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.shopping_cart),
+            label: 'Purchases',
+          ),
         ],
       ),
     );

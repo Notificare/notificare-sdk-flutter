@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:logger/logger.dart';
 import 'package:notificare/notificare.dart';
+import 'package:sample/logger/logger.dart';
 
 class TagsView extends StatefulWidget {
   const TagsView({Key? key}) : super(key: key);
@@ -33,13 +33,25 @@ class _TagsViewState extends State<TagsView> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              TextButton(onPressed: _onFetchTagsClicked, child: const Text("Fetch User Tags")),
+              TextButton(
+                onPressed: _onFetchTagsClicked,
+                child: const Text("Fetch User Tags"),
+              ),
               const Divider(height: 0),
-              TextButton(onPressed: _onAddTagsClicked, child: const Text("Add Tags")),
+              TextButton(
+                onPressed: _onAddTagsClicked,
+                child: const Text("Add Tags"),
+              ),
               const Divider(height: 0),
-              TextButton(onPressed: _onRemoveTagsClicked, child: const Text("Remove Tag")),
+              TextButton(
+                onPressed: _onRemoveTagsClicked,
+                child: const Text("Remove Tag"),
+              ),
               const Divider(height: 0),
-              TextButton(onPressed: _onClearTagsClicked, child: const Text("Clear Tags")),
+              TextButton(
+                onPressed: _onClearTagsClicked,
+                child: const Text("Clear Tags"),
+              ),
             ],
           ),
         ),
@@ -85,8 +97,7 @@ class _TagsViewState extends State<TagsView> {
         },
       );
     } catch (error) {
-      Logger().e(error);
-
+      logger.e(error);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('$error'),
@@ -98,10 +109,10 @@ class _TagsViewState extends State<TagsView> {
 
   void _onFetchTagsClicked() async {
     try {
-      Logger().i('Fetch tags clicked.');
+      logger.i('Fetch tags clicked.');
       final tags = await Notificare.device().fetchTags();
 
-      Logger().i('Fetched tags successfully.');
+      logger.i('Fetched tags successfully.');
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Fetched tags successfully.'),
@@ -110,8 +121,7 @@ class _TagsViewState extends State<TagsView> {
 
       _tagsInfo(tags);
     } catch (error) {
-      Logger().e('Fetch tags failed.', error);
-
+      logger.e('Fetch tags failed.', error);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('$error'),
@@ -123,18 +133,17 @@ class _TagsViewState extends State<TagsView> {
 
   void _onAddTagsClicked() async {
     try {
-      Logger().i('Add tags clicked.');
+      logger.i('Add tags clicked.');
       await Notificare.device().addTags(['flutter', 'hpinhal', 'remove-me']);
 
-      Logger().i('Added tags successfully.');
+      logger.i('Added tags successfully.');
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Added tags successfully.'),
         ),
       );
     } catch (error) {
-      Logger().e('Add tags failed.', error);
-
+      logger.e('Add tags failed.', error);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('$error'),
@@ -146,18 +155,17 @@ class _TagsViewState extends State<TagsView> {
 
   void _onRemoveTagsClicked() async {
     try {
-      Logger().i('Remove tag clicked.');
+      logger.i('Remove tag clicked.');
       await Notificare.device().removeTag('remove-me');
 
-      Logger().i('Removed tag successfully.');
+      logger.i('Removed tag successfully.');
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Removed tag successfully.'),
         ),
       );
     } catch (error) {
-      Logger().e('Remove tag failed.', error);
-
+      logger.e('Remove tag failed.', error);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('$error'),
@@ -169,18 +177,17 @@ class _TagsViewState extends State<TagsView> {
 
   void _onClearTagsClicked() async {
     try {
-      Logger().i('Clear tags clicked.');
+      logger.i('Clear tags clicked.');
       await Notificare.device().clearTags();
 
-      Logger().i('Cleared tags successfully.');
+      logger.i('Cleared tags successfully.');
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Cleared tags successfully.'),
         ),
       );
     } catch (error) {
-      Logger().e('Clear tags failed.', error);
-
+      logger.e('Clear tags failed.', error);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('$error'),

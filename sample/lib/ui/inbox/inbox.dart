@@ -1,10 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:logger/logger.dart';
 import 'package:notificare_inbox/notificare_inbox.dart';
 import 'package:notificare_push_ui/notificare_push_ui.dart';
 
+import '../../logger/logger.dart';
 import 'inbox_item.dart';
 
 class InboxView extends StatefulWidget {
@@ -15,7 +15,7 @@ class InboxView extends StatefulWidget {
 }
 
 class _InboxViewState extends State<InboxView> {
-  late StreamSubscription<List<NotificareInboxItem>> _inboxItemsStream;
+  StreamSubscription<List<NotificareInboxItem>>? _inboxItemsStream;
 
   List<NotificareInboxItem> _items = [];
 
@@ -31,7 +31,7 @@ class _InboxViewState extends State<InboxView> {
   dispose() {
     super.dispose();
 
-    _inboxItemsStream.cancel();
+    _cancelItemsObserver();
   }
 
   @override
@@ -123,7 +123,13 @@ class _InboxViewState extends State<InboxView> {
         _items = loadedItems;
       });
     } catch (error) {
-      Logger().e('Failed to load initial inbox items.', error);
+      logger.e('Failed to load initial inbox items.', error);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('$error'),
+          backgroundColor: Colors.red.shade900,
+        ),
+      );
     }
   }
 
@@ -135,21 +141,24 @@ class _InboxViewState extends State<InboxView> {
     });
   }
 
+  void _cancelItemsObserver() {
+    _inboxItemsStream?.cancel();
+  }
+
   void _onOpenClicked(NotificareInboxItem item) async {
     try {
-      Logger().i('Open inbox item clicked.');
+      logger.i('Open inbox item clicked.');
       final notification = await NotificareInbox.open(item);
       await NotificarePushUI.presentNotification(notification);
 
-      Logger().i('Inbox item opened and presented successfully.');
+      logger.i('Inbox item opened and presented successfully.');
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Inbox item opened and presented successfully.'),
         ),
       );
     } catch (error) {
-      Logger().e('Open inbox item error.', error);
-
+      logger.e('Open inbox item error.', error);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('$error'),
@@ -161,18 +170,17 @@ class _InboxViewState extends State<InboxView> {
 
   void _onMarkAsReadClicked(NotificareInboxItem item) async {
     try {
-      Logger().i('Mark as read clicked.');
+      logger.i('Mark as read clicked.');
       await NotificareInbox.markAsRead(item);
 
-      Logger().i('Marked as read successfully.');
+      logger.i('Marked as read successfully.');
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Marked as read successfully.'),
         ),
       );
     } catch (error) {
-      Logger().e('Mark as read error.', error);
-
+      logger.e('Mark as read error.', error);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('$error'),
@@ -184,18 +192,17 @@ class _InboxViewState extends State<InboxView> {
 
   void _onRemoveClicked(NotificareInboxItem item) async {
     try {
-      Logger().i('Remove inbox item clicked.');
+      logger.i('Remove inbox item clicked.');
       await NotificareInbox.remove(item);
 
-      Logger().i('Removed inbox item successfully.');
+      logger.i('Removed inbox item successfully.');
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Removed inbox item successfully.'),
         ),
       );
     } catch (error) {
-      Logger().e('Remove inbox item error.', error);
-
+      logger.e('Remove inbox item error.', error);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('$error'),
@@ -207,18 +214,17 @@ class _InboxViewState extends State<InboxView> {
 
   void _onRefreshClicked() async {
     try {
-      Logger().i('Refresh inbox clicked.');
+      logger.i('Refresh inbox clicked.');
       await NotificareInbox.refresh();
 
-      Logger().i('Refreshed inbox successfully.');
+      logger.i('Refreshed inbox successfully.');
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Refreshed inbox successfully.'),
         ),
       );
     } catch (error) {
-      Logger().e('Refresh inbox error.', error);
-
+      logger.e('Refresh inbox error.', error);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('$error'),
@@ -230,18 +236,17 @@ class _InboxViewState extends State<InboxView> {
 
   void _onMarkAllAsReadClicked() async {
     try {
-      Logger().i('Mark all as read clicked.');
+      logger.i('Mark all as read clicked.');
       await NotificareInbox.markAllAsRead();
 
-      Logger().i('Marked all as read successfully.');
+      logger.i('Marked all as read successfully.');
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Marked all as read successfully.'),
         ),
       );
     } catch (error) {
-      Logger().e('Mark all as read error.', error);
-
+      logger.e('Mark all as read error.', error);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('$error'),
@@ -253,18 +258,17 @@ class _InboxViewState extends State<InboxView> {
 
   void _onClearClicked() async {
     try {
-      Logger().i('Clear inbox clicked.');
+      logger.i('Clear inbox clicked.');
       await NotificareInbox.clear();
 
-      Logger().i('Cleared inbox successfully.');
+      logger.i('Cleared inbox successfully.');
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Cleared inbox successfully.'),
         ),
       );
     } catch (error) {
-      Logger().e('Clear inbox error.', error);
-
+      logger.e('Clear inbox error.', error);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('$error'),

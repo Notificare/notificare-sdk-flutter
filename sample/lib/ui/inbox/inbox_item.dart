@@ -36,9 +36,18 @@ class InboxItemView extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(item.notification.title ?? '---', style: Theme.of(context).textTheme.bodyLarge),
-                Text(item.notification.message, style: Theme.of(context).textTheme.bodyMedium),
-                Text(item.notification.type, style: Theme.of(context).textTheme.bodySmall),
+                Text(
+                  item.notification.title ?? '---',
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
+                Text(
+                  item.notification.message,
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+                Text(
+                  item.notification.type,
+                  style: Theme.of(context).textTheme.bodySmall,
+                ),
               ],
             ),
           ),
@@ -47,7 +56,10 @@ class InboxItemView extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(timeago.format(item.time, locale: 'en_short'), style: Theme.of(context).textTheme.bodySmall),
+                Text(
+                  timeago.format(item.time, locale: 'en_short'),
+                  style: Theme.of(context).textTheme.bodySmall,
+                ),
                 !item.opened
                     ? Padding(
                         padding: const EdgeInsets.only(top: 8),

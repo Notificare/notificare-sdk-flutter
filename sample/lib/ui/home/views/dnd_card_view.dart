@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:logger/logger.dart';
 import 'package:notificare/notificare.dart';
+import 'package:sample/theme/theme.dart';
 
-import '../../../main.dart';
+import '../../../logger/logger.dart';
 
 class DoNotDisturbCardView extends StatefulWidget {
   const DoNotDisturbCardView({
@@ -26,7 +26,7 @@ class DoNotDisturbCardViewState extends State<DoNotDisturbCardView> {
   void initState() {
     super.initState();
 
-    _checkDndEnabled();
+    _checkDndStatus();
   }
 
   @override
@@ -46,15 +46,16 @@ class DoNotDisturbCardViewState extends State<DoNotDisturbCardView> {
                 child: Row(
                   children: [
                     const Icon(Icons.access_time_filled),
-                    const SizedBox(
-                      width: 12,
+                    const SizedBox(width: 12),
+                    Text(
+                      "Do Not Disturb",
+                      style: Theme.of(context).textTheme.titleSmall,
                     ),
-                    Text("Do Not Disturb", style: Theme.of(context).textTheme.titleSmall),
                     const Spacer(),
                     CupertinoSwitch(
-                      activeColor: App.primaryBlue,
+                      activeColor: AppTheme.primaryBlue,
                       value: _hasDndEnabled,
-                      onChanged: _updateDndSettings,
+                      onChanged: _updateDndStatus,
                     ),
                   ],
                 ),
@@ -66,15 +67,15 @@ class DoNotDisturbCardViewState extends State<DoNotDisturbCardView> {
     );
   }
 
-  void _checkDndEnabled() async {
+  void _checkDndStatus() async {
     try {
-      final device = await Notificare.device().currentDevice;
+      final dnd = await Notificare.device().fetchDoNotDisturb();
 
       setState(() {
-        _hasDndEnabled = device?.dnd != null;
+        _hasDndEnabled = dnd != null;
       });
     } catch (error) {
-      Logger().e('Fetch DND error.', error);
+      logger.e('Fetch DND error.', error);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('$error'),
@@ -84,8 +85,8 @@ class DoNotDisturbCardViewState extends State<DoNotDisturbCardView> {
     }
   }
 
-  void _updateDndSettings(bool checked) async {
-    Logger().i((checked ? "Update" : "Clear") + " do not disturb clicked.");
+  void _updateDndStatus(bool checked) async {
+    logger.i((checked ? "Update" : "Clear") + " do not disturb clicked.");
 
     if (checked) {
       _updateDndTime(_defaultDnd);
@@ -95,14 +96,14 @@ class DoNotDisturbCardViewState extends State<DoNotDisturbCardView> {
     try {
       await Notificare.device().clearDoNotDisturb();
 
-      Logger().i('Cleared do not disturb successfully.');
+      logger.i('Cleared do not disturb successfully.');
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Cleared do not disturb successfully.'),
         ),
       );
     } catch (error) {
-      Logger().e('Clear do not disturb error.', error);
+      logger.e('Clear do not disturb error.', error);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('$error'),
@@ -120,14 +121,14 @@ class DoNotDisturbCardViewState extends State<DoNotDisturbCardView> {
     try {
       await Notificare.device().updateDoNotDisturb(dnd);
 
-      Logger().i('Updated do not disturb successfully.');
+      logger.i('Updated do not disturb successfully.');
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Updated do not disturb successfully.'),
         ),
       );
     } catch (error) {
-      Logger().e('Update Do Not Disturb error.', error);
+      logger.e('Update Do Not Disturb error.', error);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('$error'),

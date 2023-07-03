@@ -44,17 +44,25 @@ class OtherFeaturesCardViewView extends StatelessWidget {
                   child: Row(
                     children: [
                       const Icon(Icons.qr_code_scanner),
-                      const SizedBox(
-                        width: 12,
+                      const SizedBox(width: 12),
+                      Text(
+                        "Scannables",
+                        style: Theme.of(context).textTheme.titleSmall,
                       ),
-                      Text("Scannables", style: Theme.of(context).textTheme.titleSmall),
                       const Spacer(),
-                      const Icon(Icons.arrow_forward_ios, size: 14, color: Colors.black26),
+                      const Icon(
+                        Icons.arrow_forward_ios,
+                        size: 14,
+                        color: Colors.black26,
+                      ),
                     ],
                   ),
                 ),
               ),
-              Container(margin: const EdgeInsets.fromLTRB(48, 0, 0, 0), child: const Divider(height: 0)),
+              Container(
+                margin: const EdgeInsets.fromLTRB(48, 0, 0, 0),
+                child: const Divider(height: 0),
+              ),
               InkWell(
                 onTap: () {
                   Navigator.push(
@@ -69,17 +77,25 @@ class OtherFeaturesCardViewView extends StatelessWidget {
                   child: Row(
                     children: [
                       const Icon(Icons.folder),
-                      const SizedBox(
-                        width: 12,
+                      const SizedBox(width: 12),
+                      Text(
+                        "Assets",
+                        style: Theme.of(context).textTheme.titleSmall,
                       ),
-                      Text("Assets", style: Theme.of(context).textTheme.titleSmall),
                       const Spacer(),
-                      const Icon(Icons.arrow_forward_ios, size: 14, color: Colors.black26),
+                      const Icon(
+                        Icons.arrow_forward_ios,
+                        size: 14,
+                        color: Colors.black26,
+                      ),
                     ],
                   ),
                 ),
               ),
-              Container(margin: const EdgeInsets.fromLTRB(48, 0, 0, 0), child: const Divider(height: 0)),
+              Container(
+                margin: const EdgeInsets.fromLTRB(48, 0, 0, 0),
+                child: const Divider(height: 0),
+              ),
               InkWell(
                 onTap: () {
                   Navigator.push(
@@ -94,17 +110,25 @@ class OtherFeaturesCardViewView extends StatelessWidget {
                   child: Row(
                     children: [
                       const Icon(Icons.shopping_bag),
-                      const SizedBox(
-                        width: 12,
+                      const SizedBox(width: 12),
+                      Text(
+                        "Monetize",
+                        style: Theme.of(context).textTheme.titleSmall,
                       ),
-                      Text("Monetize", style: Theme.of(context).textTheme.titleSmall),
                       const Spacer(),
-                      const Icon(Icons.arrow_forward_ios, size: 14, color: Colors.black26),
+                      const Icon(
+                        Icons.arrow_forward_ios,
+                        size: 14,
+                        color: Colors.black26,
+                      ),
                     ],
                   ),
                 ),
               ),
-              Container(margin: const EdgeInsets.fromLTRB(48, 0, 0, 0), child: const Divider(height: 0)),
+              Container(
+                margin: const EdgeInsets.fromLTRB(48, 0, 0, 0),
+                child: const Divider(height: 0),
+              ),
               InkWell(
                 onTap: () {
                   Navigator.push(
@@ -119,12 +143,17 @@ class OtherFeaturesCardViewView extends StatelessWidget {
                   child: Row(
                     children: [
                       const Icon(Icons.event),
-                      const SizedBox(
-                        width: 12,
+                      const SizedBox(width: 12),
+                      Text(
+                        "Custom Events",
+                        style: Theme.of(context).textTheme.titleSmall,
                       ),
-                      Text("Custom Events", style: Theme.of(context).textTheme.titleSmall),
                       const Spacer(),
-                      const Icon(Icons.arrow_forward_ios, size: 14, color: Colors.black26),
+                      const Icon(
+                        Icons.arrow_forward_ios,
+                        size: 14,
+                        color: Colors.black26,
+                      ),
                     ],
                   ),
                 ),

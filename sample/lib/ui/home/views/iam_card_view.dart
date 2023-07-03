@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:logger/logger.dart';
 import 'package:notificare_in_app_messaging/notificare_in_app_messaging.dart';
+import 'package:sample/theme/theme.dart';
 
-import '../../../main.dart';
+import '../../../logger/logger.dart';
 
 class InAppMessagingCardView extends StatefulWidget {
   const InAppMessagingCardView({
@@ -43,34 +43,39 @@ class InAppMessagingCardViewState extends State<InAppMessagingCardView> {
                 child: Row(
                   children: [
                     const Icon(Icons.message),
-                    const SizedBox(
-                      width: 12,
+                    const SizedBox(width: 12),
+                    Text(
+                      "Evaluate Context",
+                      style: Theme.of(context).textTheme.titleSmall,
                     ),
-                    Text("Evaluate Context", style: Theme.of(context).textTheme.titleSmall),
                     const Spacer(),
                     CupertinoSwitch(
-                      activeColor: App.primaryBlue,
+                      activeColor: AppTheme.primaryBlue,
                       value: _evaluateContext,
-                      onChanged: (value) => _setEvaluateContext(value),
+                      onChanged: (value) => _setEvaluateContextStatus(value),
                     ),
                   ],
                 ),
               ),
-              Container(margin: const EdgeInsets.fromLTRB(48, 0, 0, 0), child: const Divider(height: 0)),
+              Container(
+                margin: const EdgeInsets.fromLTRB(48, 0, 0, 0),
+                child: const Divider(height: 0),
+              ),
               Container(
                 margin: const EdgeInsets.fromLTRB(12, 8, 12, 8),
                 child: Row(
                   children: [
                     const Icon(Icons.timer_off),
-                    const SizedBox(
-                      width: 12,
+                    const SizedBox(width: 12),
+                    Text(
+                      "Suppressed",
+                      style: Theme.of(context).textTheme.titleSmall,
                     ),
-                    Text("Suppressed", style: Theme.of(context).textTheme.titleSmall),
                     const Spacer(),
                     CupertinoSwitch(
-                      activeColor: App.primaryBlue,
+                      activeColor: AppTheme.primaryBlue,
                       value: _suppressed,
-                      onChanged: (value) => _setSuppressed(value),
+                      onChanged: (value) => _setSuppressedStatus(value),
                     ),
                   ],
                 ),
@@ -82,26 +87,25 @@ class InAppMessagingCardViewState extends State<InAppMessagingCardView> {
     );
   }
 
-  void _setEvaluateContext(bool shouldEvaluate) {
+  void _setEvaluateContextStatus(bool shouldEvaluate) {
     setState(() {
       _evaluateContext = shouldEvaluate;
     });
   }
 
-  Future<void> _setSuppressed(bool suppressed) async {
+  Future<void> _setSuppressedStatus(bool suppressed) async {
     try {
-      Logger().i((suppressed ? 'Suppress' : 'Unsuppress') + ' in-app messages clicked.');
+      logger.i((suppressed ? 'Suppress' : 'Unsuppress') + ' in-app messages clicked.');
       await NotificareInAppMessaging.setMessagesSuppressed(suppressed, evaluateContext: _evaluateContext);
 
-      Logger().i((suppressed ? 'Suppress' : 'Unsuppress') + ' in-app messages successfully.');
+      logger.i((suppressed ? 'Suppress' : 'Unsuppress') + ' in-app messages successfully.');
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text((suppressed ? 'Suppress' : 'Unsuppress') + ' in-app messages successfully.'),
         ),
       );
     } catch (error) {
-      Logger().e('Set messages suppressed error.', error);
-
+      logger.e('Set messages suppressed error.', error);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('$error'),
