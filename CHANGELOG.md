@@ -1,5 +1,53 @@
 # CHANGELOG
 
+## 3.5.4
+
+#### Native changes
+
+##### Android
+
+- Prevent queued events without an associated device
+- Prevent `logCustom` usage before Notificare becomes ready
+
+##### iOS
+
+- Prevent queued events without an associated device
+- Prevent `logCustom` usage before Notificare becomes ready
+
+## 3.5.3
+
+#### Native changes
+
+##### Android
+
+- Explicit handling of Notificare Links in Deep Link notifications
+- Improve supported deep links validation
+- Stricter unlaunch flow
+
+##### iOS
+
+- Improve supported deep links validation
+- Fix debug symbols search paths
+- Stricter unlaunch flow
+
+## 3.5.2
+
+#### Native changes
+
+##### Android
+
+- Prevent multiple configurations from taking place
+- Add broadcast receiver for geo events
+- Start monitoring nearest regions immediately after upgrading to background location
+- Correctly track device on initial application open event
+
+##### iOS
+
+- Emit the didChangeNotificationSettings event when disabling remote notifications
+- Add opt-in flag to prevent file access restrictions for Core Data
+- Prevent push registration race condition when enabling remote notifications
+- Correctly track device on initial application open event
+
 ## 3.5.1
 
 #### Native changes
