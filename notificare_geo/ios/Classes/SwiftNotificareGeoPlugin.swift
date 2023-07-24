@@ -23,6 +23,8 @@ public class SwiftNotificareGeoPlugin: NSObject, FlutterPlugin {
         switch call.method {
         case "hasLocationServicesEnabled": hasLocationServicesEnabled(call, result)
         case "hasBluetoothEnabled": hasBluetoothEnabled(call, result)
+        case "getMonitoredRegions": getMonitoredRegions(call, result)
+        case "getEnteredRegions": getEnteredRegions(call, result)
         case "enableLocationUpdates": enableLocationUpdates(call, result)
         case "disableLocationUpdates": disableLocationUpdates(call, result)
 
@@ -39,6 +41,30 @@ public class SwiftNotificareGeoPlugin: NSObject, FlutterPlugin {
     
     private func hasBluetoothEnabled(_ call: FlutterMethodCall, _ response: @escaping FlutterResult) {
         response(Notificare.shared.geo().hasBluetoothEnabled)
+    }
+
+    private func getMonitoredRegions(_ call: FlutterMethodCall, _ response: @escaping FlutterResult) {
+        do {
+            let regions = try Notificare.shared.geo().monitoredRegions.map { region in
+                try region.toJson()
+            }
+
+            response(regions)
+        } catch {
+            response(FlutterError(code: DEFAULT_ERROR_CODE, message: error.localizedDescription, details: nil))
+        }
+    }
+
+    private func getEnteredRegions(_ call: FlutterMethodCall, _ response: @escaping FlutterResult) {
+        do {
+            let regions = try Notificare.shared.geo().enteredRegions.map { region in
+                try region.toJson()
+            }
+
+            response(regions)
+        } catch {
+            response(FlutterError(code: DEFAULT_ERROR_CODE, message: error.localizedDescription, details: nil))
+        }
     }
     
     private func enableLocationUpdates(_ call: FlutterMethodCall, _ response: @escaping FlutterResult) {

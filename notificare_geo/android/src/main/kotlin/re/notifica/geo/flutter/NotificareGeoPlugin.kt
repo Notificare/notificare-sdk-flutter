@@ -13,6 +13,7 @@ import re.notifica.geo.ktx.geo
 import re.notifica.geo.models.NotificareBeacon
 import re.notifica.geo.models.NotificareLocation
 import re.notifica.geo.models.NotificareRegion
+import re.notifica.geo.models.toJson
 
 class NotificareGeoPlugin : FlutterPlugin, MethodCallHandler, NotificareGeo.Listener {
     private lateinit var channel: MethodChannel
@@ -39,6 +40,8 @@ class NotificareGeoPlugin : FlutterPlugin, MethodCallHandler, NotificareGeo.List
         when (call.method) {
             "hasLocationServicesEnabled" -> hasLocationServicesEnabled(call, result)
             "hasBluetoothEnabled" -> hasBluetoothEnabled(call, result)
+            "getMonitoredRegions" -> getMonitoredRegions(call, result)
+            "getEnteredRegions" -> getEnteredRegions(call, result)
             "enableLocationUpdates" -> enableLocationUpdates(call, result)
             "disableLocationUpdates" -> disableLocationUpdates(call, result)
             else -> result.notImplemented()
@@ -51,6 +54,18 @@ class NotificareGeoPlugin : FlutterPlugin, MethodCallHandler, NotificareGeo.List
 
     private fun hasBluetoothEnabled(@Suppress("UNUSED_PARAMETER") call: MethodCall, response: Result) {
         response.success(Notificare.geo().hasBluetoothEnabled)
+    }
+
+    private fun getMonitoredRegions(@Suppress("UNUSED_PARAMETER") call: MethodCall, response: Result) {
+        response.success(
+            Notificare.geo().monitoredRegions.map { it.toJson() }
+        )
+    }
+
+    private fun getEnteredRegions(@Suppress("UNUSED_PARAMETER") call: MethodCall, response: Result) {
+        response.success(
+            Notificare.geo().enteredRegions.map { it.toJson() }
+        )
     }
 
     private fun enableLocationUpdates(@Suppress("UNUSED_PARAMETER") call: MethodCall, response: Result) {
