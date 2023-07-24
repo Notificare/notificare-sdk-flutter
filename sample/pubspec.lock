@@ -45,10 +45,10 @@ packages:
     dependency: "direct main"
     description:
       name: cupertino_icons
-      sha256: "1989d917fbe8e6b39806207df5a3fdd3d816cbd090fac2ce26fb45e9a71476e5"
+      sha256: e35129dc44c9118cee2a5603506d823bab99c68393879edb440e0090d07586be
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.4"
+    version: "1.0.5"
   fake_async:
     dependency: transitive
     description:
@@ -75,6 +75,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  intl:
+    dependency: transitive
+    description:
+      name: intl
+      sha256: "3bc132a9dbce73a7e4a21a17d06e1878839ffbf975568bc875c60537824b0c4d"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.18.1"
   js:
     dependency: transitive
     description:
@@ -87,10 +95,10 @@ packages:
     dependency: transitive
     description:
       name: json_annotation
-      sha256: "3520fa844009431b5d4491a5a778603520cdc399ab3406332dcc50f93547258c"
+      sha256: b10a7b2ff83d83c777edba3c6a0f97045ddadd56c944e1a23a3fdf43a1bf4467
       url: "https://pub.dev"
     source: hosted
-    version: "4.7.0"
+    version: "4.8.1"
   lints:
     dependency: transitive
     description:
@@ -99,6 +107,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.1"
+  logger:
+    dependency: "direct main"
+    description:
+      name: logger
+      sha256: db2ff852ed77090ba9f62d3611e4208a3d11dfa35991a81ae724c113fcb3e3f7
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.3.0"
   matcher:
     dependency: transitive
     description:
@@ -129,84 +145,84 @@ packages:
       path: "../notificare"
       relative: true
     source: path
-    version: "3.5.4"
+    version: "3.6.0"
   notificare_assets:
     dependency: "direct main"
     description:
       path: "../notificare_assets"
       relative: true
     source: path
-    version: "3.5.4"
+    version: "3.6.0"
   notificare_flutter:
     dependency: "direct overridden"
     description:
       path: "../notificare_flutter"
       relative: true
     source: path
-    version: "3.5.4"
+    version: "3.6.0"
   notificare_geo:
     dependency: "direct main"
     description:
       path: "../notificare_geo"
       relative: true
     source: path
-    version: "3.5.4"
+    version: "3.6.0"
   notificare_in_app_messaging:
     dependency: "direct main"
     description:
       path: "../notificare_in_app_messaging"
       relative: true
     source: path
-    version: "3.5.4"
+    version: "3.6.0"
   notificare_inbox:
     dependency: "direct main"
     description:
       path: "../notificare_inbox"
       relative: true
     source: path
-    version: "3.5.4"
+    version: "3.6.0"
   notificare_loyalty:
     dependency: "direct main"
     description:
       path: "../notificare_loyalty"
       relative: true
     source: path
-    version: "3.5.4"
+    version: "3.6.0"
   notificare_monetize:
     dependency: "direct main"
     description:
       path: "../notificare_monetize"
       relative: true
     source: path
-    version: "3.5.4"
+    version: "3.6.0"
   notificare_push:
     dependency: "direct main"
     description:
       path: "../notificare_push"
       relative: true
     source: path
-    version: "3.5.4"
+    version: "3.6.0"
   notificare_push_ui:
     dependency: "direct main"
     description:
       path: "../notificare_push_ui"
       relative: true
     source: path
-    version: "3.5.4"
+    version: "3.6.0"
   notificare_scannables:
     dependency: "direct main"
     description:
       path: "../notificare_scannables"
       relative: true
     source: path
-    version: "3.5.4"
+    version: "3.6.0"
   notificare_user_inbox:
     dependency: "direct main"
     description:
       path: "../notificare_user_inbox"
       relative: true
     source: path
-    version: "3.5.4"
+    version: "3.6.0"
   path:
     dependency: transitive
     description:
@@ -235,10 +251,10 @@ packages:
     dependency: transitive
     description:
       name: permission_handler_apple
-      sha256: "9c370ef6a18b1c4b2f7f35944d644a56aa23576f23abee654cf73968de93f163"
+      sha256: ee96ac32f5a8e6f80756e25b25b9f8e535816c8e6665a96b6d70681f8c4f7e85
       url: "https://pub.dev"
     source: hosted
-    version: "9.0.7"
+    version: "9.0.8"
   permission_handler_platform_interface:
     dependency: transitive
     description:
@@ -259,10 +275,10 @@ packages:
     dependency: transitive
     description:
       name: plugin_platform_interface
-      sha256: "075f927ebbab4262ace8d0b283929ac5410c0ac4e7fc123c76429564facfb757"
+      sha256: "6a2128648c854906c53fa8e33986fc0247a1116122f9534dd20e3ab9e16a32bc"
       url: "https://pub.dev"
     source: hosted
-    version: "2.1.2"
+    version: "2.1.4"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -320,10 +336,10 @@ packages:
     dependency: "direct main"
     description:
       name: timeago
-      sha256: "3a38963615f1178531afa7177199e37522cf8dcbd93a144b597e32ec6d84bd9f"
+      sha256: a415b9a05ef64b845c859a91161fc9f689f88eaaa4c04759517d201891b99e90
       url: "https://pub.dev"
     source: hosted
-    version: "3.2.2"
+    version: "3.4.0"
   vector_math:
     dependency: transitive
     description:

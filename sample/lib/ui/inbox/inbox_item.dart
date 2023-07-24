@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:notificare_inbox/notificare_inbox.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
-class InboxItem extends StatelessWidget {
+class InboxItemView extends StatelessWidget {
   final NotificareInboxItem item;
 
-  const InboxItem({
+  const InboxItemView({
     Key? key,
     required this.item,
   }) : super(key: key);
@@ -36,9 +36,18 @@ class InboxItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(item.notification.title ?? '---', style: Theme.of(context).textTheme.bodyText1),
-                Text(item.notification.message, style: Theme.of(context).textTheme.bodyText2),
-                Text(item.notification.type, style: Theme.of(context).textTheme.caption),
+                Text(
+                  item.notification.title ?? '---',
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
+                Text(
+                  item.notification.message,
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+                Text(
+                  item.notification.type,
+                  style: Theme.of(context).textTheme.bodySmall,
+                ),
               ],
             ),
           ),
@@ -47,7 +56,10 @@ class InboxItem extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(timeago.format(item.time, locale: 'en_short'), style: Theme.of(context).textTheme.caption),
+                Text(
+                  timeago.format(item.time, locale: 'en_short'),
+                  style: Theme.of(context).textTheme.bodySmall,
+                ),
                 !item.opened
                     ? Padding(
                         padding: const EdgeInsets.only(top: 8),

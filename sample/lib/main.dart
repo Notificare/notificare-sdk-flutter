@@ -6,9 +6,9 @@ import 'package:notificare_monetize/notificare_monetize.dart';
 import 'package:notificare_push/notificare_push.dart';
 import 'package:notificare_push_ui/notificare_push_ui.dart';
 import 'package:notificare_scannables/notificare_scannables.dart';
-import 'package:sample/ui/pages/beacons.dart';
-import 'package:sample/ui/pages/home.dart';
-import 'package:sample/ui/pages/inbox.dart';
+import 'package:sample/ui/home/home.dart';
+
+import 'logger/logger.dart';
 
 void main() {
   runApp(const App());
@@ -28,15 +28,17 @@ class _AppState extends State<App> {
   void initState() {
     super.initState();
 
-    configureNotificare();
+    _configureNotificare();
   }
 
-  void configureNotificare() async {
+
+
+  void _configureNotificare() async {
     try {
       await NotificarePush.setPresentationOptions(['banner', 'badge', 'sound']);
       await Notificare.launch();
     } catch (error) {
-      debugPrint('Something went wrong. $error');
+      logger.e('Something went wrong.', error);
     }
 
     // region Notificare events
@@ -86,7 +88,7 @@ class _AppState extends State<App> {
     // region Notificare Push events
 
     NotificarePush.onNotificationInfoReceived.listen((event) {
-      debugPrint("Notification received (${event.deliveryMechanism}): ${event.notification.toJson()}");
+      logger.i('Notification received (${event.deliveryMechanism}): ${event.notification.toJson()}');
 
       scaffoldMessengerKey.currentState!.showSnackBar(
         SnackBar(
@@ -104,7 +106,7 @@ class _AppState extends State<App> {
     });
 
     NotificarePush.onUnknownNotificationReceived.listen((notification) {
-      debugPrint("Unknown notification received: $notification");
+      logger.i('Unknown notification received: $notification');
 
       scaffoldMessengerKey.currentState!.showSnackBar(
         const SnackBar(
@@ -118,7 +120,7 @@ class _AppState extends State<App> {
     });
 
     NotificarePush.onUnknownNotificationOpened.listen((notification) {
-      debugPrint("Unknown notification opened: $notification");
+      logger.i('Unknown notification opened: $notification');
 
       scaffoldMessengerKey.currentState!.showSnackBar(
         const SnackBar(
@@ -132,7 +134,7 @@ class _AppState extends State<App> {
     });
 
     NotificarePush.onUnknownNotificationActionOpened.listen((data) {
-      debugPrint("Unknown notification action opened: $data");
+      logger.i('Unknown notification action opened: $data');
 
       scaffoldMessengerKey.currentState!.showSnackBar(
         const SnackBar(
@@ -341,7 +343,7 @@ class _AppState extends State<App> {
     });
 
     NotificareMonetize.onProductsUpdated.listen((products) {
-      debugPrint('products updated = ${products.map((e) => e.toJson())}');
+      logger.i('products updated = ${products.map((e) => e.toJson())}');
 
       scaffoldMessengerKey.currentState!.showSnackBar(
         const SnackBar(
@@ -351,7 +353,7 @@ class _AppState extends State<App> {
     });
 
     NotificareMonetize.onPurchasesUpdated.listen((purchases) {
-      debugPrint('purchases updated = ${purchases.map((e) => e.toJson())}');
+      logger.i('purchases updated = ${purchases.map((e) => e.toJson())}');
 
       scaffoldMessengerKey.currentState!.showSnackBar(
         const SnackBar(
@@ -361,7 +363,7 @@ class _AppState extends State<App> {
     });
 
     NotificareMonetize.onPurchaseFinished.listen((purchase) {
-      debugPrint('purchase finished = ${purchase.toJson()}');
+      logger.i('purchase finished = ${purchase.toJson()}');
 
       scaffoldMessengerKey.currentState!.showSnackBar(
         const SnackBar(
@@ -371,7 +373,7 @@ class _AppState extends State<App> {
     });
 
     NotificareMonetize.onPurchaseRestored.listen((purchase) {
-      debugPrint('purchase restored = ${purchase.toJson()}');
+      logger.i('purchase restored = ${purchase.toJson()}');
 
       scaffoldMessengerKey.currentState!.showSnackBar(
         const SnackBar(
@@ -389,7 +391,7 @@ class _AppState extends State<App> {
     });
 
     NotificareMonetize.onPurchaseFailed.listen((event) {
-      debugPrint('purchase failed = ${event.toJson()}');
+      logger.i('purchase failed = ${event.toJson()}');
 
       scaffoldMessengerKey.currentState!.showSnackBar(
         SnackBar(
@@ -403,7 +405,7 @@ class _AppState extends State<App> {
     // region Notificare In-App Messaging events
 
     NotificareInAppMessaging.onMessagePresented.listen((message) {
-      debugPrint("message presented = ${message.toJson()}");
+      logger.i('message presented = ${message.toJson()}');
 
       scaffoldMessengerKey.currentState!.showSnackBar(
         const SnackBar(
@@ -413,7 +415,7 @@ class _AppState extends State<App> {
     });
 
     NotificareInAppMessaging.onMessageFinishedPresenting.listen((message) {
-      debugPrint("message finished presenting = ${message.toJson()}");
+      logger.i('message finished presenting = ${message.toJson()}');
 
       scaffoldMessengerKey.currentState!.showSnackBar(
         const SnackBar(
@@ -423,7 +425,7 @@ class _AppState extends State<App> {
     });
 
     NotificareInAppMessaging.onMessageFailedToPresent.listen((message) {
-      debugPrint("message failed to present present = ${message.toJson()}");
+      logger.i('message failed to present present = ${message.toJson()}');
 
       scaffoldMessengerKey.currentState!.showSnackBar(
         const SnackBar(
@@ -433,7 +435,7 @@ class _AppState extends State<App> {
     });
 
     NotificareInAppMessaging.onActionExecuted.listen((event) {
-      debugPrint("action executed = ${event.toJson()}");
+      logger.i('action executed = ${event.toJson()}');
 
       scaffoldMessengerKey.currentState!.showSnackBar(
         const SnackBar(
@@ -443,7 +445,7 @@ class _AppState extends State<App> {
     });
 
     NotificareInAppMessaging.onActionFailedToExecute.listen((event) {
-      debugPrint("action failed to execute = ${event.toJson()}");
+      logger.i('action failed to execute = ${event.toJson()}');
 
       scaffoldMessengerKey.currentState!.showSnackBar(
         const SnackBar(
@@ -458,17 +460,11 @@ class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      scaffoldMessengerKey: scaffoldMessengerKey,
-      title: 'Sample',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      initialRoute: '/',
-      routes: {
-        '/': (context) => const HomePage(),
-        '/inbox': (context) => const InboxPage(),
-        '/beacons': (context) => const BeaconsPage(),
-      },
-    );
+        scaffoldMessengerKey: scaffoldMessengerKey,
+        title: 'Sample',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: const HomeView());
   }
 }

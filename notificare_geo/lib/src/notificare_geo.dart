@@ -24,6 +24,16 @@ class NotificareGeo {
     return await _channel.invokeMethod('hasBluetoothEnabled');
   }
 
+  static Future<List<NotificareRegion>> get monitoredRegions async {
+    final json = await _channel.invokeListMethod<Map<String, dynamic>>('getMonitoredRegions');
+    return json!.map((e) => NotificareRegion.fromJson(e)).toList();
+  }
+
+  static Future<List<NotificareRegion>> get enteredRegions async {
+    final json = await _channel.invokeListMethod<Map<String, dynamic>>('getEnteredRegions');
+    return json!.map((e) => NotificareRegion.fromJson(e)).toList();
+  }
+
   static Future<void> enableLocationUpdates() async {
     await _channel.invokeMethod('enableLocationUpdates');
   }

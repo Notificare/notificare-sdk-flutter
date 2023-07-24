@@ -2,16 +2,17 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:notificare_geo/notificare_geo.dart';
-import 'package:sample/ui/views/beacon_row.dart';
 
-class BeaconsPage extends StatefulWidget {
-  const BeaconsPage({Key? key}) : super(key: key);
+import 'views/beacon_row_view.dart';
+
+class BeaconsView extends StatefulWidget {
+  const BeaconsView({Key? key}) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => _BeaconsPageState();
+  State<StatefulWidget> createState() => _BeaconsViewState();
 }
 
-class _BeaconsPageState extends State<BeaconsPage> {
+class _BeaconsViewState extends State<BeaconsView> {
   NotificareRegion? _region;
   List<NotificareBeacon> _beacons = [];
 
@@ -39,6 +40,7 @@ class _BeaconsPageState extends State<BeaconsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: const Text('Beacons'),
       ),
       body: ListView.builder(
@@ -52,14 +54,14 @@ class _BeaconsPageState extends State<BeaconsPage> {
                 children: [
                   Text(
                     _region!.name,
-                    style: Theme.of(context).textTheme.bodyText1,
+                    style: Theme.of(context).textTheme.bodyLarge,
                   ),
                 ],
               ),
             );
           }
 
-          return BeaconRow(beacon: _beacons[index - 1]);
+          return BeaconRowView(beacon: _beacons[index - 1]);
         },
       ),
     );
