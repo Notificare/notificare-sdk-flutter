@@ -36,7 +36,7 @@ end
 
 target 'NotificationServiceExtension' do
   use_frameworks!
-  pod 'Notificare/NotificareNotificationServiceExtensionKit', '>= 3.5.4'
+  pod 'Notificare/NotificareNotificationServiceExtensionKit', '>= 3.6.1'
 end
 
 post_install do |installer|
