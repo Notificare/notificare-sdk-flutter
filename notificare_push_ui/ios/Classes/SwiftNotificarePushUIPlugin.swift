@@ -233,7 +233,7 @@ extension SwiftNotificarePushUIPlugin: NotificarePushUIDelegate {
         )
     }
     
-    public func notificare(_ notificarePushUI: NotificarePushUI, shouldPerformSelectorWithURL url: URL, in action: NotificareNotification.Action, for notification: NotificareNotification) {
+    public func notificare(_ notificarePushUI: NotificarePushUI, didReceiveCustomAction url: URL, in action: NotificareNotification.Action, for notification: NotificareNotification) {
         eventBroker.emit(
             NotificarePushUIPluginEventBroker.OnCustomActionReceived(
                 notification: notification,
