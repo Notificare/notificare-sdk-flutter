@@ -1,66 +1,66 @@
 PODS:
   - Flutter (1.0.0)
-  - Notificare/NotificareAssetsKit (3.6.0)
-  - Notificare/NotificareGeoKit (3.6.0)
-  - Notificare/NotificareInAppMessagingKit (3.6.0)
-  - Notificare/NotificareInboxKit (3.6.0)
-  - Notificare/NotificareKit (3.6.0)
-  - Notificare/NotificareLoyaltyKit (3.6.0)
-  - Notificare/NotificareMonetizeKit (3.6.0)
-  - Notificare/NotificareNotificationServiceExtensionKit (3.6.0)
-  - Notificare/NotificarePushKit (3.6.0)
-  - Notificare/NotificarePushUIKit (3.6.0)
-  - Notificare/NotificareScannablesKit (3.6.0)
-  - Notificare/NotificareUserInboxKit (3.6.0)
-  - notificare_assets (3.6.0):
+  - Notificare/NotificareAssetsKit (3.6.1)
+  - Notificare/NotificareGeoKit (3.6.1)
+  - Notificare/NotificareInAppMessagingKit (3.6.1)
+  - Notificare/NotificareInboxKit (3.6.1)
+  - Notificare/NotificareKit (3.6.1)
+  - Notificare/NotificareLoyaltyKit (3.6.1)
+  - Notificare/NotificareMonetizeKit (3.6.1)
+  - Notificare/NotificareNotificationServiceExtensionKit (3.6.1)
+  - Notificare/NotificarePushKit (3.6.1)
+  - Notificare/NotificarePushUIKit (3.6.1)
+  - Notificare/NotificareScannablesKit (3.6.1)
+  - Notificare/NotificareUserInboxKit (3.6.1)
+  - notificare_assets (3.6.1):
     - Flutter
-    - Notificare/NotificareAssetsKit (= 3.6.0)
-    - Notificare/NotificareKit (= 3.6.0)
-  - notificare_flutter (3.6.0):
+    - Notificare/NotificareAssetsKit (= 3.6.1)
+    - Notificare/NotificareKit (= 3.6.1)
+  - notificare_flutter (3.6.1):
     - Flutter
-    - Notificare/NotificareKit (= 3.6.0)
-  - notificare_geo (3.6.0):
+    - Notificare/NotificareKit (= 3.6.1)
+  - notificare_geo (3.6.1):
     - Flutter
-    - Notificare/NotificareGeoKit (= 3.6.0)
-    - Notificare/NotificareKit (= 3.6.0)
-  - notificare_in_app_messaging (3.6.0):
+    - Notificare/NotificareGeoKit (= 3.6.1)
+    - Notificare/NotificareKit (= 3.6.1)
+  - notificare_in_app_messaging (3.6.1):
     - Flutter
-    - Notificare/NotificareInAppMessagingKit (= 3.6.0)
-    - Notificare/NotificareKit (= 3.6.0)
-  - notificare_inbox (3.6.0):
+    - Notificare/NotificareInAppMessagingKit (= 3.6.1)
+    - Notificare/NotificareKit (= 3.6.1)
+  - notificare_inbox (3.6.1):
     - Flutter
-    - Notificare/NotificareInboxKit (= 3.6.0)
-    - Notificare/NotificareKit (= 3.6.0)
-  - notificare_loyalty (3.6.0):
+    - Notificare/NotificareInboxKit (= 3.6.1)
+    - Notificare/NotificareKit (= 3.6.1)
+  - notificare_loyalty (3.6.1):
     - Flutter
-    - Notificare/NotificareKit (= 3.6.0)
-    - Notificare/NotificareLoyaltyKit (= 3.6.0)
-  - notificare_monetize (3.6.0):
+    - Notificare/NotificareKit (= 3.6.1)
+    - Notificare/NotificareLoyaltyKit (= 3.6.1)
+  - notificare_monetize (3.6.1):
     - Flutter
-    - Notificare/NotificareKit (= 3.6.0)
-    - Notificare/NotificareMonetizeKit (= 3.6.0)
-  - notificare_push (3.6.0):
+    - Notificare/NotificareKit (= 3.6.1)
+    - Notificare/NotificareMonetizeKit (= 3.6.1)
+  - notificare_push (3.6.1):
     - Flutter
-    - Notificare/NotificareKit (= 3.6.0)
-    - Notificare/NotificarePushKit (= 3.6.0)
-  - notificare_push_ui (3.6.0):
+    - Notificare/NotificareKit (= 3.6.1)
+    - Notificare/NotificarePushKit (= 3.6.1)
+  - notificare_push_ui (3.6.1):
     - Flutter
-    - Notificare/NotificareKit (= 3.6.0)
-    - Notificare/NotificarePushUIKit (= 3.6.0)
-  - notificare_scannables (3.6.0):
+    - Notificare/NotificareKit (= 3.6.1)
+    - Notificare/NotificarePushUIKit (= 3.6.1)
+  - notificare_scannables (3.6.1):
     - Flutter
-    - Notificare/NotificareKit (= 3.6.0)
-    - Notificare/NotificareScannablesKit (= 3.6.0)
-  - notificare_user_inbox (3.6.0):
+    - Notificare/NotificareKit (= 3.6.1)
+    - Notificare/NotificareScannablesKit (= 3.6.1)
+  - notificare_user_inbox (3.6.1):
     - Flutter
-    - Notificare/NotificareKit (= 3.6.0)
-    - Notificare/NotificareUserInboxKit (= 3.6.0)
+    - Notificare/NotificareKit (= 3.6.1)
+    - Notificare/NotificareUserInboxKit (= 3.6.1)
   - permission_handler_apple (9.0.4):
     - Flutter
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
-  - Notificare/NotificareNotificationServiceExtensionKit (>= 3.5.4)
+  - Notificare/NotificareNotificationServiceExtensionKit (>= 3.6.1)
   - notificare_assets (from `.symlinks/plugins/notificare_assets/ios`)
   - notificare_flutter (from `.symlinks/plugins/notificare_flutter/ios`)
   - notificare_geo (from `.symlinks/plugins/notificare_geo/ios`)
@@ -108,20 +108,20 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
-  Notificare: ffbb87d12ceee35ed3077e93489e597a00e79845
-  notificare_assets: 8c03b49fff4392bd98b405d33302af2c41bfc5f4
-  notificare_flutter: fc459559392d1163c243adbc946359f6818e4047
-  notificare_geo: 9b60bba080b8cd7e0a1a3c8b4b8b9dedf6aa2272
-  notificare_in_app_messaging: d8ea3b47def04d46ef9afef245a9bfa1f4041008
-  notificare_inbox: 8e4a50ff899175e3b3f38871ca364c0ef8d76293
-  notificare_loyalty: 7b272d598c44f0b33f52cdccbbcd25f354805f58
-  notificare_monetize: d0853922fc4aa73a08af4619ed4d6493cacd15ab
-  notificare_push: 3d15cee1ceb5e31eb6004598192ed4dd8b6716a6
-  notificare_push_ui: c0ef7cc7e36c9ee3da4ba5f205f818dad184a494
-  notificare_scannables: a2cbe019a72ecde883848d8184defaaf66f545d8
-  notificare_user_inbox: d688abac848f89ca15c2502926b87c7697ecb368
+  Notificare: 366a8c4f38b4dad3315ea1c910593edad02aff26
+  notificare_assets: ff014b1d6022252cf00a98f7b0a8dda737e0299a
+  notificare_flutter: cdb867c89d79ce8ac1f32434d56578989155a44b
+  notificare_geo: 2a376fccb3df493681c7db30aad85e2d307a1a96
+  notificare_in_app_messaging: 7197fb20c536dd2a42cdecdbabb2f3fb6b43fe92
+  notificare_inbox: c3acc73288c1617ad6db3deadfdbd20ecd9f3857
+  notificare_loyalty: 293e09d3734df9e3aa730e2e2dc59bfc4de54744
+  notificare_monetize: 1ab3279d96c3d04d872870b1171f64560c515f2f
+  notificare_push: 846ef8d2d8934ed28ba3182c0cbf326918af1882
+  notificare_push_ui: 7746e305ad1624b4148df63777abceef2a14c0f6
+  notificare_scannables: 2200a7209189995cedb12a40dc64b44f0e4059e5
+  notificare_user_inbox: f8dc8450ff04ccc460e36906581b99fe083ca28c
   permission_handler_apple: 44366e37eaf29454a1e7b1b7d736c2cceaeb17ce
 
-PODFILE CHECKSUM: 0e2f11128fa8d887e05f7d00cd5978d09b1878b7
+PODFILE CHECKSUM: ddab68248e42745afc5063a925fb818c37c82253
 
 COCOAPODS: 1.12.1
