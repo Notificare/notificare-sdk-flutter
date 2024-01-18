@@ -49,14 +49,6 @@ class _AppState extends State<App> {
           content: Text('Notificare: ${application.name}'),
         ),
       );
-
-      if (await NotificarePush.hasRemoteNotificationsEnabled) {
-        await NotificarePush.enableRemoteNotifications();
-      }
-
-      if (await NotificareGeo.hasLocationServicesEnabled) {
-        await NotificareGeo.enableLocationUpdates();
-      }
     });
 
     Notificare.onUnlaunched.listen((event) {
