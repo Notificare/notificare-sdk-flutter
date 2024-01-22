@@ -29,6 +29,10 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
+    if (project.android.hasProperty("namespace")) {
+        namespace 're.notifica.scannables.flutter'
+    }
+
     compileSdkVersion 33
 
     defaultConfig {
