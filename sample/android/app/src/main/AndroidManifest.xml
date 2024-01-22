@@ -1,5 +1,4 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="re.notifica.sample">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application
         android:icon="@mipmap/ic_launcher"
@@ -80,5 +79,9 @@
         <meta-data
             android:name="re.notifica.push.ui.notification_url_schemes"
             android:resource="@array/notification_url_schemes" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="${googleMapsApiKey}" />
     </application>
 </manifest>
