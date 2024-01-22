@@ -107,7 +107,7 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/permission_handler_apple/ios"
 
 SPEC CHECKSUMS:
-  Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
+  Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   Notificare: 4803f08802a7c02edcee7934b2856ba0b78f1300
   notificare_assets: 4e554dde7974649dd88921c3dfdd953c44fb2f91
   notificare_flutter: 28b302a2e58a5d6d2863275a9cf69d0030488d73
@@ -124,4 +124,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 169dd8c57cd434cf5a142968bfc4a70a9fddbf9a
 
-COCOAPODS: 1.12.1
+COCOAPODS: 1.14.3
