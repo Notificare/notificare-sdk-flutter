@@ -28,20 +28,35 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 33
+    if (project.android.hasProperty("namespace")) {
+        namespace 're.notifica.flutter'
+    }
+
+    compileSdkVersion 34
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
+
     defaultConfig {
         minSdkVersion 23
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
     lintOptions {
         disable 'InvalidPackage'
     }
 }
 
 dependencies {
-    def notificare_version = '3.6.1'
+    def notificare_version = '3.7.0'
     api "re.notifica:notificare:$notificare_version"
 }
