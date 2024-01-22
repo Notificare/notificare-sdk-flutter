@@ -31,7 +31,7 @@ android {
         namespace 're.notifica.assets.flutter'
     }
 
-    compileSdkVersion 33
+    compileSdkVersion 34
 
     defaultConfig {
         minSdkVersion 23
