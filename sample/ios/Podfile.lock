@@ -122,6 +122,6 @@ SPEC CHECKSUMS:
   notificare_user_inbox: 7a0368fec2af71f3df59dd26327ede1d7b597f7e
   permission_handler_apple: 44366e37eaf29454a1e7b1b7d736c2cceaeb17ce
 
-PODFILE CHECKSUM: 169dd8c57cd434cf5a142968bfc4a70a9fddbf9a
+PODFILE CHECKSUM: a9d3c8abbebf8e57da166529c9d3a6269f8b2e5c
 
 COCOAPODS: 1.14.3
