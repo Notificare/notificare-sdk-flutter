@@ -65,6 +65,12 @@ android {
             keyAlias localProperties.getProperty('keystore.debug.key.alias')
             keyPassword localProperties.getProperty('keystore.debug.key.password')
         }
+        release {
+            storeFile file('release.keystore')
+            storePassword localProperties.getProperty('keystore.release.store.password')
+            keyAlias localProperties.getProperty('keystore.release.key.alias')
+            keyPassword localProperties.getProperty('keystore.release.key.password')
+        }
     }
 
     buildTypes {
@@ -77,8 +83,7 @@ android {
 //            shrinkResources true
 //            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
 
-            // Using debug signing config
-            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.release
         }
     }
 
