@@ -53,6 +53,8 @@
 	<string>We will need access to the device's microphone to reply to notifications.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>We may need to access your photos to reply to notifications.</string>
+	<key>UIApplicationSupportsIndirectInputEvents</key>
+	<true/>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>remote-notification</string>
@@ -76,7 +78,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>UIApplicationSupportsIndirectInputEvents</key>
-	<true/>
 </dict>
 </plist>

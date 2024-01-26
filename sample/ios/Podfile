@@ -1,13 +1,14 @@
 # Uncomment this line to define a global platform for your project
-# platform :ios, '11.0'
+# platform :ios, '13.0'
 
 # CocoaPods analytics sends network stats synchronously affecting flutter build latency.
 ENV['COCOAPODS_DISABLE_STATS'] = 'true'
 
 project 'Runner', {
-  'Debug' => :debug,
-  'Profile' => :release,
-  'Release' => :release,
+  'Debug-production' => :debug,
+  'Debug-development' => :debug,
+  'Release-production' => :release,
+  'Release-development' => :release,
 }
 
 def flutter_root
@@ -36,7 +37,7 @@ end
 
 target 'NotificationServiceExtension' do
   use_frameworks!
-  pod 'Notificare/NotificareNotificationServiceExtensionKit', '>= 3.6.1'
+  pod 'Notificare/NotificareNotificationServiceExtensionKit', '>= 3.7.0'
 end
 
 post_install do |installer|

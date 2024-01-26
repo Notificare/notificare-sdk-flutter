@@ -29,7 +29,11 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 33
+    if (project.android.hasProperty("namespace")) {
+        namespace 're.notifica.scannables.flutter'
+    }
+
+    compileSdkVersion 34
 
     defaultConfig {
         minSdkVersion 23
@@ -50,7 +54,7 @@ android {
 }
 
 dependencies {
-    def notificare_version = '3.6.1'
+    def notificare_version = '3.7.1'
     api "re.notifica:notificare:$notificare_version"
     api "re.notifica:notificare-scannables:$notificare_version"
     implementation "re.notifica:notificare-scannables-gms:$notificare_version"
