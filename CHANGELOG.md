@@ -1,6 +1,23 @@
 # CHANGELOG
 
-## Upcoming release
+## 3.7.0
+
+**Important notice:** Re-enabling remote notifications and location services is no longer required.
+You can safely remove the following piece of code as the SDK will automatically handle it for you during the launch flow.
+
+```dart
+Notificare.onReady.listen((application) async {
+  // This check is no longer necessary.
+  if (await NotificarePush.hasRemoteNotificationsEnabled) {
+    await NotificarePush.enableRemoteNotifications();
+  }
+
+  // This check is no longer necessary.
+  if (await NotificareGeo.hasLocationServicesEnabled) {
+    await NotificareGeo.enableLocationUpdates();
+  }
+});
+```
 
 #### Native changes
 
@@ -21,46 +38,12 @@
 - Fix crash when presenting an in-app browser when the phone has none installed
 - Fix `getParcelableExtra` on API 33 in certain cases
 
-**Important notice:** Re-enabling remote notifications and location services is no longer required.
-You can safely remove the following piece of code as the SDK will automatically handle it for you during the launch flow.
-
-```kotlin
-override fun onReady(application: NotificareApplication) {
-    // This check is no longer necessary.
-    if (Notificare.push().hasRemoteNotificationsEnabled) {
-        Notificare.push().enableRemoteNotifications()
-    }
-
-    // This check is no longer necessary.
-    if (Notificare.geo().hasLocationServicesEnabled) {
-        Notificare.geo().enableLocationUpdates()
-    }
-}
-```
-
 ##### iOS
 
 - Prevent the `device_registered` event from invoking before the `ready` event
 - Automatically enable remote notifications during launch when possible
 - Automatically enable location updates during launch when possible
 - Drop support for iOS 12.0
-
-**Important notice:** Re-enabling remote notifications and location services is no longer required.
-You can safely remove the following piece of code as the SDK will automatically handle it for you during the launch flow.
-
-```swift
-func notificare(_ notificare: Notificare, onReady application: NotificareApplication) {
-    // This check is no longer necessary.
-    if Notificare.shared.push().hasRemoteNotificationsEnabled {
-        Notificare.shared.push().enableRemoteNotifications { _ in }
-    }
-
-    // This check is no longer necessary.
-    if Notificare.shared.geo().hasLocationServicesEnabled {
-        Notificare.shared.geo().enableLocationUpdates()
-    }
-}
-```
 
 ## 3.6.1
 
