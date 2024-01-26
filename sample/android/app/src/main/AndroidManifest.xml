@@ -32,6 +32,12 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+            <intent-filter>
+                <action android:name="re.notifica.intent.action.RemoteMessageOpened" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -40,9 +46,15 @@
 
                 <data android:scheme="${applicationId}" />
             </intent-filter>
-            <intent-filter>
-                <action android:name="re.notifica.intent.action.RemoteMessageOpened" />
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="@string/notificare_dynamic_link_hostname"
+                    android:scheme="https" />
             </intent-filter>
             <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.VIEW" />
@@ -51,7 +63,7 @@
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data
-                    android:host="${notificareApplicationId}.applinks.notifica.re"
+                    android:host="@string/notificare_app_links_hostname"
                     android:pathPrefix="/testdevice"
                     android:scheme="https" />
             </intent-filter>
