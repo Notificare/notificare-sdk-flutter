@@ -1,7 +1,7 @@
 group 're.notifica.assets.flutter'
 
 buildscript {
-    ext.kotlin_version = '1.7.20'
+    ext.kotlin_version = '1.9.10'
     repositories {
         google()
         mavenCentral()
