@@ -24,7 +24,8 @@ class NotificareHeading {
     required this.timestamp,
   });
 
-  factory NotificareHeading.fromJson(Map<String, dynamic> json) => _$NotificareHeadingFromJson(json);
+  factory NotificareHeading.fromJson(Map<String, dynamic> json) =>
+      _$NotificareHeadingFromJson(json);
 
   Map<String, dynamic> toJson() => _$NotificareHeadingToJson(this);
 }

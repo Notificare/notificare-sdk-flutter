@@ -20,7 +20,8 @@ class NotificareInboxItem {
     required this.expires,
   });
 
-  factory NotificareInboxItem.fromJson(Map<String, dynamic> json) => _$NotificareInboxItemFromJson(json);
+  factory NotificareInboxItem.fromJson(Map<String, dynamic> json) =>
+      _$NotificareInboxItemFromJson(json);
 
   Map<String, dynamic> toJson() => _$NotificareInboxItemToJson(this);
 }

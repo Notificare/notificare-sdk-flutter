@@ -9,20 +9,36 @@ class NotificareUserInbox {
   NotificareUserInbox._();
 
   // Channels
-  static const _channel = MethodChannel('re.notifica.inbox.user.flutter/notificare_user_inbox', JSONMethodCodec());
+  static const _channel = MethodChannel(
+    're.notifica.inbox.user.flutter/notificare_user_inbox',
+    JSONMethodCodec(),
+  );
 
-  static Future<NotificareUserInboxResponse> parseResponseFromJSON(Map<String, dynamic> json) async {
-    final result = await _channel.invokeMapMethod<String, dynamic>('parseResponseFromJSON', json);
+  static Future<NotificareUserInboxResponse> parseResponseFromJSON(
+    Map<String, dynamic> json,
+  ) async {
+    final result = await _channel.invokeMapMethod<String, dynamic>(
+      'parseResponseFromJSON',
+      json,
+    );
     return NotificareUserInboxResponse.fromJson(result!);
   }
 
-  static Future<NotificareUserInboxResponse> parseResponseFromString(String json) async {
-    final result = await _channel.invokeMapMethod<String, dynamic>('parseResponseFromString', json);
+  static Future<NotificareUserInboxResponse> parseResponseFromString(
+    String json,
+  ) async {
+    final result = await _channel.invokeMapMethod<String, dynamic>(
+      'parseResponseFromString',
+      json,
+    );
     return NotificareUserInboxResponse.fromJson(result!);
   }
 
-  static Future<NotificareNotification> open(NotificareUserInboxItem item) async {
-    final result = await _channel.invokeMapMethod<String, dynamic>('open', item.toJson());
+  static Future<NotificareNotification> open(
+    NotificareUserInboxItem item,
+  ) async {
+    final result =
+        await _channel.invokeMapMethod<String, dynamic>('open', item.toJson());
     return NotificareNotification.fromJson(result!);
   }
 

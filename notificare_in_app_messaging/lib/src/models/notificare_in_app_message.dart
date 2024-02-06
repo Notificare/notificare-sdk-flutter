@@ -30,7 +30,8 @@ class NotificareInAppMessage {
     required this.secondaryAction,
   });
 
-  factory NotificareInAppMessage.fromJson(Map<String, dynamic> json) => _$NotificareInAppMessageFromJson(json);
+  factory NotificareInAppMessage.fromJson(Map<String, dynamic> json) =>
+      _$NotificareInAppMessageFromJson(json);
 
   Map<String, dynamic> toJson() => _$NotificareInAppMessageToJson(this);
 }

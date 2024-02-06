@@ -15,8 +15,11 @@ class NotificareNotificationReceivedEvent {
     required this.deliveryMechanism,
   });
 
-  factory NotificareNotificationReceivedEvent.fromJson(Map<String, dynamic> json) =>
+  factory NotificareNotificationReceivedEvent.fromJson(
+    Map<String, dynamic> json,
+  ) =>
       _$NotificareNotificationReceivedEventFromJson(json);
 
-  Map<String, dynamic> toJson() => _$NotificareNotificationReceivedEventToJson(this);
+  Map<String, dynamic> toJson() =>
+      _$NotificareNotificationReceivedEventToJson(this);
 }

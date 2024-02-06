@@ -14,8 +14,11 @@ class NotificareUnknownNotificationActionOpenedEvent {
     required this.responseText,
   });
 
-  factory NotificareUnknownNotificationActionOpenedEvent.fromJson(Map<String, dynamic> json) =>
+  factory NotificareUnknownNotificationActionOpenedEvent.fromJson(
+    Map<String, dynamic> json,
+  ) =>
       _$NotificareUnknownNotificationActionOpenedEventFromJson(json);
 
-  Map<String, dynamic> toJson() => _$NotificareUnknownNotificationActionOpenedEventToJson(this);
+  Map<String, dynamic> toJson() =>
+      _$NotificareUnknownNotificationActionOpenedEventToJson(this);
 }

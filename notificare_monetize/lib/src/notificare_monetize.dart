@@ -8,19 +8,24 @@ class NotificareMonetize {
   NotificareMonetize._();
 
   // Channels
-  static const _channel = MethodChannel('re.notifica.monetize.flutter/notificare_monetize', JSONMethodCodec());
+  static const _channel = MethodChannel(
+    're.notifica.monetize.flutter/notificare_monetize',
+    JSONMethodCodec(),
+  );
 
   // Events
   static final Map<String, EventChannel> _eventChannels = {};
   static final Map<String, Stream<dynamic>> _eventStreams = {};
 
   static Future<List<NotificareProduct>> get products async {
-    final json = await _channel.invokeListMethod<Map<String, dynamic>>('getProducts');
+    final json =
+        await _channel.invokeListMethod<Map<String, dynamic>>('getProducts');
     return json!.map((e) => NotificareProduct.fromJson(e)).toList();
   }
 
   static Future<List<NotificarePurchase>> get purchases async {
-    final json = await _channel.invokeListMethod<Map<String, dynamic>>('getPurchases');
+    final json =
+        await _channel.invokeListMethod<Map<String, dynamic>>('getPurchases');
     return json!.map((e) => NotificarePurchase.fromJson(e)).toList();
   }
 
@@ -29,7 +34,10 @@ class NotificareMonetize {
   }
 
   static Future<void> startPurchaseFlow(NotificareProduct product) async {
-    await _channel.invokeMapMethod<String, dynamic>('startPurchaseFlow', product.toJson());
+    await _channel.invokeMapMethod<String, dynamic>(
+      'startPurchaseFlow',
+      product.toJson(),
+    );
   }
 
   // Events
@@ -40,7 +48,8 @@ class NotificareMonetize {
     }
 
     if (_eventStreams[eventType] == null) {
-      _eventStreams[eventType] = _eventChannels[eventType]!.receiveBroadcastStream();
+      _eventStreams[eventType] =
+          _eventChannels[eventType]!.receiveBroadcastStream();
     }
 
     return _eventStreams[eventType]!;
