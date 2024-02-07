@@ -1,5 +1,5 @@
 name: notificare_user_inbox
-description: Notificare User Inbox Flutter Plugin. Provide your users with a single inbox accessible across all their devices.
+description: "Notificare User Inbox Flutter Plugin: Provide your users with a single inbox accessible across all their devices."
 version: 3.7.0
 homepage: https://notificare.com
 documentation: https://docs.notifica.re/sdk/v3/flutter/setup/
