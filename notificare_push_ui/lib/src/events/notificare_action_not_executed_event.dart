@@ -13,8 +13,11 @@ class NotificareActionNotExecutedEvent {
     required this.action,
   });
 
-  factory NotificareActionNotExecutedEvent.fromJson(Map<String, dynamic> json) =>
+  factory NotificareActionNotExecutedEvent.fromJson(
+    Map<String, dynamic> json,
+  ) =>
       _$NotificareActionNotExecutedEventFromJson(json);
 
-  Map<String, dynamic> toJson() => _$NotificareActionNotExecutedEventToJson(this);
+  Map<String, dynamic> toJson() =>
+      _$NotificareActionNotExecutedEventToJson(this);
 }

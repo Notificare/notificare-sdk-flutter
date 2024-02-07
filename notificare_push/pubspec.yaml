@@ -1,5 +1,5 @@
 name: notificare_push
-description: Notificare Push Flutter Plugin
+description: "Notificare Push Flutter Plugin: Receive push notifications and automatically track its engagement."
 version: 3.7.0
 homepage: https://notificare.com
 documentation: https://docs.notifica.re/sdk/v3/flutter/setup/

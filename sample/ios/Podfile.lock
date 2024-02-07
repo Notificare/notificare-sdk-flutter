@@ -55,7 +55,7 @@ PODS:
     - Flutter
     - Notificare/NotificareKit (= 3.7.0)
     - Notificare/NotificareUserInboxKit (= 3.7.0)
-  - permission_handler_apple (9.0.4):
+  - permission_handler_apple (9.1.1):
     - Flutter
 
 DEPENDENCIES:
@@ -120,7 +120,7 @@ SPEC CHECKSUMS:
   notificare_push_ui: 6936bc0d4aef19bd08177ba5566dd366d07a0750
   notificare_scannables: aeb5a8d8efbc0aaa232037cbdda0d0820955b517
   notificare_user_inbox: 0ef37ab303a0b6b7ac407c39ce66a0fe83f446fc
-  permission_handler_apple: 44366e37eaf29454a1e7b1b7d736c2cceaeb17ce
+  permission_handler_apple: e76247795d700c14ea09e3a2d8855d41ee80a2e6
 
 PODFILE CHECKSUM: a9d3c8abbebf8e57da166529c9d3a6269f8b2e5c
 

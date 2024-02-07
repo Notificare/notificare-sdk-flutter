@@ -18,7 +18,8 @@ class NotificareVisit {
     required this.longitude,
   });
 
-  factory NotificareVisit.fromJson(Map<String, dynamic> json) => _$NotificareVisitFromJson(json);
+  factory NotificareVisit.fromJson(Map<String, dynamic> json) =>
+      _$NotificareVisitFromJson(json);
 
   Map<String, dynamic> toJson() => _$NotificareVisitToJson(this);
 }

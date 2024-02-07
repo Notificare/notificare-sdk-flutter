@@ -20,7 +20,8 @@ class NotificareBeacon {
     required this.proximity,
   });
 
-  factory NotificareBeacon.fromJson(Map<String, dynamic> json) => _$NotificareBeaconFromJson(json);
+  factory NotificareBeacon.fromJson(Map<String, dynamic> json) =>
+      _$NotificareBeaconFromJson(json);
 
   Map<String, dynamic> toJson() => _$NotificareBeaconToJson(this);
 }

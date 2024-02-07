@@ -32,7 +32,8 @@ class NotificarePurchase {
     this.receipt,
   });
 
-  factory NotificarePurchase.fromJson(Map<String, dynamic> json) => _$NotificarePurchaseFromJson(json);
+  factory NotificarePurchase.fromJson(Map<String, dynamic> json) =>
+      _$NotificarePurchaseFromJson(json);
 
   Map<String, dynamic> toJson() => _$NotificarePurchaseToJson(this);
 }

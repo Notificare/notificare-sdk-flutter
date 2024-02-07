@@ -28,7 +28,8 @@ class NotificareRegion {
     required this.timeZoneOffset,
   });
 
-  factory NotificareRegion.fromJson(Map<String, dynamic> json) => _$NotificareRegionFromJson(json);
+  factory NotificareRegion.fromJson(Map<String, dynamic> json) =>
+      _$NotificareRegionFromJson(json);
 
   Map<String, dynamic> toJson() => _$NotificareRegionToJson(this);
 }
@@ -43,7 +44,8 @@ class NotificareRegionGeometry {
     required this.coordinate,
   });
 
-  factory NotificareRegionGeometry.fromJson(Map<String, dynamic> json) => _$NotificareRegionGeometryFromJson(json);
+  factory NotificareRegionGeometry.fromJson(Map<String, dynamic> json) =>
+      _$NotificareRegionGeometryFromJson(json);
 
   Map<String, dynamic> toJson() => _$NotificareRegionGeometryToJson(this);
 }
@@ -58,10 +60,13 @@ class NotificareRegionAdvancedGeometry {
     required this.coordinates,
   });
 
-  factory NotificareRegionAdvancedGeometry.fromJson(Map<String, dynamic> json) =>
+  factory NotificareRegionAdvancedGeometry.fromJson(
+    Map<String, dynamic> json,
+  ) =>
       _$NotificareRegionAdvancedGeometryFromJson(json);
 
-  Map<String, dynamic> toJson() => _$NotificareRegionAdvancedGeometryToJson(this);
+  Map<String, dynamic> toJson() =>
+      _$NotificareRegionAdvancedGeometryToJson(this);
 }
 
 @JsonSerializable(anyMap: true, explicitToJson: true)
@@ -74,7 +79,8 @@ class NotificareRegionCoordinate {
     required this.longitude,
   });
 
-  factory NotificareRegionCoordinate.fromJson(Map<String, dynamic> json) => _$NotificareRegionCoordinateFromJson(json);
+  factory NotificareRegionCoordinate.fromJson(Map<String, dynamic> json) =>
+      _$NotificareRegionCoordinateFromJson(json);
 
   Map<String, dynamic> toJson() => _$NotificareRegionCoordinateToJson(this);
 }

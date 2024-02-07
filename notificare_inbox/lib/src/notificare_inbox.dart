@@ -8,14 +8,18 @@ class NotificareInbox {
   NotificareInbox._();
 
   // Channels
-  static const _channel = MethodChannel('re.notifica.inbox.flutter/notificare_inbox', JSONMethodCodec());
+  static const _channel = MethodChannel(
+    're.notifica.inbox.flutter/notificare_inbox',
+    JSONMethodCodec(),
+  );
 
   // Events
   static final Map<String, EventChannel> _eventChannels = {};
   static final Map<String, Stream<dynamic>> _eventStreams = {};
 
   static Future<List<NotificareInboxItem>> get items async {
-    final json = await _channel.invokeListMethod<Map<String, dynamic>>('getItems');
+    final json =
+        await _channel.invokeListMethod<Map<String, dynamic>>('getItems');
     return json!.map((e) => NotificareInboxItem.fromJson(e)).toList();
   }
 
@@ -28,7 +32,8 @@ class NotificareInbox {
   }
 
   static Future<NotificareNotification> open(NotificareInboxItem item) async {
-    final json = await _channel.invokeMapMethod<String, dynamic>('open', item.toJson());
+    final json =
+        await _channel.invokeMapMethod<String, dynamic>('open', item.toJson());
     return NotificareNotification.fromJson(json!);
   }
 
@@ -56,7 +61,8 @@ class NotificareInbox {
     }
 
     if (_eventStreams[eventType] == null) {
-      _eventStreams[eventType] = _eventChannels[eventType]!.receiveBroadcastStream();
+      _eventStreams[eventType] =
+          _eventChannels[eventType]!.receiveBroadcastStream();
     }
 
     return _eventStreams[eventType]!;

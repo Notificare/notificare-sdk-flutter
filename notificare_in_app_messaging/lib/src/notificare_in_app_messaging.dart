@@ -9,7 +9,10 @@ class NotificareInAppMessaging {
   NotificareInAppMessaging._();
 
   // Channels
-  static const _channel = MethodChannel('re.notifica.iam.flutter/notificare_in_app_messaging', JSONMethodCodec());
+  static const _channel = MethodChannel(
+    're.notifica.iam.flutter/notificare_in_app_messaging',
+    JSONMethodCodec(),
+  );
 
   // Events
   static final Map<String, EventChannel> _eventChannels = {};
@@ -19,7 +22,10 @@ class NotificareInAppMessaging {
     return await _channel.invokeMethod('hasMessagesSuppressed');
   }
 
-  static Future<void> setMessagesSuppressed(bool suppressed, {bool? evaluateContext}) async {
+  static Future<void> setMessagesSuppressed(
+    bool suppressed, {
+    bool? evaluateContext,
+  }) async {
     await _channel.invokeMethod('setMessagesSuppressed', {
       "suppressed": suppressed,
       "evaluateContext": evaluateContext,
@@ -34,7 +40,8 @@ class NotificareInAppMessaging {
     }
 
     if (_eventStreams[eventType] == null) {
-      _eventStreams[eventType] = _eventChannels[eventType]!.receiveBroadcastStream();
+      _eventStreams[eventType] =
+          _eventChannels[eventType]!.receiveBroadcastStream();
     }
 
     return _eventStreams[eventType]!;
@@ -68,7 +75,8 @@ class NotificareInAppMessaging {
     });
   }
 
-  static Stream<NotificareActionFailedToExecuteEvent> get onActionFailedToExecute {
+  static Stream<NotificareActionFailedToExecuteEvent>
+      get onActionFailedToExecute {
     return _getEventStream('action_failed_to_execute').map((result) {
       final Map<dynamic, dynamic> json = result;
       return NotificareActionFailedToExecuteEvent.fromJson(json.cast());

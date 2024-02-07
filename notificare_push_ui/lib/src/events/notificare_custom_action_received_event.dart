@@ -15,8 +15,11 @@ class NotificareCustomActionReceivedEvent {
     required this.uri,
   });
 
-  factory NotificareCustomActionReceivedEvent.fromJson(Map<String, dynamic> json) =>
+  factory NotificareCustomActionReceivedEvent.fromJson(
+    Map<String, dynamic> json,
+  ) =>
       _$NotificareCustomActionReceivedEventFromJson(json);
 
-  Map<String, dynamic> toJson() => _$NotificareCustomActionReceivedEventToJson(this);
+  Map<String, dynamic> toJson() =>
+      _$NotificareCustomActionReceivedEventToJson(this);
 }

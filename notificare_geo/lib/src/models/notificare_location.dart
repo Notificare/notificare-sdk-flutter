@@ -28,7 +28,8 @@ class NotificareLocation {
     required this.timestamp,
   });
 
-  factory NotificareLocation.fromJson(Map<String, dynamic> json) => _$NotificareLocationFromJson(json);
+  factory NotificareLocation.fromJson(Map<String, dynamic> json) =>
+      _$NotificareLocationFromJson(json);
 
   Map<String, dynamic> toJson() => _$NotificareLocationToJson(this);
 }

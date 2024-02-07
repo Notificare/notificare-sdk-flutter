@@ -19,7 +19,8 @@ class NotificareScannable {
     required this.notification,
   });
 
-  factory NotificareScannable.fromJson(Map<String, dynamic> json) => _$NotificareScannableFromJson(json);
+  factory NotificareScannable.fromJson(Map<String, dynamic> json) =>
+      _$NotificareScannableFromJson(json);
 
   Map<String, dynamic> toJson() => _$NotificareScannableToJson(this);
 }
