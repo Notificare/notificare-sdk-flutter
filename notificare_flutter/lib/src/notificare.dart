@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/services.dart';
 import 'package:notificare_flutter/src/models/notificare_application.dart';
 import 'package:notificare_flutter/src/models/notificare_device.dart';
+import 'package:notificare_flutter/src/models/notificare_dynamic_link.dart';
 import 'package:notificare_flutter/src/models/notificare_notification.dart';
 import 'package:notificare_flutter/src/notificare_device_module.dart';
 import 'package:notificare_flutter/src/notificare_events_module.dart';
@@ -56,6 +57,11 @@ class Notificare {
   static Future<NotificareNotification> fetchNotification(String id) async {
     final json = await _channel.invokeMapMethod<String, dynamic>('fetchNotification', id);
     return NotificareNotification.fromJson(json!);
+  }
+
+  static Future<NotificareDynamicLink> fetchDynamicLink(String url) async {
+    final json = await _channel.invokeMapMethod<String, dynamic>('fetchDynamicLink', url);
+    return NotificareDynamicLink.fromJson(json!);
   }
 
   // Events
