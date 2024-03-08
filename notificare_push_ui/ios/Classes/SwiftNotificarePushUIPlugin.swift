@@ -105,26 +105,7 @@ public class SwiftNotificarePushUIPlugin: NSObject, FlutterPlugin {
                 navigationController.view.backgroundColor = .white
             }
         }
-        
-        let closeButton: UIBarButtonItem
-        if let closeButtonImage = NotificareLocalizable.image(resource: .close) {
-            closeButton = UIBarButtonItem(image: closeButtonImage,
-                                          style: .plain,
-                                          target: self,
-                                          action: #selector(onCloseClicked))
-        } else {
-            closeButton = UIBarButtonItem(title: NotificareLocalizable.string(resource: .closeButton),
-                                          style: .plain,
-                                          target: self,
-                                          action: #selector(onCloseClicked))
-        }
-        
-        if let colorStr = theme?.actionButtonTextColor {
-            closeButton.tintColor = UIColor(hexString: colorStr)
-        }
-        
-        navigationController.navigationItem.leftBarButtonItem = closeButton
-        
+
         return navigationController
     }
     
