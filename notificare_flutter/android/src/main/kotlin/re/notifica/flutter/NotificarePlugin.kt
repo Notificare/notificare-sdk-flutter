@@ -3,6 +3,7 @@ package re.notifica.flutter
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Handler
 import android.os.Looper
 import io.flutter.embedding.engine.plugins.FlutterPlugin
@@ -48,6 +49,7 @@ class NotificarePlugin : FlutterPlugin, ActivityAware, PluginRegistry.NewIntentL
                 "getApplication" -> getApplication(call, result)
                 "fetchApplication" -> fetchApplication(call, result)
                 "fetchNotification" -> fetchNotification(call, result)
+                "fetchDynamicLink" -> fetchDynamicLink(call, result)
 
                 // Device module
                 "getCurrentDevice" -> getCurrentDevice(result)
@@ -169,6 +171,28 @@ class NotificarePlugin : FlutterPlugin, ActivityAware, PluginRegistry.NewIntentL
 
         Notificare.fetchNotification(id, object : NotificareCallback<NotificareNotification> {
             override fun onSuccess(result: NotificareNotification) {
+                onMainThread {
+                    response.success(result.toJson())
+                }
+            }
+
+            override fun onFailure(e: Exception) {
+                onMainThread {
+                    response.error(DEFAULT_ERROR_CODE, e.message, null)
+                }
+            }
+        })
+    }
+
+    private fun fetchDynamicLink(call: MethodCall, response: Result) {
+        val url = call.arguments<String>() ?: return onMainThread {
+            response.error(DEFAULT_ERROR_CODE, "Invalid request arguments.", null)
+        }
+
+        val uri = Uri.parse(url)
+
+        Notificare.fetchDynamicLink(uri, object : NotificareCallback<NotificareDynamicLink> {
+            override fun onSuccess(result: NotificareDynamicLink) {
                 onMainThread {
                     response.success(result.toJson())
                 }

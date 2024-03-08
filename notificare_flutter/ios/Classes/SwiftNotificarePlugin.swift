@@ -37,6 +37,7 @@ public class SwiftNotificarePlugin: NSObject, FlutterPlugin {
             case "getApplication": self.getApplication(call, result)
             case "fetchApplication": self.fetchApplication(call, result)
             case "fetchNotification": self.fetchNotification(call, result)
+            case "fetchDynamicLink": self.fetchDynamicLink(call, result)
 
             // Notificare Device Module
             case "getCurrentDevice": self.getCurrentDevice(call, result)
@@ -121,6 +122,24 @@ public class SwiftNotificarePlugin: NSObject, FlutterPlugin {
             case let .success(notification):
                 do {
                     let json = try notification.toJson()
+                    response(json)
+                } catch {
+                    response(FlutterError(code: DEFAULT_ERROR_CODE, message: error.localizedDescription, details: nil))
+                }
+            case let .failure(error):
+                response(FlutterError(code: DEFAULT_ERROR_CODE, message: error.localizedDescription, details: nil))
+            }
+        }
+    }
+
+    private func fetchDynamicLink(_ call: FlutterMethodCall, _ response: @escaping FlutterResult) {
+        let url = call.arguments as! String
+
+        Notificare.shared.fetchDynamicLink(url) { result in
+            switch result {
+            case let .success(dynamicLink):
+                do {
+                    let json = try dynamicLink.toJson()
                     response(json)
                 } catch {
                     response(FlutterError(code: DEFAULT_ERROR_CODE, message: error.localizedDescription, details: nil))
