@@ -1,6 +1,6 @@
 name: notificare_monetize
-description: Notificare Monetize Flutter Plugin
-version: 3.7.0
+description: "Notificare Monetize Flutter Plugin: Quickly support in-app purchases in both the App Store and Google Play."
+version: 3.8.0
 homepage: https://notificare.com
 documentation: https://docs.notifica.re/sdk/v3/flutter/setup/
 repository: https://github.com/Notificare/notificare-sdk-flutter/tree/main/notificare_monetize

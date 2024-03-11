@@ -13,8 +13,11 @@ class NotificareActionWillExecuteEvent {
     required this.action,
   });
 
-  factory NotificareActionWillExecuteEvent.fromJson(Map<String, dynamic> json) =>
+  factory NotificareActionWillExecuteEvent.fromJson(
+    Map<String, dynamic> json,
+  ) =>
       _$NotificareActionWillExecuteEventFromJson(json);
 
-  Map<String, dynamic> toJson() => _$NotificareActionWillExecuteEventToJson(this);
+  Map<String, dynamic> toJson() =>
+      _$NotificareActionWillExecuteEventToJson(this);
 }

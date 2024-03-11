@@ -8,7 +8,10 @@ import 'package:notificare_push/notificare_push.dart';
 class NotificarePush {
   NotificarePush._();
 
-  static const MethodChannel _channel = MethodChannel('re.notifica.push.flutter/notificare_push', JSONMethodCodec());
+  static const MethodChannel _channel = MethodChannel(
+    're.notifica.push.flutter/notificare_push',
+    JSONMethodCodec(),
+  );
 
   // Events
   static final Map<String, EventChannel> _eventChannels = {};
@@ -56,13 +59,16 @@ class NotificarePush {
     }
 
     if (_eventStreams[eventType] == null) {
-      _eventStreams[eventType] = _eventChannels[eventType]!.receiveBroadcastStream();
+      _eventStreams[eventType] =
+          _eventChannels[eventType]!.receiveBroadcastStream();
     }
 
     return _eventStreams[eventType]!;
   }
 
-  @Deprecated('Listen to onNotificationInfoReceived(notification, deliveryMechanism) instead.')
+  @Deprecated(
+    'Listen to onNotificationInfoReceived(notification, deliveryMechanism) instead.',
+  )
   static Stream<NotificareNotification> get onNotificationReceived {
     return _getEventStream('notification_received').map((result) {
       final Map<dynamic, dynamic> json = result;
@@ -70,7 +76,8 @@ class NotificarePush {
     });
   }
 
-  static Stream<NotificareNotificationReceivedEvent> get onNotificationInfoReceived {
+  static Stream<NotificareNotificationReceivedEvent>
+      get onNotificationInfoReceived {
     return _getEventStream('notification_info_received').map((result) {
       final Map<dynamic, dynamic> json = result;
       return NotificareNotificationReceivedEvent.fromJson(json.cast());
@@ -105,17 +112,21 @@ class NotificarePush {
     });
   }
 
-  static Stream<NotificareNotificationActionOpenedEvent> get onNotificationActionOpened {
+  static Stream<NotificareNotificationActionOpenedEvent>
+      get onNotificationActionOpened {
     return _getEventStream('notification_action_opened').map((result) {
       final Map<dynamic, dynamic> json = result;
       return NotificareNotificationActionOpenedEvent.fromJson(json.cast());
     });
   }
 
-  static Stream<NotificareUnknownNotificationActionOpenedEvent> get onUnknownNotificationActionOpened {
+  static Stream<NotificareUnknownNotificationActionOpenedEvent>
+      get onUnknownNotificationActionOpened {
     return _getEventStream('unknown_notification_action_opened').map((result) {
       final Map<dynamic, dynamic> json = result;
-      return NotificareUnknownNotificationActionOpenedEvent.fromJson(json.cast());
+      return NotificareUnknownNotificationActionOpenedEvent.fromJson(
+        json.cast(),
+      );
     });
   }
 
@@ -135,7 +146,8 @@ class NotificarePush {
   }
 
   static Stream<String> get onFailedToRegisterForRemoteNotifications {
-    return _getEventStream('failed_to_register_for_remote_notifications').map((result) {
+    return _getEventStream('failed_to_register_for_remote_notifications')
+        .map((result) {
       return result as String;
     });
   }

@@ -9,7 +9,10 @@ import 'package:notificare_geo/src/models/notificare_visit.dart';
 class NotificareGeo {
   NotificareGeo._();
 
-  static const MethodChannel _channel = MethodChannel('re.notifica.geo.flutter/notificare_geo', JSONMethodCodec());
+  static const MethodChannel _channel = MethodChannel(
+    're.notifica.geo.flutter/notificare_geo',
+    JSONMethodCodec(),
+  );
 
   // Events
   static final Map<String, EventChannel> _eventChannels = {};
@@ -25,12 +28,14 @@ class NotificareGeo {
   }
 
   static Future<List<NotificareRegion>> get monitoredRegions async {
-    final json = await _channel.invokeListMethod<Map<String, dynamic>>('getMonitoredRegions');
+    final json = await _channel
+        .invokeListMethod<Map<String, dynamic>>('getMonitoredRegions');
     return json!.map((e) => NotificareRegion.fromJson(e)).toList();
   }
 
   static Future<List<NotificareRegion>> get enteredRegions async {
-    final json = await _channel.invokeListMethod<Map<String, dynamic>>('getEnteredRegions');
+    final json = await _channel
+        .invokeListMethod<Map<String, dynamic>>('getEnteredRegions');
     return json!.map((e) => NotificareRegion.fromJson(e)).toList();
   }
 
@@ -50,7 +55,8 @@ class NotificareGeo {
     }
 
     if (_eventStreams[eventType] == null) {
-      _eventStreams[eventType] = _eventChannels[eventType]!.receiveBroadcastStream();
+      _eventStreams[eventType] =
+          _eventChannels[eventType]!.receiveBroadcastStream();
     }
 
     return _eventStreams[eventType]!;

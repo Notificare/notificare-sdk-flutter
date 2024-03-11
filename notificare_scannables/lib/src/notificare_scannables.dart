@@ -4,8 +4,10 @@ import 'package:notificare_scannables/src/models/notificare_scannable.dart';
 class NotificareScannables {
   NotificareScannables._();
 
-  static const MethodChannel _channel =
-      MethodChannel('re.notifica.scannables.flutter/notificare_scannables', JSONMethodCodec());
+  static const MethodChannel _channel = MethodChannel(
+    're.notifica.scannables.flutter/notificare_scannables',
+    JSONMethodCodec(),
+  );
 
   // Events
   static final Map<String, EventChannel> _eventChannels = {};
@@ -41,7 +43,8 @@ class NotificareScannables {
     }
 
     if (_eventStreams[eventType] == null) {
-      _eventStreams[eventType] = _eventChannels[eventType]!.receiveBroadcastStream();
+      _eventStreams[eventType] =
+          _eventChannels[eventType]!.receiveBroadcastStream();
     }
 
     return _eventStreams[eventType]!;

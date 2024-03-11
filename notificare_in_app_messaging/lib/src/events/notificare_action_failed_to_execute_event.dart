@@ -15,8 +15,10 @@ class NotificareActionFailedToExecuteEvent {
     required this.error,
   });
 
-  factory NotificareActionFailedToExecuteEvent.fromJson(Map<String, dynamic> json) =>
+  factory NotificareActionFailedToExecuteEvent.fromJson(
+          Map<String, dynamic> json) =>
       _$NotificareActionFailedToExecuteEventFromJson(json);
 
-  Map<String, dynamic> toJson() => _$NotificareActionFailedToExecuteEventToJson(this);
+  Map<String, dynamic> toJson() =>
+      _$NotificareActionFailedToExecuteEventToJson(this);
 }

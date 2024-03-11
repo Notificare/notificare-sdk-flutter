@@ -12,18 +12,25 @@ import 'package:notificare_push_ui/src/events/notificare_notification_url_clicke
 class NotificarePushUI {
   NotificarePushUI._();
 
-  static const MethodChannel _channel =
-      MethodChannel('re.notifica.push.ui.flutter/notificare_push_ui', JSONMethodCodec());
+  static const MethodChannel _channel = MethodChannel(
+    're.notifica.push.ui.flutter/notificare_push_ui',
+    JSONMethodCodec(),
+  );
 
   // Events
   static final Map<String, EventChannel> _eventChannels = {};
   static final Map<String, Stream<dynamic>> _eventStreams = {};
 
-  static Future<void> presentNotification(NotificareNotification notification) async {
+  static Future<void> presentNotification(
+    NotificareNotification notification,
+  ) async {
     await _channel.invokeMethod('presentNotification', notification.toJson());
   }
 
-  static Future<void> presentAction(NotificareNotification notification, NotificareNotificationAction action) async {
+  static Future<void> presentAction(
+    NotificareNotification notification,
+    NotificareNotificationAction action,
+  ) async {
     await _channel.invokeMethod('presentAction', {
       'notification': notification.toJson(),
       'action': action.toJson(),
@@ -38,7 +45,8 @@ class NotificarePushUI {
     }
 
     if (_eventStreams[eventType] == null) {
-      _eventStreams[eventType] = _eventChannels[eventType]!.receiveBroadcastStream();
+      _eventStreams[eventType] =
+          _eventChannels[eventType]!.receiveBroadcastStream();
     }
 
     return _eventStreams[eventType]!;
@@ -72,7 +80,8 @@ class NotificarePushUI {
     });
   }
 
-  static Stream<NotificareNotificationUrlClickedEvent> get onNotificationUrlClicked {
+  static Stream<NotificareNotificationUrlClickedEvent>
+      get onNotificationUrlClicked {
     return _getEventStream('notification_url_clicked').map((result) {
       final Map<dynamic, dynamic> json = result;
       return NotificareNotificationUrlClickedEvent.fromJson(json.cast());
@@ -100,14 +109,16 @@ class NotificarePushUI {
     });
   }
 
-  static Stream<NotificareActionFailedToExecuteEvent> get onActionFailedToExecute {
+  static Stream<NotificareActionFailedToExecuteEvent>
+      get onActionFailedToExecute {
     return _getEventStream('action_failed_to_execute').map((result) {
       final Map<dynamic, dynamic> json = result;
       return NotificareActionFailedToExecuteEvent.fromJson(json.cast());
     });
   }
 
-  static Stream<NotificareCustomActionReceivedEvent> get onCustomActionReceived {
+  static Stream<NotificareCustomActionReceivedEvent>
+      get onCustomActionReceived {
     return _getEventStream('custom_action_received').map((result) {
       final Map<dynamic, dynamic> json = result;
       return NotificareCustomActionReceivedEvent.fromJson(json.cast());

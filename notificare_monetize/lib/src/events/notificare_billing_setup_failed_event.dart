@@ -12,9 +12,11 @@ class NotificareBillingSetupFailedEvent {
     required this.message,
   });
 
-
-  factory NotificareBillingSetupFailedEvent.fromJson(Map<String, dynamic> json) =>
+  factory NotificareBillingSetupFailedEvent.fromJson(
+    Map<String, dynamic> json,
+  ) =>
       _$NotificareBillingSetupFailedEventFromJson(json);
 
-  Map<String, dynamic> toJson() => _$NotificareBillingSetupFailedEventToJson(this);
+  Map<String, dynamic> toJson() =>
+      _$NotificareBillingSetupFailedEventToJson(this);
 }

@@ -38,7 +38,8 @@ class NotificarePass {
     required this.googlePaySaveLink,
   });
 
-  factory NotificarePass.fromJson(Map<String, dynamic> json) => _$NotificarePassFromJson(json);
+  factory NotificarePass.fromJson(Map<String, dynamic> json) =>
+      _$NotificarePassFromJson(json);
 
   Map<String, dynamic> toJson() => _$NotificarePassToJson(this);
 }
@@ -54,7 +55,8 @@ class NotificarePassRedemption {
     required this.date,
   });
 
-  factory NotificarePassRedemption.fromJson(Map<String, dynamic> json) => _$NotificarePassRedemptionFromJson(json);
+  factory NotificarePassRedemption.fromJson(Map<String, dynamic> json) =>
+      _$NotificarePassRedemptionFromJson(json);
 
   Map<String, dynamic> toJson() => _$NotificarePassRedemptionToJson(this);
 }

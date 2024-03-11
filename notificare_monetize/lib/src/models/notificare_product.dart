@@ -18,7 +18,8 @@ class NotificareProduct {
     this.storeDetails,
   });
 
-  factory NotificareProduct.fromJson(Map<String, dynamic> json) => _$NotificareProductFromJson(json);
+  factory NotificareProduct.fromJson(Map<String, dynamic> json) =>
+      _$NotificareProductFromJson(json);
 
   Map<String, dynamic> toJson() => _$NotificareProductToJson(this);
 }

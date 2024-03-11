@@ -13,8 +13,11 @@ class NotificareNotificationUrlClickedEvent {
     required this.url,
   });
 
-  factory NotificareNotificationUrlClickedEvent.fromJson(Map<String, dynamic> json) =>
+  factory NotificareNotificationUrlClickedEvent.fromJson(
+    Map<String, dynamic> json,
+  ) =>
       _$NotificareNotificationUrlClickedEventFromJson(json);
 
-  Map<String, dynamic> toJson() => _$NotificareNotificationUrlClickedEventToJson(this);
+  Map<String, dynamic> toJson() =>
+      _$NotificareNotificationUrlClickedEventToJson(this);
 }

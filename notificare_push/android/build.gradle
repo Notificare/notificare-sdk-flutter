@@ -1,7 +1,7 @@
 group 're.notifica.push.flutter'
 
 buildscript {
-    ext.kotlin_version = '1.7.20'
+    ext.kotlin_version = '1.9.10'
 
     repositories {
         google()
@@ -55,7 +55,7 @@ android {
 }
 
 dependencies {
-    def notificare_version = '3.7.1'
+    def notificare_version = '3.8.0'
     api "re.notifica:notificare:$notificare_version"
     api "re.notifica:notificare-push:$notificare_version"
     implementation "re.notifica:notificare-push-gms:$notificare_version"

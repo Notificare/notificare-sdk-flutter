@@ -1,6 +1,6 @@
 name: notificare_scannables
-description: Notificare Scannables Flutter Plugin
-version: 3.7.0
+description: "Notificare Scannables Flutter Plugin: Unlock new content by scanning NFC tags or QR codes that integrate seamlessly in your mobile applications."
+version: 3.8.0
 homepage: https://notificare.com
 documentation: https://docs.notifica.re/sdk/v3/flutter/setup/
 repository: https://github.com/Notificare/notificare-sdk-flutter/tree/main/notificare_geo

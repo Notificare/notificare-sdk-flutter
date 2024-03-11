@@ -22,7 +22,8 @@ class NotificareAsset {
     required this.extra,
   });
 
-  factory NotificareAsset.fromJson(Map<String, dynamic> json) => _$NotificareAssetFromJson(json);
+  factory NotificareAsset.fromJson(Map<String, dynamic> json) =>
+      _$NotificareAssetFromJson(json);
 
   Map<String, dynamic> toJson() => _$NotificareAssetToJson(this);
 }
@@ -37,7 +38,8 @@ class NotificareAssetButton {
     required this.action,
   });
 
-  factory NotificareAssetButton.fromJson(Map<String, dynamic> json) => _$NotificareAssetButtonFromJson(json);
+  factory NotificareAssetButton.fromJson(Map<String, dynamic> json) =>
+      _$NotificareAssetButtonFromJson(json);
 
   Map<String, dynamic> toJson() => _$NotificareAssetButtonToJson(this);
 }
@@ -54,7 +56,8 @@ class NotificareAssetMetaData {
     required this.contentLength,
   });
 
-  factory NotificareAssetMetaData.fromJson(Map<String, dynamic> json) => _$NotificareAssetMetaDataFromJson(json);
+  factory NotificareAssetMetaData.fromJson(Map<String, dynamic> json) =>
+      _$NotificareAssetMetaDataFromJson(json);
 
   Map<String, dynamic> toJson() => _$NotificareAssetMetaDataToJson(this);
 }
