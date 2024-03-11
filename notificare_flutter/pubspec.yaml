@@ -1,6 +1,6 @@
 name: notificare_flutter
 description: Internal Notificare plugin. Use the `notificare` plugin instead.
-version: 3.7.0
+version: 3.8.0
 homepage: https://notificare.com
 documentation: https://docs.notifica.re/sdk/v3/flutter/setup/
 repository: https://github.com/Notificare/notificare-sdk-flutter/tree/main/notificare
