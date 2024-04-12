@@ -10,6 +10,7 @@
 
 @implementation NotificareGeoPlugin
 + (void)registerWithRegistrar:(NSObject<FlutterPluginRegistrar>*)registrar {
+  [NotificareGeoPluginBackgroundService registerWithRegistrar:registrar];
   [SwiftNotificareGeoPlugin registerWithRegistrar:registrar];
 }
 @end

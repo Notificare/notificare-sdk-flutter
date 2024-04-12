@@ -1,24 +1,34 @@
 package re.notifica.geo.flutter
 
+import android.content.Context
 import androidx.annotation.NonNull
 import io.flutter.embedding.engine.plugins.FlutterPlugin
+import io.flutter.embedding.engine.plugins.activity.ActivityAware
+import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
 import io.flutter.plugin.common.JSONMethodCodec
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
+import org.json.JSONObject
 import re.notifica.Notificare
-import re.notifica.geo.NotificareGeo
+import re.notifica.geo.flutter.NotificareGeoPluginBackgroundService.BackgroundEvent.CallbackType
+import re.notifica.geo.flutter.NotificareGeoPluginBackgroundService.Companion.isAttachedToActivity
+import re.notifica.geo.flutter.storage.NotificareGeoPluginStorage.Companion.updateCallback
 import re.notifica.geo.ktx.geo
-import re.notifica.geo.models.NotificareBeacon
-import re.notifica.geo.models.NotificareLocation
-import re.notifica.geo.models.NotificareRegion
 import re.notifica.geo.models.toJson
 
-class NotificareGeoPlugin : FlutterPlugin, MethodCallHandler, NotificareGeo.Listener {
+class NotificareGeoPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
+
+    internal companion object {
+        private const val NOTIFICARE_ERROR = "notificare_error"
+    }
+
     private lateinit var channel: MethodChannel
+    private var mContext: Context? = null
 
     override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
+        mContext = flutterPluginBinding.applicationContext
         channel = MethodChannel(
             flutterPluginBinding.binaryMessenger,
             "re.notifica.geo.flutter/notificare_geo",
@@ -27,13 +37,11 @@ class NotificareGeoPlugin : FlutterPlugin, MethodCallHandler, NotificareGeo.List
         channel.setMethodCallHandler(this)
 
         NotificareGeoPluginEventBroker.register(flutterPluginBinding.binaryMessenger)
-        Notificare.geo().addListener(this)
     }
 
     override fun onDetachedFromEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
+        mContext = null
         channel.setMethodCallHandler(null)
-
-        Notificare.geo().removeListener(this)
     }
 
     override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
@@ -44,7 +52,33 @@ class NotificareGeoPlugin : FlutterPlugin, MethodCallHandler, NotificareGeo.List
             "getEnteredRegions" -> getEnteredRegions(call, result)
             "enableLocationUpdates" -> enableLocationUpdates(call, result)
             "disableLocationUpdates" -> disableLocationUpdates(call, result)
+            "onLocationUpdatedCallback" -> onBackgroundCallback(call, result, CallbackType.LOCATION_UPDATED)
+            "onRegionEnteredCallback" -> onBackgroundCallback(call, result, CallbackType.REGION_ENTERED)
+            "onRegionExitedCallback" -> onBackgroundCallback(call, result, CallbackType.REGION_EXITED)
+            "onBeaconEnteredCallback" -> onBackgroundCallback(call, result, CallbackType.BEACON_ENTERED)
+            "onBeaconExitedCallback" -> onBackgroundCallback(call, result, CallbackType.BEACON_EXITED)
+            "onBeaconsRangedCallback" -> onBackgroundCallback(call, result, CallbackType.BEACONS_RANGED)
+
+            // iOS-only events
+            "onVisitCallback" -> result.success(null)
+            "onHeadingUpdatedCallback" -> result.success(null)
             else -> result.notImplemented()
+        }
+    }
+
+    override fun onAttachedToActivity(binding: ActivityPluginBinding) {
+        synchronized(isAttachedToActivity) {
+            isAttachedToActivity.set(true)
+        }
+    }
+
+    override fun onDetachedFromActivityForConfigChanges() {}
+
+    override fun onReattachedToActivityForConfigChanges(binding: ActivityPluginBinding) {}
+
+    override fun onDetachedFromActivity() {
+        synchronized(isAttachedToActivity) {
+            isAttachedToActivity.set(false)
         }
     }
 
@@ -78,43 +112,26 @@ class NotificareGeoPlugin : FlutterPlugin, MethodCallHandler, NotificareGeo.List
         response.success(null)
     }
 
-    // region NotificareGeo.Listener
+    private fun onBackgroundCallback(call: MethodCall, response: Result, callbackType: CallbackType) {
+        val arguments = call.arguments<JSONObject>()
+            ?: return response.error(NOTIFICARE_ERROR, "Invalid request arguments.", null)
 
-    override fun onLocationUpdated(location: NotificareLocation) {
-        NotificareGeoPluginEventBroker.emit(
-            NotificareGeoPluginEventBroker.Event.LocationUpdated(location)
+        val callbackDispatcher = arguments.getLong("callbackDispatcher")
+        val callback = arguments.getLong("callback")
+
+        val context = mContext
+            ?: return response.error(
+                NOTIFICARE_ERROR,
+                "Unable to register background callback",
+                null
+            )
+
+        context.updateCallback(
+            callbackType = callbackType,
+            callbackDispatcher = callbackDispatcher,
+            callback = callback
         )
-    }
 
-    override fun onRegionEntered(region: NotificareRegion) {
-        NotificareGeoPluginEventBroker.emit(
-            NotificareGeoPluginEventBroker.Event.RegionEntered(region)
-        )
+        response.success(null)
     }
-
-    override fun onRegionExited(region: NotificareRegion) {
-        NotificareGeoPluginEventBroker.emit(
-            NotificareGeoPluginEventBroker.Event.RegionExited(region)
-        )
-    }
-
-    override fun onBeaconEntered(beacon: NotificareBeacon) {
-        NotificareGeoPluginEventBroker.emit(
-            NotificareGeoPluginEventBroker.Event.BeaconEntered(beacon)
-        )
-    }
-
-    override fun onBeaconExited(beacon: NotificareBeacon) {
-        NotificareGeoPluginEventBroker.emit(
-            NotificareGeoPluginEventBroker.Event.BeaconExited(beacon)
-        )
-    }
-
-    override fun onBeaconsRanged(region: NotificareRegion, beacons: List<NotificareBeacon>) {
-        NotificareGeoPluginEventBroker.emit(
-            NotificareGeoPluginEventBroker.Event.BeaconsRanged(region, beacons)
-        )
-    }
-
-    // endregion
 }
