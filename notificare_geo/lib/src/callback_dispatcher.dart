@@ -15,8 +15,8 @@ void callbackDispatcher() {
 
   _backgroundChannel.setMethodCallHandler((MethodCall call) async {
     final Map<dynamic, dynamic> arguments = call.arguments;
-    final Function? callback =
-        PluginUtilities.getCallbackFromHandle(CallbackHandle.fromRawHandle(arguments.remove("callback")));
+    final Function? callback = PluginUtilities.getCallbackFromHandle(
+        CallbackHandle.fromRawHandle(arguments.remove("callback")));
 
     if (callback == null) {
       return;
@@ -99,7 +99,8 @@ void _onBeaconExited(Map<dynamic, dynamic> arguments, Function callback) {
 }
 
 void _onBeaconsRanged(Map<dynamic, dynamic> arguments, Function callback) {
-  final NotificareRangedBeaconsEvent event = NotificareRangedBeaconsEvent.fromJson(arguments.cast());
+  final NotificareRangedBeaconsEvent event =
+      NotificareRangedBeaconsEvent.fromJson(arguments.cast());
 
   callback.call(event);
 }

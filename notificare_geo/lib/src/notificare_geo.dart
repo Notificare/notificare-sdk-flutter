@@ -32,12 +32,14 @@ class NotificareGeo {
   }
 
   static Future<List<NotificareRegion>> get monitoredRegions async {
-    final json = await _channel.invokeListMethod<Map<String, dynamic>>('getMonitoredRegions');
+    final json = await _channel
+        .invokeListMethod<Map<String, dynamic>>('getMonitoredRegions');
     return json!.map((e) => NotificareRegion.fromJson(e)).toList();
   }
 
   static Future<List<NotificareRegion>> get enteredRegions async {
-    final json = await _channel.invokeListMethod<Map<String, dynamic>>('getEnteredRegions');
+    final json = await _channel
+        .invokeListMethod<Map<String, dynamic>>('getEnteredRegions');
     return json!.map((e) => NotificareRegion.fromJson(e)).toList();
   }
 
@@ -49,108 +51,155 @@ class NotificareGeo {
     await _channel.invokeMethod('disableLocationUpdates');
   }
 
-  static Future<void> onLocationUpdatedCallback(void Function(NotificareLocation location) onLocationUpdated) async {
-    final CallbackHandle? dispatcher = PluginUtilities.getCallbackHandle(callbackDispatcher);
-    final CallbackHandle? callback = PluginUtilities.getCallbackHandle(onLocationUpdated);
+  static Future<void> onLocationUpdatedCallback(
+      void Function(NotificareLocation location) onLocationUpdated) async {
+    final CallbackHandle? dispatcher =
+        PluginUtilities.getCallbackHandle(callbackDispatcher);
+    final CallbackHandle? callback =
+        PluginUtilities.getCallbackHandle(onLocationUpdated);
 
     if (dispatcher == null || callback == null) {
-      print("Failed to register onLocationUpdatedCallback. Ensure you are using a static or top level function.");
+      print(
+          "Failed to register onLocationUpdatedCallback. Ensure you are using a static or top level function.");
       return;
     }
 
-    await _channel.invokeListMethod("onLocationUpdatedCallback",
-        {"callbackDispatcher": dispatcher.toRawHandle(), "callback": callback.toRawHandle()});
+    await _channel.invokeListMethod("onLocationUpdatedCallback", {
+      "callbackDispatcher": dispatcher.toRawHandle(),
+      "callback": callback.toRawHandle()
+    });
   }
 
-  static Future<void> onRegionEnteredCallback(void Function(NotificareRegion region) onRegionEntered) async {
-    final CallbackHandle? dispatcher = PluginUtilities.getCallbackHandle(callbackDispatcher);
-    final CallbackHandle? callback = PluginUtilities.getCallbackHandle(onRegionEntered);
+  static Future<void> onRegionEnteredCallback(
+      void Function(NotificareRegion region) onRegionEntered) async {
+    final CallbackHandle? dispatcher =
+        PluginUtilities.getCallbackHandle(callbackDispatcher);
+    final CallbackHandle? callback =
+        PluginUtilities.getCallbackHandle(onRegionEntered);
 
     if (dispatcher == null || callback == null) {
-      print("Failed to register onRegionEnteredCallback. Ensure you are using a static or top level function.");
+      print(
+          "Failed to register onRegionEnteredCallback. Ensure you are using a static or top level function.");
       return;
     }
 
-    await _channel.invokeListMethod("onRegionEnteredCallback",
-        {"callbackDispatcher": dispatcher.toRawHandle(), "callback": callback.toRawHandle()});
+    await _channel.invokeListMethod("onRegionEnteredCallback", {
+      "callbackDispatcher": dispatcher.toRawHandle(),
+      "callback": callback.toRawHandle()
+    });
   }
 
-  static Future<void> onRegionExitedCallback(void Function(NotificareRegion region) onRegionExited) async {
-    final CallbackHandle? dispatcher = PluginUtilities.getCallbackHandle(callbackDispatcher);
-    final CallbackHandle? callback = PluginUtilities.getCallbackHandle(onRegionExited);
+  static Future<void> onRegionExitedCallback(
+      void Function(NotificareRegion region) onRegionExited) async {
+    final CallbackHandle? dispatcher =
+        PluginUtilities.getCallbackHandle(callbackDispatcher);
+    final CallbackHandle? callback =
+        PluginUtilities.getCallbackHandle(onRegionExited);
 
     if (dispatcher == null || callback == null) {
-      print("Failed to register onRegionExitedCallback. Ensure you are using a static or top level function.");
+      print(
+          "Failed to register onRegionExitedCallback. Ensure you are using a static or top level function.");
       return;
     }
 
-    await _channel.invokeListMethod(
-        "onRegionExitedCallback", {"callbackDispatcher": dispatcher.toRawHandle(), "callback": callback.toRawHandle()});
+    await _channel.invokeListMethod("onRegionExitedCallback", {
+      "callbackDispatcher": dispatcher.toRawHandle(),
+      "callback": callback.toRawHandle()
+    });
   }
 
-  static Future<void> onBeaconEnteredCallback(void Function(NotificareBeacon beacon) onBeaconEntered) async {
-    final CallbackHandle? dispatcher = PluginUtilities.getCallbackHandle(callbackDispatcher);
-    final CallbackHandle? callback = PluginUtilities.getCallbackHandle(onBeaconEntered);
+  static Future<void> onBeaconEnteredCallback(
+      void Function(NotificareBeacon beacon) onBeaconEntered) async {
+    final CallbackHandle? dispatcher =
+        PluginUtilities.getCallbackHandle(callbackDispatcher);
+    final CallbackHandle? callback =
+        PluginUtilities.getCallbackHandle(onBeaconEntered);
 
     if (dispatcher == null || callback == null) {
-      print("Failed to register onBeaconEnteredCallback. Ensure you are using a static or top level function.");
+      print(
+          "Failed to register onBeaconEnteredCallback. Ensure you are using a static or top level function.");
       return;
     }
 
-    await _channel.invokeListMethod("onBeaconEnteredCallback",
-        {"callbackDispatcher": dispatcher.toRawHandle(), "callback": callback.toRawHandle()});
+    await _channel.invokeListMethod("onBeaconEnteredCallback", {
+      "callbackDispatcher": dispatcher.toRawHandle(),
+      "callback": callback.toRawHandle()
+    });
   }
 
-  static Future<void> onBeaconExitedCallback(void Function(NotificareBeacon beacon) onBeaconExited) async {
-    final CallbackHandle? dispatcher = PluginUtilities.getCallbackHandle(callbackDispatcher);
-    final CallbackHandle? callback = PluginUtilities.getCallbackHandle(onBeaconExited);
+  static Future<void> onBeaconExitedCallback(
+      void Function(NotificareBeacon beacon) onBeaconExited) async {
+    final CallbackHandle? dispatcher =
+        PluginUtilities.getCallbackHandle(callbackDispatcher);
+    final CallbackHandle? callback =
+        PluginUtilities.getCallbackHandle(onBeaconExited);
 
     if (dispatcher == null || callback == null) {
-      print("Failed to register onBeaconExitedCallback. Ensure you are using a static or top level function.");
+      print(
+          "Failed to register onBeaconExitedCallback. Ensure you are using a static or top level function.");
       return;
     }
 
-    await _channel.invokeListMethod(
-        "onBeaconExitedCallback", {"callbackDispatcher": dispatcher.toRawHandle(), "callback": callback.toRawHandle()});
+    await _channel.invokeListMethod("onBeaconExitedCallback", {
+      "callbackDispatcher": dispatcher.toRawHandle(),
+      "callback": callback.toRawHandle()
+    });
   }
 
-  static Future<void> onBeaconsRangedCallback(void Function(NotificareRangedBeaconsEvent event) onBeaconsRanged) async {
-    final CallbackHandle? dispatcher = PluginUtilities.getCallbackHandle(callbackDispatcher);
-    final CallbackHandle? callback = PluginUtilities.getCallbackHandle(onBeaconsRanged);
+  static Future<void> onBeaconsRangedCallback(
+      void Function(NotificareRangedBeaconsEvent event) onBeaconsRanged) async {
+    final CallbackHandle? dispatcher =
+        PluginUtilities.getCallbackHandle(callbackDispatcher);
+    final CallbackHandle? callback =
+        PluginUtilities.getCallbackHandle(onBeaconsRanged);
 
     if (dispatcher == null || callback == null) {
-      print("Failed to register onBeaconsRangedCallback. Ensure you are using a static or top level function.");
+      print(
+          "Failed to register onBeaconsRangedCallback. Ensure you are using a static or top level function.");
       return;
     }
 
-    await _channel.invokeListMethod("onBeaconsRangedCallback",
-        {"callbackDispatcher": dispatcher.toRawHandle(), "callback": callback.toRawHandle()});
+    await _channel.invokeListMethod("onBeaconsRangedCallback", {
+      "callbackDispatcher": dispatcher.toRawHandle(),
+      "callback": callback.toRawHandle()
+    });
   }
 
-  static Future<void> onVisitCallback(void Function(NotificareVisit visit) onVisit) async {
-    final CallbackHandle? dispatcher = PluginUtilities.getCallbackHandle(callbackDispatcher);
+  static Future<void> onVisitCallback(
+      void Function(NotificareVisit visit) onVisit) async {
+    final CallbackHandle? dispatcher =
+        PluginUtilities.getCallbackHandle(callbackDispatcher);
     final CallbackHandle? callback = PluginUtilities.getCallbackHandle(onVisit);
 
     if (dispatcher == null || callback == null) {
-      print("Failed to register onVisitCallback. Ensure you are using a static or top level function.");
+      print(
+          "Failed to register onVisitCallback. Ensure you are using a static or top level function.");
       return;
     }
 
-    await _channel.invokeListMethod(
-        "onVisitCallback", {"callbackDispatcher": dispatcher.toRawHandle(), "callback": callback.toRawHandle()});
+    await _channel.invokeListMethod("onVisitCallback", {
+      "callbackDispatcher": dispatcher.toRawHandle(),
+      "callback": callback.toRawHandle()
+    });
   }
 
-  static Future<void> onHeadingUpdatedCallback(void Function(NotificareHeading heading) onHeadingUpdated) async {
-    final CallbackHandle? dispatcher = PluginUtilities.getCallbackHandle(callbackDispatcher);
-    final CallbackHandle? callback = PluginUtilities.getCallbackHandle(onHeadingUpdated);
+  static Future<void> onHeadingUpdatedCallback(
+      void Function(NotificareHeading heading) onHeadingUpdated) async {
+    final CallbackHandle? dispatcher =
+        PluginUtilities.getCallbackHandle(callbackDispatcher);
+    final CallbackHandle? callback =
+        PluginUtilities.getCallbackHandle(onHeadingUpdated);
 
     if (dispatcher == null || callback == null) {
-      print("Failed to register onHeadingUpdatedCallback. Ensure you are using a static or top level function.");
+      print(
+          "Failed to register onHeadingUpdatedCallback. Ensure you are using a static or top level function.");
       return;
     }
 
-    await _channel.invokeListMethod("onHeadingUpdatedCallback",
-        {"callbackDispatcher": dispatcher.toRawHandle(), "callback": callback.toRawHandle()});
+    await _channel.invokeListMethod("onHeadingUpdatedCallback", {
+      "callbackDispatcher": dispatcher.toRawHandle(),
+      "callback": callback.toRawHandle()
+    });
   }
 
   // Events
@@ -161,7 +210,8 @@ class NotificareGeo {
     }
 
     if (_eventStreams[eventType] == null) {
-      _eventStreams[eventType] = _eventChannels[eventType]!.receiveBroadcastStream();
+      _eventStreams[eventType] =
+          _eventChannels[eventType]!.receiveBroadcastStream();
     }
 
     return _eventStreams[eventType]!;
