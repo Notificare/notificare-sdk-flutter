@@ -22,7 +22,12 @@ import re.notifica.flutter.events.NotificareEvent
 import re.notifica.flutter.events.NotificareEventManager
 import re.notifica.ktx.device
 import re.notifica.ktx.events
-import re.notifica.models.*
+import re.notifica.models.NotificareApplication
+import re.notifica.models.NotificareDoNotDisturb
+import re.notifica.models.NotificareDynamicLink
+import re.notifica.models.NotificareEventData
+import re.notifica.models.NotificareNotification
+import re.notifica.models.NotificareUserData
 
 class NotificarePlugin : FlutterPlugin, ActivityAware, PluginRegistry.NewIntentListener {
 
@@ -50,6 +55,8 @@ class NotificarePlugin : FlutterPlugin, ActivityAware, PluginRegistry.NewIntentL
                 "fetchApplication" -> fetchApplication(call, result)
                 "fetchNotification" -> fetchNotification(call, result)
                 "fetchDynamicLink" -> fetchDynamicLink(call, result)
+                "canEvaluateDeferredLink" -> canEvaluateDeferredLink(call, result)
+                "evaluateDeferredLink" -> evaluateDeferredLink(call, result)
 
                 // Device module
                 "getCurrentDevice" -> getCurrentDevice(result)
@@ -195,6 +202,38 @@ class NotificarePlugin : FlutterPlugin, ActivityAware, PluginRegistry.NewIntentL
             override fun onSuccess(result: NotificareDynamicLink) {
                 onMainThread {
                     response.success(result.toJson())
+                }
+            }
+
+            override fun onFailure(e: Exception) {
+                onMainThread {
+                    response.error(DEFAULT_ERROR_CODE, e.message, null)
+                }
+            }
+        })
+    }
+
+    private fun canEvaluateDeferredLink(@Suppress("UNUSED_PARAMETER") call: MethodCall, response: Result) {
+        Notificare.canEvaluateDeferredLink(object : NotificareCallback<Boolean> {
+            override fun onSuccess(result: Boolean) {
+                onMainThread {
+                    response.success(result)
+                }
+            }
+
+            override fun onFailure(e: Exception) {
+                onMainThread {
+                    response.error(DEFAULT_ERROR_CODE, e.message, null)
+                }
+            }
+        })
+    }
+
+    private fun evaluateDeferredLink(@Suppress("UNUSED_PARAMETER") call: MethodCall, response: Result) {
+        Notificare.evaluateDeferredLink(object : NotificareCallback<Boolean> {
+            override fun onSuccess(result: Boolean) {
+                onMainThread {
+                    response.success(result)
                 }
             }
 

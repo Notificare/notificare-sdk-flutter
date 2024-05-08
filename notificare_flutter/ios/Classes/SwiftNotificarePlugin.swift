@@ -38,6 +38,8 @@ public class SwiftNotificarePlugin: NSObject, FlutterPlugin {
             case "fetchApplication": self.fetchApplication(call, result)
             case "fetchNotification": self.fetchNotification(call, result)
             case "fetchDynamicLink": self.fetchDynamicLink(call, result)
+            case "canEvaluateDeferredLink": self.canEvaluateDeferredLink(call, result)
+            case "evaluateDeferredLink": self.evaluateDeferredLink(call, result)
 
             // Notificare Device Module
             case "getCurrentDevice": self.getCurrentDevice(call, result)
@@ -144,6 +146,21 @@ public class SwiftNotificarePlugin: NSObject, FlutterPlugin {
                 } catch {
                     response(FlutterError(code: DEFAULT_ERROR_CODE, message: error.localizedDescription, details: nil))
                 }
+            case let .failure(error):
+                response(FlutterError(code: DEFAULT_ERROR_CODE, message: error.localizedDescription, details: nil))
+            }
+        }
+    }
+
+    private func canEvaluateDeferredLink(_ call: FlutterMethodCall, _ response: FlutterResult) {
+        response(Notificare.shared.canEvaluateDeferredLink)
+    }
+
+    private func evaluateDeferredLink(_ call: FlutterMethodCall, _ response: @escaping FlutterResult) {
+        Notificare.shared.evaluateDeferredLink { result in
+            switch result {
+            case let .success(evaluated):
+                response(evaluated)
             case let .failure(error):
                 response(FlutterError(code: DEFAULT_ERROR_CODE, message: error.localizedDescription, details: nil))
             }
