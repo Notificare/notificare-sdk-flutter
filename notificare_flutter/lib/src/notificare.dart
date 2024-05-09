@@ -64,6 +64,14 @@ class Notificare {
     return NotificareDynamicLink.fromJson(json!);
   }
 
+  static Future<bool> get canEvaluateDeferredLink async {
+    return await _channel.invokeMethod('canEvaluateDeferredLink');
+  }
+
+  static Future<bool> evaluateDeferredLink() async {
+    return await _channel.invokeMethod('evaluateDeferredLink');
+  }
+
   // Events
   static Stream<dynamic> _getEventStream(String eventType) {
     if (_eventChannels[eventType] == null) {

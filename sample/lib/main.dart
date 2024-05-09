@@ -31,8 +31,6 @@ class _AppState extends State<App> {
     _configureNotificare();
   }
 
-
-
   void _configureNotificare() async {
     try {
       await NotificarePush.setPresentationOptions(['banner', 'badge', 'sound']);
@@ -49,6 +47,8 @@ class _AppState extends State<App> {
           content: Text('Notificare: ${application.name}'),
         ),
       );
+
+      _handleDeferredLink();
     });
 
     Notificare.onUnlaunched.listen((event) {
@@ -447,6 +447,25 @@ class _AppState extends State<App> {
     });
 
     // endregion
+  }
+
+  void _handleDeferredLink() async {
+    try {
+      if (!await Notificare.canEvaluateDeferredLink) {
+        return;
+      }
+
+      final evaluated = await Notificare.evaluateDeferredLink();
+      logger.i('Did evaluate deferred link: $evaluated');
+
+      scaffoldMessengerKey.currentState!.showSnackBar(
+        SnackBar(
+          content: Text('Did evaluate deferred link: $evaluated'),
+        ),
+      );
+    } catch (error) {
+      logger.e('Error evaluating deferred link.', error);
+    }
   }
 
   @override
