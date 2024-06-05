@@ -180,13 +180,6 @@ packages:
       relative: true
     source: path
     version: "3.9.0"
-  notificare_monetize:
-    dependency: "direct main"
-    description:
-      path: "../notificare_monetize"
-      relative: true
-    source: path
-    version: "3.9.0"
   notificare_push:
     dependency: "direct main"
     description:

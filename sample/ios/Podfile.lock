@@ -6,7 +6,6 @@ PODS:
   - Notificare/NotificareInboxKit (3.9.0)
   - Notificare/NotificareKit (3.9.0)
   - Notificare/NotificareLoyaltyKit (3.9.0)
-  - Notificare/NotificareMonetizeKit (3.9.0)
   - Notificare/NotificareNotificationServiceExtensionKit (3.9.0)
   - Notificare/NotificarePushKit (3.9.0)
   - Notificare/NotificarePushUIKit (3.9.0)
@@ -35,10 +34,6 @@ PODS:
     - Flutter
     - Notificare/NotificareKit (= 3.9.0)
     - Notificare/NotificareLoyaltyKit (= 3.9.0)
-  - notificare_monetize (3.9.0):
-    - Flutter
-    - Notificare/NotificareKit (= 3.9.0)
-    - Notificare/NotificareMonetizeKit (= 3.9.0)
   - notificare_push (3.9.0):
     - Flutter
     - Notificare/NotificareKit (= 3.9.0)
@@ -67,7 +62,6 @@ DEPENDENCIES:
   - notificare_in_app_messaging (from `.symlinks/plugins/notificare_in_app_messaging/ios`)
   - notificare_inbox (from `.symlinks/plugins/notificare_inbox/ios`)
   - notificare_loyalty (from `.symlinks/plugins/notificare_loyalty/ios`)
-  - notificare_monetize (from `.symlinks/plugins/notificare_monetize/ios`)
   - notificare_push (from `.symlinks/plugins/notificare_push/ios`)
   - notificare_push_ui (from `.symlinks/plugins/notificare_push_ui/ios`)
   - notificare_scannables (from `.symlinks/plugins/notificare_scannables/ios`)
@@ -93,8 +87,6 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/notificare_inbox/ios"
   notificare_loyalty:
     :path: ".symlinks/plugins/notificare_loyalty/ios"
-  notificare_monetize:
-    :path: ".symlinks/plugins/notificare_monetize/ios"
   notificare_push:
     :path: ".symlinks/plugins/notificare_push/ios"
   notificare_push_ui:
@@ -115,7 +107,6 @@ SPEC CHECKSUMS:
   notificare_in_app_messaging: 88fe5494c9c3382ad2300009b2dfbdcc0fd47e9a
   notificare_inbox: 5e7d65eba0329a58e83b552afaee68731566010a
   notificare_loyalty: 391a108e73db90b40bf5deb1bdec98ebc586e9c1
-  notificare_monetize: e2e84050e31c3b43a460a0311e6bc6dd2cf8e702
   notificare_push: 98eced1f3ed20a2aaf9a8122e19e3b809b96c7b3
   notificare_push_ui: ffbe0f88fc23a844169cc9d18ba2410c479a6d4a
   notificare_scannables: 62b650da818183c22b3d89f6987a34b0b016d03e

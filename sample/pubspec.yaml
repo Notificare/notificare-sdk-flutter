@@ -56,8 +56,6 @@ dependencies:
     path: "../notificare_scannables"
   notificare_loyalty:
     path: "../notificare_loyalty"
-  notificare_monetize:
-    path: "../notificare_monetize"
   notificare_user_inbox:
     path: "../notificare_user_inbox"
 
