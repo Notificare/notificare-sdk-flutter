@@ -4,7 +4,8 @@
 
 #### Breaking changes
 
-- Drops support for the monetize module.
+- Drops support for the monetize module
+- Drops support for Huawei Mobile Services
 
 ## 3.9.0
 
