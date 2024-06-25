@@ -20,11 +20,21 @@ class NotificareDeviceModule {
     await _channel.invokeMethod('updatePreferredLanguage', language);
   }
 
+  @Deprecated(
+    'Use updateUser() instead.',
+  )
   Future<void> register({
     required String? userId,
     required String? userName,
   }) async {
     await _channel.invokeMethod('register', {'userId': userId, 'userName': userName});
+  }
+
+  Future<void> updateUser({
+    required String? userId,
+    required String? userName,
+  }) async {
+    await _channel.invokeMethod('updateUser', {'userId': userId, 'userName': userName});
   }
 
   Future<List<String>> fetchTags() async {

@@ -44,6 +44,7 @@ public class SwiftNotificarePlugin: NSObject, FlutterPlugin {
             // Notificare Device Module
             case "getCurrentDevice": self.getCurrentDevice(call, result)
             case "register": self.register(call, result)
+            case "updateUser": self.updateUser(call, result)
             case "fetchTags": self.fetchTags(call, result)
             case "addTag": self.addTag(call, result)
             case "addTags": self.addTags(call, result)
@@ -81,14 +82,26 @@ public class SwiftNotificarePlugin: NSObject, FlutterPlugin {
         result(Notificare.shared.isReady)
     }
 
-    private func launch(_ call: FlutterMethodCall, _ result: FlutterResult) {
-        Notificare.shared.launch()
-        result(nil)
+    private func launch(_ call: FlutterMethodCall, _ response: @escaping FlutterResult) {
+        Notificare.shared.launch { result in
+            switch result {
+            case .success:
+                response(nil)
+            case .failure(let error):
+                response(FlutterError(code: DEFAULT_ERROR_CODE, message: error.localizedDescription, details: nil))
+            }
+        }
     }
 
-    private func unlaunch(_ call: FlutterMethodCall, _ result: FlutterResult) {
-        Notificare.shared.unlaunch()
-        result(nil)
+    private func unlaunch(_ call: FlutterMethodCall, _ response: @escaping FlutterResult) {
+        Notificare.shared.unlaunch { result in
+            switch result {
+            case .success:
+                response(nil)
+            case .failure(let error):
+                response(FlutterError(code: DEFAULT_ERROR_CODE, message: error.localizedDescription, details: nil))
+            }
+        }
     }
     
     private func getApplication(_ call: FlutterMethodCall, _ response: @escaping FlutterResult) {
@@ -182,6 +195,22 @@ public class SwiftNotificarePlugin: NSObject, FlutterPlugin {
         let arguments = call.arguments as! FlutterDictionary
 
         Notificare.shared.device().register(
+            userId: arguments["userId"] as? String,
+            userName: arguments["userName"] as? String
+        ) { result in
+            switch result {
+            case .success:
+                response(nil)
+            case .failure(let error):
+                response(FlutterError(code: DEFAULT_ERROR_CODE, message: error.localizedDescription, details: nil))
+            }
+        }
+    }
+
+    private func updateUser(_ call: FlutterMethodCall, _ response: @escaping FlutterResult) {
+        let arguments = call.arguments as! FlutterDictionary
+
+        Notificare.shared.device().updateUser(
             userId: arguments["userId"] as? String,
             userName: arguments["userName"] as? String
         ) { result in
