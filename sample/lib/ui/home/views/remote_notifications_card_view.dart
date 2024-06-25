@@ -417,19 +417,28 @@ class RemoteNotificationsCardViewState extends State<RemoteNotificationsCardView
                     const Text("Transport: "),
                     const Spacer(),
                     Text(
-                      transport != null ? transport.name : "null",
+                      transport?.name ?? "null",
                       style: const TextStyle(fontWeight: FontWeight.bold),
                     )
                   ],
                 ),
                 Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text("SubscriptionID: "),
+                    const Text(
+                      "SubscriptionID: ",
+                    ),
                     const Spacer(),
-                    Text(
-                      subscriptionId != null ? "...${subscriptionId.substring(subscriptionId.length - 8)}" : "null",
-                      style: const TextStyle(fontWeight: FontWeight.bold),
-                    )
+                    Flexible(
+                      flex: 1,
+                      child: Align(
+                        alignment: Alignment.topRight,
+                        child: Text(
+                          subscriptionId ?? "null",
+                          style: const TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ],
