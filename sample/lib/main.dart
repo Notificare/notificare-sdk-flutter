@@ -136,11 +136,11 @@ class _AppState extends State<App> {
     });
 
     NotificarePush.onNotificationSettingsChanged.listen((granted) {
-      logger.i('On notification settings changed: $granted');
+      logger.i('Notification settings changed: $granted');
 
       scaffoldMessengerKey.currentState!.showSnackBar(
         SnackBar(
-          content: Text('allowedUI = $granted'),
+          content: Text('Notification settings changed: $granted'),
         ),
       );
     });
