@@ -56,7 +56,7 @@ android {
 }
 
 dependencies {
-    def notificare_version = '3.9.0'
+    def notificare_version = '4.0.0-canary.1'
     api "re.notifica:notificare:$notificare_version"
     api "re.notifica:notificare-push-ui:$notificare_version"
     implementation "re.notifica:notificare-push-ui-gms:$notificare_version"
