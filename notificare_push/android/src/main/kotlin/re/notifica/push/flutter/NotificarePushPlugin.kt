@@ -1,8 +1,6 @@
 package re.notifica.push.flutter
 
 import android.content.Intent
-import android.os.Handler
-import android.os.Looper
 import androidx.annotation.NonNull
 import androidx.lifecycle.Observer
 import io.flutter.embedding.engine.plugins.FlutterPlugin
@@ -22,7 +20,6 @@ class NotificarePushPlugin : FlutterPlugin, MethodCallHandler, ActivityAware, Pl
 
     companion object {
         internal const val NAMESPACE = "re.notifica.push.flutter"
-
         internal const val DEFAULT_ERROR_CODE = "notificare_error"
     }
 
