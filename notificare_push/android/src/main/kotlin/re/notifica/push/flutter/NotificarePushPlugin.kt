@@ -1,6 +1,8 @@
 package re.notifica.push.flutter
 
 import android.content.Intent
+import android.os.Handler
+import android.os.Looper
 import androidx.annotation.NonNull
 import androidx.lifecycle.Observer
 import io.flutter.embedding.engine.plugins.FlutterPlugin
@@ -13,12 +15,15 @@ import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
 import io.flutter.plugin.common.PluginRegistry
 import re.notifica.Notificare
+import re.notifica.NotificareCallback
 import re.notifica.push.ktx.push
 
 class NotificarePushPlugin : FlutterPlugin, MethodCallHandler, ActivityAware, PluginRegistry.NewIntentListener {
 
     companion object {
         internal const val NAMESPACE = "re.notifica.push.flutter"
+
+        internal const val DEFAULT_ERROR_CODE = "notificare_error"
     }
 
     private lateinit var channel: MethodChannel
@@ -54,6 +59,8 @@ class NotificarePushPlugin : FlutterPlugin, MethodCallHandler, ActivityAware, Pl
         when (call.method) {
             "hasRemoteNotificationsEnabled" -> hasRemoteNotificationsEnabled(call, result)
             "allowedUI" -> allowedUI(call, result)
+            "getTransport" -> getTransport(call, result)
+            "getSubscriptionId" -> getSubscriptionId(call, result)
             "enableRemoteNotifications" -> enableRemoteNotifications(call, result)
             "disableRemoteNotifications" -> disableRemoteNotifications(call, result)
             else -> result.notImplemented()
@@ -89,17 +96,39 @@ class NotificarePushPlugin : FlutterPlugin, MethodCallHandler, ActivityAware, Pl
         result.success(Notificare.push().hasRemoteNotificationsEnabled)
     }
 
+    private fun getTransport(@Suppress("UNUSED_PARAMETER") call: MethodCall, result: Result) {
+        result.success(Notificare.push().transport?.rawValue)
+    }
+
+    private fun getSubscriptionId(@Suppress("UNUSED_PARAMETER") call: MethodCall, result: Result) {
+        result.success(Notificare.push().subscriptionId)
+    }
+
     private fun allowedUI(@Suppress("UNUSED_PARAMETER") call: MethodCall, result: Result) {
         result.success(Notificare.push().allowedUI)
     }
 
-    private fun enableRemoteNotifications(@Suppress("UNUSED_PARAMETER") call: MethodCall, result: Result) {
-        Notificare.push().enableRemoteNotifications()
-        result.success(null)
+    private fun enableRemoteNotifications(@Suppress("UNUSED_PARAMETER") call: MethodCall, response: Result) {
+        Notificare.push().enableRemoteNotifications(object : NotificareCallback<Unit> {
+            override fun onSuccess(result: Unit) {
+                response.success(null)
+            }
+
+            override fun onFailure(e: Exception) {
+                response.error(DEFAULT_ERROR_CODE, e.message, null)
+            }
+        })
     }
 
-    private fun disableRemoteNotifications(@Suppress("UNUSED_PARAMETER") call: MethodCall, result: Result) {
-        Notificare.push().disableRemoteNotifications()
-        result.success(null)
+    private fun disableRemoteNotifications(@Suppress("UNUSED_PARAMETER") call: MethodCall, response: Result) {
+        Notificare.push().disableRemoteNotifications(object : NotificareCallback<Unit> {
+            override fun onSuccess(result: Unit) {
+                response.success(null)
+            }
+
+            override fun onFailure(e: Exception) {
+                response.error(DEFAULT_ERROR_CODE, e.message, null)
+            }
+        })
     }
 }

@@ -39,6 +39,18 @@ class NotificarePush {
     return await _channel.invokeMethod('hasRemoteNotificationsEnabled');
   }
 
+  static Future<NotificareTransport?> get transport async {
+    final transport = await _channel.invokeMethod('getTransport');
+    return transport != null
+        ? NotificareTransport.values
+            .firstWhere((value) => value.name == transport, orElse: null)
+        : null;
+  }
+
+  static Future<String?> get subscriptionId async {
+    return await _channel.invokeMethod('getSubscriptionId');
+  }
+
   static Future<bool> get allowedUI async {
     return await _channel.invokeMethod('allowedUI');
   }
