@@ -1,5 +1,5 @@
 enum NotificareTransport {
-  Notificare,
-  GCM,
-  APNS,
+  notificare,
+  gcm,
+  apns,
 }

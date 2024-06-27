@@ -40,10 +40,10 @@ class NotificarePush {
   }
 
   static Future<NotificareTransport?> get transport async {
-    final transport = await _channel.invokeMethod('getTransport');
+    final String? transport = await _channel.invokeMethod('getTransport');
     return transport != null
         ? NotificareTransport.values
-            .firstWhere((value) => value.name == transport, orElse: null)
+            .firstWhere((value) => value.name == transport.toLowerCase(), orElse: null)
         : null;
   }
 
