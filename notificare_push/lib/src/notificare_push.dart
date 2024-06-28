@@ -40,11 +40,8 @@ class NotificarePush {
   }
 
   static Future<NotificareTransport?> get transport async {
-    final String? transport = await _channel.invokeMethod('getTransport');
-    return transport != null
-        ? NotificareTransport.values
-            .firstWhere((value) => value.name == transport.toLowerCase(), orElse: null)
-        : null;
+    final json = await _channel.invokeMethod('getTransport');
+    return json != null ? NotificareTransport.fromJson(json) : null;
   }
 
   static Future<String?> get subscriptionId async {
