@@ -1,3 +1,6 @@
+source 'https://cdn.cocoapods.org/'
+source 'git@github.com:Notificare/notificare-cocoapods-specs.git'
+
 # Uncomment this line to define a global platform for your project
 # platform :ios, '13.0'
 
@@ -37,7 +40,7 @@ end
 
 target 'NotificationServiceExtension' do
   use_frameworks!
-  pod 'Notificare/NotificareNotificationServiceExtensionKit', '>= 3.9.0'
+  pod 'Notificare/NotificareNotificationServiceExtensionKit', '>= 4.0.0-canary.1'
 end
 
 post_install do |installer|

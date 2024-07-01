@@ -61,6 +61,7 @@ class NotificarePlugin : FlutterPlugin, ActivityAware, PluginRegistry.NewIntentL
                 // Device module
                 "getCurrentDevice" -> getCurrentDevice(result)
                 "register" -> register(call, result)
+                "updateUser" -> updateUser(call, result)
                 "fetchTags" -> fetchTags(result)
                 "addTag" -> addTag(call, result)
                 "addTags" -> addTags(call, result)
@@ -141,14 +142,28 @@ class NotificarePlugin : FlutterPlugin, ActivityAware, PluginRegistry.NewIntentL
         result.success(Notificare.isReady)
     }
 
-    private fun launch(result: Result) {
-        Notificare.launch()
-        result.success(null)
+    private fun launch(response: Result) {
+        Notificare.launch(object : NotificareCallback<Unit> {
+            override fun onSuccess(result: Unit) {
+                response.success(null)
+            }
+
+            override fun onFailure(e: Exception) {
+                response.error(DEFAULT_ERROR_CODE, e.message, null)
+            }
+        })
     }
 
-    private fun unlaunch(result: Result) {
-        Notificare.unlaunch()
-        result.success(null)
+    private fun unlaunch(response: Result) {
+        Notificare.unlaunch(object : NotificareCallback<Unit> {
+            override fun onSuccess(result: Unit) {
+                response.success(null)
+            }
+
+            override fun onFailure(e: Exception) {
+                response.error(DEFAULT_ERROR_CODE, e.message, null)
+            }
+        })
     }
 
     private fun getApplication(@Suppress("UNUSED_PARAMETER") call: MethodCall, response: Result) {
@@ -262,6 +277,29 @@ class NotificarePlugin : FlutterPlugin, ActivityAware, PluginRegistry.NewIntentL
         val userName = if (!arguments.isNull("userName")) arguments.getString("userName") else null
 
         Notificare.device().register(userId, userName, object : NotificareCallback<Unit> {
+            override fun onSuccess(result: Unit) {
+                onMainThread {
+                    pluginResult.success(null)
+                }
+            }
+
+            override fun onFailure(e: Exception) {
+                onMainThread {
+                    pluginResult.error(DEFAULT_ERROR_CODE, e.message, null)
+                }
+            }
+        })
+    }
+
+    private fun updateUser(call: MethodCall, pluginResult: Result) {
+        val arguments = call.arguments<JSONObject>() ?: return onMainThread {
+            pluginResult.error(DEFAULT_ERROR_CODE, "Invalid request arguments.", null)
+        }
+
+        val userId = if (!arguments.isNull("userId")) arguments.getString("userId") else null
+        val userName = if (!arguments.isNull("userName")) arguments.getString("userName") else null
+
+        Notificare.device().updateUser(userId, userName, object : NotificareCallback<Unit> {
             override fun onSuccess(result: Unit) {
                 onMainThread {
                     pluginResult.success(null)

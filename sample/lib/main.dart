@@ -41,6 +41,7 @@ class _AppState extends State<App> {
     // region Notificare events
 
     Notificare.onReady.listen((application) async {
+      logger.i('Notificare onReady event.');
       scaffoldMessengerKey.currentState!.showSnackBar(
         SnackBar(
           content: Text('Notificare: ${application.name}'),
@@ -135,9 +136,11 @@ class _AppState extends State<App> {
     });
 
     NotificarePush.onNotificationSettingsChanged.listen((granted) {
+      logger.i('Notification settings changed: $granted');
+
       scaffoldMessengerKey.currentState!.showSnackBar(
         SnackBar(
-          content: Text('allowedUI = $granted'),
+          content: Text('Notification settings changed: $granted'),
         ),
       );
     });
