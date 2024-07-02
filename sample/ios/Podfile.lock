@@ -12,46 +12,46 @@ PODS:
   - Notificare/NotificarePushUIKit (3.10.0)
   - Notificare/NotificareScannablesKit (3.10.0)
   - Notificare/NotificareUserInboxKit (3.10.0)
-  - notificare_assets (3.9.1):
+  - notificare_assets (3.10.0):
     - Flutter
     - Notificare/NotificareAssetsKit (= 3.10.0)
     - Notificare/NotificareKit (= 3.10.0)
-  - notificare_flutter (3.9.1):
+  - notificare_flutter (3.10.0):
     - Flutter
     - Notificare/NotificareKit (= 3.10.0)
-  - notificare_geo (3.9.1):
+  - notificare_geo (3.10.0):
     - Flutter
     - Notificare/NotificareGeoKit (= 3.10.0)
     - Notificare/NotificareKit (= 3.10.0)
-  - notificare_in_app_messaging (3.9.1):
+  - notificare_in_app_messaging (3.10.0):
     - Flutter
     - Notificare/NotificareInAppMessagingKit (= 3.10.0)
     - Notificare/NotificareKit (= 3.10.0)
-  - notificare_inbox (3.9.1):
+  - notificare_inbox (3.10.0):
     - Flutter
     - Notificare/NotificareInboxKit (= 3.10.0)
     - Notificare/NotificareKit (= 3.10.0)
-  - notificare_loyalty (3.9.1):
+  - notificare_loyalty (3.10.0):
     - Flutter
     - Notificare/NotificareKit (= 3.10.0)
     - Notificare/NotificareLoyaltyKit (= 3.10.0)
-  - notificare_monetize (3.9.1):
+  - notificare_monetize (3.10.0):
     - Flutter
     - Notificare/NotificareKit (= 3.10.0)
     - Notificare/NotificareMonetizeKit (= 3.10.0)
-  - notificare_push (3.9.1):
+  - notificare_push (3.10.0):
     - Flutter
     - Notificare/NotificareKit (= 3.10.0)
     - Notificare/NotificarePushKit (= 3.10.0)
-  - notificare_push_ui (3.9.1):
+  - notificare_push_ui (3.10.0):
     - Flutter
     - Notificare/NotificareKit (= 3.10.0)
     - Notificare/NotificarePushUIKit (= 3.10.0)
-  - notificare_scannables (3.9.1):
+  - notificare_scannables (3.10.0):
     - Flutter
     - Notificare/NotificareKit (= 3.10.0)
     - Notificare/NotificareScannablesKit (= 3.10.0)
-  - notificare_user_inbox (3.9.1):
+  - notificare_user_inbox (3.10.0):
     - Flutter
     - Notificare/NotificareKit (= 3.10.0)
     - Notificare/NotificareUserInboxKit (= 3.10.0)
@@ -109,17 +109,17 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   Notificare: 113d5405b5075dd9c753d25d8cb6c0a28a0fca0f
-  notificare_assets: 7b393aef28d973a28963e49690443f349a9543b3
-  notificare_flutter: abbbc5bf29c4de1d464762da79ef83b5ea4e3910
-  notificare_geo: bbea88eb6cf463f7ee6f9abadf3985e0272d648d
-  notificare_in_app_messaging: f864a6817a8d83e962ca2967440cdedc9a3a8244
-  notificare_inbox: c9c1e8411f4f18fe35faac576734d0de32c87e05
-  notificare_loyalty: 13eafaf994acc7e4343066e23f62e3bc3747540c
-  notificare_monetize: 7b4a6e7fbe1131e0c1757b7bf626396899077ee7
-  notificare_push: 462f672087e2fda303e29512dcebcc5cfea7a31b
-  notificare_push_ui: bbe6786c9e4586ebec503687b7176ac2399419f8
-  notificare_scannables: ba8924f5ede01b754185708f2d34b6afe7a51881
-  notificare_user_inbox: d466263eb92160a20fb45a97364f99954a9572d8
+  notificare_assets: fbdfa2404d4d0ddeaac5606ad5e844e7e5dc3079
+  notificare_flutter: be0fa78358a3fd36b0fbfb0f690067773c5a817e
+  notificare_geo: 13c2063a29d5d5296501f93579454bb029e6ce88
+  notificare_in_app_messaging: c846f9e4ed72dc5f57274cd4d5b297b07ebf7b65
+  notificare_inbox: 3eda0e23c4a58d77bf508417d0b159b82f758a89
+  notificare_loyalty: 3e7574f16a0a7e0bd82cf2a1890be370f9d6bbc1
+  notificare_monetize: 480570f8b0b66453700081cba6f7acb825400f18
+  notificare_push: dd84769526e451eb9736529af229ae492c7ce79c
+  notificare_push_ui: cae558be9135532ac425f2bcbbfd2d689d232fbf
+  notificare_scannables: 0b7316a4b14852f208e59fb528d6792af96dc17c
+  notificare_user_inbox: 460ffc8ae1908a45cb33616f82d2bec5ee429a31
   permission_handler_apple: e76247795d700c14ea09e3a2d8855d41ee80a2e6
 
 PODFILE CHECKSUM: d68978958f000d1ae969266ff62df69e190f4271
