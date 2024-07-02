@@ -118,23 +118,6 @@ public class SwiftNotificarePushUIPlugin: NSObject, FlutterPlugin {
     }
 }
 
-extension NotificareNotification {
-    var requiresViewController: Bool {
-        get {
-            if let type = NotificareNotification.NotificationType.init(rawValue: type) {
-                switch type {
-                case .alert, .none, .passbook, .rate, .urlScheme:
-                    return false
-                default:
-                    break
-                }
-            }
-
-            return true
-        }
-    }
-}
-
 extension SwiftNotificarePushUIPlugin: NotificarePushUIDelegate {
     public func notificare(_ notificarePushUI: NotificarePushUI, willPresentNotification notification: NotificareNotification) {
         eventBroker.emit(
