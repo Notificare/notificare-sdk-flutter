@@ -38,7 +38,6 @@ internal object NotificarePushPluginEventBroker {
         abstract val payload: Any?
 
         enum class Type(val id: String) {
-            NOTIFICATION_RECEIVED(id = "notification_received"),
             NOTIFICATION_INFO_RECEIVED(id = "notification_info_received"),
             SYSTEM_NOTIFICATION_RECEIVED(id = "system_notification_received"),
             UNKNOWN_NOTIFICATION_RECEIVED(id = "unknown_notification_received"),
@@ -51,13 +50,6 @@ internal object NotificarePushPluginEventBroker {
             UNKNOWN_NOTIFICATION_ACTION_OPENED(id = "unknown_notification_action_opened"),
             SHOULD_OPEN_NOTIFICATION_SETTINGS(id = "should_open_notification_settings"),
             FAILED_TO_REGISTER_FOR_REMOTE_NOTIFICATIONS(id = "failed_to_register_for_remote_notifications"),
-        }
-
-        class NotificationReceived(
-            notification: NotificareNotification
-        ) : Event() {
-            override val type = Type.NOTIFICATION_RECEIVED
-            override val payload = notification.toJson()
         }
 
         class NotificationInfoReceived(

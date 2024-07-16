@@ -219,14 +219,6 @@ extension SwiftNotificarePushPlugin: NotificarePushDelegate {
         )
     }
     
-    public func notificare(_ notificarePush: NotificarePush, didReceiveNotification notification: NotificareNotification) {
-        eventBroker.emit(
-            NotificarePushPluginEventBroker.OnNotificationReceived(
-                notification: notification
-            )
-        )
-    }
-    
     public func notificare(_ notificarePush: NotificarePush, didReceiveNotification notification: NotificareNotification, deliveryMechanism: NotificareNotificationDeliveryMechanism) {
         eventBroker.emit(
             NotificarePushPluginEventBroker.OnNotificationReceived(

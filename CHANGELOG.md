@@ -12,6 +12,7 @@
 - `NotificareDevice.transport` attribute no longer contains the transport. Use `NotificarePush.transport` instead
 - The `NotificareDevice` data model was reduced to only publicly relevant attributes
 - `onDeviceRegistered` only triggers once, when the device is created
+- Removed deprecated `NotificarePush.onNotificationReceived(notification)` event. Use `NotificarePush.onNotificationInfoReceived(notification, deliveryMechanism)` instead
 
 #### Native changes
 
