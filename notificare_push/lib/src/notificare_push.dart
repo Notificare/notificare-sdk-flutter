@@ -135,6 +135,12 @@ class NotificarePush {
     });
   }
 
+  static Stream<String?> get onSubscriptionIdChanged {
+    return _getEventStream('subscription_id_changed').map((result) {
+      return result as String?;
+    });
+  }
+
   static Stream<NotificareNotification?> get onShouldOpenNotificationSettings {
     return _getEventStream('should_open_notification_settings').map((result) {
       if (result == null) return null;

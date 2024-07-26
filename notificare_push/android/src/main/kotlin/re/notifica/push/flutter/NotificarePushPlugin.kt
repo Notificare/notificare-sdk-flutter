@@ -35,6 +35,14 @@ class NotificarePushPlugin : FlutterPlugin, MethodCallHandler, ActivityAware, Pl
         )
     }
 
+    private val subscriptionIdObserver = Observer<String?> { subscriptionId ->
+        NotificarePushPluginEventBroker.emit(
+            NotificarePushPluginEventBroker.Event.SubscriptionIdChanged(
+                subscriptionId = subscriptionId,
+            )
+        )
+    }
+
     override fun onAttachedToEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
         Notificare.push().intentReceiver = NotificarePushPluginReceiver::class.java
 
@@ -44,10 +52,12 @@ class NotificarePushPlugin : FlutterPlugin, MethodCallHandler, ActivityAware, Pl
         NotificarePushPluginEventBroker.register(binding.binaryMessenger)
 
         Notificare.push().observableAllowedUI.observeForever(allowedUIObserver)
+        Notificare.push().observableSubscriptionId.observeForever(subscriptionIdObserver)
     }
 
     override fun onDetachedFromEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
         Notificare.push().observableAllowedUI.removeObserver(allowedUIObserver)
+        Notificare.push().observableSubscriptionId.removeObserver(subscriptionIdObserver)
 
         channel.setMethodCallHandler(null)
     }
