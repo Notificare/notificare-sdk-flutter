@@ -3,6 +3,7 @@
 ## Upcoming release
 
 - Device identifiers become long-lived
+- Add `NotificarePush.onSubscriptionIdChanged` event for push token updates
 
 #### Breaking changes
 
