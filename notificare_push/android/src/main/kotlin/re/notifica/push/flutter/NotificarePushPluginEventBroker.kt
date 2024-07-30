@@ -44,6 +44,7 @@ internal object NotificarePushPluginEventBroker {
             NOTIFICATION_OPENED(id = "notification_opened"),
             NOTIFICATION_ACTION_OPENED(id = "notification_action_opened"),
             NOTIFICATION_SETTINGS_CHANGED(id = "notification_settings_changed"),
+            SUBSCRIPTION_ID_CHANGED(id = "subscription_id_changed"),
 
             // iOS-only events (declared to prevent missing stream errors)
             UNKNOWN_NOTIFICATION_OPENED(id = "unknown_notification_opened"),
@@ -100,6 +101,13 @@ internal object NotificarePushPluginEventBroker {
         ) : Event() {
             override val type = Type.NOTIFICATION_SETTINGS_CHANGED
             override val payload = allowedUI
+        }
+
+        class SubscriptionIdChanged(
+            subscriptionId: String?
+        ) : Event() {
+            override val type = Type.SUBSCRIPTION_ID_CHANGED
+            override val payload = subscriptionId
         }
     }
 

@@ -145,6 +145,16 @@ class _AppState extends State<App> {
       );
     });
 
+    NotificarePush.onSubscriptionIdChanged.listen((subscriptionId) {
+      logger.i('Subscription ID changed: $subscriptionId');
+
+      scaffoldMessengerKey.currentState!.showSnackBar(
+        SnackBar(
+          content: Text('Subscription ID changed: $subscriptionId'),
+        ),
+      );
+    });
+
     // endregion
 
     // region Notificare Push UI events
