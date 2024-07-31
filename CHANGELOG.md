@@ -26,6 +26,30 @@
 
 - `launch()`, `unlaunch()`, `enableRemoteNotifications()` and `disableRemoteNotifications()` become suspending functions with a callback alternative
 
+## 3.10.0
+
+#### Native changes
+
+##### iOS
+
+- Add support for the URLResolver notification type
+- Fix anonymous device registration
+
+##### Android
+
+- Add support for the URLResolver notification type
+- Fix anonymous device registration
+
+## 3.9.1
+
+- Preload images before showing in-app messages
+
+#### Native changes
+
+##### iOS
+
+- Fix `NotificarePass.type` decoding
+
 ## 3.9.0
 
 - Add support for deferred links
