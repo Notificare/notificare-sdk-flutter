@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Upcoming release
+## 4.0.0-beta.1
 
 - Device identifiers become long-lived
 - Add `NotificarePush.onSubscriptionIdChanged` event for push token updates
@@ -20,11 +20,6 @@
 ##### Android
 
 - Fix padding discrepancies in alert dialog with actions
-- `launch()`, `unlaunch()`, `enableRemoteNotifications()` and `disableRemoteNotifications()` become suspending functions with a callback alternative
-
-##### iOS
-
-- `launch()`, `unlaunch()`, `enableRemoteNotifications()` and `disableRemoteNotifications()` become suspending functions with a callback alternative
 
 ## 3.10.0
 
