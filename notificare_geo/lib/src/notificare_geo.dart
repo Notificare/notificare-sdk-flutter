@@ -1,3 +1,7 @@
+import 'dart:ui';
+import 'dart:io';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:notificare_geo/src/events/notificare_ranged_beacons_event.dart';
 import 'package:notificare_geo/src/models/notificare_beacon.dart';
@@ -5,6 +9,8 @@ import 'package:notificare_geo/src/models/notificare_heading.dart';
 import 'package:notificare_geo/src/models/notificare_location.dart';
 import 'package:notificare_geo/src/models/notificare_region.dart';
 import 'package:notificare_geo/src/models/notificare_visit.dart';
+
+import 'callback_dispatcher.dart';
 
 class NotificareGeo {
   NotificareGeo._();
@@ -45,6 +51,145 @@ class NotificareGeo {
 
   static Future<void> disableLocationUpdates() async {
     await _channel.invokeMethod('disableLocationUpdates');
+  }
+
+  static Future<void> onLocationUpdatedCallback(
+      void Function(NotificareLocation location) onLocationUpdated) async {
+    if (!Platform.isAndroid) {
+      return;
+    }
+
+    final CallbackHandle? dispatcher =
+        PluginUtilities.getCallbackHandle(callbackDispatcher);
+    final CallbackHandle? callback =
+        PluginUtilities.getCallbackHandle(onLocationUpdated);
+
+    if (dispatcher == null || callback == null) {
+      debugPrint(
+          "Failed to register onLocationUpdatedCallback. Ensure you are using a static or top level function.");
+
+      return;
+    }
+
+    await _channel.invokeListMethod("onLocationUpdatedCallback", {
+      "callbackDispatcher": dispatcher.toRawHandle(),
+      "callback": callback.toRawHandle()
+    });
+  }
+
+  static Future<void> onRegionEnteredCallback(
+      void Function(NotificareRegion region) onRegionEntered) async {
+    if (!Platform.isAndroid) {
+      return;
+    }
+
+    final CallbackHandle? dispatcher =
+        PluginUtilities.getCallbackHandle(callbackDispatcher);
+    final CallbackHandle? callback =
+        PluginUtilities.getCallbackHandle(onRegionEntered);
+
+    if (dispatcher == null || callback == null) {
+      debugPrint(
+          "Failed to register onRegionEnteredCallback. Ensure you are using a static or top level function.");
+      return;
+    }
+
+    await _channel.invokeListMethod("onRegionEnteredCallback", {
+      "callbackDispatcher": dispatcher.toRawHandle(),
+      "callback": callback.toRawHandle()
+    });
+  }
+
+  static Future<void> onRegionExitedCallback(
+      void Function(NotificareRegion region) onRegionExited) async {
+    if (!Platform.isAndroid) {
+      return;
+    }
+
+    final CallbackHandle? dispatcher =
+        PluginUtilities.getCallbackHandle(callbackDispatcher);
+    final CallbackHandle? callback =
+        PluginUtilities.getCallbackHandle(onRegionExited);
+
+    if (dispatcher == null || callback == null) {
+      debugPrint(
+          "Failed to register onRegionExitedCallback. Ensure you are using a static or top level function.");
+      return;
+    }
+
+    await _channel.invokeListMethod("onRegionExitedCallback", {
+      "callbackDispatcher": dispatcher.toRawHandle(),
+      "callback": callback.toRawHandle()
+    });
+  }
+
+  static Future<void> onBeaconEnteredCallback(
+      void Function(NotificareBeacon beacon) onBeaconEntered) async {
+    if (!Platform.isAndroid) {
+      return;
+    }
+
+    final CallbackHandle? dispatcher =
+        PluginUtilities.getCallbackHandle(callbackDispatcher);
+    final CallbackHandle? callback =
+        PluginUtilities.getCallbackHandle(onBeaconEntered);
+
+    if (dispatcher == null || callback == null) {
+      debugPrint(
+          "Failed to register onBeaconEnteredCallback. Ensure you are using a static or top level function.");
+      return;
+    }
+
+    await _channel.invokeListMethod("onBeaconEnteredCallback", {
+      "callbackDispatcher": dispatcher.toRawHandle(),
+      "callback": callback.toRawHandle()
+    });
+  }
+
+  static Future<void> onBeaconExitedCallback(
+      void Function(NotificareBeacon beacon) onBeaconExited) async {
+    if (!Platform.isAndroid) {
+      return;
+    }
+
+    final CallbackHandle? dispatcher =
+        PluginUtilities.getCallbackHandle(callbackDispatcher);
+    final CallbackHandle? callback =
+        PluginUtilities.getCallbackHandle(onBeaconExited);
+
+    if (dispatcher == null || callback == null) {
+      debugPrint(
+          "Failed to register onBeaconExitedCallback. Ensure you are using a static or top level function.");
+      return;
+    }
+
+    await _channel.invokeListMethod("onBeaconExitedCallback", {
+      "callbackDispatcher": dispatcher.toRawHandle(),
+      "callback": callback.toRawHandle()
+    });
+  }
+
+  static Future<void> onBeaconsRangedCallback(
+      void Function(NotificareRangedBeaconsEvent event) onBeaconsRanged) async {
+    if (!Platform.isAndroid) {
+      return;
+    }
+
+    final CallbackHandle? dispatcher =
+        PluginUtilities.getCallbackHandle(callbackDispatcher);
+    final CallbackHandle? callback =
+        PluginUtilities.getCallbackHandle(onBeaconsRanged);
+
+    if (dispatcher == null || callback == null) {
+      debugPrint(
+          "Failed to register onBeaconsRangedCallback. Ensure you are using a static or top level function.");
+      return;
+    }
+
+    await _channel.invokeListMethod("onBeaconsRangedCallback", {
+      "callbackDispatcher": dispatcher.toRawHandle(),
+      "callback": callback.toRawHandle()
+    });
   }
 
   // Events
