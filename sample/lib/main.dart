@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:notificare/notificare.dart';
 import 'package:notificare_geo/notificare_geo.dart';
@@ -7,7 +9,50 @@ import 'package:notificare_push_ui/notificare_push_ui.dart';
 import 'package:notificare_scannables/notificare_scannables.dart';
 import 'package:sample/ui/home/home.dart';
 
+import 'logger/custom_event_logger.dart';
 import 'logger/logger.dart';
+
+@pragma('vm:entry-point')
+Future<void> _onLocationUpdatedCallback(NotificareLocation location) async {
+  logger.i('onLocationUpdatedCallback');
+
+  logCustomEvent("onLocationUpdatedCallback", location.toJson());
+}
+
+@pragma('vm:entry-point')
+Future<void> _onRegionEnteredCallback(NotificareRegion region) async {
+  logger.i('onRegionEnteredCallback');
+
+  logCustomEvent("onRegionEnteredCallback", region.toJson());
+}
+
+@pragma('vm:entry-point')
+Future<void> _onRegionExitedCallback(NotificareRegion region) async {
+  logger.i('onRegionExitedCallback in app side');
+
+  logCustomEvent("onRegionExitedCallback", region.toJson());
+}
+
+@pragma('vm:entry-point')
+Future<void> _onBeaconEnteredCallback(NotificareBeacon beacon) async {
+  logger.i('onBeaconEnteredCallback in app side');
+
+  logCustomEvent("onBeaconEnteredCallback", beacon.toJson());
+}
+
+@pragma('vm:entry-point')
+Future<void> _onBeaconExitedCallback(NotificareBeacon beacon) async {
+  logger.i('onBeaconExitedCallback in app side');
+
+  logCustomEvent("onBeaconExitedCallback", beacon.toJson());
+}
+
+@pragma('vm:entry-point')
+Future<void> _onBeaconsRangedCallback(NotificareRangedBeaconsEvent event) async {
+  logger.i('onBeaconsRangedCallback in app side');
+
+  logCustomEvent("onBeaconsRangedCallback", event.toJson());
+}
 
 void main() {
   runApp(const App());
@@ -23,6 +68,12 @@ class App extends StatefulWidget {
 class _AppState extends State<App> {
   final scaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
 
+  bool get isIOSBackgroundEvent {
+    final appState = WidgetsBinding.instance.lifecycleState;
+
+    return Platform.isIOS && (appState == AppLifecycleState.inactive || appState == AppLifecycleState.detached);
+  }
+
   @override
   void initState() {
     super.initState();
@@ -31,12 +82,12 @@ class _AppState extends State<App> {
   }
 
   void _configureNotificare() async {
-    try {
-      await NotificarePush.setPresentationOptions(['banner', 'badge', 'sound']);
-      await Notificare.launch();
-    } catch (error) {
-      logger.e('Something went wrong.', error);
-    }
+    await NotificareGeo.onLocationUpdatedCallback(_onLocationUpdatedCallback);
+    await NotificareGeo.onRegionEnteredCallback(_onRegionEnteredCallback);
+    await NotificareGeo.onRegionExitedCallback(_onRegionExitedCallback);
+    await NotificareGeo.onBeaconEnteredCallback(_onBeaconEnteredCallback);
+    await NotificareGeo.onBeaconExitedCallback(_onBeaconExitedCallback);
+    await NotificareGeo.onBeaconsRangedCallback(_onBeaconsRangedCallback);
 
     // region Notificare events
 
@@ -244,6 +295,11 @@ class _AppState extends State<App> {
     // region Notificare Geo events
 
     NotificareGeo.onLocationUpdated.listen((location) {
+      if (isIOSBackgroundEvent) {
+        logCustomEvent("onLocationUpdated", location.toJson());
+        return;
+      }
+
       scaffoldMessengerKey.currentState!.showSnackBar(
         SnackBar(
           content: Text('Location updated: ${location.toJson()}'),
@@ -252,6 +308,11 @@ class _AppState extends State<App> {
     });
 
     NotificareGeo.onRegionEntered.listen((region) {
+      if (isIOSBackgroundEvent) {
+        logCustomEvent("onRegionEntered", region.toJson());
+        return;
+      }
+
       scaffoldMessengerKey.currentState!.showSnackBar(
         SnackBar(
           content: Text('Region entered: ${region.name}'),
@@ -260,6 +321,11 @@ class _AppState extends State<App> {
     });
 
     NotificareGeo.onRegionExited.listen((region) {
+      if (isIOSBackgroundEvent) {
+        logCustomEvent("onRegionExited", region.toJson());
+        return;
+      }
+
       scaffoldMessengerKey.currentState!.showSnackBar(
         SnackBar(
           content: Text('Region exited: ${region.name}'),
@@ -268,6 +334,11 @@ class _AppState extends State<App> {
     });
 
     NotificareGeo.onBeaconEntered.listen((beacon) {
+      if (isIOSBackgroundEvent) {
+        logCustomEvent("onBeaconEntered", beacon.toJson());
+        return;
+      }
+
       scaffoldMessengerKey.currentState!.showSnackBar(
         SnackBar(
           content: Text('Beacon entered: ${beacon.name}'),
@@ -276,6 +347,11 @@ class _AppState extends State<App> {
     });
 
     NotificareGeo.onBeaconExited.listen((beacon) {
+      if (isIOSBackgroundEvent) {
+        logCustomEvent("onBeaconExited", beacon.toJson());
+        return;
+      }
+
       scaffoldMessengerKey.currentState!.showSnackBar(
         SnackBar(
           content: Text('Beacon exited: ${beacon.name}'),
@@ -283,7 +359,25 @@ class _AppState extends State<App> {
       );
     });
 
+    NotificareGeo.onBeaconsRanged.listen((event) {
+      if (isIOSBackgroundEvent) {
+        logCustomEvent("onBeaconsRanged", event.toJson());
+        return;
+      }
+
+      scaffoldMessengerKey.currentState!.showSnackBar(
+        SnackBar(
+          content: Text('Beacons ranged: ${event.toJson()}'),
+        ),
+      );
+    });
+
     NotificareGeo.onVisit.listen((visit) {
+      if (isIOSBackgroundEvent) {
+        logCustomEvent("onVisit", visit.toJson());
+        return;
+      }
+
       scaffoldMessengerKey.currentState!.showSnackBar(
         SnackBar(
           content: Text('Visit: ${visit.toJson()}'),
@@ -292,6 +386,11 @@ class _AppState extends State<App> {
     });
 
     NotificareGeo.onHeadingUpdated.listen((heading) {
+      if (isIOSBackgroundEvent) {
+        logCustomEvent("onHeading", heading.toJson());
+        return;
+      }
+
       scaffoldMessengerKey.currentState!.showSnackBar(
         SnackBar(
           content: Text('Heading updated: ${heading.toJson()}'),
@@ -380,6 +479,13 @@ class _AppState extends State<App> {
     });
 
     // endregion
+
+    try {
+      await NotificarePush.setPresentationOptions(['banner', 'badge', 'sound']);
+      await Notificare.launch();
+    } catch (error) {
+      logger.e('Something went wrong.', error);
+    }
   }
 
   void _handleDeferredLink() async {
