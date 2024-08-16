@@ -82,12 +82,12 @@ class _AppState extends State<App> {
   }
 
   void _configureNotificare() async {
-    await NotificareGeo.onLocationUpdatedCallback(_onLocationUpdatedCallback);
-    await NotificareGeo.onRegionEnteredCallback(_onRegionEnteredCallback);
-    await NotificareGeo.onRegionExitedCallback(_onRegionExitedCallback);
-    await NotificareGeo.onBeaconEnteredCallback(_onBeaconEnteredCallback);
-    await NotificareGeo.onBeaconExitedCallback(_onBeaconExitedCallback);
-    await NotificareGeo.onBeaconsRangedCallback(_onBeaconsRangedCallback);
+    await NotificareGeo.setLocationUpdatedBackgroundCallback(_onLocationUpdatedCallback);
+    await NotificareGeo.setRegionEnteredBackgroundCallback(_onRegionEnteredCallback);
+    await NotificareGeo.setRegionExitedBackgroundCallback(_onRegionExitedCallback);
+    await NotificareGeo.setBeaconEnteredBackgroundCallback(_onBeaconEnteredCallback);
+    await NotificareGeo.setBeaconExitedBackgroundCallback(_onBeaconExitedCallback);
+    await NotificareGeo.setBeaconsRangedBackgroundCallback(_onBeaconsRangedCallback);
 
     // region Notificare events
 
