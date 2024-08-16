@@ -53,7 +53,9 @@ class NotificareGeo {
     await _channel.invokeMethod('disableLocationUpdates');
   }
 
-  static Future<void> onLocationUpdatedCallback(
+  // Background callback methods
+
+  static Future<void> setLocationUpdatedBackgroundCallback(
       void Function(NotificareLocation location) onLocationUpdated) async {
     if (!Platform.isAndroid) {
       return;
@@ -71,13 +73,13 @@ class NotificareGeo {
       return;
     }
 
-    await _channel.invokeListMethod("onLocationUpdatedCallback", {
+    await _channel.invokeListMethod("setLocationUpdatedBackgroundCallback", {
       "callbackDispatcher": dispatcher.toRawHandle(),
       "callback": callback.toRawHandle()
     });
   }
 
-  static Future<void> onRegionEnteredCallback(
+  static Future<void> setRegionEnteredBackgroundCallback(
       void Function(NotificareRegion region) onRegionEntered) async {
     if (!Platform.isAndroid) {
       return;
@@ -94,13 +96,13 @@ class NotificareGeo {
       return;
     }
 
-    await _channel.invokeListMethod("onRegionEnteredCallback", {
+    await _channel.invokeListMethod("setRegionEnteredBackgroundCallback", {
       "callbackDispatcher": dispatcher.toRawHandle(),
       "callback": callback.toRawHandle()
     });
   }
 
-  static Future<void> onRegionExitedCallback(
+  static Future<void> setRegionExitedBackgroundCallback(
       void Function(NotificareRegion region) onRegionExited) async {
     if (!Platform.isAndroid) {
       return;
@@ -117,13 +119,13 @@ class NotificareGeo {
       return;
     }
 
-    await _channel.invokeListMethod("onRegionExitedCallback", {
+    await _channel.invokeListMethod("setRegionExitedBackgroundCallback", {
       "callbackDispatcher": dispatcher.toRawHandle(),
       "callback": callback.toRawHandle()
     });
   }
 
-  static Future<void> onBeaconEnteredCallback(
+  static Future<void> setBeaconEnteredBackgroundCallback(
       void Function(NotificareBeacon beacon) onBeaconEntered) async {
     if (!Platform.isAndroid) {
       return;
@@ -140,13 +142,13 @@ class NotificareGeo {
       return;
     }
 
-    await _channel.invokeListMethod("onBeaconEnteredCallback", {
+    await _channel.invokeListMethod("setBeaconEnteredBackgroundCallback", {
       "callbackDispatcher": dispatcher.toRawHandle(),
       "callback": callback.toRawHandle()
     });
   }
 
-  static Future<void> onBeaconExitedCallback(
+  static Future<void> setBeaconExitedBackgroundCallback(
       void Function(NotificareBeacon beacon) onBeaconExited) async {
     if (!Platform.isAndroid) {
       return;
@@ -163,13 +165,13 @@ class NotificareGeo {
       return;
     }
 
-    await _channel.invokeListMethod("onBeaconExitedCallback", {
+    await _channel.invokeListMethod("setBeaconExitedBackgroundCallback", {
       "callbackDispatcher": dispatcher.toRawHandle(),
       "callback": callback.toRawHandle()
     });
   }
 
-  static Future<void> onBeaconsRangedCallback(
+  static Future<void> setBeaconsRangedBackgroundCallback(
       void Function(NotificareRangedBeaconsEvent event) onBeaconsRanged) async {
     if (!Platform.isAndroid) {
       return;
@@ -186,7 +188,7 @@ class NotificareGeo {
       return;
     }
 
-    await _channel.invokeListMethod("onBeaconsRangedCallback", {
+    await _channel.invokeListMethod("setBeaconsRangedBackgroundCallback", {
       "callbackDispatcher": dispatcher.toRawHandle(),
       "callback": callback.toRawHandle()
     });

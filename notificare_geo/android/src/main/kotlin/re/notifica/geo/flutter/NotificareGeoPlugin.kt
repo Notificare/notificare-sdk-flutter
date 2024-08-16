@@ -14,7 +14,7 @@ import org.json.JSONObject
 import re.notifica.Notificare
 import re.notifica.geo.flutter.NotificareGeoPluginBackgroundService.BackgroundEvent.CallbackType
 import re.notifica.geo.flutter.NotificareGeoPluginBackgroundService.Companion.isAttachedToActivity
-import re.notifica.geo.flutter.storage.NotificareGeoPluginStorage.Companion.updateCallback
+import re.notifica.geo.flutter.storage.NotificareGeoPluginStorage.updateCallback
 import re.notifica.geo.ktx.geo
 import re.notifica.geo.models.toJson
 
@@ -25,10 +25,10 @@ class NotificareGeoPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
     }
 
     private lateinit var channel: MethodChannel
-    private var mContext: Context? = null
+    private var applicationContext: Context? = null
 
     override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
-        mContext = flutterPluginBinding.applicationContext
+        applicationContext = flutterPluginBinding.applicationContext
         channel = MethodChannel(
             flutterPluginBinding.binaryMessenger,
             "re.notifica.geo.flutter/notificare_geo",
@@ -40,7 +40,7 @@ class NotificareGeoPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
     }
 
     override fun onDetachedFromEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
-        mContext = null
+        applicationContext = null
         channel.setMethodCallHandler(null)
     }
 
@@ -52,12 +52,26 @@ class NotificareGeoPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
             "getEnteredRegions" -> getEnteredRegions(call, result)
             "enableLocationUpdates" -> enableLocationUpdates(call, result)
             "disableLocationUpdates" -> disableLocationUpdates(call, result)
-            "onLocationUpdatedCallback" -> onBackgroundCallback(call, result, CallbackType.LOCATION_UPDATED)
-            "onRegionEnteredCallback" -> onBackgroundCallback(call, result, CallbackType.REGION_ENTERED)
-            "onRegionExitedCallback" -> onBackgroundCallback(call, result, CallbackType.REGION_EXITED)
-            "onBeaconEnteredCallback" -> onBackgroundCallback(call, result, CallbackType.BEACON_ENTERED)
-            "onBeaconExitedCallback" -> onBackgroundCallback(call, result, CallbackType.BEACON_EXITED)
-            "onBeaconsRangedCallback" -> onBackgroundCallback(call, result, CallbackType.BEACONS_RANGED)
+
+            // Background callback methods
+            "setLocationUpdatedBackgroundCallback" ->
+                setBackgroundCallback(call, result, CallbackType.LOCATION_UPDATED)
+
+            "setRegionEnteredBackgroundCallback" ->
+                setBackgroundCallback(call, result, CallbackType.REGION_ENTERED)
+
+            "setRegionExitedBackgroundCallback" ->
+                setBackgroundCallback(call, result, CallbackType.REGION_EXITED)
+
+            "setBeaconEnteredBackgroundCallback" ->
+                setBackgroundCallback(call, result, CallbackType.BEACON_ENTERED)
+
+            "setBeaconExitedBackgroundCallback" ->
+                setBackgroundCallback(call, result, CallbackType.BEACON_EXITED)
+
+            "setBeaconsRangedBackgroundCallback" ->
+                setBackgroundCallback(call, result, CallbackType.BEACONS_RANGED)
+
             else -> result.notImplemented()
         }
     }
@@ -78,44 +92,66 @@ class NotificareGeoPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
         }
     }
 
-    private fun hasLocationServicesEnabled(@Suppress("UNUSED_PARAMETER") call: MethodCall, response: Result) {
+    private fun hasLocationServicesEnabled(
+        @Suppress("UNUSED_PARAMETER") call: MethodCall,
+        response: Result
+    ) {
         response.success(Notificare.geo().hasLocationServicesEnabled)
     }
 
-    private fun hasBluetoothEnabled(@Suppress("UNUSED_PARAMETER") call: MethodCall, response: Result) {
+    private fun hasBluetoothEnabled(
+        @Suppress("UNUSED_PARAMETER") call: MethodCall,
+        response: Result
+    ) {
         response.success(Notificare.geo().hasBluetoothEnabled)
     }
 
-    private fun getMonitoredRegions(@Suppress("UNUSED_PARAMETER") call: MethodCall, response: Result) {
+    private fun getMonitoredRegions(
+        @Suppress("UNUSED_PARAMETER") call: MethodCall,
+        response: Result
+    ) {
         response.success(
             Notificare.geo().monitoredRegions.map { it.toJson() }
         )
     }
 
-    private fun getEnteredRegions(@Suppress("UNUSED_PARAMETER") call: MethodCall, response: Result) {
+    private fun getEnteredRegions(
+        @Suppress("UNUSED_PARAMETER") call: MethodCall,
+        response: Result
+    ) {
         response.success(
             Notificare.geo().enteredRegions.map { it.toJson() }
         )
     }
 
-    private fun enableLocationUpdates(@Suppress("UNUSED_PARAMETER") call: MethodCall, response: Result) {
+    private fun enableLocationUpdates(
+        @Suppress("UNUSED_PARAMETER") call: MethodCall,
+        response: Result
+    ) {
         Notificare.geo().enableLocationUpdates()
         response.success(null)
     }
 
-    private fun disableLocationUpdates(@Suppress("UNUSED_PARAMETER") call: MethodCall, response: Result) {
+    private fun disableLocationUpdates(
+        @Suppress("UNUSED_PARAMETER") call: MethodCall,
+        response: Result
+    ) {
         Notificare.geo().disableLocationUpdates()
         response.success(null)
     }
 
-    private fun onBackgroundCallback(call: MethodCall, response: Result, callbackType: CallbackType) {
+    private fun setBackgroundCallback(
+        call: MethodCall,
+        response: Result,
+        callbackType: CallbackType
+    ) {
         val arguments = call.arguments<JSONObject>()
             ?: return response.error(NOTIFICARE_ERROR, "Invalid request arguments.", null)
 
         val callbackDispatcher = arguments.getLong("callbackDispatcher")
         val callback = arguments.getLong("callback")
 
-        val context = mContext
+        val context = applicationContext
             ?: return response.error(
                 NOTIFICARE_ERROR,
                 "Unable to register background callback",

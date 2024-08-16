@@ -11,8 +11,8 @@ import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.view.FlutterCallbackInformation
-import re.notifica.geo.flutter.storage.NotificareGeoPluginStorage.Companion.getCallback
-import re.notifica.geo.flutter.storage.NotificareGeoPluginStorage.Companion.getCallbackDispatcher
+import re.notifica.geo.flutter.storage.NotificareGeoPluginStorage.getCallback
+import re.notifica.geo.flutter.storage.NotificareGeoPluginStorage.getCallbackDispatcher
 import re.notifica.geo.models.NotificareBeacon
 import re.notifica.geo.models.NotificareLocation
 import re.notifica.geo.models.NotificareRegion
@@ -49,9 +49,8 @@ class NotificareGeoPluginBackgroundService : MethodCallHandler {
 
             synchronized(this) {
                 if (instance == null) {
-                    val callbackDispatcher = context.getCallbackDispatcher().also {
-                        if (it == 0L) return
-                    }
+                    val callbackDispatcher = context.getCallbackDispatcher()
+                    if (callbackDispatcher == 0L) return
 
                     ensureInstanceInitialized(context, callbackDispatcher)
                 }
@@ -61,18 +60,13 @@ class NotificareGeoPluginBackgroundService : MethodCallHandler {
         }
 
         private fun ensureInstanceInitialized(context: Context, callbackDispatcher: Long) {
-            instance = NotificareGeoPluginBackgroundService().also {
-                it.startBackgroundService(context, callbackDispatcher)
+            instance = NotificareGeoPluginBackgroundService().apply {
+                startBackgroundService(context, callbackDispatcher)
             }
         }
 
         private fun enqueueEvent(event: BackgroundEvent) {
-            instance?.also {
-                it.handleBackgroundEvent(event)
-                return
-            }
-
-            queue.add(event)
+            instance?.handleBackgroundEvent(event) ?: queue.add(event)
         }
     }
 
