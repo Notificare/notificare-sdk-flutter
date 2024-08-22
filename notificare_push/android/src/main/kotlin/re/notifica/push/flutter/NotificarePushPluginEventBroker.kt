@@ -7,6 +7,7 @@ import io.flutter.plugin.common.EventChannel
 import io.flutter.plugin.common.JSONMethodCodec
 import re.notifica.models.NotificareNotification
 import re.notifica.push.models.NotificareNotificationDeliveryMechanism
+import re.notifica.push.models.NotificarePushSubscription
 import re.notifica.push.models.NotificareSystemNotification
 import re.notifica.push.models.NotificareUnknownNotification
 
@@ -44,7 +45,7 @@ internal object NotificarePushPluginEventBroker {
             NOTIFICATION_OPENED(id = "notification_opened"),
             NOTIFICATION_ACTION_OPENED(id = "notification_action_opened"),
             NOTIFICATION_SETTINGS_CHANGED(id = "notification_settings_changed"),
-            SUBSCRIPTION_ID_CHANGED(id = "subscription_id_changed"),
+            SUBSCRIPTION_CHANGED(id = "subscription_changed"),
 
             // iOS-only events (declared to prevent missing stream errors)
             UNKNOWN_NOTIFICATION_OPENED(id = "unknown_notification_opened"),
@@ -103,11 +104,11 @@ internal object NotificarePushPluginEventBroker {
             override val payload = allowedUI
         }
 
-        class SubscriptionIdChanged(
-            subscriptionId: String?
+        class SubscriptionChanged(
+            subscription: NotificarePushSubscription?
         ) : Event() {
-            override val type = Type.SUBSCRIPTION_ID_CHANGED
-            override val payload = subscriptionId
+            override val type = Type.SUBSCRIPTION_CHANGED
+            override val payload = subscription?.toJson()
         }
     }
 

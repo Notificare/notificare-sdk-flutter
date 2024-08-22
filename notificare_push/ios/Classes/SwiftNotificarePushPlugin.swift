@@ -40,7 +40,7 @@ public class SwiftNotificarePushPlugin: NSObject, FlutterPlugin {
             case "setPresentationOptions": self.setPresentationOptions(call, result)
             case "hasRemoteNotificationsEnabled": self.hasRemoteNotificationsEnabled(call, result)
             case "getTransport": self.getTransport(call, result)
-            case "getSubscriptionId": self.getSubscriptionId(call, result)
+            case "getSubscription": self.getSubscription(call, result)
             case "allowedUI": self.allowedUI(call, result)
             case "enableRemoteNotifications": self.enableRemoteNotifications(call, result)
             case "disableRemoteNotifications": self.disableRemoteNotifications(call, result)
@@ -171,8 +171,13 @@ public class SwiftNotificarePushPlugin: NSObject, FlutterPlugin {
         response(Notificare.shared.push().transport?.rawValue)
     }
 
-    private func getSubscriptionId(_ call: FlutterMethodCall, _ response: FlutterResult) {
-        response(Notificare.shared.push().subscriptionId)
+    private func getSubscription(_ call: FlutterMethodCall, _ response: FlutterResult) {
+        do {
+            let json = try Notificare.shared.push().subscription?.toJson()
+            response(json)
+        } catch {
+            response(FlutterError(code: DEFAULT_ERROR_CODE, message: error.localizedDescription, details: nil))
+        }
     }
 
     private func allowedUI(_ call: FlutterMethodCall, _ response: FlutterResult) {
@@ -219,10 +224,10 @@ extension SwiftNotificarePushPlugin: NotificarePushDelegate {
         )
     }
 
-    public func notificare(_ notificarePush: any NotificarePush, didChangeSubscriptionId subscriptionId: String?) {
+    public func notificare(_ notificarePush: any NotificarePush, didChangeSubscription subscription: NotificarePushSubscription?) {
         eventBroker.emit(
-            NotificarePushPluginEventBroker.OnSubscriptionIdChanged(
-                subscriptionId: subscriptionId
+            NotificarePushPluginEventBroker.OnSubscriptionChanged(
+                subscription: subscription
             )
         )
     }

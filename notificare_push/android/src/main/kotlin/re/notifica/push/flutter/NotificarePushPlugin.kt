@@ -15,6 +15,7 @@ import io.flutter.plugin.common.PluginRegistry
 import re.notifica.Notificare
 import re.notifica.NotificareCallback
 import re.notifica.push.ktx.push
+import re.notifica.push.models.NotificarePushSubscription
 
 class NotificarePushPlugin : FlutterPlugin, MethodCallHandler, ActivityAware, PluginRegistry.NewIntentListener {
 
@@ -35,10 +36,10 @@ class NotificarePushPlugin : FlutterPlugin, MethodCallHandler, ActivityAware, Pl
         )
     }
 
-    private val subscriptionIdObserver = Observer<String?> { subscriptionId ->
+    private val subscriptionObserver = Observer<NotificarePushSubscription?> { subscription ->
         NotificarePushPluginEventBroker.emit(
-            NotificarePushPluginEventBroker.Event.SubscriptionIdChanged(
-                subscriptionId = subscriptionId,
+            NotificarePushPluginEventBroker.Event.SubscriptionChanged(
+                subscription = subscription,
             )
         )
     }
@@ -52,12 +53,12 @@ class NotificarePushPlugin : FlutterPlugin, MethodCallHandler, ActivityAware, Pl
         NotificarePushPluginEventBroker.register(binding.binaryMessenger)
 
         Notificare.push().observableAllowedUI.observeForever(allowedUIObserver)
-        Notificare.push().observableSubscriptionId.observeForever(subscriptionIdObserver)
+        Notificare.push().observableSubscription.observeForever(subscriptionObserver)
     }
 
     override fun onDetachedFromEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
         Notificare.push().observableAllowedUI.removeObserver(allowedUIObserver)
-        Notificare.push().observableSubscriptionId.removeObserver(subscriptionIdObserver)
+        Notificare.push().observableSubscription.removeObserver(subscriptionObserver)
 
         channel.setMethodCallHandler(null)
     }
@@ -67,7 +68,7 @@ class NotificarePushPlugin : FlutterPlugin, MethodCallHandler, ActivityAware, Pl
             "hasRemoteNotificationsEnabled" -> hasRemoteNotificationsEnabled(call, result)
             "allowedUI" -> allowedUI(call, result)
             "getTransport" -> getTransport(call, result)
-            "getSubscriptionId" -> getSubscriptionId(call, result)
+            "getSubscription" -> getSubscription(call, result)
             "enableRemoteNotifications" -> enableRemoteNotifications(call, result)
             "disableRemoteNotifications" -> disableRemoteNotifications(call, result)
             else -> result.notImplemented()
@@ -107,8 +108,8 @@ class NotificarePushPlugin : FlutterPlugin, MethodCallHandler, ActivityAware, Pl
         result.success(Notificare.push().transport?.rawValue)
     }
 
-    private fun getSubscriptionId(@Suppress("UNUSED_PARAMETER") call: MethodCall, result: Result) {
-        result.success(Notificare.push().subscriptionId)
+    private fun getSubscription(@Suppress("UNUSED_PARAMETER") call: MethodCall, result: Result) {
+        result.success(Notificare.push().subscription?.toJson())
     }
 
     private fun allowedUI(@Suppress("UNUSED_PARAMETER") call: MethodCall, result: Result) {
