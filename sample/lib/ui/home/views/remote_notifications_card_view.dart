@@ -383,7 +383,7 @@ class RemoteNotificationsCardViewState extends State<RemoteNotificationsCardView
       final allowedUi = await NotificarePush.allowedUI;
       final hasRemoteNotificationsEnabled = await NotificarePush.hasRemoteNotificationsEnabled;
       final transport = await NotificarePush.transport;
-      final subscriptionId = await NotificarePush.subscriptionId;
+      final subscription = await NotificarePush.subscription;
 
       await showDialog(
         context: context,
@@ -426,7 +426,7 @@ class RemoteNotificationsCardViewState extends State<RemoteNotificationsCardView
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text(
-                      "SubscriptionID: ",
+                      "Token: ",
                     ),
                     const Spacer(),
                     Flexible(
@@ -434,7 +434,7 @@ class RemoteNotificationsCardViewState extends State<RemoteNotificationsCardView
                       child: Align(
                         alignment: Alignment.topRight,
                         child: Text(
-                          subscriptionId ?? "null",
+                          "${subscription?.token}",
                           style: const TextStyle(fontWeight: FontWeight.bold),
                         ),
                       ),

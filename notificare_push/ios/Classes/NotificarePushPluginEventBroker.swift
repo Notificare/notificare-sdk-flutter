@@ -107,7 +107,7 @@ extension NotificarePushPluginEventBroker {
         case unknownNotificationActionOpened = "unknown_notification_action_opened"
         case shouldOpenNotificationSettings = "should_open_notification_settings"
         case notificationSettingsChanged = "notification_settings_changed"
-        case subscriptionIdChanged = "subscription_id_changed"
+        case subscriptionChanged = "subscription_changed"
         case failedToRegisterForRemoteNotifications = "failed_to_register_for_remote_notifications"
     }
     
@@ -196,10 +196,10 @@ extension NotificarePushPluginEventBroker {
         )
     }
 
-    static func OnSubscriptionIdChanged(subscriptionId: String?) -> Event {
+    static func OnSubscriptionChanged(subscription: NotificarePushSubscription?) -> Event {
         return Event(
-            type: .subscriptionIdChanged,
-            payload: subscriptionId
+            type: .subscriptionChanged,
+            payload: try! subscription?.toJson()
         )
     }
 

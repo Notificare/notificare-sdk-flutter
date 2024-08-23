@@ -44,8 +44,9 @@ class NotificarePush {
     return json != null ? NotificareTransport.fromJson(json) : null;
   }
 
-  static Future<String?> get subscriptionId async {
-    return await _channel.invokeMethod('getSubscriptionId');
+  static Future<NotificarePushSubscription?> get subscription async {
+    final json = await _channel.invokeMethod('getSubscription');
+    return json != null ? NotificarePushSubscription.fromJson(json) : null;
   }
 
   static Future<bool> get allowedUI async {
@@ -135,9 +136,12 @@ class NotificarePush {
     });
   }
 
-  static Stream<String?> get onSubscriptionIdChanged {
-    return _getEventStream('subscription_id_changed').map((result) {
-      return result as String?;
+  static Stream<NotificarePushSubscription?> get onSubscriptionChanged {
+    return _getEventStream('subscription_changed').map((result) {
+      final Map<dynamic, dynamic>? json = result;
+      return json != null
+          ? NotificarePushSubscription.fromJson(json.cast())
+          : null;
     });
   }
 

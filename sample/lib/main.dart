@@ -196,12 +196,12 @@ class _AppState extends State<App> {
       );
     });
 
-    NotificarePush.onSubscriptionIdChanged.listen((subscriptionId) {
-      logger.i('Subscription ID changed: $subscriptionId');
+    NotificarePush.onSubscriptionChanged.listen((subscription) {
+      logger.i('Subscription changed: ${subscription?.toJson()}');
 
       scaffoldMessengerKey.currentState!.showSnackBar(
         SnackBar(
-          content: Text('Subscription ID changed: $subscriptionId'),
+          content: Text('Subscription changed: ${subscription?.toJson()}'),
         ),
       );
     });
