@@ -1,0 +1,125 @@
+def localProperties = new Properties()
+def localPropertiesFile = rootProject.file('local.properties')
+if (localPropertiesFile.exists()) {
+    localPropertiesFile.withReader('UTF-8') { reader ->
+        localProperties.load(reader)
+    }
+}
+
+def flutterRoot = localProperties.getProperty('flutter.sdk')
+if (flutterRoot == null) {
+    throw new GradleException("Flutter SDK not found. Define location with flutter.sdk in the local.properties file.")
+}
+
+def flutterVersionCode = localProperties.getProperty('flutter.versionCode')
+if (flutterVersionCode == null) {
+    flutterVersionCode = '1'
+}
+
+def flutterVersionName = localProperties.getProperty('flutter.versionName')
+if (flutterVersionName == null) {
+    flutterVersionName = '1.0'
+}
+
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 're.notifica.gradle.notificare-services'
+apply plugin: 'com.google.gms.google-services'
+apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
+
+android {
+    namespace 're.notifica.sample.user.inbox'
+    compileSdkVersion 34
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+
+    defaultConfig {
+        applicationId "re.notifica.sample.user.inbox.app"
+        minSdkVersion 23
+        targetSdkVersion 34
+        versionCode flutterVersionCode.toInteger()
+        versionName flutterVersionName
+
+        manifestPlaceholders = [
+                googleMapsApiKey: localProperties.getProperty('google.maps.key'),
+                notificareApplicationId: localProperties.getProperty('notificare.application.id'),
+                auth0Domain: localProperties.getProperty('user.inbox.login.domain'),
+                auth0Scheme: "auth.re.notifica.sample.user.inbox.app.dev"
+        ]
+    }
+
+    signingConfigs {
+        debug {
+            storeFile file('debug.keystore')
+            storePassword localProperties.getProperty('keystore.debug.store.password')
+            keyAlias localProperties.getProperty('keystore.debug.key.alias')
+            keyPassword localProperties.getProperty('keystore.debug.key.password')
+        }
+        release {
+            storeFile file('release.keystore')
+            storePassword localProperties.getProperty('keystore.release.store.password')
+            keyAlias localProperties.getProperty('keystore.release.key.alias')
+            keyPassword localProperties.getProperty('keystore.release.key.password')
+        }
+    }
+
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.debug
+            applicationIdSuffix '.dev'
+        }
+        release {
+//            minifyEnabled true
+//            shrinkResources true
+//            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+            signingConfig signingConfigs.release
+        }
+    }
+
+    flavorDimensions 'default'
+    productFlavors {
+        development {
+            dimension 'default'
+            applicationId "re.notifica.sample.app.test"
+        }
+        production {
+            dimension 'default'
+        }
+    }
+
+    applicationVariants.configureEach {
+        if (name == "developmentDebug") {
+            resValue("string", "notificare_app_links_hostname", "\"618d0f4edc09fbed1864e8d0.applinks-test.notifica.re\"")
+            resValue("string", "notificare_dynamic_link_hostname", "\"sample-app-dev.test.ntc.re\"")
+        } else if (name == "developmentRelease") {
+            resValue("string", "notificare_app_links_hostname", "\"654d017fc468efc19379921e.applinks-test.notifica.re\"")
+            resValue("string", "notificare_dynamic_link_hostname", "\"sample-app.test.ntc.re\"")
+        } else if (name == "productionDebug") {
+            resValue("string", "notificare_app_links_hostname", "\"61644511218adebf72c5449b.applinks.notifica.re\"")
+            resValue("string", "notificare_dynamic_link_hostname", "\"sample-app-dev.ntc.re\"")
+        } else if (name == "productionRelease") {
+            resValue("string", "notificare_app_links_hostname", "\"6511625f445cc1c81d47fd6f.applinks.notifica.re\"")
+            resValue("string", "notificare_dynamic_link_hostname", "\"sample-app.ntc.re\"")
+        }
+    }
+}
+
+flutter {
+    source '../..'
+}
+
+dependencies {
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+}
