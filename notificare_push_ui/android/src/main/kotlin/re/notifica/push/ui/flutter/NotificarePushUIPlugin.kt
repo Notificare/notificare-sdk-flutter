@@ -34,6 +34,8 @@ public class NotificarePushUIPlugin : FlutterPlugin, MethodCallHandler, Activity
         channel = MethodChannel(binding.binaryMessenger, "$NAMESPACE/notificare_push_ui", JSONMethodCodec.INSTANCE)
         channel.setMethodCallHandler(this)
 
+        logger.hasDebugLoggingEnabled = Notificare.options?.debugLoggingEnabled ?: false
+
         NotificarePushUIPluginEventBroker.register(binding.binaryMessenger)
 
         Notificare.pushUI().addLifecycleListener(this)
