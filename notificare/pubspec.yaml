@@ -12,7 +12,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  notificare_flutter: ^3.0.0
+  notificare_flutter: ^4.0.0
 
 dev_dependencies:
   flutter_test:
