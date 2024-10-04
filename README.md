@@ -7,7 +7,7 @@
 
 The Notificare Flutter SDK makes it quick and easy to communicate efficiently with many of the Notificare API services and enables you to seamlessly integrate our various features, from Push Notifications to Contextualised Storage.
 
-Get started with our [📚 integration guides](https://docs.notifica.re/sdk/v3/flutter/setup) and [example projects](#examples), or [📘 browse the SDK reference]() (coming soon).
+Get started with our [📚 integration guides](https://docs.notifica.re/sdk/v4/flutter/setup) and [example projects](#examples).
 
 
 Table of contents
@@ -54,22 +54,22 @@ Add the Flutter packages to your `pubspec.yaml` and follow the Getting Started g
 ```yaml
 dependencies:
   # Required
-  notificare: ^3.0.0
+  notificare: ^4.0.0
 
   # Optional modules
-  notificare_assets: ^3.0.0
-  notificare_geo: ^3.0.0
-  notificare_inbox: ^3.0.0
-  notificare_loyalty: ^3.0.0
-  notificare_push: ^3.0.0
-  notificare_push_ui: ^3.0.0
-  notificare_scannables: ^3.0.0
+  notificare_assets: ^4.0.0
+  notificare_geo: ^4.0.0
+  notificare_inbox: ^4.0.0
+  notificare_loyalty: ^4.0.0
+  notificare_push: ^4.0.0
+  notificare_push_ui: ^4.0.0
+  notificare_scannables: ^4.0.0
 ```
 
 ## Getting Started
 
 ### Integration
-Get started with our [📚 integration guides](https://docs.notifica.re/sdk/v3/flutter/setup) and [example projects](#examples), or [📘 browse the SDK reference]() (coming soon).
+Get started with our [📚 integration guides](https://docs.notifica.re/sdk/v4/flutter/setup) and [example projects](#examples).
 
 
 ### Examples
