@@ -39,6 +39,8 @@ public class SwiftNotificarePushPlugin: NSObject, FlutterPlugin {
             case "setCategoryOptions": self.setCategoryOptions(call, result)
             case "setPresentationOptions": self.setPresentationOptions(call, result)
             case "hasRemoteNotificationsEnabled": self.hasRemoteNotificationsEnabled(call, result)
+            case "getTransport": self.getTransport(call, result)
+            case "getSubscription": self.getSubscription(call, result)
             case "allowedUI": self.allowedUI(call, result)
             case "enableRemoteNotifications": self.enableRemoteNotifications(call, result)
             case "disableRemoteNotifications": self.disableRemoteNotifications(call, result)
@@ -164,13 +166,26 @@ public class SwiftNotificarePushPlugin: NSObject, FlutterPlugin {
     private func hasRemoteNotificationsEnabled(_ call: FlutterMethodCall, _ response: FlutterResult) {
         response(Notificare.shared.push().hasRemoteNotificationsEnabled)
     }
-    
+
+    private func getTransport(_ call: FlutterMethodCall, _ response: FlutterResult) {
+        response(Notificare.shared.push().transport?.rawValue)
+    }
+
+    private func getSubscription(_ call: FlutterMethodCall, _ response: FlutterResult) {
+        do {
+            let json = try Notificare.shared.push().subscription?.toJson()
+            response(json)
+        } catch {
+            response(FlutterError(code: DEFAULT_ERROR_CODE, message: error.localizedDescription, details: nil))
+        }
+    }
+
     private func allowedUI(_ call: FlutterMethodCall, _ response: FlutterResult) {
         response(Notificare.shared.push().allowedUI)
     }
     
     private func enableRemoteNotifications(_ call: FlutterMethodCall, _ response: @escaping FlutterResult) {
-        Notificare.shared.push().enableRemoteNotifications{ result in
+        Notificare.shared.push().enableRemoteNotifications { result in
             switch result {
             case .success:
                 response(nil)
@@ -180,9 +195,15 @@ public class SwiftNotificarePushPlugin: NSObject, FlutterPlugin {
         }
     }
     
-    private func disableRemoteNotifications(_ call: FlutterMethodCall, _ response: FlutterResult) {
-        Notificare.shared.push().disableRemoteNotifications()
-        response(nil)
+    private func disableRemoteNotifications(_ call: FlutterMethodCall, _ response: @escaping FlutterResult) {
+        Notificare.shared.push().disableRemoteNotifications { result in
+            switch result {
+            case .success:
+                response(nil)
+            case let .failure(error):
+                response(FlutterError(code: DEFAULT_ERROR_CODE, message: error.localizedDescription, details: nil))
+            }
+        }
     }
 }
 
@@ -202,15 +223,15 @@ extension SwiftNotificarePushPlugin: NotificarePushDelegate {
             )
         )
     }
-    
-    public func notificare(_ notificarePush: NotificarePush, didReceiveNotification notification: NotificareNotification) {
+
+    public func notificare(_ notificarePush: any NotificarePush, didChangeSubscription subscription: NotificarePushSubscription?) {
         eventBroker.emit(
-            NotificarePushPluginEventBroker.OnNotificationReceived(
-                notification: notification
+            NotificarePushPluginEventBroker.OnSubscriptionChanged(
+                subscription: subscription
             )
         )
     }
-    
+
     public func notificare(_ notificarePush: NotificarePush, didReceiveNotification notification: NotificareNotification, deliveryMechanism: NotificareNotificationDeliveryMechanism) {
         eventBroker.emit(
             NotificarePushPluginEventBroker.OnNotificationReceived(

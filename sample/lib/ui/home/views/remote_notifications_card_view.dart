@@ -235,7 +235,7 @@ class RemoteNotificationsCardViewState extends State<RemoteNotificationsCardView
   }
 
   void _updateNotificationsStatus(bool checked) async {
-    logger.i((checked ? "Enable" : "Disable") + " remote notifications clicked.");
+    logger.i((checked ? "Enabling" : "Disabling") + " remote notifications.");
     setState(() {
       _hasNotificationsEnabled = checked;
     });
@@ -244,14 +244,14 @@ class RemoteNotificationsCardViewState extends State<RemoteNotificationsCardView
       try {
         await NotificarePush.disableRemoteNotifications();
 
-        logger.i('Disabled remote notifications successfully.');
+        logger.i('Disabling remote notifications finished.');
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             content: Text('Disabled remote notifications successfully.'),
           ),
         );
       } catch (error) {
-        logger.e('Disable remote notifications error.', error);
+        logger.e('Disabled remote notifications error.', error);
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text('$error'),
@@ -267,16 +267,17 @@ class RemoteNotificationsCardViewState extends State<RemoteNotificationsCardView
       if (await _ensureNotificationsPermission()) {
         await NotificarePush.enableRemoteNotifications();
 
-        logger.i('Enabled remote notifications successfully.');
+        logger.i('Enabling remote notifications finished.');
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             content: Text('Enabled remote notifications successfully.'),
           ),
         );
+
         return;
       }
     } catch (error) {
-      logger.e('Enable remote notifications error.', error);
+      logger.e('Enabling remote notifications error.', error);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('$error'),
@@ -381,6 +382,8 @@ class RemoteNotificationsCardViewState extends State<RemoteNotificationsCardView
     try {
       final allowedUi = await NotificarePush.allowedUI;
       final hasRemoteNotificationsEnabled = await NotificarePush.hasRemoteNotificationsEnabled;
+      final transport = await NotificarePush.transport;
+      final subscription = await NotificarePush.subscription;
 
       await showDialog(
         context: context,
@@ -407,6 +410,35 @@ class RemoteNotificationsCardViewState extends State<RemoteNotificationsCardView
                       hasRemoteNotificationsEnabled.toString(),
                       style: const TextStyle(fontWeight: FontWeight.bold),
                     )
+                  ],
+                ),
+                Row(
+                  children: [
+                    const Text("Transport: "),
+                    const Spacer(),
+                    Text(
+                      transport?.name ?? "null",
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                    )
+                  ],
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      "Token: ",
+                    ),
+                    const Spacer(),
+                    Flexible(
+                      flex: 1,
+                      child: Align(
+                        alignment: Alignment.topRight,
+                        child: Text(
+                          "${subscription?.token}",
+                          style: const TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ],

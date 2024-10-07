@@ -14,13 +14,6 @@ class NotificarePushPluginReceiver : NotificarePushIntentReceiver() {
         notification: NotificareNotification,
         deliveryMechanism: NotificareNotificationDeliveryMechanism
     ) {
-        // Continue emitting the legacy event to preserve backwards compatibility.
-        NotificarePushPluginEventBroker.emit(
-            NotificarePushPluginEventBroker.Event.NotificationReceived(
-                notification = notification,
-            )
-        )
-
         NotificarePushPluginEventBroker.emit(
             NotificarePushPluginEventBroker.Event.NotificationInfoReceived(
                 notification = notification,

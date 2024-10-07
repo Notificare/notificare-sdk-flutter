@@ -98,7 +98,6 @@ extension NotificarePushPluginEventBroker {
 // NotificarePushPluginEventBroker.Event
 extension NotificarePushPluginEventBroker {
     enum EventType: String, CaseIterable {
-        case notificationReceived = "notification_received"
         case notificationInfoReceived = "notification_info_received"
         case systemNotificationReceived = "system_notification_received"
         case unknownNotificationReceived = "unknown_notification_received"
@@ -108,6 +107,7 @@ extension NotificarePushPluginEventBroker {
         case unknownNotificationActionOpened = "unknown_notification_action_opened"
         case shouldOpenNotificationSettings = "should_open_notification_settings"
         case notificationSettingsChanged = "notification_settings_changed"
+        case subscriptionChanged = "subscription_changed"
         case failedToRegisterForRemoteNotifications = "failed_to_register_for_remote_notifications"
     }
     
@@ -118,13 +118,6 @@ extension NotificarePushPluginEventBroker {
 }
 
 extension NotificarePushPluginEventBroker {
-    static func OnNotificationReceived(notification: NotificareNotification) -> Event {
-        return Event(
-            type: .notificationReceived,
-            payload: try! notification.toJson()
-        )
-    }
-    
     static func OnNotificationReceived(notification: NotificareNotification, deliveryMechanism: NotificareNotificationDeliveryMechanism) -> Event {
         return Event(
             type: .notificationInfoReceived,
@@ -202,7 +195,14 @@ extension NotificarePushPluginEventBroker {
             payload: granted
         )
     }
-    
+
+    static func OnSubscriptionChanged(subscription: NotificarePushSubscription?) -> Event {
+        return Event(
+            type: .subscriptionChanged,
+            payload: try! subscription?.toJson()
+        )
+    }
+
     static func OnFailedToRegisterForRemoteNotifications(error: Error) -> Event {
         return Event(
             type: .failedToRegisterForRemoteNotifications,

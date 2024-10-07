@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sample/ui/monetize/monetize.dart';
 
 import '../../assets/assets.dart';
 import '../../custom_events/custom_events.dart';
@@ -80,39 +79,6 @@ class OtherFeaturesCardViewView extends StatelessWidget {
                       const SizedBox(width: 12),
                       Text(
                         "Assets",
-                        style: Theme.of(context).textTheme.titleSmall,
-                      ),
-                      const Spacer(),
-                      const Icon(
-                        Icons.arrow_forward_ios,
-                        size: 14,
-                        color: Colors.black26,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Container(
-                margin: const EdgeInsets.fromLTRB(48, 0, 0, 0),
-                child: const Divider(height: 0),
-              ),
-              InkWell(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const MonetizeView(),
-                    ),
-                  );
-                },
-                child: Container(
-                  margin: const EdgeInsets.fromLTRB(12, 12, 12, 12),
-                  child: Row(
-                    children: [
-                      const Icon(Icons.shopping_bag),
-                      const SizedBox(width: 12),
-                      Text(
-                        "Monetize",
                         style: Theme.of(context).textTheme.titleSmall,
                       ),
                       const Spacer(),
