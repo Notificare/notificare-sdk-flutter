@@ -20,8 +20,6 @@ rootProject.allprojects {
 
         maven { url 'https://maven.notifica.re/releases' }
         maven { url 'https://maven.notifica.re/prereleases' }
-
-        maven { url 'https://developer.huawei.com/repo' }
     }
 }
 
@@ -54,9 +52,7 @@ android {
 }
 
 dependencies {
-    def notificare_version = '3.10.0'
+    def notificare_version = '4.0.0'
     api "re.notifica:notificare:$notificare_version"
     api "re.notifica:notificare-scannables:$notificare_version"
-    implementation "re.notifica:notificare-scannables-gms:$notificare_version"
-    implementation "re.notifica:notificare-scannables-hms:$notificare_version"
 }

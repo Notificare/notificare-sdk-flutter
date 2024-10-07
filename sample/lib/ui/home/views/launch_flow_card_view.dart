@@ -67,10 +67,10 @@ class LaunchFlowCardView extends StatelessWidget {
 
   void _launchNotificare(BuildContext context) async {
     try {
-      logger.i('Notificare launch clicked.');
+      logger.i('Launching Notificare.');
       await Notificare.launch();
 
-      logger.i('Notificare launched successfully.');
+      logger.i('Launching Notificare finished.');
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Notificare launched successfully.'),
@@ -89,10 +89,10 @@ class LaunchFlowCardView extends StatelessWidget {
 
   void _unLaunchNotificare(BuildContext context) async {
     try {
-      logger.i('Notificare unlaunch clicked.');
+      logger.i('Unlaunching Notificare.');
       await Notificare.unlaunch();
 
-      logger.i('Notificare unlaunched successfully.');
+      logger.i('Unlaunching Notificare finished.');
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Notificare unlaunched successfully.'),

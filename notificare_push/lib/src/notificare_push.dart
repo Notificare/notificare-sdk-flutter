@@ -39,6 +39,16 @@ class NotificarePush {
     return await _channel.invokeMethod('hasRemoteNotificationsEnabled');
   }
 
+  static Future<NotificareTransport?> get transport async {
+    final json = await _channel.invokeMethod('getTransport');
+    return json != null ? NotificareTransport.fromJson(json) : null;
+  }
+
+  static Future<NotificarePushSubscription?> get subscription async {
+    final json = await _channel.invokeMethod('getSubscription');
+    return json != null ? NotificarePushSubscription.fromJson(json) : null;
+  }
+
   static Future<bool> get allowedUI async {
     return await _channel.invokeMethod('allowedUI');
   }
@@ -64,16 +74,6 @@ class NotificarePush {
     }
 
     return _eventStreams[eventType]!;
-  }
-
-  @Deprecated(
-    'Listen to onNotificationInfoReceived(notification, deliveryMechanism) instead.',
-  )
-  static Stream<NotificareNotification> get onNotificationReceived {
-    return _getEventStream('notification_received').map((result) {
-      final Map<dynamic, dynamic> json = result;
-      return NotificareNotification.fromJson(json.cast());
-    });
   }
 
   static Stream<NotificareNotificationReceivedEvent>
@@ -133,6 +133,15 @@ class NotificarePush {
   static Stream<bool> get onNotificationSettingsChanged {
     return _getEventStream('notification_settings_changed').map((result) {
       return result as bool;
+    });
+  }
+
+  static Stream<NotificarePushSubscription?> get onSubscriptionChanged {
+    return _getEventStream('subscription_changed').map((result) {
+      final Map<dynamic, dynamic>? json = result;
+      return json != null
+          ? NotificarePushSubscription.fromJson(json.cast())
+          : null;
     });
   }
 

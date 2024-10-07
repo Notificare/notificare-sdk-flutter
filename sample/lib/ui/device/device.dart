@@ -156,13 +156,13 @@ class _DeviceViewState extends State<DeviceView> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   TextButton(
-                    onPressed: _onRegisterDeviceWithUserClicked,
-                    child: const Text("Register with User"),
+                    onPressed: _onUpdateUserClicked,
+                    child: const Text("Update User"),
                   ),
                   const Divider(height: 0),
                   TextButton(
-                    onPressed: _onRegisterDeviceWithAnonymousUserClicked,
-                    child: const Text("Register as Anonymous"),
+                    onPressed: _onUpdateUserAsAnonymousClicked,
+                    child: const Text("Update User as Anonymous"),
                   ),
                 ],
               ),
@@ -252,14 +252,8 @@ class _DeviceViewState extends State<DeviceView> {
           : currentDevice.id;
       currentDeviceData["User Name"] =
           userName != null && userName.length > 14 ? userName.substring(0, 14) + "..." : userName.toString();
-      currentDeviceData["Registered"] = currentDevice.lastRegistered.toLocal().toString();
       currentDeviceData["DnD"] = dnd != null ? "${dnd.start} - ${dnd.end}" : "";
-      currentDeviceData["Region"] = currentDevice.region;
-      currentDeviceData["Language"] = currentDevice.language;
       currentDeviceData["Preferred Language"] = preferredLanguage.toString();
-      currentDeviceData["Transport"] = currentDevice.transport;
-      currentDeviceData["OS Version"] = currentDevice.osVersion;
-      currentDeviceData["SDK Version"] = currentDevice.sdkVersion;
 
       setState(() {
         _currentDeviceData = currentDeviceData;
@@ -278,24 +272,24 @@ class _DeviceViewState extends State<DeviceView> {
     }
   }
 
-  void _onRegisterDeviceWithUserClicked() async {
+  void _onUpdateUserClicked() async {
     try {
-      logger.i('Notificare register device with user clicked.');
-      await Notificare.device().register(
-        userId: 'helder@notifica.re',
-        userName: 'Helder Pinhal',
+      logger.i('Update user clicked.');
+      await Notificare.device().updateUser(
+        userId: 'notificarista@notifica.re',
+        userName: 'Notificarista',
       );
 
       _loadDeviceData();
 
-      logger.i('Notificare registered device with user successfully.');
+      logger.i('Updated user as Notificarista successfully.');
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('Notificare registered device with user successfully.'),
+          content: Text('Updated user as Notificarista successfully.'),
         ),
       );
     } catch (error) {
-      logger.e('Notificare register device with user error.', error);
+      logger.e('Update user as Notificarista error.', error);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('$error'),
@@ -305,24 +299,24 @@ class _DeviceViewState extends State<DeviceView> {
     }
   }
 
-  void _onRegisterDeviceWithAnonymousUserClicked() async {
+  void _onUpdateUserAsAnonymousClicked() async {
     try {
-      logger.i('Notificare register device with anonymous clicked.');
-      await Notificare.device().register(
+      logger.i('Update user as anonymous clicked.');
+      await Notificare.device().updateUser(
         userId: null,
         userName: null,
       );
 
       _loadDeviceData();
 
-      logger.i('Notificare registered device with anonymous successfully.');
+      logger.i('Updated user as anonymous successfully.');
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('Notificare registered device with anonymous successfully.'),
+          content: Text('Updated user as anonymous successfully.'),
         ),
       );
     } catch (error) {
-      logger.e('Notificare register device with anonymous error.', error);
+      logger.e('Update user as anonymous error.', error);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('$error'),
@@ -384,8 +378,8 @@ class _DeviceViewState extends State<DeviceView> {
     try {
       Logger().i('Update user data clicked.');
       await Notificare.device().updateUserData({
-        'firstName': 'Helder',
-        'lastName': 'Pinhal',
+        'firstName': 'FirstNameExample',
+        'lastName': 'LastNameExample',
       });
 
       _loadDeviceData();
