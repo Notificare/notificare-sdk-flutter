@@ -13,7 +13,6 @@ import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
 import org.json.JSONObject
 import re.notifica.Notificare
-import re.notifica.internal.NotificareLogger
 import re.notifica.models.NotificareNotification
 import re.notifica.push.ui.NotificarePushUI
 import re.notifica.push.ui.ktx.pushUI
@@ -33,6 +32,8 @@ public class NotificarePushUIPlugin : FlutterPlugin, MethodCallHandler, Activity
     override fun onAttachedToEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
         channel = MethodChannel(binding.binaryMessenger, "$NAMESPACE/notificare_push_ui", JSONMethodCodec.INSTANCE)
         channel.setMethodCallHandler(this)
+
+        logger.hasDebugLoggingEnabled = Notificare.options?.debugLoggingEnabled ?: false
 
         NotificarePushUIPluginEventBroker.register(binding.binaryMessenger)
 
@@ -65,7 +66,7 @@ public class NotificarePushUIPlugin : FlutterPlugin, MethodCallHandler, Activity
 
     private fun presentNotification(call: MethodCall, result: Result) {
         val activity = activity ?: run {
-            NotificareLogger.warning("Flutter attached activity was null. Cannot continue.")
+            logger.warning("Flutter attached activity was null. Cannot continue.")
             result.error(NOTIFICARE_ERROR, "Method called before an activity was attached.", null)
             return
         }
@@ -81,7 +82,7 @@ public class NotificarePushUIPlugin : FlutterPlugin, MethodCallHandler, Activity
 
     private fun presentAction(call: MethodCall, result: Result) {
         val activity = activity ?: run {
-            NotificareLogger.warning("Flutter attached activity was null. Cannot continue.")
+            logger.warning("Flutter attached activity was null. Cannot continue.")
             result.error(NOTIFICARE_ERROR, "Method called before an activity was attached.", null)
             return
         }

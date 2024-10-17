@@ -1,5 +1,29 @@
 # CHANGELOG
 
+## 4.0.0
+
+- Device identifiers become long-lived
+- Add methods to register callbacks in order to handle background location events on Android
+- Add support for customisable hosts
+- Add `NotificarePush.onSubscriptionChanged` event for push token updates
+- `launch()`, `unlaunch()`, `enableRemoteNotifications()` and `disableRemoteNotifications()` functions now complete after all the work is done
+
+#### Breaking changes
+
+- Drops support for the monetize module
+- Drops support for Huawei Mobile Services
+- `NotificareDevice.id` attribute no longer contains the push token. Use `NotificarePush.subscription` instead
+- `NotificareDevice.transport` attribute no longer contains the transport. Use `NotificarePush.transport` instead
+- The `NotificareDevice` data model was reduced to only publicly relevant attributes
+- `onDeviceRegistered` only triggers once, when the device is created
+- Removed deprecated `NotificarePush.onNotificationReceived(notification)` event. Use `NotificarePush.onNotificationInfoReceived(notification, deliveryMechanism)` instead
+
+#### Native changes
+
+##### Android
+
+- Fix padding discrepancies in alert dialog with actions
+
 ## 4.0.0-beta.2
 
 - Changed the `subscriptionId` properties to a more robust data model
@@ -264,7 +288,7 @@ Notificare.onReady.listen((application) async {
 
 #### Native changes
 
-##### iOS 
+##### iOS
 
 - Add option to preserve existing notification categories
 
@@ -385,4 +409,4 @@ Notificare.onReady.listen((application) async {
 
 ## 3.0.0
 
-Please check our [migration guide](./MIGRATION.md) before adopting the v3.x generation.
+Please check our [migration guide](./MIGRATION-3.0.md) before adopting the v3.x generation.
