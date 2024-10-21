@@ -182,35 +182,35 @@ packages:
       path: "../notificare"
       relative: true
     source: path
-    version: "4.0.0-beta.2"
+    version: "4.0.0"
   notificare_flutter:
     dependency: "direct overridden"
     description:
       path: "../notificare_flutter"
       relative: true
     source: path
-    version: "4.0.0-beta.2"
+    version: "4.0.0"
   notificare_push:
     dependency: "direct main"
     description:
       path: "../notificare_push"
       relative: true
     source: path
-    version: "4.0.0-beta.2"
+    version: "4.0.0"
   notificare_push_ui:
     dependency: "direct main"
     description:
       path: "../notificare_push_ui"
       relative: true
     source: path
-    version: "4.0.0-beta.2"
+    version: "4.0.0"
   notificare_user_inbox:
     dependency: "direct main"
     description:
       path: "../notificare_user_inbox"
       relative: true
     source: path
-    version: "4.0.0-beta.2"
+    version: "4.0.0"
   path:
     dependency: transitive
     description:
