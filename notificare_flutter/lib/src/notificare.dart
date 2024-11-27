@@ -103,8 +103,8 @@ class Notificare {
     return await _channel.invokeMethod('canEvaluateDeferredLink');
   }
 
-  /// Evaluates the deferred link, triggering an intent with the resolved deferred
-  /// link.
+  /// Evaluates the deferred link. Once the deferred link is evaluated,
+  /// Notificare will open the resolved deep link.
   ///
   /// Returns `true` if the deferred link was successfully evaluated, `false`
   /// otherwise.
