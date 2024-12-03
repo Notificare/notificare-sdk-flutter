@@ -24,7 +24,7 @@ class NotificarePushUI {
   /// Presents a notification to the user.
   ///
   /// This method launches the UI for displaying the provided
-  /// {@link NotificareNotification}.
+  /// [NotificareNotification].
   ///
   /// - notification` The [NotificareNotification] to present.
   static Future<void> presentNotification(

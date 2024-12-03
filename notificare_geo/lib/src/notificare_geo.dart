@@ -25,6 +25,7 @@ class NotificareGeo {
   static final Map<String, Stream<dynamic>> _eventStreams = {};
 
   // Methods
+  
   /// Indicates whether location services are enabled.
   ///
   /// Returns `true` if the location services are enabled by the application, and

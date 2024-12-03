@@ -62,7 +62,7 @@ class NotificarePush {
 
   /// Provides the current push transport information.
   ///
-  /// @returns The [NotificareTransport] assigned to the device.
+  /// Returns the [NotificareTransport] assigned to the device.
   static Future<NotificareTransport?> get transport async {
     final json = await _channel.invokeMethod('getTransport');
     return json != null ? NotificareTransport.fromJson(json) : null;
