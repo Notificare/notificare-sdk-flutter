@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## Upcoming release
+
+- Add docs to public methods
+- Add flag to allow excluding beacons dependency
+
 ## 4.0.0
 
 - Device identifiers become long-lived
