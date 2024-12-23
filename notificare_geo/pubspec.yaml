@@ -1,6 +1,6 @@
 name: notificare_geo
 description: "Notificare Geo Flutter Plugin: Transform your user's location into relevant information, automate users segmentation based on location and create truly contextual notifications."
-version: 4.0.0
+version: 4.0.1
 homepage: https://notificare.com
 documentation: https://docs.notifica.re/sdk/v3/flutter/setup/
 repository: https://github.com/Notificare/notificare-sdk-flutter/tree/main/notificare_geo

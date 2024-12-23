@@ -1,0 +1,102 @@
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    id "dev.flutter.flutter-gradle-plugin"
+    id "com.google.gms.google-services"
+    id "re.notifica.gradle.notificare-services"
+}
+
+def localProperties = new Properties()
+def localPropertiesFile = rootProject.file('local.properties')
+if (localPropertiesFile.exists()) {
+    localPropertiesFile.withReader('UTF-8') { reader ->
+        localProperties.load(reader)
+    }
+}
+
+def flutterVersionCode = localProperties.getProperty('flutter.versionCode')
+if (flutterVersionCode == null) {
+    flutterVersionCode = '1'
+}
+
+def flutterVersionName = localProperties.getProperty('flutter.versionName')
+if (flutterVersionName == null) {
+    flutterVersionName = '1.0'
+}
+
+android {
+    namespace 're.notifica.sample.user.inbox'
+    compileSdkVersion 34
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+
+    defaultConfig {
+        applicationId "re.notifica.sample.user.inbox.app"
+        minSdkVersion 23
+        targetSdkVersion 34
+        versionCode flutterVersionCode.toInteger()
+        versionName flutterVersionName
+
+        manifestPlaceholders = [
+                googleMapsApiKey: localProperties.getProperty('google.maps.key'),
+                notificareApplicationId: localProperties.getProperty('notificare.application.id'),
+                auth0Domain: localProperties.getProperty('user.inbox.login.domain'),
+                auth0Scheme: "auth.re.notifica.sample.user.inbox.app.dev"
+        ]
+    }
+
+    signingConfigs {
+        debug {
+            storeFile file('debug.keystore')
+            storePassword localProperties.getProperty('keystore.debug.store.password')
+            keyAlias localProperties.getProperty('keystore.debug.key.alias')
+            keyPassword localProperties.getProperty('keystore.debug.key.password')
+        }
+        release {
+            storeFile file('release.keystore')
+            storePassword localProperties.getProperty('keystore.release.store.password')
+            keyAlias localProperties.getProperty('keystore.release.key.alias')
+            keyPassword localProperties.getProperty('keystore.release.key.password')
+        }
+    }
+
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.debug
+            applicationIdSuffix '.dev'
+        }
+        release {
+//            minifyEnabled true
+//            shrinkResources true
+//            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+            signingConfig signingConfigs.release
+        }
+    }
+
+    flavorDimensions 'default'
+    productFlavors {
+        production {
+            dimension 'default'
+        }
+    }
+}
+
+flutter {
+    source '../..'
+}
+
+dependencies {
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+}
