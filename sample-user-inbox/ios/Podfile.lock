@@ -10,31 +10,31 @@ PODS:
     - SimpleKeychain (= 1.1.0)
   - Flutter (1.0.0)
   - JWTDecode (3.1.0)
-  - Notificare/NotificareKit (4.0.0):
+  - Notificare/NotificareKit (4.0.1):
     - Notificare/NotificareUtilitiesKit
-  - Notificare/NotificareNotificationServiceExtensionKit (4.0.0)
-  - Notificare/NotificarePushKit (4.0.0):
+  - Notificare/NotificareNotificationServiceExtensionKit (4.0.1)
+  - Notificare/NotificarePushKit (4.0.1):
     - Notificare/NotificareUtilitiesKit
-  - Notificare/NotificarePushUIKit (4.0.0):
+  - Notificare/NotificarePushUIKit (4.0.1):
     - Notificare/NotificareUtilitiesKit
-  - Notificare/NotificareUserInboxKit (4.0.0):
+  - Notificare/NotificareUserInboxKit (4.0.1):
     - Notificare/NotificareUtilitiesKit
-  - Notificare/NotificareUtilitiesKit (4.0.0)
+  - Notificare/NotificareUtilitiesKit (4.0.1)
   - notificare_flutter (4.0.0):
     - Flutter
-    - Notificare/NotificareKit (= 4.0.0)
+    - Notificare/NotificareKit (= 4.0.1)
   - notificare_push (4.0.0):
     - Flutter
-    - Notificare/NotificareKit (= 4.0.0)
-    - Notificare/NotificarePushKit (= 4.0.0)
+    - Notificare/NotificareKit (= 4.0.1)
+    - Notificare/NotificarePushKit (= 4.0.1)
   - notificare_push_ui (4.0.0):
     - Flutter
-    - Notificare/NotificareKit (= 4.0.0)
-    - Notificare/NotificarePushUIKit (= 4.0.0)
+    - Notificare/NotificareKit (= 4.0.1)
+    - Notificare/NotificarePushUIKit (= 4.0.1)
   - notificare_user_inbox (4.0.0):
     - Flutter
-    - Notificare/NotificareKit (= 4.0.0)
-    - Notificare/NotificareUserInboxKit (= 4.0.0)
+    - Notificare/NotificareKit (= 4.0.1)
+    - Notificare/NotificareUserInboxKit (= 4.0.1)
   - permission_handler_apple (9.1.1):
     - Flutter
   - SimpleKeychain (1.1.0)
@@ -42,7 +42,7 @@ PODS:
 DEPENDENCIES:
   - auth0_flutter (from `.symlinks/plugins/auth0_flutter/darwin`)
   - Flutter (from `Flutter`)
-  - Notificare/NotificareNotificationServiceExtensionKit (= 4.0.0)
+  - Notificare/NotificareNotificationServiceExtensionKit (= 4.0.1)
   - notificare_flutter (from `.symlinks/plugins/notificare_flutter/ios`)
   - notificare_push (from `.symlinks/plugins/notificare_push/ios`)
   - notificare_push_ui (from `.symlinks/plugins/notificare_push_ui/ios`)
@@ -77,14 +77,14 @@ SPEC CHECKSUMS:
   auth0_flutter: f085572268059bc194c7b023d7f432f5ebb72413
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   JWTDecode: 3eaab1e06b6f4dcbdd6716aff09ba4c2104ca8b7
-  Notificare: 7f0501b852da610ed3b4caaa07f86c0d110409cf
-  notificare_flutter: 5e451bf42ec4c7bab924c0894143bf3150c5ccda
-  notificare_push: 7b977cce9d7b112260836423ae1a077d696e7934
-  notificare_push_ui: c8ed1a4b79851ba9f272a586b07e29553e9e80c5
-  notificare_user_inbox: 580292ec72ae7418bd7a99b4e251d76d72b35ffc
+  Notificare: dc066c6d8acb6f63e73c78c9a6ed7cfff7fe4965
+  notificare_flutter: 9a7898477fe3de2ecdc620757c66834e49fe526a
+  notificare_push: ab3109cef995fd25f5a99958531b9508eb933fd8
+  notificare_push_ui: 5d74605a32d4a2b39316badad22f70ab2b368be7
+  notificare_user_inbox: 9530874abd2dff8ce8432ab553e21a8045ec2ac3
   permission_handler_apple: e76247795d700c14ea09e3a2d8855d41ee80a2e6
   SimpleKeychain: f8707c8e97b38c6a6e687b17732afc9bcef06439
 
-PODFILE CHECKSUM: c4f663b1ebf701b849d2bd8240362025ddb03ea3
+PODFILE CHECKSUM: 0713049ba2b7037640e1b4f8ddb404cca25e984b
 
 COCOAPODS: 1.16.1
