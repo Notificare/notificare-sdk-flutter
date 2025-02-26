@@ -8,7 +8,6 @@ import io.flutter.plugin.common.JSONMethodCodec
 import re.notifica.geo.models.NotificareBeacon
 import re.notifica.geo.models.NotificareLocation
 import re.notifica.geo.models.NotificareRegion
-import re.notifica.geo.models.toJson
 
 internal object NotificareGeoPluginEventBroker {
 
