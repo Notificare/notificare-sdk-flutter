@@ -533,14 +533,12 @@ class NotificarePlugin : FlutterPlugin, ActivityAware, PluginRegistry.NewIntentL
             pluginResult.error(DEFAULT_ERROR_CODE, "Invalid request arguments.", null)
         }
 
-        val userData = mutableMapOf<String, String>()
+        val userData = mutableMapOf<String, String?>()
 
         val iterator = json.keys()
         while (iterator.hasNext()) {
             val key = iterator.next()
-            if (!json.isNull(key)) {
-                userData[key] = json.getString(key)
-            }
+            userData[key] = if (json.isNull(key)) null else json.getString(key)
         }
 
         Notificare.device().updateUserData(userData, object : NotificareCallback<Unit> {
