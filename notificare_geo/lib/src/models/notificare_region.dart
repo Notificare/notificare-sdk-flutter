@@ -13,7 +13,7 @@ class NotificareRegion {
   final int? major;
   final double distance;
   final String timeZone;
-  final int timeZoneOffset;
+  final double timeZoneOffset;
 
   NotificareRegion({
     required this.id,
