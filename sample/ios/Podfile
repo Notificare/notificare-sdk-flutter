@@ -40,7 +40,7 @@ end
 
 target 'NotificationServiceExtension' do
   use_frameworks!
-  pod 'Notificare/NotificareNotificationServiceExtensionKit', '4.0.1'
+  pod 'Notificare/NotificareNotificationServiceExtensionKit', '4.1.0'
 end
 
 post_install do |installer|
