@@ -21,6 +21,8 @@
 - Warnings related to missing requirements for Beacons functionality only logged once during `enableLocationUpdates()` flow
 - Fix UI behaviour after screen rotation when presenting notifications
 - Fix crash when rotating the screen when presenting a `NotificareCallbackActionFragment`
+- Bump sourceCompatibility/targetCompatibility to Java 11
+- Update target and compile SDK to 35
 
 ## 4.0.1
 
