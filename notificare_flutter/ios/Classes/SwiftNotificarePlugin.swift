@@ -374,7 +374,7 @@ public class SwiftNotificarePlugin: NSObject, FlutterPlugin {
     }
 
     private func updateUserData(_ call: FlutterMethodCall, _ response: @escaping  FlutterResult) {
-        let userData = call.arguments as! [String: String]
+        let userData = call.arguments as! [String: String?]
 
         Notificare.shared.device().updateUserData(userData) { result in
             switch result {

@@ -223,6 +223,11 @@ class _DeviceViewState extends State<DeviceView> {
                     onPressed: _onUpdateUserDataClicked,
                     child: const Text("Update user data"),
                   ),
+                  const Divider(height: 0),
+                  TextButton(
+                    onPressed: _onUnsetUserDataClicked,
+                    child: const Text("Unset user data field"),
+                  ),
                 ],
               ),
             ),
@@ -392,6 +397,33 @@ class _DeviceViewState extends State<DeviceView> {
       );
     } catch (error) {
       Logger().e('Updated user data error.', error);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('$error'),
+          backgroundColor: Colors.red.shade900,
+        ),
+      );
+    }
+  }
+
+  void _onUnsetUserDataClicked() async {
+    try {
+      Logger().i('Unset user data clicked.');
+      await Notificare.device().updateUserData({
+        'firstName': null,
+        'lastName': 'LastNameExample',
+      });
+
+      _loadDeviceData();
+
+      Logger().i('Unset user data successfully.');
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Unset user data successfully.'),
+        ),
+      );
+    } catch (error) {
+      Logger().e('Unset user data error.', error);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('$error'),

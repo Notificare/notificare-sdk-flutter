@@ -2,7 +2,7 @@ name: notificare_assets
 description: "Notificare Assets Flutter Plugin: Add powerful contextual marketing features to your apps. Show the right content to the right users at the right time or location."
 version: 4.0.1
 homepage: https://notificare.com
-documentation: https://docs.notifica.re/sdk/v3/flutter/setup/
+documentation: https://docs.notifica.re/sdk/v4/flutter/setup/
 repository: https://github.com/Notificare/notificare-sdk-flutter/tree/main/notificare_assets
 
 environment:

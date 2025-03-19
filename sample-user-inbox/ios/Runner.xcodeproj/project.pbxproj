@@ -230,6 +230,7 @@
 				9705A1C41CF9048500538489 /* Embed Frameworks */,
 				3B06AD1E1E4923F5004D2608 /* Thin Binary */,
 				714CC1927A996E881AA40D40 /* [CP] Embed Pods Frameworks */,
+				EC53697DF718908F56A74341 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -430,6 +431,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "CONFIGURATION_FILE_NAME=NotificareServices.plist\n\nBUILD_TYPE=$(echo $CONFIGURATION | cut -d \"-\" -f 1)\nENVIRONMENT=$(echo $CONFIGURATION | cut -d \"-\" -f 2)\n\nCONFIGURATION_FILE=${PROJECT_DIR}/${TARGET_NAME}/Configuration/${BUILD_TYPE}/${ENVIRONMENT}/${CONFIGURATION_FILE_NAME}\nCONFIGURATION_FILE_DESTINATION=${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app\n\necho \"Looking for ${CONFIGURATION_FILE_NAME} in ${CONFIGURATION_FILE}\"\nif [ ! -f $CONFIGURATION_FILE ] ; then\n    echo \"File not found.\"\n    exit 1\nfi\n\necho \"Copying ${CONFIGURATION_FILE_NAME} to final destination: ${CONFIGURATION_FILE}\"\ncp \"${CONFIGURATION_FILE}\" \"${CONFIGURATION_FILE_DESTINATION}\"\n\n";
+		};
+		EC53697DF718908F56A74341 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Runner/Pods-Runner-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Runner/Pods-Runner-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Runner/Pods-Runner-resources.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 

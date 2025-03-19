@@ -16,7 +16,6 @@ import re.notifica.geo.flutter.storage.NotificareGeoPluginStorage.getCallbackDis
 import re.notifica.geo.models.NotificareBeacon
 import re.notifica.geo.models.NotificareLocation
 import re.notifica.geo.models.NotificareRegion
-import re.notifica.geo.models.toJson
 import java.util.LinkedList
 import java.util.Queue
 import java.util.concurrent.atomic.AtomicBoolean

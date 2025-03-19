@@ -1,7 +1,6 @@
 package re.notifica.inbox.flutter.events
 
 import re.notifica.inbox.models.NotificareInboxItem
-import re.notifica.inbox.models.toJson
 import java.util.*
 
 internal sealed class NotificareEvent {

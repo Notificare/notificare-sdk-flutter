@@ -515,6 +515,10 @@ class _AppState extends State<App> {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
+        darkTheme: ThemeData(
+          brightness: Brightness.dark,
+        ),
+        themeMode: ThemeMode.system,
         home: const HomeView());
   }
 }

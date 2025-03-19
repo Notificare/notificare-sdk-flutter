@@ -127,7 +127,7 @@ class NotificareDeviceModule {
   /// Updates the custom user data associated with the device.
   ///
   /// - `userData`: The updated user data to associate with the device.
-  Future<void> updateUserData(Map<String, String> userData) async {
+  Future<void> updateUserData(Map<String, String?> userData) async {
     await _channel.invokeMethod('updateUserData', userData);
   }
 }

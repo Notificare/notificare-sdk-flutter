@@ -46,6 +46,8 @@
 
                 <data android:scheme="${applicationId}" />
             </intent-filter>
+
+            <meta-data android:name="flutter_deeplinking_enabled" android:value="false" />
         </activity>
 
         <activity
