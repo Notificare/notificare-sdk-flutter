@@ -1,6 +1,8 @@
 .DS_Store
 
 .idea/libraries/
+.idea/caches/
+.idea/material_theme_project_new.xml
 
 google-services.json
 agconnect-services.json

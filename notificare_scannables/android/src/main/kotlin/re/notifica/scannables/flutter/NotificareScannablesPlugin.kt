@@ -15,7 +15,6 @@ import re.notifica.NotificareCallback
 import re.notifica.scannables.NotificareScannables
 import re.notifica.scannables.ktx.scannables
 import re.notifica.scannables.models.NotificareScannable
-import re.notifica.scannables.models.toJson
 
 class NotificareScannablesPlugin : FlutterPlugin, MethodCallHandler, ActivityAware,
     NotificareScannables.ScannableSessionListener {

@@ -26,15 +26,15 @@ if (flutterVersionName == null) {
 
 android {
     namespace 're.notifica.sample'
-    compileSdkVersion 34
+    compileSdkVersion 35
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
 
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = JavaVersion.VERSION_11
     }
 
     sourceSets {
@@ -44,7 +44,7 @@ android {
     defaultConfig {
         applicationId "re.notifica.sample.app"
         minSdkVersion 23
-        targetSdkVersion 34
+        targetSdkVersion 35
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
 
@@ -109,6 +109,10 @@ android {
             resValue("string", "notificare_dynamic_link_hostname", "\"sample-app.ntc.re\"")
         }
     }
+
+    buildFeatures {
+        buildConfig = true
+    }
 }
 
 flutter {
@@ -116,5 +120,5 @@ flutter {
 }
 
 dependencies {
-    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'androidx.appcompat:appcompat:1.7.0'
 }

@@ -16,7 +16,6 @@ import re.notifica.geo.flutter.NotificareGeoPluginBackgroundService.BackgroundEv
 import re.notifica.geo.flutter.NotificareGeoPluginBackgroundService.Companion.isAttachedToActivity
 import re.notifica.geo.flutter.storage.NotificareGeoPluginStorage.updateCallback
 import re.notifica.geo.ktx.geo
-import re.notifica.geo.models.toJson
 
 class NotificareGeoPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
 

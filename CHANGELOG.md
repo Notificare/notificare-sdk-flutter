@@ -1,5 +1,26 @@
 # CHANGELOG
 
+## 4.1.0
+
+- Allow unsetting user data fields
+- Change `NotificareRegion.timeZoneOffset` attribute from `int` to `double` to support half-hour & 45 minute timezones.
+
+#### Native changes
+
+##### iOS
+
+- Fix issue where the notification UI was not dismissed when an action was executed through a custom markup or actions context sheet
+- Fix callback with keyboard safe area insets
+- Improve CoreData threading
+
+##### Android
+
+- Warnings related to missing requirements for Beacons functionality only logged once during `enableLocationUpdates()` flow
+- Fix UI behaviour after screen rotation when presenting notifications
+- Fix crash when rotating the screen when presenting a `NotificareCallbackActionFragment`
+- Bump sourceCompatibility/targetCompatibility to Java 11
+- Update target and compile SDK to 35
+
 ## 4.0.1
 
 - Add documentation to public methods

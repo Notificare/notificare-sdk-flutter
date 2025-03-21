@@ -6,7 +6,6 @@ import io.flutter.plugin.common.BinaryMessenger
 import io.flutter.plugin.common.EventChannel
 import io.flutter.plugin.common.JSONMethodCodec
 import re.notifica.scannables.models.NotificareScannable
-import re.notifica.scannables.models.toJson
 
 internal object NotificareScannablesPluginEventBroker {
 

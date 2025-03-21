@@ -17,10 +17,10 @@ NotificareRegion _$NotificareRegionFromJson(Map json) => NotificareRegion(
           ? null
           : NotificareRegionAdvancedGeometry.fromJson(
               Map<String, dynamic>.from(json['advancedGeometry'] as Map)),
-      major: json['major'] as int?,
+      major: (json['major'] as num?)?.toInt(),
       distance: (json['distance'] as num).toDouble(),
       timeZone: json['timeZone'] as String,
-      timeZoneOffset: json['timeZoneOffset'] as int,
+      timeZoneOffset: (json['timeZoneOffset'] as num).toDouble(),
     );
 
 Map<String, dynamic> _$NotificareRegionToJson(NotificareRegion instance) =>

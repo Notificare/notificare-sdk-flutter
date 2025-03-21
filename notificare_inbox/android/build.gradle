@@ -9,7 +9,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.4.2'
+        classpath 'com.android.tools.build:gradle:8.7.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
@@ -32,7 +32,7 @@ android {
         namespace 're.notifica.inbox.flutter'
     }
 
-    compileSdkVersion 34
+    compileSdk 35
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
@@ -43,12 +43,12 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
 
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = JavaVersion.VERSION_11
     }
 
     lintOptions {
@@ -57,7 +57,7 @@ android {
 }
 
 dependencies {
-    def notificare_version = '4.0.1'
+    def notificare_version = '4.1.0'
     api "re.notifica:notificare:$notificare_version"
     api "re.notifica:notificare-inbox:$notificare_version"
 }
