@@ -1,11 +1,8 @@
 # CHANGELOG
 
-## Upcoming Release
+## 4.1.0
 
 - Allow unsetting user data fields
-
-#### Breaking changes
-
 - Change `NotificareRegion.timeZoneOffset` attribute from `int` to `double` to support half-hour & 45 minute timezones.
 
 #### Native changes
