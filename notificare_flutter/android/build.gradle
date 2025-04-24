@@ -57,6 +57,6 @@ android {
 }
 
 dependencies {
-    def notificare_version = '4.1.0'
+    def notificare_version = '4.2.0'
     api "re.notifica:notificare:$notificare_version"
 }

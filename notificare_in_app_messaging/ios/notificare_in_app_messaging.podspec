@@ -1,7 +1,7 @@
 require 'yaml'
 
 pubspec = YAML.load(File.read(File.join(__dir__, "..", "pubspec.yaml")))
-notificare_version = '4.1.0'
+notificare_version = '4.2.0'
 
 Pod::Spec.new do |s|
   s.name             = pubspec['name']
