@@ -1,6 +1,6 @@
 name: notificare_inbox
 description: "Notificare Inbox Flutter Plugin: Apps with a built-in message inbox enjoy higher conversions due to its nature of keeping messages around for user access."
-version: 4.1.0
+version: 4.2.0
 homepage: https://notificare.com
 documentation: https://docs.notifica.re/sdk/v4/flutter/setup/
 repository: https://github.com/Notificare/notificare-sdk-flutter/tree/main/notificare_inbox
