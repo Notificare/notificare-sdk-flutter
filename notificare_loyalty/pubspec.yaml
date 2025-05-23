@@ -1,6 +1,6 @@
 name: notificare_loyalty
 description: "Notificare Loyalty Flutter Plugin: Harness the power of digital cards that live beyond your app and are always in your customer’s pocket."
-version: 4.2.0
+version: 4.2.1
 homepage: https://notificare.com
 documentation: https://docs.notifica.re/sdk/v4/flutter/setup/
 repository: https://github.com/Notificare/notificare-sdk-flutter/tree/main/notificare_loyalty
