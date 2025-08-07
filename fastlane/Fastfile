@@ -75,8 +75,8 @@ lane :update_compile_sdk_version do |options|
   end
 
   files = Dir['../notificare*/android/build.gradle']
-  regex = /compileSdkVersion .*$/
-  replacement = "compileSdkVersion #{version}"
+  regex = /compileSdk .*$/
+  replacement = "compileSdk #{version}"
 
   files.each { |file| update_file(file, regex, replacement) }
 end
