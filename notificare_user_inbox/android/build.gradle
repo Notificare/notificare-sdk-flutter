@@ -34,7 +34,7 @@ android {
         namespace 're.notifica.inbox.user.flutter'
     }
 
-    compileSdk 35
+    compileSdk 36
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'

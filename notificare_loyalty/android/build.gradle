@@ -31,7 +31,7 @@ android {
         namespace 're.notifica.loyalty.flutter'
     }
 
-    compileSdk 35
+    compileSdk 36
 
     defaultConfig {
         minSdkVersion 23

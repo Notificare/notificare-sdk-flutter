@@ -32,7 +32,7 @@ android {
         namespace 're.notifica.push.ui.flutter'
     }
 
-    compileSdk 35
+    compileSdk 36
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
