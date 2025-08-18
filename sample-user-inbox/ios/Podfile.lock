@@ -20,18 +20,18 @@ PODS:
   - Notificare/NotificareUserInboxKit (4.2.2):
     - Notificare/NotificareUtilitiesKit
   - Notificare/NotificareUtilitiesKit (4.2.2)
-  - notificare_flutter (4.2.1):
+  - notificare_flutter (4.2.2):
     - Flutter
     - Notificare/NotificareKit (= 4.2.2)
-  - notificare_push (4.2.1):
+  - notificare_push (4.2.2):
     - Flutter
     - Notificare/NotificareKit (= 4.2.2)
     - Notificare/NotificarePushKit (= 4.2.2)
-  - notificare_push_ui (4.2.1):
+  - notificare_push_ui (4.2.2):
     - Flutter
     - Notificare/NotificareKit (= 4.2.2)
     - Notificare/NotificarePushUIKit (= 4.2.2)
-  - notificare_user_inbox (4.2.1):
+  - notificare_user_inbox (4.2.2):
     - Flutter
     - Notificare/NotificareKit (= 4.2.2)
     - Notificare/NotificareUserInboxKit (= 4.2.2)
@@ -78,10 +78,10 @@ SPEC CHECKSUMS:
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   JWTDecode: 3eaab1e06b6f4dcbdd6716aff09ba4c2104ca8b7
   Notificare: 16be1792142667eb152894d09d868294e098e762
-  notificare_flutter: 805ba21c471d0f4bee9891de29276812501a240c
-  notificare_push: d122154c152fc4d71426664be749c163a9d38263
-  notificare_push_ui: bd6334a6ab86d82ce71bf2fde0b1111782792c1c
-  notificare_user_inbox: 23c0084927e015e9a052cc38cbd0b9a36ab3d12b
+  notificare_flutter: 1399a059ef7336636119c411c6b9abbc60703af4
+  notificare_push: aef97cf5d5c7f01ff391cc6315a4be69e50ab0d0
+  notificare_push_ui: 1fa2c3d350d9b24f8493ea19ae2264130d83e0c4
+  notificare_user_inbox: 8e61493999416751f1ee928de2083de2e685158e
   permission_handler_apple: 4ed2196e43d0651e8ff7ca3483a069d469701f2d
   SimpleKeychain: f8707c8e97b38c6a6e687b17732afc9bcef06439
 

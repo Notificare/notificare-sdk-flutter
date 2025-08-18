@@ -31,7 +31,7 @@ android {
         namespace 're.notifica.assets.flutter'
     }
 
-    compileSdk 35
+    compileSdk 36
 
     defaultConfig {
         minSdkVersion 23
@@ -52,7 +52,7 @@ android {
 }
 
 dependencies {
-    def notificare_version = '4.2.0'
+    def notificare_version = '4.2.1'
     api "re.notifica:notificare:$notificare_version"
     api "re.notifica:notificare-assets:$notificare_version"
 }
