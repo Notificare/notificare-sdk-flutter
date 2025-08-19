@@ -32,7 +32,7 @@ android {
         namespace 're.notifica.flutter'
     }
 
-    compileSdk 35
+    compileSdk 36
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
@@ -57,6 +57,6 @@ android {
 }
 
 dependencies {
-    def notificare_version = '4.2.0'
+    def notificare_version = '4.2.1'
     api "re.notifica:notificare:$notificare_version"
 }
